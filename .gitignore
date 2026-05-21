@@ -1,0 +1,11 @@
+.env
+*.png
+node_modules/
+.netlify/
+gen_cards.py
+catalog-check.png
+cooper-menu.png
+cooper-site.png
+debug*.png
+lander*.png
+shot_*.png
