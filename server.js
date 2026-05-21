@@ -94,9 +94,9 @@ const server = http.createServer((req, res) => {
         payer: body.payer || {},
         payment_methods: { excluded_payment_types: [], installments: 12 },
         back_urls: {
-          success: body.back_url || 'https://powerpy.com/sucesso',
-          failure: body.back_url || 'https://powerpy.com/erro',
-          pending: body.back_url || 'https://powerpy.com/pendente'
+          success: body.back_url || 'https://powerpy-site-production.up.railway.app/sucesso',
+          failure: body.back_url || 'https://powerpy-site-production.up.railway.app/erro',
+          pending: body.back_url || 'https://powerpy-site-production.up.railway.app/pendente'
         },
         auto_return: 'approved',
         statement_descriptor: 'POWERPY'
