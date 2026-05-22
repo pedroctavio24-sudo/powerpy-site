@@ -15,6 +15,45 @@ const ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN;
 const PUBLIC_KEY = process.env.MP_PUBLIC_KEY;
 const PORT = process.env.PORT || 8899;
 
+const GH_TOKEN = process.env.GH_TOKEN;
+const GH_REPO = 'pedroctavio24-sudo/powerpy-site';
+const GH_BRANCH = 'main';
+const ADMIN_SECRET = process.env.ADMIN_SECRET || 'pp2126';
+
+// In-memory products cache (loaded from products.json at startup if exists)
+let productsCache = null;
+const PRODUCTS_FILE = path.join(__dirname, 'products.json');
+if (fs.existsSync(PRODUCTS_FILE)) {
+  try { productsCache = JSON.parse(fs.readFileSync(PRODUCTS_FILE, 'utf8')); } catch(e) {}
+}
+
+function githubRequest(method, endpoint, body, cb) {
+  const data = body ? JSON.stringify(body) : null;
+  const options = {
+    hostname: 'api.github.com',
+    path: endpoint,
+    method,
+    headers: {
+      'Authorization': `token ${GH_TOKEN}`,
+      'User-Agent': 'powerpy-server',
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json'
+    }
+  };
+  if (data) options.headers['Content-Length'] = Buffer.byteLength(data);
+  const req = https.request(options, r => {
+    let raw = '';
+    r.on('data', c => raw += c);
+    r.on('end', () => {
+      try { cb(null, JSON.parse(raw), r.statusCode); }
+      catch(e) { cb(e); }
+    });
+  });
+  req.on('error', cb);
+  if (data) req.write(data);
+  req.end();
+}
+
 const MIME = {
   '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript',
   '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg',
@@ -154,6 +193,59 @@ const server = http.createServer((req, res) => {
   if (pathname === '/api/mp/pubkey' && req.method === 'GET') {
     res.writeHead(200, {'Content-Type':'application/json'});
     res.end(JSON.stringify({ public_key: PUBLIC_KEY }));
+    return;
+  }
+
+  // GET /api/products — return products cache
+  if (pathname === '/api/products' && req.method === 'GET') {
+    if (productsCache) {
+      res.writeHead(200, {'Content-Type':'application/json'});
+      res.end(JSON.stringify(productsCache));
+    } else {
+      res.writeHead(404, {'Content-Type':'application/json'});
+      res.end(JSON.stringify({error:'no products override'}));
+    }
+    return;
+  }
+
+  // POST /api/admin/save — save products via GitHub commit
+  if (pathname === '/api/admin/save' && req.method === 'POST') {
+    readBody(req, (err, body) => {
+      if (err) { res.writeHead(400); res.end(JSON.stringify({error:'bad json'})); return; }
+      if (body.secret !== ADMIN_SECRET) {
+        res.writeHead(401); res.end(JSON.stringify({error:'unauthorized'})); return;
+      }
+      const products = body.products;
+      if (!products) { res.writeHead(400); res.end(JSON.stringify({error:'no products'})); return; }
+
+      const fileContent = JSON.stringify(products, null, 2);
+      const encoded = Buffer.from(fileContent).toString('base64');
+
+      // First, get current file SHA (needed for update)
+      githubRequest('GET', `/repos/${GH_REPO}/contents/products.json?ref=${GH_BRANCH}`, null, (err, data) => {
+        const sha = (!err && data && data.sha) ? data.sha : undefined;
+
+        const payload = {
+          message: 'update products via admin panel',
+          content: encoded,
+          branch: GH_BRANCH
+        };
+        if (sha) payload.sha = sha;
+
+        githubRequest('PUT', `/repos/${GH_REPO}/contents/products.json`, payload, (err2, data2, status2) => {
+          if (err2 || status2 > 201) {
+            res.writeHead(500, {'Content-Type':'application/json'});
+            res.end(JSON.stringify({error: err2 ? err2.message : data2}));
+            return;
+          }
+          // Update in-memory cache too
+          productsCache = products;
+          try { fs.writeFileSync(PRODUCTS_FILE, fileContent); } catch(e) {}
+          res.writeHead(200, {'Content-Type':'application/json'});
+          res.end(JSON.stringify({ok:true, commit: data2.commit && data2.commit.sha}));
+        });
+      });
+    });
     return;
   }
 
