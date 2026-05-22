@@ -8246,7 +8246,7 @@ function getCartTotalBRL() {
   // Pega o total BRL já calculado no carrinho
   const el = document.getElementById('cart-total-brl');
   if (!el) return 0;
-  const txt = el.textContent.replace('R,'').replace(/\./g,'').replace(',','.').trim();
+  const txt = el.textContent.replace(/R\$[\s\u00a0]*/,'').replace(/\./g,'').replace(',','.').trim();
   return parseFloat(txt) || 0;
 }
 
