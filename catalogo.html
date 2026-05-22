@@ -8225,11 +8225,7 @@ window.addEventListener('load', () => {
         <input type="text" id="mp-identificationNumber" placeholder="CPF (somente números)" maxlength="11" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
         <input type="email" id="mp-cardholderEmail" placeholder="E-mail" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
         <select id="mp-installments-sel" style="background:#07090f;border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
-          <option value="1">1x sem juros</option>
-          <option value="2">2x sem juros</option>
-          <option value="3">3x sem juros</option>
-          <option value="6">6x sem juros</option>
-          <option value="12">12x</option>
+          <option value="1">1x (carregando...)</option>
         </select>
         <button id="mp-card-submit-btn" onclick="submitCardPayment()" style="width:100%;background:linear-gradient(135deg,#009ee3,#0073c1);color:#fff;border:none;padding:16px;font-family:DM Sans,sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:4px;">PAGAR</button>
       </div>
@@ -8348,14 +8344,32 @@ async function initCardForm() {
     mpInstance = new MercadoPago(pk.public_key, { locale: 'pt-BR' });
     mpCardForm = true; // marca como iniciado
 
-    // Detectar bandeira ao digitar número
+    // Detectar bandeira e carregar parcelas ao digitar número
     document.getElementById('mp-cardNumber').addEventListener('input', async function() {
       const num = this.value.replace(/\D/g,'').substring(0,6);
       if (num.length >= 6) {
         try {
           const methods = await mpInstance.getPaymentMethods({ bin: num });
           if (methods.results && methods.results.length > 0) {
-            document.getElementById('mp-card-brand').textContent = methods.results[0].name;
+            const method = methods.results[0];
+            document.getElementById('mp-card-brand').textContent = method.name;
+            // Buscar parcelas com juros
+            const total = getCartTotalBRL();
+            const inst = await mpInstance.getInstallments({
+              amount: String(total.toFixed(2)),
+              bin: num,
+              locale: 'pt-BR'
+            });
+            if (inst && inst.length > 0 && inst[0].payer_costs) {
+              const sel = document.getElementById('mp-installments-sel');
+              sel.innerHTML = '';
+              inst[0].payer_costs.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.installments;
+                opt.textContent = p.recommended_message || `${p.installments}x de R$ ${p.installment_amount.toFixed(2).replace('.',',')}`;
+                sel.appendChild(opt);
+              });
+            }
           }
         } catch(e) {}
       }
