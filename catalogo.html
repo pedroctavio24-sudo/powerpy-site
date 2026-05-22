@@ -8214,19 +8214,25 @@ window.addEventListener('load', () => {
 
     <!-- CARD TAB -->
     <div id="card-tab" style="display:none;padding:24px;">
-      <div style="font-family:Space Mono,monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);margin-bottom:16px;">PAGAMENTO COM CARTÃO</div>
-      <form id="mp-card-form">
-        <div id="mp-cardNumber" style="height:40px;"></div>
-        <div id="mp-expirationDate" style="height:40px;"></div>
-        <div id="mp-securityCode" style="height:40px;"></div>
+      <div style="font-family:Space Mono,monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);margin-bottom:16px;">PAGAMENTO COM CARTÃO <span id="mp-card-brand" style="color:#009ee3;"></span></div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <input type="text" id="mp-cardNumber" placeholder="Número do cartão" maxlength="19" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
+        <div style="display:flex;gap:10px;">
+          <input type="text" id="mp-expirationDate" placeholder="MM/AA" maxlength="5" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
+          <input type="text" id="mp-securityCode" placeholder="CVV" maxlength="4" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
+        </div>
         <input type="text" id="mp-cardholderName" placeholder="Nome no cartão" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
-        <div id="mp-issuer" style="height:40px;"></div>
-        <div id="mp-installments" style="height:40px;"></div>
-        <select id="mp-identificationType" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;"></select>
-        <input type="text" id="mp-identificationNumber" placeholder="CPF" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
+        <input type="text" id="mp-identificationNumber" placeholder="CPF (somente números)" maxlength="11" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
         <input type="email" id="mp-cardholderEmail" placeholder="E-mail" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
-        <button type="submit" style="width:100%;background:linear-gradient(135deg,#009ee3,#0073c1);color:#fff;border:none;padding:16px;font-family:DM Sans,sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:8px;">PAGAR</button>
-      </form>
+        <select id="mp-installments-sel" style="background:#07090f;border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px 14px;font-family:DM Sans,sans-serif;font-size:13px;outline:none;width:100%;box-sizing:border-box;">
+          <option value="1">1x sem juros</option>
+          <option value="2">2x sem juros</option>
+          <option value="3">3x sem juros</option>
+          <option value="6">6x sem juros</option>
+          <option value="12">12x</option>
+        </select>
+        <button id="mp-card-submit-btn" onclick="submitCardPayment()" style="width:100%;background:linear-gradient(135deg,#009ee3,#0073c1);color:#fff;border:none;padding:16px;font-family:DM Sans,sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:4px;">PAGAR</button>
+      </div>
       <div id="mp-card-msg" style="margin-top:12px;font-family:DM Sans,sans-serif;font-size:13px;"></div>
     </div>
 
@@ -8340,92 +8346,105 @@ async function initCardForm() {
   try {
     const pk = await fetch('/api/mp/pubkey').then(r=>r.json());
     mpInstance = new MercadoPago(pk.public_key, { locale: 'pt-BR' });
+    mpCardForm = true; // marca como iniciado
 
-    const total = getCartTotalBRL();
-    mpCardForm = mpInstance.cardForm({
-      amount: String(total.toFixed(2)),
-      autoMount: true,
-      form: {
-        id: 'mp-card-form',
-        cardNumber: { id: 'mp-cardNumber', placeholder: 'Número do cartão' },
-        expirationDate: { id: 'mp-expirationDate', placeholder: 'MM/AA' },
-        securityCode: { id: 'mp-securityCode', placeholder: 'CVV' },
-        cardholderName: { id: 'mp-cardholderName', placeholder: 'Nome no cartão' },
-        issuer: { id: 'mp-issuer', placeholder: 'Banco emissor' },
-        installments: { id: 'mp-installments', placeholder: 'Parcelas' },
-        identificationType: { id: 'mp-identificationType' },
-        identificationNumber: { id: 'mp-identificationNumber', placeholder: 'CPF' },
-        cardholderEmail: { id: 'mp-cardholderEmail', placeholder: 'E-mail' }
-      },
-      callbacks: {
-        onFormMounted: err => { if (err) console.error('MP form error:', err); },
-        onSubmit: async (e) => {
-          e.preventDefault();
-          const { paymentMethodId, issuerId, cardholderEmail, amount, token, installments, identificationNumber, identificationType } = mpCardForm.getCardFormData();
-          
-          document.getElementById('mp-card-msg').innerHTML = '<span style="color:#ffc107">Processando pagamento...</span>';
-
-          const res = await fetch('/api/mp/payment', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({
-              token, issuer_id: issuerId, payment_method_id: paymentMethodId,
-              transaction_amount: parseFloat(amount),
-              installments: parseInt(installments),
-              description: 'Pedido PowerPy',
-              payer: { email: cardholderEmail, identification: { type: identificationType, number: identificationNumber } }
-            })
-          });
-          const data = await res.json();
-
-          if (data.status === 'approved') {
-            document.getElementById('mp-card-msg').innerHTML = '<span style="color:#10b981">✓ Pagamento aprovado! Obrigado.</span>';
-          } else if (data.status === 'in_process') {
-            document.getElementById('mp-card-msg').innerHTML = '<span style="color:#ffc107">⏱ Pagamento em análise. Entraremos em contato.</span>';
-          } else {
-            document.getElementById('mp-card-msg').innerHTML = '<span style="color:#ef4444">✗ ' + (data.message || 'Pagamento não aprovado. Tente outro cartão.') + '</span>';
+    // Detectar bandeira ao digitar número
+    document.getElementById('mp-cardNumber').addEventListener('input', async function() {
+      const num = this.value.replace(/\D/g,'').substring(0,6);
+      if (num.length >= 6) {
+        try {
+          const methods = await mpInstance.getPaymentMethods({ bin: num });
+          if (methods.results && methods.results.length > 0) {
+            document.getElementById('mp-card-brand').textContent = methods.results[0].name;
           }
-        },
-        onFetching: (resource) => {
-          document.getElementById('mp-card-msg').innerHTML = '<span style="color:rgba(255,255,255,0.4)">Validando ' + resource + '...</span>';
-        }
+        } catch(e) {}
       }
     });
 
-    // Inject MP form styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #mp-card-form { display: flex; flex-direction: column; gap: 10px; }
-      #mp-card-form input, #mp-card-form select {
-        background: rgba(255,255,255,0.05) !important;
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        color: #fff !important;
-        padding: 12px 14px !important;
-        font-family: DM Sans, sans-serif !important;
-        font-size: 13px !important;
-        outline: none !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-      }
-      #mp-card-form select option { background: #07090f; color: #fff; }
-      .mp-submit-btn {
-        width: 100%;
-        background: linear-gradient(135deg,#009ee3,#0073c1);
-        color: #fff;
-        border: none;
-        padding: 16px;
-        font-family: DM Sans, sans-serif;
-        font-size: 14px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        cursor: pointer;
-        margin-top: 8px;
-      }
-    `;
-    document.head.appendChild(style);
+    document.getElementById('mp-card-msg').innerHTML = '<span style="color:rgba(255,255,255,0.4);font-size:12px">Formulário pronto.</span>';
+    setTimeout(() => { document.getElementById('mp-card-msg').innerHTML = ''; }, 1500);
 
   } catch(e) {
-    document.getElementById('mp-card-form').innerHTML = '<p style="color:#ef4444;font-size:13px">Erro ao carregar formulário de cartão.</p>';
+    document.getElementById('mp-card-msg').innerHTML = '<p style="color:#ef4444;font-size:13px">Erro ao carregar MP: ' + e.message + '</p>';
+  }
+}
+
+async function submitCardPayment() {
+  const btn = document.getElementById('mp-card-submit-btn');
+  const msg = document.getElementById('mp-card-msg');
+
+  const cardNumber = document.getElementById('mp-cardNumber').value.replace(/\D/g,'');
+  const expiration = document.getElementById('mp-expirationDate').value;
+  const cvv = document.getElementById('mp-securityCode').value;
+  const name = document.getElementById('mp-cardholderName').value.trim();
+  const cpf = document.getElementById('mp-identificationNumber').value.replace(/\D/g,'');
+  const email = document.getElementById('mp-cardholderEmail').value.trim();
+  const installments = parseInt(document.getElementById('mp-installments-sel').value) || 1;
+
+  if (!cardNumber || !expiration || !cvv || !name || !cpf || !email) {
+    msg.innerHTML = '<span style="color:#ef4444">Preencha todos os campos.</span>';
+    return;
+  }
+
+  const [expMonth, expYear] = expiration.split('/');
+  if (!expMonth || !expYear) {
+    msg.innerHTML = '<span style="color:#ef4444">Data de validade inválida (MM/AA).</span>';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'PROCESSANDO...';
+  msg.innerHTML = '<span style="color:#ffc107">Tokenizando cartão...</span>';
+
+  try {
+    const token = await mpInstance.createCardToken({
+      cardNumber,
+      cardholderName: name,
+      cardExpirationMonth: expMonth,
+      cardExpirationYear: expYear.length === 2 ? '20' + expYear : expYear,
+      securityCode: cvv,
+      identificationType: 'CPF',
+      identificationNumber: cpf
+    });
+
+    if (!token || !token.id) throw new Error('Token não gerado');
+
+    msg.innerHTML = '<span style="color:#ffc107">Processando pagamento...</span>';
+
+    // Detectar bandeira
+    const methods = await mpInstance.getPaymentMethods({ bin: cardNumber.substring(0,6) });
+    const paymentMethodId = methods.results && methods.results.length > 0 ? methods.results[0].id : 'visa';
+
+    const total = getCartTotalBRL();
+    const res = await fetch('/api/mp/payment', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        token: token.id,
+        payment_method_id: paymentMethodId,
+        transaction_amount: parseFloat(total.toFixed(2)),
+        installments,
+        description: 'Pedido PowerPy',
+        payer: { email, identification: { type: 'CPF', number: cpf } }
+      })
+    });
+    const data = await res.json();
+
+    if (data.status === 'approved') {
+      msg.innerHTML = '<span style="color:#10b981">✓ Pagamento aprovado! Obrigado.</span>';
+      btn.textContent = 'PAGO';
+    } else if (data.status === 'in_process') {
+      msg.innerHTML = '<span style="color:#ffc107">⏱ Em análise. Entraremos em contato.</span>';
+      btn.textContent = 'EM ANÁLISE';
+    } else {
+      msg.innerHTML = '<span style="color:#ef4444">✗ ' + (data.message || 'Não aprovado. Tente outro cartão.') + '</span>';
+      btn.disabled = false;
+      btn.textContent = 'PAGAR';
+    }
+  } catch(e) {
+    msg.innerHTML = '<span style="color:#ef4444">Erro: ' + e.message + '</span>';
+    btn.disabled = false;
+    btn.textContent = 'PAGAR';
   }
 }
 
