@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://powerpy-site-production.up.railway.app/sitemap.xml
+
+# Bloquear painel admin
+Disallow: /painel-pp2126.html
+Disallow: /api/
