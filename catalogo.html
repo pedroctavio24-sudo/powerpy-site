@@ -919,12 +919,24 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
       <span style="font-family:Space Mono,monospace;font-size:11px;color:rgba(255,255,255,0.4);">TOTAL BRL</span>
       <span id="cart-total-brl" style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#10b981;">R$ 0,00</span>
     </div>
-    <!-- Formulário de lead antes de enviar -->
-    <div style="margin-bottom:16px;padding:14px;background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.15);">
-      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-bottom:10px;">SEUS DADOS (OPCIONAL)</div>
-      <input id="lead-nome" type="text" placeholder="Seu nome..." style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:8px;">
-      <input id="lead-tel" type="tel" placeholder="Seu WhatsApp (com DDD)..." style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;">
+    <!-- DADOS PARA ETIQUETA — OBRIGATÓRIO -->
+    <div id="etiqueta-form" style="margin-bottom:16px;padding:14px;background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.2);">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:#60a5fa;margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+        📦 DADOS PARA ETIQUETA <span style="color:#ef4444;font-size:11px;">*obrigatório</span>
+      </div>
+      <input id="etiq-destinatario" type="text" placeholder="Nome Destinatário *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
+      <input id="etiq-cpf-cnpj" type="text" placeholder="CPF ou CNPJ *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
+      <input id="etiq-cep" type="text" placeholder="CEP *" maxlength="9" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
+      <input id="etiq-endereco" type="text" placeholder="Endereço de Entrega *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
+      <input id="etiq-numero" type="text" placeholder="Número *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
+      <input id="etiq-complemento" type="text" placeholder="Complemento (ex: Apto 12)" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
+      <input id="etiq-bairro" type="text" placeholder="Bairro / Distrito *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
+      <input id="etiq-logradouro" type="text" placeholder="Logradouro (ex: Rua, Av, Travessa) *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:0;box-sizing:border-box;">
+      <div id="etiq-erro" style="color:#ef4444;font-family:'Space Mono',monospace;font-size:10px;margin-top:8px;display:none;">⚠ Preencha todos os campos obrigatórios (*) para continuar.</div>
     </div>
+    <!-- Campo nome/tel (ainda usado internamente) -->
+    <input id="lead-nome" type="hidden">
+    <input id="lead-tel" type="hidden">
     <button onclick="openMPCheckout()" style="width:100%;background:linear-gradient(135deg,#009ee3,#0073c1);color:#fff;border:none;padding:16px;font-family:DM Sans,sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;margin-bottom:10px;">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
       💳 Pagar com Mercado Pago
@@ -7974,11 +7986,51 @@ function toggleCart() {
   }
 }
 
+function getEtiquetaDados() {
+  return {
+    destinatario: (document.getElementById('etiq-destinatario')||{}).value?.trim()||'',
+    cpfCnpj:      (document.getElementById('etiq-cpf-cnpj')||{}).value?.trim()||'',
+    cep:          (document.getElementById('etiq-cep')||{}).value?.trim()||'',
+    endereco:     (document.getElementById('etiq-endereco')||{}).value?.trim()||'',
+    numero:       (document.getElementById('etiq-numero')||{}).value?.trim()||'',
+    complemento:  (document.getElementById('etiq-complemento')||{}).value?.trim()||'',
+    bairro:       (document.getElementById('etiq-bairro')||{}).value?.trim()||'',
+    logradouro:   (document.getElementById('etiq-logradouro')||{}).value?.trim()||'',
+  };
+}
+function validarEtiqueta() {
+  const d = getEtiquetaDados();
+  const erroEl = document.getElementById('etiq-erro');
+  const obrigatorios = [d.destinatario, d.cpfCnpj, d.cep, d.endereco, d.numero, d.bairro, d.logradouro];
+  const ok = obrigatorios.every(v => v.length > 0);
+  if (erroEl) erroEl.style.display = ok ? 'none' : 'block';
+  if (!ok) {
+    // highlight campos vazios
+    const ids = ['etiq-destinatario','etiq-cpf-cnpj','etiq-cep','etiq-endereco','etiq-numero','etiq-bairro','etiq-logradouro'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.borderColor = el.value.trim() ? 'rgba(255,255,255,0.12)' : '#ef4444';
+    });
+    document.getElementById('etiqueta-form')?.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  return ok;
+}
 function sendCartWA() {
   if (cart.length === 0) return;
+  if (!validarEtiqueta()) return;
+  const etiq = getEtiquetaDados();
   const rate = USD_BRL ? USD_BRL.toFixed(2) : '?';
   let msg = '*PEDIDO POWER PY*\n';
   msg += `Cotação: $1 = R$\u00a0${rate}\n`;
+  msg += '━━━━━━━━━━━━━━━━━━━━\n';
+  msg += '\n*📦 DADOS PARA ETIQUETA*\n';
+  msg += `Destinatário: ${etiq.destinatario}\n`;
+  msg += `CPF/CNPJ: ${etiq.cpfCnpj}\n`;
+  msg += `CEP: ${etiq.cep}\n`;
+  msg += `Logradouro: ${etiq.logradouro}\n`;
+  msg += `Endereço: ${etiq.endereco}, Nº ${etiq.numero}`;
+  if (etiq.complemento) msg += `, ${etiq.complemento}`;
+  msg += `\nBairro: ${etiq.bairro}\n`;
   msg += '━━━━━━━━━━━━━━━━━━━━\n';
   cart.forEach(item => {
     const unitBRL = USD_BRL ? (item.priceUSD * USD_BRL).toLocaleString('pt-BR', {minimumFractionDigits:2}) : '?';
@@ -8322,9 +8374,15 @@ function getCartTotalBRL() {
 }
 
 function openMPCheckout() {
+  if (!validarEtiqueta()) return;
   const total = getCartTotalBRL();
   if (total <= 0) { alert('Carrinho vazio!'); return; }
-  
+  // Pré-preenche nome no Pix com o destinatário da etiqueta
+  const etiq = getEtiquetaDados();
+  if (etiq.destinatario) {
+    const nomeEl = document.getElementById('pix-nome');
+    if (nomeEl && !nomeEl.value) nomeEl.value = etiq.destinatario;
+  }
   document.getElementById('mp-total-display').textContent = 'R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits:2});
   document.getElementById('mp-modal').style.display = 'flex';
   document.getElementById('pix-qr-area').style.display = 'none';
