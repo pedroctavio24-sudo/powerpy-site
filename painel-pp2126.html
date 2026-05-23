@@ -396,7 +396,9 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <option value="perdido">Perdido</option>
         </select>
         <button class="btn btn-green" onclick="openAddLead()">+ Adicionar Lead</button>
-        <button class="btn btn-ghost" onclick="exportLeadsCSV()">⬇ CSV</button>
+        <button class="btn btn-ghost" onclick="exportLeadsCSV()">⬇ CSV Local</button>
+        <button class="btn btn-blue" onclick="syncLeadsFromServer()" title="Buscar leads enviados pelo site">🔄 Sync Servidor</button>
+        <a class="btn btn-ghost" id="csv-server-link" href="/api/leads/csv?secret=pp2126" target="_blank">⬇ CSV Servidor</a>
       </div>
       <div class="table-wrap">
         <table>
@@ -898,6 +900,42 @@ function deleteLead(idx){
   saveLeads(leads);
   renderLeads();
   toast('Lead removido');
+}
+
+async function syncLeadsFromServer(){
+  try {
+    const r = await fetch('/api/leads?secret=pp2126');
+    if(!r.ok){toast('Erro: sem acesso ao servidor','error');return;}
+    const data = await r.json();
+    const srvLeads = data.leads || [];
+    if(!srvLeads.length){toast('Nenhum lead no servidor ainda','error');return;}
+    // Merge: add server leads not already in localStorage (match by id or date+nome)
+    const local = getLeads();
+    const localDates = new Set(local.map(l=>l.date));
+    let added = 0;
+    srvLeads.forEach(sl => {
+      const d = new Date(sl.ts).getTime();
+      if(!localDates.has(d)){
+        local.push({
+          nome: sl.nome || sl.email || 'Servidor',
+          tel: sl.telefone || '',
+          msg: sl.produto || sl.mensagem || '',
+          status: 'novo',
+          date: d
+        });
+        added++;
+      }
+    });
+    if(added > 0){
+      saveLeads(local);
+      renderLeads();
+      toast(`${added} lead(s) importado(s) do servidor!`);
+    } else {
+      toast('Já sincronizado — sem novos leads');
+    }
+  } catch(e){
+    toast('Erro ao conectar com servidor','error');
+  }
 }
 
 function exportLeadsCSV(){

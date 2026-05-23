@@ -27,6 +27,20 @@ if (fs.existsSync(PRODUCTS_FILE)) {
   try { productsCache = JSON.parse(fs.readFileSync(PRODUCTS_FILE, 'utf8')); } catch(e) {}
 }
 
+// In-memory leads store (lost on redeploy — for persistent use a DB)
+const leadsStore = [];
+const LEADS_FILE = path.join('/tmp', 'pp_leads.json');
+// Try to load from /tmp on restart (not guaranteed, but helps)
+if (fs.existsSync(LEADS_FILE)) {
+  try {
+    const saved = JSON.parse(fs.readFileSync(LEADS_FILE, 'utf8'));
+    if (Array.isArray(saved)) leadsStore.push(...saved);
+  } catch(e) {}
+}
+function saveLeadsToDisk() {
+  try { fs.writeFileSync(LEADS_FILE, JSON.stringify(leadsStore, null, 2)); } catch(e) {}
+}
+
 function githubRequest(method, endpoint, body, cb) {
   const data = body ? JSON.stringify(body) : null;
   const options = {
@@ -246,6 +260,63 @@ const server = http.createServer((req, res) => {
         });
       });
     });
+    return;
+  }
+
+  // POST /api/lead — receive lead from site form
+  if (pathname === '/api/lead' && req.method === 'POST') {
+    readBody(req, (err, body) => {
+      if (err) { res.writeHead(400); res.end(JSON.stringify({error:'bad json'})); return; }
+      const lead = {
+        id: Date.now(),
+        ts: new Date().toISOString(),
+        ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress || '',
+        nome: body.nome || '',
+        email: body.email || '',
+        telefone: body.telefone || body.whatsapp || '',
+        produto: body.produto || '',
+        mensagem: body.mensagem || '',
+        tipo: body.tipo || 'lead',   // 'lead' | 'pedido' | 'contato'
+        extra: body.extra || null
+      };
+      leadsStore.unshift(lead); // newest first
+      if (leadsStore.length > 2000) leadsStore.splice(2000); // limit
+      saveLeadsToDisk();
+      res.writeHead(200, {'Content-Type':'application/json'});
+      res.end(JSON.stringify({ok: true, id: lead.id}));
+    });
+    return;
+  }
+
+  // GET /api/leads — view all leads (protected by ADMIN_SECRET)
+  if (pathname === '/api/leads' && req.method === 'GET') {
+    const secret = parsed.query.secret || req.headers['x-admin-secret'];
+    if (secret !== ADMIN_SECRET) {
+      res.writeHead(401, {'Content-Type':'application/json'});
+      res.end(JSON.stringify({error:'unauthorized'}));
+      return;
+    }
+    res.writeHead(200, {'Content-Type':'application/json'});
+    res.end(JSON.stringify({ total: leadsStore.length, leads: leadsStore }));
+    return;
+  }
+
+  // GET /api/leads/csv — download leads as CSV
+  if (pathname === '/api/leads/csv' && req.method === 'GET') {
+    const secret = parsed.query.secret || req.headers['x-admin-secret'];
+    if (secret !== ADMIN_SECRET) {
+      res.writeHead(401); res.end('Unauthorized'); return;
+    }
+    const cols = ['id','ts','tipo','nome','email','telefone','produto','mensagem','ip'];
+    const rows = leadsStore.map(l =>
+      cols.map(c => `"${String(l[c] || '').replace(/"/g,'""')}"`).join(',')
+    );
+    const csv = [cols.join(','), ...rows].join('\n');
+    res.writeHead(200, {
+      'Content-Type': 'text/csv',
+      'Content-Disposition': 'attachment; filename="leads-powerpy.csv"'
+    });
+    res.end(csv);
     return;
   }
 

@@ -8011,6 +8011,20 @@ function sendCartWA() {
     const pedidos = JSON.parse(localStorage.getItem('pp_pedidos')||'[]');
     pedidos.push({cliente:nomeVal||'Via WhatsApp',itens:itensStr,total:totalUSD2,date:Date.now(),status:'pendente'});
     localStorage.setItem('pp_pedidos',JSON.stringify(pedidos));
+    // enviar lead ao servidor (centralizado)
+    try {
+      fetch('/api/lead', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          tipo: 'pedido',
+          nome: nomeVal || 'WhatsApp',
+          telefone: telVal,
+          produto: itensStr,
+          mensagem: msg.substring(0,500)
+        })
+      });
+    } catch(e){}
   } catch(e){}
   const waNum = localStorage.getItem('pp_wa_num') || WA_NUM;
   window.open('https://wa.me/'+waNum+'?text=' + encodeURIComponent(msg), '_blank');
