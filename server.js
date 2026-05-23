@@ -433,6 +433,21 @@ const server = http.createServer((req, res) => {
         res.writeHead(400); res.end(JSON.stringify({error:'invalid email'})); return;
       }
 
+      // Parse etiqueta if provided
+      let etiqueta = null;
+      if (body.etiqueta && typeof body.etiqueta === 'object') {
+        etiqueta = {
+          destinatario: String(body.etiqueta.destinatario || '').slice(0, 120),
+          cpfCnpj:      String(body.etiqueta.cpfCnpj      || '').slice(0, 20),
+          cep:          String(body.etiqueta.cep          || '').slice(0, 10),
+          endereco:     String(body.etiqueta.endereco     || '').slice(0, 200),
+          numero:       String(body.etiqueta.numero       || '').slice(0, 20),
+          complemento:  String(body.etiqueta.complemento  || '').slice(0, 100),
+          bairro:       String(body.etiqueta.bairro       || '').slice(0, 100),
+          logradouro:   String(body.etiqueta.logradouro   || '').slice(0, 50),
+        };
+      }
+
       const lead = {
         id:        Date.now(),
         ts:        new Date().toISOString(),
@@ -443,7 +458,7 @@ const server = http.createServer((req, res) => {
         produto:   String(body.produto   || '').slice(0, 200),
         mensagem:  String(body.mensagem  || '').slice(0, 2000),
         tipo:      ['lead','pedido','contato'].includes(body.tipo) ? body.tipo : 'lead',
-        extra:     null // ignore arbitrary extra fields
+        etiqueta,
       };
 
       leadsStore.unshift(lead);

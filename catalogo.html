@@ -8073,7 +8073,8 @@ function sendCartWA() {
           nome: nomeVal || 'WhatsApp',
           telefone: telVal,
           produto: itensStr,
-          mensagem: msg.substring(0,500)
+          mensagem: msg.substring(0,500),
+          etiqueta: getEtiquetaDados()
         })
       });
     } catch(e){}
