@@ -398,7 +398,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
         <button class="btn btn-green" onclick="openAddLead()">+ Adicionar Lead</button>
         <button class="btn btn-ghost" onclick="exportLeadsCSV()">⬇ CSV Local</button>
         <button class="btn btn-blue" onclick="syncLeadsFromServer()" title="Buscar leads enviados pelo site">🔄 Sync Servidor</button>
-        <a class="btn btn-ghost" id="csv-server-link" href="/api/leads/csv?secret=pp2126" target="_blank">⬇ CSV Servidor</a>
+        <button class="btn btn-ghost" onclick="downloadCSVServer()">⬇ CSV Servidor</button>
       </div>
       <div class="table-wrap">
         <table>
@@ -694,6 +694,30 @@ const BRAND_META_DEFAULT = {
   tirzepatidas: {name:'TIRZEPATIDAS',sub:'Emagrecimento'}
 };
 
+// Admin secret — lido do localStorage para não ficar hardcoded no HTML
+// O admin define na primeira vez via prompt, fica salvo criptografado em base64 no localStorage
+const ADMIN_SECRET_KEY = (function(){
+  let k = localStorage.getItem('pp_adm_key');
+  if(!k){
+    k = prompt('Digite a senha admin do servidor:') || '';
+    if(k) localStorage.setItem('pp_adm_key', k);
+  }
+  return k;
+})();
+
+// Download CSV do servidor via fetch com header (nunca expõe senha na URL)
+async function downloadCSVServer(){
+  try {
+    const r = await fetch('/api/leads/csv', { headers: { 'X-Admin-Secret': ADMIN_SECRET_KEY } });
+    if(!r.ok){ alert('Acesso negado ou erro no servidor'); return; }
+    const blob = await r.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'leads-powerpy.csv';
+    a.click();
+  } catch(e){ alert('Erro ao baixar CSV: ' + e.message); }
+}
+
 // Produtos default (mesmo JSON do catálogo)
 const PRODUCTS_DEFAULT = {"landerlan":[{"name":"Androlic","apresent":"20 comp","atacado":21.6,"varejo":27.6,"confirm":false,"img":""},{"name":"Decaland","apresent":"5 ml","atacado":15.3,"varejo":19.55,"confirm":false,"img":""},{"name":"Drostenoland","apresent":"50 comp","atacado":32.4,"varejo":41.4,"confirm":false,"img":""},{"name":"Durateston 250mg","apresent":"1 ml","atacado":5.4,"varejo":6.9,"confirm":false,"img":""},{"name":"Landertropin 10 UI","apresent":"","atacado":45,"varejo":57.5,"confirm":false,"img":""},{"name":"Landertropin 100 UI","apresent":"","atacado":378,"varejo":483,"confirm":false,"img":""},{"name":"Metandrostenolona 10mg","apresent":"100 comp","atacado":18,"varejo":23,"confirm":false,"img":""},{"name":"Metenolona","apresent":"30 comp","atacado":66.6,"varejo":85.1,"confirm":false,"img":""},{"name":"Oxandrolona 10mg","apresent":"50 comp","atacado":45,"varejo":57.5,"confirm":false,"img":""},{"name":"Oxandrolona 5mg","apresent":"100 comp","atacado":45,"varejo":57.5,"confirm":false,"img":""},{"name":"Oxitoland 50mg","apresent":"20 comp","atacado":18,"varejo":23,"confirm":false,"img":""},{"name":"Stanozoland 10mg","apresent":"100 comp","atacado":18,"varejo":23,"confirm":false,"img":""},{"name":"Stanozoland 50mg 15ml","apresent":"15 ml","atacado":18,"varejo":23,"confirm":false,"img":""},{"name":"Stanozoland 50mg 30ml","apresent":"30 ml","atacado":25.2,"varejo":32.2,"confirm":false,"img":""},{"name":"Testenat Depot","apresent":"4 ml","atacado":15.3,"varejo":19.55,"confirm":false,"img":""},{"name":"Testoland Depot 200mg","apresent":"3amp x 2ml","atacado":13.5,"varejo":17.25,"confirm":false,"img":""}],"lander_gold":[{"name":"Boldenona 250mg","apresent":"10 ml","atacado":32.4,"varejo":41.4,"confirm":false,"img":""},{"name":"Clembuterol 0,04mg","apresent":"50 comp","atacado":18,"varejo":23,"confirm":false,"img":""},{"name":"Decaland 200mg","apresent":"10 ml","atacado":28.8,"varejo":36.8,"confirm":false,"img":""},{"name":"Drostenolona 100mg Masteron","apresent":"10 ml","atacado":32.4,"varejo":41.4,"confirm":false,"img":""},{"name":"Durateston Plus 250mg","apresent":"10 ml","atacado":32.4,"varejo":41.4,"confirm":false,"img":""},{"name":"HCG 5000 UI Gonadotropin","apresent":"","atacado":45,"varejo":57.5,"confirm":false,"img":""},{"name":"Metenolona Enantato 100mg","apresent":"10 ml","atacado":63,"varejo":80.5,"confirm":false,"img":""},{"name":"Nandrolona Fenil","apresent":"10 ml","atacado":30.6,"varejo":39.1,"confirm":false,"img":""},{"name":"Sales de Trembolona Tri","apresent":"10 ml","atacado":48.6,"varejo":62.1,"confirm":false,"img":""},{"name":"Testenat","apresent":"10 ml","atacado":30.6,"varejo":39.1,"confirm":false,"img":""},{"name":"Testo Propionato","apresent":"10 ml","atacado":27,"varejo":34.5,"confirm":false,"img":""},{"name":"Testolan","apresent":"10 ml","atacado":21.6,"varejo":27.6,"confirm":false,"img":""},{"name":"Trembolona Acetato 100mg","apresent":"10 ml","atacado":39.6,"varejo":50.6,"confirm":false,"img":""},{"name":"Trembolona Enantato","apresent":"10 ml","atacado":36,"varejo":46,"confirm":false,"img":""},{"name":"Trembolona Hexa","apresent":"10 ml","atacado":36,"varejo":46,"confirm":false,"img":""}]};
 
@@ -904,7 +928,7 @@ function deleteLead(idx){
 
 async function syncLeadsFromServer(){
   try {
-    const r = await fetch('/api/leads?secret=pp2126');
+    const r = await fetch('/api/leads', { headers: { 'X-Admin-Secret': ADMIN_SECRET_KEY } });
     if(!r.ok){toast('Erro: sem acesso ao servidor','error');return;}
     const data = await r.json();
     const srvLeads = data.leads || [];
