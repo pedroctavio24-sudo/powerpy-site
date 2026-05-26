@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1779753958747,
+    "ts": "2026-05-26T00:05:58.747Z",
+    "ip": "136.109.25.173",
+    "nome": "Teste Silva",
+    "email": "teste@teste.com",
+    "telefone": "61999999999",
+    "produto": "Oxandrolona 5mg x2 - Landerlan",
+    "mensagem": "Pedido teste: Oxandrolona 5mg x2 = R$ 121,50. Pix.",
+    "tipo": "pedido",
+    "etiqueta": null
+  }
+]
