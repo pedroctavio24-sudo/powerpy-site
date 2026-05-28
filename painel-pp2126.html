@@ -272,6 +272,8 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 }
 #toast.show{transform:translateY(0);opacity:1;}
 #toast.error{background:var(--red);}
+#toast.warning{background:#f59e0b;}
+#toast.info{background:#3b82f6;}
 
 /* ── BRANDS MANAGER ── */
 .brand-manager-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
@@ -1116,17 +1118,46 @@ function renderProducts(){
   }).join('');
 }
 
-function uploadImg(event, brand, idx){
+async function uploadImg(event, brand, idx){
   const file = event.target.files[0];
   if(!file)return;
-  if(file.size > 2*1024*1024){toast('Imagem muito grande (máx 2MB)','error');return;}
+  if(file.size > 3*1024*1024){toast('Imagem muito grande (máx 3MB)','error');return;}
+  toast('⏳ Enviando imagem...','info');
   const reader = new FileReader();
-  reader.onload = function(e){
+  reader.onload = async function(e){
+    const imageData = e.target.result;
     const products = getProducts();
-    products[brand][idx].img = e.target.result;
+    // Temporarily store base64 locally while uploading
+    products[brand][idx].img = imageData;
     saveProducts(products);
     renderProducts();
-    toast('Foto salva!');
+    // Upload to server → get permanent URL
+    try {
+      const r = await fetch('/api/admin/image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': ADMIN_SECRET_KEY },
+        body: JSON.stringify({ brand, idx, imageData, filename: file.name })
+      });
+      if(r.ok){
+        const data = await r.json();
+        if(data.url){
+          products[brand][idx].img = data.url;
+          saveProducts(products);
+          renderProducts();
+          // Save updated products with permanent URL to server
+          await fetch('/api/admin/save', {
+            method:'POST',
+            headers:{'Content-Type':'application/json','X-Admin-Secret':ADMIN_SECRET_KEY},
+            body: JSON.stringify({products})
+          });
+          toast('✅ Foto enviada ao servidor!','success');
+        }
+      } else {
+        toast('⚠️ Foto salva localmente (erro no servidor)','warning');
+      }
+    } catch(err) {
+      toast('⚠️ Foto salva localmente (sem conexão)','warning');
+    }
   };
   reader.readAsDataURL(file);
 }
@@ -1158,7 +1189,7 @@ function saveProduct(brand, idx){
   toast('Produto salvo!');
 }
 
-function saveAllProducts(){
+async function saveAllProducts(){
   const products = getProducts();
   const stock = getStock();
   const arr = products[currentProdBrand]||[];
@@ -1179,7 +1210,25 @@ function saveAllProducts(){
   saveProducts(products);
   saveStock(stock);
   renderProducts();
-  toast('Todos os produtos salvos!');
+  // Push products + stock to server
+  try {
+    const [rp, rs] = await Promise.all([
+      fetch('/api/admin/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': ADMIN_SECRET_KEY },
+        body: JSON.stringify({ products })
+      }),
+      fetch('/api/admin/stock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': ADMIN_SECRET_KEY },
+        body: JSON.stringify({ stock })
+      })
+    ]);
+    if(rp.ok && rs.ok) toast('✅ Produtos e estoque salvos no servidor!','success');
+    else toast('⚠️ Salvo localmente (erro no servidor)','warning');
+  } catch(e) {
+    toast('⚠️ Salvo localmente (sem conexão)','warning');
+  }
 }
 
 function deleteProduct(brand, idx){
@@ -1326,9 +1375,10 @@ document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click
 function toast(msg, type='success'){
   const t=document.getElementById('toast');
   t.textContent=msg;
-  t.className='show'+(type==='error'?' error':'');
+  const cls = {error:'error', warning:'warning', info:'info', success:''};
+  t.className='show ' + (cls[type]||'');
   clearTimeout(t._t);
-  t._t=setTimeout(()=>t.className='',3000);
+  t._t=setTimeout(()=>t.className='',3500);
 }
 function fmtDate(ts){
   if(!ts)return '—';
@@ -1349,6 +1399,64 @@ function downloadCSV(rows, filename){
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape') document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));
 });
+
+// ── SYNC FROM SERVER ON LOAD ──────────────────────────────────────────────
+async function syncFromServer(){
+  try {
+    // Fetch latest products from server
+    const r = await fetch('/api/products');
+    if(r.ok){
+      const data = await r.json();
+      if(data && typeof data === 'object' && Object.keys(data).length > 0){
+        saveProducts(data);
+        console.log('[PowerPY] Products synced from server');
+      }
+    }
+    // Fetch stock from server
+    const rs = await fetch('/api/admin/stock', {
+      headers: { 'X-Admin-Secret': ADMIN_SECRET_KEY }
+    });
+    if(rs.ok){
+      const stock = await rs.json();
+      if(stock && typeof stock === 'object'){
+        localStorage.setItem('pp_stock', JSON.stringify(stock));
+        console.log('[PowerPY] Stock synced from server');
+      }
+    }
+    // Fetch leads from server
+    const rl = await fetch('/api/leads', {
+      headers: { 'X-Admin-Secret': ADMIN_SECRET_KEY }
+    });
+    if(rl.ok){
+      const ldata = await rl.json();
+      if(ldata && ldata.leads){
+        localStorage.setItem('pp_leads', JSON.stringify(ldata.leads));
+        console.log(`[PowerPY] ${ldata.leads.length} leads synced from server`);
+      }
+    }
+  } catch(e) {
+    console.warn('[PowerPY] Sync failed:', e.message);
+  }
+  // Re-render after sync
+  if(typeof renderProducts === 'function') renderProducts();
+  if(typeof renderLeads === 'function') renderLeads();
+  updateDashboard();
+}
+
+function updateDashboard(){
+  const leads = getLeads ? getLeads() : [];
+  const products = getProducts ? getProducts() : {};
+  const pedidos = getPedidos ? getPedidos() : [];
+  const totalProds = Object.values(products).reduce((a,b)=>a+(b.length||0),0);
+  const el = (id) => document.getElementById(id);
+  if(el('dash-total-produtos')) el('dash-total-produtos').textContent = totalProds;
+  if(el('dash-total-leads')) el('dash-total-leads').textContent = leads.length;
+  if(el('dash-total-pedidos')) el('dash-total-pedidos').textContent = pedidos.length;
+  if(el('dash-total-marcas')) el('dash-total-marcas').textContent = Object.keys(getBrandMeta ? getBrandMeta() : {}).length;
+}
+
+// Sync on page load
+syncFromServer();
 </script>
 </body>
 </html>
