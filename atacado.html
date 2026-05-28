@@ -149,6 +149,51 @@ body{padding-bottom:0;}
   nav .nav-greeting{display:none;}
   .ticker{padding:8px 20px;font-size:9px;}
 }
+
+/* ══ MERCADO PAGO CHECKOUT ══ */
+.cart-pay-btns{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.cart-pix-btn{width:100%;background:#00c2ff;border:none;color:#fff;padding:14px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;}
+.cart-pix-btn:hover{background:#00a8db;}
+.cart-card-btn{width:100%;background:#6c63ff;border:none;color:#fff;padding:14px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;}
+.cart-card-btn:hover{background:#5a52e0;}
+.cart-divider{text-align:center;font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:3px;text-transform:uppercase;margin:4px 0;}
+
+/* CHECKOUT MODAL */
+.checkout-modal{position:fixed;inset:0;z-index:2000;background:rgba(4,6,15,0.95);display:none;align-items:center;justify-content:center;padding:20px;}
+.checkout-modal.open{display:flex;}
+.checkout-box{background:#0d1117;border:1px solid rgba(59,130,246,0.2);width:100%;max-width:480px;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;}
+.checkout-header{padding:24px 28px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#0d1117;z-index:1;}
+.checkout-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:#fff;}
+.checkout-close{background:none;border:none;color:rgba(255,255,255,0.3);font-size:20px;cursor:pointer;transition:color .2s;}
+.checkout-close:hover{color:#fff;}
+.checkout-body{padding:24px 28px;}
+.co-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;display:block;margin-bottom:6px;margin-top:16px;}
+.co-label:first-child{margin-top:0;}
+.co-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;padding:12px 14px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.co-input:focus{border-color:rgba(59,130,246,0.5);}
+.co-input::placeholder{color:rgba(255,255,255,0.2);}
+.co-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.co-total{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);padding:16px;margin-top:20px;margin-bottom:4px;}
+.co-total-label{font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.co-total-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;line-height:1;}
+.co-total-brl{font-family:'Space Mono',monospace;font-size:11px;color:#22c55e;letter-spacing:1px;margin-top:2px;}
+.co-submit{width:100%;border:none;color:#fff;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;cursor:pointer;margin-top:16px;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.co-submit:disabled{opacity:.5;cursor:not-allowed;}
+.co-submit.pix{background:#00c2ff;}
+.co-submit.pix:hover:not(:disabled){background:#00a8db;}
+.co-submit.card{background:#6c63ff;}
+.co-submit.card:hover:not(:disabled){background:#5a52e0;}
+
+/* PIX QR */
+.pix-result{text-align:center;padding:8px 0;}
+.pix-qr{width:200px;height:200px;margin:0 auto 16px;border:4px solid #fff;}
+.pix-copy{width:100%;background:rgba(0,194,255,0.1);border:1px solid rgba(0,194,255,0.3);color:#00c2ff;padding:12px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all .2s;word-break:break-all;text-align:left;}
+.pix-copy:hover{background:rgba(0,194,255,0.2);}
+.pix-note{font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);letter-spacing:1px;text-transform:uppercase;margin-top:12px;}
+.co-spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.co-err{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:12px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;margin-top:12px;display:none;}
+
 </style>
 </head>
 <body>
@@ -223,15 +268,39 @@ body{padding-bottom:0;}
   <div class="cart-footer">
     <div class="cart-total-row">
       <div>
-        <div class="cart-total-label">Total</div>
+        <div class="cart-total-label">Total do Pedido</div>
         <div class="cart-total-usd" id="cart-total-usd">$0,00</div>
         <div class="cart-total-brl" id="cart-total-brl">≈ R$ 0,00</div>
       </div>
     </div>
+    <div class="cart-pay-btns">
+      <button class="cart-pix-btn" onclick="openCheckout('pix')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5a7.5 7.5 0 110 15 7.5 7.5 0 010-15zm0 2a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/></svg>
+        PAGAR COM PIX
+      </button>
+      <button class="cart-card-btn" onclick="openCheckout('card')">
+        💳 PAGAR COM CARTÃO
+      </button>
+    </div>
+    <div class="cart-divider">— ou —</div>
     <button class="cart-wa-btn" onclick="sendWhatsApp()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      ENVIAR PEDIDO
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      PEDIR PELO WHATSAPP
     </button>
+  </div>
+</div>
+
+
+<!-- ══ CHECKOUT MODAL ══ -->
+<div class="checkout-modal" id="checkout-modal">
+  <div class="checkout-box">
+    <div class="checkout-header">
+      <div class="checkout-title" id="co-title">PAGAR COM PIX</div>
+      <button class="checkout-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="checkout-body" id="co-body">
+      <!-- filled by JS -->
+    </div>
   </div>
 </div>
 
@@ -840,6 +909,320 @@ if(checkSession()){
 document.getElementById('login-user').addEventListener('keydown', e=>{
   if(e.key==='Enter') document.getElementById('login-pwd').focus();
 });
+
+// ══════════════════════════════════════════════════════════════
+// MERCADO PAGO
+// ══════════════════════════════════════════════════════════════
+let MP_PK = null;
+let mpjs_loaded = false;
+let checkoutMode = 'pix'; // 'pix' or 'card'
+
+async function getMpPk(){
+  if(MP_PK) return MP_PK;
+  try{
+    const r = await fetch('/api/mp/pubkey');
+    if(r.ok){ const d = await r.json(); MP_PK = d.public_key; }
+  }catch(e){}
+  return MP_PK;
+}
+
+function calcTotalBRL(){
+  return cart.reduce((sum, item) => {
+    const lineBRL = item.isTirz ? TIRZ_BRL_FIXO * item.qty : item.priceUSD * item.qty * USD_BRL;
+    return sum + lineBRL;
+  }, 0);
+}
+
+function cartDescription(){
+  return cart.map(c => `${c.name} x${c.qty}`).join(', ').slice(0, 200);
+}
+
+async function openCheckout(mode){
+  if(cart.length === 0){ showToast('Carrinho vazio'); return; }
+  checkoutMode = mode;
+  const modal = document.getElementById('checkout-modal');
+  const title = document.getElementById('co-title');
+  const body  = document.getElementById('co-body');
+  
+  title.textContent = mode === 'pix' ? 'PAGAR COM PIX' : 'PAGAR COM CARTÃO';
+  
+  const totalBRL = calcTotalBRL();
+  const totalFmt = totalBRL.toFixed(2).replace('.',',');
+  
+  const totalHTML = `
+    <div class="co-total">
+      <div class="co-total-label">Total a pagar</div>
+      <div class="co-total-val">R$ ${totalFmt}</div>
+      <div class="co-total-brl">${cartDescription()}</div>
+    </div>`;
+  
+  if(mode === 'pix'){
+    body.innerHTML = `
+      <label class="co-label">Nome completo</label>
+      <input class="co-input" id="co-nome" placeholder="Seu nome" value="${currentUser.name}">
+      <label class="co-label">Sobrenome</label>
+      <input class="co-input" id="co-sobrenome" placeholder="Seu sobrenome">
+      <label class="co-label">CPF (somente números)</label>
+      <input class="co-input" id="co-cpf" placeholder="12345678901" maxlength="11" oninput="this.value=this.value.replace(/\D/g,'')">
+      <label class="co-label">E-mail</label>
+      <input class="co-input" id="co-email" type="email" placeholder="seu@email.com">
+      ${totalHTML}
+      <div class="co-err" id="co-err"></div>
+      <button class="co-submit pix" id="co-btn" onclick="submitPix()">
+        GERAR PIX
+      </button>`;
+  } else {
+    // Card — load MP SDK
+    await getMpPk();
+    body.innerHTML = `
+      <label class="co-label">Nome (como no cartão)</label>
+      <input class="co-input" id="co-nome" placeholder="NOME SOBRENOME">
+      <label class="co-label">E-mail</label>
+      <input class="co-input" id="co-email" type="email" placeholder="seu@email.com">
+      <label class="co-label">CPF do titular</label>
+      <input class="co-input" id="co-cpf" placeholder="12345678901" maxlength="11" oninput="this.value=this.value.replace(/\D/g,'')">
+      <label class="co-label">Número do cartão</label>
+      <input class="co-input" id="co-cardnum" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)">
+      <div class="co-row">
+        <div>
+          <label class="co-label">Validade</label>
+          <input class="co-input" id="co-expiry" placeholder="MM/AA" maxlength="5" oninput="fmtExpiry(this)">
+        </div>
+        <div>
+          <label class="co-label">CVV</label>
+          <input class="co-input" id="co-cvv" placeholder="123" maxlength="4" oninput="this.value=this.value.replace(/\D/g,'')">
+        </div>
+      </div>
+      <label class="co-label">Parcelas</label>
+      <select class="co-input" id="co-parcelas" style="background:#0d1117;">
+        <option value="1">1x de R$ ${(totalBRL).toFixed(2).replace('.',',')} sem juros</option>
+        <option value="2">2x de R$ ${(totalBRL/2).toFixed(2).replace('.',',')} sem juros</option>
+        <option value="3">3x de R$ ${(totalBRL/3).toFixed(2).replace('.',',')} sem juros</option>
+      </select>
+      ${totalHTML}
+      <div class="co-err" id="co-err"></div>
+      <button class="co-submit card" id="co-btn" onclick="submitCard()">
+        💳 PAGAR R$ ${totalFmt}
+      </button>`;
+  }
+  
+  modal.classList.add('open');
+}
+
+function closeCheckout(){
+  document.getElementById('checkout-modal').classList.remove('open');
+}
+
+// Format card number with spaces
+function fmtCard(el){
+  let v = el.value.replace(/\D/g,'').slice(0,16);
+  el.value = v.replace(/(\d{4})/g,'$1 ').trim();
+}
+function fmtExpiry(el){
+  let v = el.value.replace(/\D/g,'');
+  if(v.length >= 2) v = v.slice(0,2)+'/'+v.slice(2,4);
+  el.value = v;
+}
+
+function coErr(msg){
+  const el = document.getElementById('co-err');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function setLoading(loading){
+  const btn = document.getElementById('co-btn');
+  if(!btn) return;
+  if(loading){
+    btn.disabled = true;
+    btn.innerHTML = '<div class="co-spinner"></div> PROCESSANDO...';
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = checkoutMode === 'pix' ? 'GERAR PIX' : '💳 PAGAR';
+  }
+}
+
+async function submitPix(){
+  const nome  = document.getElementById('co-nome').value.trim();
+  const sobre = document.getElementById('co-sobrenome').value.trim();
+  const cpf   = document.getElementById('co-cpf').value.replace(/\D/g,'');
+  const email = document.getElementById('co-email').value.trim();
+  
+  if(!nome){ coErr('Preencha o nome'); return; }
+  if(cpf.length !== 11){ coErr('CPF inválido — 11 dígitos'); return; }
+  if(!email.includes('@')){ coErr('E-mail inválido'); return; }
+  
+  const totalBRL = calcTotalBRL();
+  setLoading(true);
+  
+  try{
+    const r = await fetch('/api/mp/pix', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        amount: totalBRL,
+        description: cartDescription(),
+        nome, sobrenome: sobre || 'PowerPY',
+        cpf, email
+      })
+    });
+    const data = await r.json();
+    if(!r.ok || data.error){
+      coErr(data.error || data.message || 'Erro ao gerar PIX');
+      setLoading(false);
+      return;
+    }
+    // Show QR code
+    const qr   = data.point_of_interaction?.transaction_data?.qr_code;
+    const qrB64 = data.point_of_interaction?.transaction_data?.qr_code_base64;
+    const payId  = data.id;
+    
+    document.getElementById('co-body').innerHTML = `
+      <div class="pix-result">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#00c2ff;letter-spacing:3px;margin-bottom:16px;">PIX GERADO!</div>
+        ${qrB64 ? `<img class="pix-qr" src="data:image/png;base64,${qrB64}" alt="QR PIX">` : ''}
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:8px;letter-spacing:1px;text-transform:uppercase;">Ou copie o código PIX:</div>
+        <button class="pix-copy" onclick="copyPix('${qr}')">📋 ${qr ? qr.slice(0,60)+'...' : 'Copiar'}</button>
+        <div class="pix-note">⏳ Válido por 30 minutos · ID: ${payId}</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;margin-top:20px;">R$ ${totalBRL.toFixed(2).replace('.',',')}</div>
+        <button onclick="closeCheckout()" style="margin-top:20px;width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);padding:12px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;">Fechar</button>
+      </div>`;
+    
+    // Log lead
+    logLead('PIX', totalBRL, payId);
+  }catch(e){
+    coErr('Erro de conexão. Tente novamente.');
+    setLoading(false);
+  }
+}
+
+function copyPix(code){
+  navigator.clipboard.writeText(code).then(()=>showToast('Código PIX copiado!')).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = code;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Código PIX copiado!');
+  });
+}
+
+async function submitCard(){
+  const nome    = document.getElementById('co-nome').value.trim();
+  const email   = document.getElementById('co-email').value.trim();
+  const cpf     = document.getElementById('co-cpf').value.replace(/\D/g,'');
+  const cardnum = document.getElementById('co-cardnum').value.replace(/\s/g,'');
+  const expiry  = document.getElementById('co-expiry').value;
+  const cvv     = document.getElementById('co-cvv').value;
+  const parcelas = parseInt(document.getElementById('co-parcelas').value)||1;
+  
+  if(!nome){ coErr('Preencha o nome'); return; }
+  if(!email.includes('@')){ coErr('E-mail inválido'); return; }
+  if(cpf.length !== 11){ coErr('CPF inválido'); return; }
+  if(cardnum.length < 15){ coErr('Número do cartão inválido'); return; }
+  if(!expiry.includes('/')){ coErr('Validade inválida (MM/AA)'); return; }
+  if(cvv.length < 3){ coErr('CVV inválido'); return; }
+  
+  const [expMM, expYY] = expiry.split('/');
+  const totalBRL = calcTotalBRL();
+  
+  setLoading(true);
+  
+  try{
+    const pk = await getMpPk();
+    if(!pk){ coErr('Erro ao carregar configuração de pagamento'); setLoading(false); return; }
+    
+    // Use MP SDK to tokenize card
+    const mp = new MercadoPago(pk);
+    const cardToken = await mp.createCardToken({
+      cardNumber: cardnum,
+      cardholderName: nome,
+      cardExpirationMonth: expMM,
+      cardExpirationYear: '20'+expYY,
+      securityCode: cvv,
+      identificationType: 'CPF',
+      identificationNumber: cpf
+    });
+    
+    // Get payment method
+    const pmData = await mp.getPaymentMethods({ bin: cardnum.slice(0,6) });
+    const paymentMethodId = pmData.results[0]?.id || 'visa';
+    
+    const r = await fetch('/api/mp/payment', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        token: cardToken.id,
+        payment_method_id: paymentMethodId,
+        installments: parcelas,
+        amount: totalBRL,
+        description: cartDescription(),
+        nome, cpf, email
+      })
+    });
+    
+    const data = await r.json();
+    
+    if(data.status === 'approved'){
+      document.getElementById('co-body').innerHTML = `
+        <div class="pix-result">
+          <div style="font-size:48px;margin-bottom:12px;">✅</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#22c55e;letter-spacing:3px;margin-bottom:8px;">PAGAMENTO APROVADO!</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1px;">ID: ${data.id} · R$ ${totalBRL.toFixed(2).replace('.',',')}</div>
+          <button onclick="closeCheckout();cart=[];renderCart();" style="margin-top:24px;width:100%;background:#22c55e;border:none;color:#fff;padding:14px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;cursor:pointer;">FECHAR</button>
+        </div>`;
+      logLead('CARTÃO', totalBRL, data.id);
+    } else if(data.status === 'in_process' || data.status === 'pending'){
+      document.getElementById('co-body').innerHTML = `
+        <div class="pix-result">
+          <div style="font-size:48px;margin-bottom:12px;">⏳</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#f59e0b;letter-spacing:3px;margin-bottom:8px;">EM ANÁLISE</div>
+          <div style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1px;">Pagamento em processamento. ID: ${data.id}</div>
+          <button onclick="closeCheckout()" style="margin-top:24px;width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:12px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;">Fechar</button>
+        </div>`;
+    } else {
+      coErr(`Pagamento não aprovado: ${data.status_detail || data.status || 'Erro'}`);
+      setLoading(false);
+    }
+  }catch(e){
+    coErr('Erro ao processar cartão: ' + (e.message || 'Tente novamente'));
+    setLoading(false);
+  }
+}
+
+// Load MP SDK when needed
+async function loadMpSdk(){
+  if(window.MercadoPago) return;
+  const pk = await getMpPk();
+  if(!pk) return;
+  return new Promise(resolve=>{
+    const s = document.createElement('script');
+    s.src = 'https://sdk.mercadopago.com/js/v2';
+    s.onload = resolve;
+    document.head.appendChild(s);
+  });
+}
+
+function logLead(tipo, totalBRL, payId){
+  fetch('/api/lead', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      tipo: 'pagamento_atacado',
+      nome: currentUser.name,
+      produto: cartDescription(),
+      mensagem: `${tipo} · R$ ${totalBRL.toFixed(2)} · ID: ${payId}`
+    })
+  }).catch(()=>{});
+}
+
+// Load SDK on page ready
+loadMpSdk();
+
+// Close modal on ESC
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeCheckout(); });
+
 </script>
 </body>
 </html>
