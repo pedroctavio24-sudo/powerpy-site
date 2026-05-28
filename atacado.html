@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power PY — Área do Cliente</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#04060f;--surface:#0d1117;--border:rgba(59,130,246,0.12);
+  --accent:#3b82f6;--accent2:#60a5fa;--text:#fff;--muted:rgba(255,255,255,0.35);
+  --green:#22c55e;--red:#ef4444;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;}
+
+/* ── LOGIN ── */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;background:var(--bg);}
+.login-box{background:var(--surface);border:1px solid var(--border);padding:56px 48px;max-width:440px;width:100%;text-align:center;}
+.login-logo{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:6px;color:#fff;margin-bottom:4px;}
+.login-logo span{color:var(--accent);}
+.login-sub{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:48px;}
+.login-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;display:block;text-align:left;margin-bottom:8px;}
+.login-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;padding:14px 18px;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;margin-bottom:16px;}
+.login-input:focus{border-color:var(--accent);}
+.login-input::placeholder{color:rgba(255,255,255,0.2);}
+.login-btn{width:100%;background:var(--accent);border:none;color:#fff;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;cursor:pointer;transition:background .2s;margin-top:8px;}
+.login-btn:hover{background:#2563eb;}
+.login-err{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:12px;display:none;}
+.login-attempts{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:16px;letter-spacing:1px;}
+
+/* ── MAIN ── */
+#main-screen{display:none;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(4,6,15,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:#fff;}
+.nav-logo span{color:var(--accent);}
+.nav-user{display:flex;align-items:center;gap:16px;}
+.nav-greeting{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.nav-logout{background:none;border:1px solid rgba(255,255,255,0.1);color:var(--muted);padding:6px 16px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.nav-logout:hover{border-color:var(--red);color:var(--red);}
+
+/* TICKER */
+.ticker{background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.15);padding:8px 40px;display:flex;align-items:center;gap:16px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(34,197,94,0.8);text-transform:uppercase;}
+.ticker-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* BODY */
+.container{max-width:1300px;margin:0 auto;padding:40px;}
+.page-header{margin-bottom:40px;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);line-height:.9;color:#fff;margin-bottom:8px;}
+.page-title span{color:var(--accent);}
+.page-sub{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
+
+/* FILTER BAR */
+.filter-bar{display:flex;align-items:center;gap:12px;margin-bottom:32px;flex-wrap:wrap;}
+.search-input{flex:1;min-width:220px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;padding:12px 18px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.search-input:focus{border-color:var(--accent);}
+.search-input::placeholder{color:rgba(255,255,255,0.2);}
+.brand-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{background:none;border:1px solid rgba(255,255,255,0.08);color:var(--muted);padding:8px 16px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.pill.active,.pill:hover{border-color:var(--accent);color:var(--accent);}
+.pill.all.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+/* PRODUCTS TABLE */
+.brand-section{margin-bottom:48px;}
+.brand-header{display:flex;align-items:center;gap:16px;padding:20px 0;border-bottom:2px solid var(--accent);margin-bottom:0;}
+.brand-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.brand-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:#fff;}
+.brand-count{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.prod-table{width:100%;border-collapse:collapse;}
+.prod-table thead th{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:14px 16px;border-bottom:1px solid var(--border);text-align:left;}
+.prod-table thead th:last-child{text-align:right;}
+.prod-table tbody tr{border-bottom:1px solid rgba(255,255,255,0.03);transition:background .15s;}
+.prod-table tbody tr:hover{background:rgba(59,130,246,0.04);}
+.prod-table tbody tr.hidden{display:none;}
+.td-name{padding:14px 16px;font-size:14px;color:rgba(255,255,255,0.85);}
+.td-apresent{padding:14px 16px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
+.td-price{padding:14px 16px;text-align:right;}
+.price-usd{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:1px;line-height:1;}
+.price-brl{font-size:11px;color:var(--green);font-family:'Space Mono',monospace;letter-spacing:1px;margin-top:2px;}
+.confirm-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:2px 7px;margin-left:8px;vertical-align:middle;text-transform:uppercase;}
+.td-wa{padding:14px 16px;text-align:right;}
+.wa-btn{display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;border:none;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.wa-btn:hover{background:#1fad55;transform:translateY(-1px);}
+
+/* TIRZEPATIDAS SPECIAL */
+.tirz-note{background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);padding:12px 20px;margin-bottom:0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(20,184,166,0.8);text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+
+/* NO RESULTS */
+.no-results{text-align:center;padding:80px 20px;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+
+/* CART FAB */
+.cart-fab{position:fixed;bottom:80px;right:32px;z-index:500;}
+.cart-fab-btn{width:56px;height:56px;background:var(--accent);border:none;border-radius:50%;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(59,130,246,0.4);transition:all .2s;position:relative;}
+.cart-fab-btn:hover{transform:scale(1.08);background:#2563eb;}
+.cart-count{position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;}
+
+/* CART SIDEBAR */
+.cart-sidebar{position:fixed;top:0;right:-420px;width:420px;height:100vh;background:var(--surface);border-left:1px solid var(--border);z-index:1000;transition:right .35s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;}
+.cart-sidebar.open{right:0;}
+.cart-top{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.cart-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:#fff;}
+.cart-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;transition:color .2s;}
+.cart-close:hover{color:#fff;}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px;}
+.cart-item{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.cart-item-info{flex:1;}
+.cart-item-name{font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:2px;}
+.cart-item-brand{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.cart-item-price{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;white-space:nowrap;}
+.cart-item-brl{font-family:'Space Mono',monospace;font-size:9px;color:var(--green);letter-spacing:1px;}
+.cart-qty{display:flex;align-items:center;gap:8px;}
+.qty-btn{background:rgba(255,255,255,0.06);border:none;color:#fff;width:28px;height:28px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.qty-btn:hover{background:rgba(59,130,246,0.2);}
+.qty-val{font-family:'Space Mono',monospace;font-size:12px;color:#fff;min-width:20px;text-align:center;}
+.remove-btn{background:none;border:none;color:rgba(255,255,255,0.2);cursor:pointer;font-size:14px;padding:4px;transition:color .2s;}
+.remove-btn:hover{color:var(--red);}
+.cart-empty{text-align:center;padding:60px 20px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+.cart-footer{padding:20px 24px;border-top:1px solid var(--border);flex-shrink:0;}
+.cart-total-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;}
+.cart-total-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+.cart-total-usd{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;line-height:1;}
+.cart-total-brl{font-family:'Space Mono',monospace;font-size:11px;color:var(--green);letter-spacing:1px;}
+.cart-wa-btn{width:100%;background:#25d366;border:none;color:#fff;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;}
+.cart-wa-btn:hover{background:#1fad55;}
+.cart-wa-btn svg{flex-shrink:0;}
+
+/* OVERLAY */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:none;}
+.sidebar-overlay.open{display:block;}
+
+/* TOAST */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--accent);color:#fff;padding:12px 24px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;z-index:9999;opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1);white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+/* SCROLL FAB bottom marquee space */
+body{padding-bottom:0;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .container{padding:24px 16px;}
+  .filter-bar{gap:8px;}
+  .cart-sidebar{width:100%;right:-100%;}
+  .td-apresent{display:none;}
+  nav .nav-greeting{display:none;}
+  .ticker{padding:8px 20px;font-size:9px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">POWER<span>PY</span></div>
+    <div class="login-sub">Área do Cliente — Acesso Restrito</div>
+    <label class="login-label">Login</label>
+    <input class="login-input" id="login-user" type="text" placeholder="Seu login" autocomplete="username" onkeydown="if(event.key==='Enter')document.getElementById('login-pwd').focus()">
+    <label class="login-label">Senha</label>
+    <input class="login-input" id="login-pwd" type="password" placeholder="Sua senha" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="login-err" id="login-err">Login ou senha incorretos</div>
+    <button class="login-btn" onclick="doLogin()">ENTRAR</button>
+    <div class="login-attempts" id="login-attempts"></div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<div id="main-screen">
+  <nav>
+    <div class="nav-logo">POWER<span>PY</span></div>
+    <div class="nav-user">
+      <span class="nav-greeting" id="nav-greeting"></span>
+      <button class="nav-logout" onclick="doLogout()">Sair</button>
+    </div>
+  </nav>
+
+  <div class="ticker">
+    <div class="ticker-dot"></div>
+    <span>Preços Atacado · Exclusivo</span>
+    <span style="margin-left:auto;">USD/BRL: <strong id="ticker-rate">R$ 5,30</strong></span>
+  </div>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">TABELA DE<br><span>ATACADO</span></h1>
+      <div class="page-sub" id="page-sub">Produtos disponíveis · Preços exclusivos</div>
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-bar">
+      <input type="text" class="search-input" id="search" placeholder="Buscar produto..." oninput="filterAll()">
+      <div class="brand-pills" id="brand-pills"></div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div id="products-container"></div>
+    <div class="no-results" id="no-results" style="display:none;">Nenhum produto encontrado</div>
+  </div>
+</div>
+
+<!-- CART FAB -->
+<div class="cart-fab">
+  <button class="cart-fab-btn" onclick="toggleCart()">
+    🛒
+    <div class="cart-count" id="cart-count" style="display:none;">0</div>
+  </button>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-top">
+    <div class="cart-title">Pedido</div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">Carrinho vazio</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <div>
+        <div class="cart-total-label">Total</div>
+        <div class="cart-total-usd" id="cart-total-usd">$0,00</div>
+        <div class="cart-total-brl" id="cart-total-brl">≈ R$ 0,00</div>
+      </div>
+    </div>
+    <button class="cart-wa-btn" onclick="sendWhatsApp()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      ENVIAR PEDIDO
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// CLIENTES — login/senha com hash SHA-256
+// Para adicionar novo cliente: gerar hash de "login:senha"
+// ═══════════════════════════════════════════════════════════
+const CLIENTS = {
+  // hash de SHA-256("ezequiel:power2026")
+  'c8114ab1db38183305a364ac2100ff265dde9b0ef59b1c77c98381f90651de05': {
+    name: 'Ezequiel',
+    greeting: 'Ezequiel'
+  }
+};
+
+// Taxa do dólar fixa
+const USD_BRL = 5.30;
+// Valor fixo BRL para Tirzepatidas (independente da taxa)
+const TIRZ_BRL_FIXO = 830;
+
+const WA_NUM = '5561992011365';
+
+// ── PRODUTOS (preços de ATACADO) ──────────────────────────────────────
+const PRODUCTS = {
+  "tirzepatidas": {
+    label: "Pep Gen Labs — Tirzepatidas",
+    color: "#14b8a6",
+    brl_fixo: TIRZ_BRL_FIXO,
+    produtos: [
+      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185},
+      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185},
+      {name:"TG 15mg (IF)",apresent:"IF",atacado:180},
+      {name:"Tirzec 15mg",apresent:"",atacado:190},
+      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
+      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
+      {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810}
+    ]
+  },
+  "cooper": {
+    label: "Cooper Pharma",
+    color: "#10b981",
+    produtos: [
+      {name:"Anazbol — Anastrozol 1mg",apresent:"50 comp",atacado:52.2},
+      {name:"Clenbolic — Clenbuterol 40mcg",apresent:"50 comp",atacado:32.4},
+      {name:"Cypobolic — Testo Cipionato 250mg",apresent:"10 amp",atacado:54.0},
+      {name:"Decabolic — Nandrolona Decanoato 250mg",apresent:"10 amp",atacado:63.0},
+      {name:"Enanbolic — Testo Enantato 250mg",apresent:"10 amp",atacado:54.0},
+      {name:"Masterbolic — Masteron Prop 100mg",apresent:"10 amp",atacado:81.0},
+      {name:"Nanbolic-PH — Nandrolona Fenilpropionato 100mg",apresent:"10 amp",atacado:63.0},
+      {name:"Oxanbolic — Oxandrolona 10mg",apresent:"50 comp",atacado:48.6},
+      {name:"Oxybolic — Hemogenin 50mg",apresent:"50 comp",atacado:54.0},
+      {name:"Primo Comp — Primobolan Metenolona",apresent:"50 comp",atacado:109.0},
+      {name:"Primobolic — Primobolan Enantato 100mg",apresent:"10 amp",atacado:189.0},
+      {name:"Probolic — Testo Propionato 100mg",apresent:"10 amp",atacado:54.0},
+      {name:"Provibolic — Proviron 25mg",apresent:"50 comp",atacado:54.0},
+      {name:"Susobolic — Testo Mix 250mg",apresent:"10 amp",atacado:57.6},
+      {name:"Turbolic — Turinabol 10mg",apresent:"50 comp",atacado:48.6},
+      {name:"Winobolic — Estanozolol 10mg",apresent:"50 comp",atacado:28.8}
+    ]
+  },
+  "pharmacom": {
+    label: "Pharmacom Labs",
+    color: "#ef4444",
+    produtos: [
+      {name:"Dro P 100 — Masteron",apresent:"10ml",atacado:89.0},
+      {name:"Nan D 300 — Nandro Deca",apresent:"10ml",atacado:63.0},
+      {name:"Nan Ph 100mg — Nandrolona Fenil",apresent:"10ml",atacado:58.0},
+      {name:"Oxandrolonos 10mg",apresent:"100 comp",atacado:81.0},
+      {name:"Pharmatropin",apresent:"100 UI",atacado:360.0},
+      {name:"Stan50 — Stano Inj. 50mg",apresent:"10ml",atacado:46.8},
+      {name:"Sust 250mg — Durateston",apresent:"10ml",atacado:57.6},
+      {name:"Sust 300mg — Durateston",apresent:"10ml",atacado:63.0},
+      {name:"Test C 250",apresent:"10ml",atacado:63.0},
+      {name:"Test P 100 — Testo Propio",apresent:"10ml",atacado:41.4},
+      {name:"Tren A 100",apresent:"10 amp",atacado:63.0}
+    ]
+  },
+  "king": {
+    label: "King Pharma",
+    color: "#8b5cf6",
+    produtos: [
+      {name:"CutStack",apresent:"10ml",atacado:30.6},
+      {name:"Decadurabolin 300",apresent:"10ml",atacado:30.6},
+      {name:"Masteron Compri. 10mg",apresent:"50 comp",atacado:32.4},
+      {name:"Masteron Slow",apresent:"10ml",atacado:34.6},
+      {name:"Parabolan — Trembo-Acetato",apresent:"10ml",atacado:30.6},
+      {name:"Primobolan 25mg",apresent:"50 comp",atacado:54.0},
+      {name:"Sustan — Durateston",apresent:"10ml",atacado:33.0},
+      {name:"Testoviron — Testo Enantato",apresent:"10ml",atacado:30.0},
+      {name:"Testex — Cipionato de Testo",apresent:"10ml",atacado:31.9}
+    ]
+  },
+  "lander_gold": {
+    label: "Landerlan Gold",
+    color: "#f59e0b",
+    produtos: [
+      {name:"Boldenona 250mg",apresent:"10ml",atacado:32.4},
+      {name:"Clembuterol 0,04mg",apresent:"50 comp",atacado:18.0},
+      {name:"Decaland Plus 250mg",apresent:"10ml",atacado:31.9},
+      {name:"Drostanolona Masteron Prop 100mg",apresent:"10ml",atacado:32.4},
+      {name:"Durateston Plus Gold 250mg",apresent:"10ml",atacado:32.0},
+      {name:"HCG Gonadotropin 5000 UI",apresent:"",atacado:58.0},
+      {name:"NPP — Nandrolona Fenilpropionato",apresent:"10ml",atacado:30.6},
+      {name:"Primobolan — Metenolona Enantato 100mg",apresent:"10ml",atacado:69.0},
+      {name:"Sales de Trembolona Tritrembo 200mg",apresent:"10ml",atacado:51.0},
+      {name:"Testenat — Enantato de Testosterona 250mg",apresent:"10ml",atacado:32.0},
+      {name:"Testo Propionato",apresent:"10ml",atacado:27.0},
+      {name:"Testoland Depot Gold",apresent:"10ml",atacado:29.0},
+      {name:"Trembolona Acetato 100mg",apresent:"10ml",atacado:40.0},
+      {name:"Trembolona Enantato",apresent:"10ml",atacado:36.0},
+      {name:"Trembolona Hexa 100mg",apresent:"10ml",atacado:37.0}
+    ]
+  },
+  "landerlan": {
+    label: "Landerlan Clássica",
+    color: "#3b82f6",
+    produtos: [
+      {name:"Decaland",apresent:"5ml",atacado:15.3},
+      {name:"Durateston 250mg",apresent:"1ml",atacado:5.4},
+      {name:"Metandrostenolona 10mg",apresent:"100 comp",atacado:18.0},
+      {name:"Oxandrolona 5mg",apresent:"100 comp",atacado:45.0},
+      {name:"Oxitoland 50mg",apresent:"20 comp",atacado:18.0},
+      {name:"Stanozoland 10mg",apresent:"100 comp",atacado:18.0},
+      {name:"Testenat Depot",apresent:"4ml",atacado:15.3},
+      {name:"Testoland Depot 200mg",apresent:"3 amp x 2ml",atacado:13.5}
+    ]
+  },
+  "zphc": {
+    label: "ZPHC",
+    color: "#06b6d4",
+    produtos: [
+      {name:"Boldenone Undecylenate 250mg",apresent:"10ml",atacado:47.25},
+      {name:"Clembuterol 40mcg",apresent:"100 comp",atacado:31.5},
+      {name:"Clomid 25mg",apresent:"100 caps",atacado:61.25},
+      {name:"DHB Dihydroboldenone 50mg",apresent:"10ml",atacado:78.75},
+      {name:"Drostanolone Enanthate 200mg",apresent:"10ml",atacado:78.75},
+      {name:"Drostanolone Propionate 100mg",apresent:"10ml",atacado:64.75},
+      {name:"HP HCG 5000UI",apresent:"",atacado:52.5},
+      {name:"Mega Mix 250mg",apresent:"10ml",atacado:87.3},
+      {name:"Mesterolone Proviron",apresent:"100 comp",atacado:87.5},
+      {name:"Methandienone",apresent:"100 tabs",atacado:47.25},
+      {name:"Methenolone E Primo 100mg",apresent:"10ml",atacado:153.0},
+      {name:"Nandrolone Decanoate Deca 250mg",apresent:"10ml",atacado:48.65},
+      {name:"Nandrolone Phenylpropionate NPP 100mg",apresent:"10ml",atacado:54.5},
+      {name:"Oxandrolone 10mg",apresent:"100 comp",atacado:59.4},
+      {name:"Oxymetholone 25mg",apresent:"100 comp",atacado:63.25},
+      {name:"Stanozolol 10mg",apresent:"100 comp",atacado:27.0},
+      {name:"Stanozolol AQ 50mg",apresent:"10ml",atacado:38.5},
+      {name:"Testosterone Cypionate 250mg",apresent:"10ml",atacado:43.75},
+      {name:"Testosterone Enanthate 250mg",apresent:"10ml",atacado:47.25},
+      {name:"Testosterone Enanthate 400mg",apresent:"10ml",atacado:61.2},
+      {name:"Testosterone Mix Durateston 250mg",apresent:"10ml",atacado:54.4},
+      {name:"Testosterone Propionate 100mg",apresent:"10ml",atacado:39.5},
+      {name:"Trembolone Acetate 100mg",apresent:"10ml",atacado:128.8},
+      {name:"Trembolone Enanthate 200mg",apresent:"10 amp",atacado:77.4},
+      {name:"Trestolone Acetate 25mg",apresent:"10ml",atacado:93.6},
+      {name:"Trestolone Acetate 50mg",apresent:"10ml",atacado:100.8},
+      {name:"Turinabol 10mg",apresent:"100 comp",atacado:57.6},
+      {name:"Zptrop 90 GH 90UI",apresent:"",atacado:216.0},
+      {name:"Zptropin 16 GH 16UI",apresent:"",atacado:72.0}
+    ]
+  },
+  "bratva_labs": {
+    label: "Bratva Labs",
+    color: "#ec4899",
+    produtos: [
+      {name:"Acetato Trembolona 100mg",apresent:"10ml",atacado:27.0},
+      {name:"B-Blend 150mg",apresent:"10ml",atacado:28.8},
+      {name:"Boldenona 250mg",apresent:"10ml",atacado:25.2},
+      {name:"Cipionato Testo 200mg",apresent:"10ml",atacado:23.4},
+      {name:"CXI Enantato de Testosterona",apresent:"10ml",atacado:30.6},
+      {name:"CXI Sales de Testosterona",apresent:"10ml",atacado:30.6},
+      {name:"CXI Trembolona de Acetato",apresent:"10ml",atacado:34.2},
+      {name:"Deca Nandro 250mg",apresent:"10ml",atacado:25.2},
+      {name:"Enantato Metenolona Primo 100mg",apresent:"10ml",atacado:57.6},
+      {name:"Enantato Testo 250mg",apresent:"10ml",atacado:24.3},
+      {name:"Mesterolona 25mg",apresent:"25 comp",atacado:19.8},
+      {name:"Metandrostenolona 10mg",apresent:"50 comp",atacado:13.5},
+      {name:"Oxandrolona 10mg",apresent:"50 caps",atacado:36.0},
+      {name:"Propionato Drostanolona 100mg",apresent:"10ml",atacado:29.7},
+      {name:"Propionato Testo 100mg",apresent:"10ml",atacado:23.4},
+      {name:"Proviron 25mg",apresent:"25 caps",atacado:27.0},
+      {name:"Sales de Testosterona 250mg",apresent:"10ml",atacado:23.4},
+      {name:"Stanozolo 50mg",apresent:"10ml",atacado:23.4},
+      {name:"Stanozolol 10mg",apresent:"50 comp",atacado:23.4}
+    ]
+  },
+  "muscle_pharma": {
+    label: "Muscle Pharma",
+    color: "#a855f7",
+    produtos: [
+      {name:"Anadrol 25mg",apresent:"50 comp",atacado:36.0},
+      {name:"Anavar 10mg",apresent:"50 comp",atacado:36.0},
+      {name:"Anavar 25mg",apresent:"50 comp",atacado:52.2},
+      {name:"Anavar 5mg",apresent:"100 comp",atacado:39.6},
+      {name:"Aromasin 1mg",apresent:"30 comp",atacado:36.0},
+      {name:"Boldebol 200mg",apresent:"10ml",atacado:36.0},
+      {name:"Cut Stack 100mg",apresent:"10ml",atacado:36.0},
+      {name:"D-Bol 50mg",apresent:"10ml",atacado:36.0},
+      {name:"Decadurabolin 300mg",apresent:"10ml",atacado:36.0},
+      {name:"Dianabol 10mg",apresent:"",atacado:36.0},
+      {name:"GH 50UI",apresent:"5 amp",atacado:207.0},
+      {name:"Halotestin 10mg",apresent:"30 tabs",atacado:54.0},
+      {name:"HCG 5000 UI",apresent:"1 amp",atacado:39.6},
+      {name:"IGF-1 100mcg",apresent:"5 amp + diluente",atacado:189.0},
+      {name:"Masteron 100mg",apresent:"10ml",atacado:36.0},
+      {name:"Parabolan 100mg",apresent:"10ml",atacado:36.0},
+      {name:"Parabolin Blend 200mg",apresent:"10ml",atacado:45.0},
+      {name:"Primobolan 100mg",apresent:"10ml",atacado:54.0},
+      {name:"Proviron",apresent:"50 comp",atacado:36.0},
+      {name:"Sibutramina 15mg",apresent:"30 tabs",atacado:18.0},
+      {name:"Stanozolol 50mg",apresent:"30ml",atacado:34.18},
+      {name:"Sustan XT 250mg",apresent:"10ml",atacado:36.0},
+      {name:"T3 Cytomel 100mcg",apresent:"50 comp",atacado:36.0},
+      {name:"Testex 250mg",apresent:"10ml",atacado:36.0},
+      {name:"Testoviron 150 Suspensão",apresent:"10ml",atacado:39.6},
+      {name:"Testoviron 250",apresent:"10ml",atacado:36.0},
+      {name:"Turinabol 10mg",apresent:"60 comp",atacado:36.0},
+      {name:"Winstrol 100 — 100mg",apresent:"10ml",atacado:36.0}
+    ]
+  },
+  "spectrum": {
+    label: "Spectrum Pharma",
+    color: "#f97316",
+    produtos: [
+      {name:"Anavar 5mg",apresent:"100 comp",atacado:45.0},
+      {name:"Deca 250mg",apresent:"10 amp",atacado:54.0},
+      {name:"Dianabol 10mg",apresent:"100 tabs",atacado:28.8},
+      {name:"Equipoise 300mg",apresent:"10ml",atacado:59.4},
+      {name:"Hemogenin / Anapolan 25mg",apresent:"100 caps",atacado:50.4},
+      {name:"Masteron 100mg",apresent:"10 amp",atacado:59.4},
+      {name:"Masteron Depot 200mg",apresent:"10 amp",atacado:81.0},
+      {name:"Primobolan Depot 100mg",apresent:"",atacado:90.0},
+      {name:"Proviron 25mg",apresent:"100 caps",atacado:75.6},
+      {name:"Spectros GH 140UI",apresent:"",atacado:405.0},
+      {name:"Stromba Stanozolol 10mg",apresent:"",atacado:36.0},
+      {name:"Test Propionato 100mg",apresent:"1ml",atacado:36.0},
+      {name:"Testen 300mg",apresent:"10ml",atacado:54.0},
+      {name:"Testo Mix 250mg",apresent:"10ml",atacado:54.0},
+      {name:"Testoc 200mg",apresent:"10ml",atacado:45.0},
+      {name:"Trembolona Acetato",apresent:"10ml",atacado:68.4}
+    ]
+  },
+  "canada": {
+    label: "Canada Bio Labs",
+    color: "#22c55e",
+    produtos: [
+      {name:"Anadrol 50",apresent:"amp",atacado:39.6},
+      {name:"Anavar (Oxa)",apresent:"10ml",atacado:45.0},
+      {name:"Androbase 100",apresent:"10ml",atacado:48.6},
+      {name:"Decabolan 250",apresent:"10ml",atacado:57.6},
+      {name:"Delatestryl 300",apresent:"10ml",atacado:50.4},
+      {name:"Depotest 200",apresent:"10ml",atacado:48.6},
+      {name:"Durabolin 100",apresent:"10ml",atacado:45.0},
+      {name:"Equipoise 300 — Boldenona",apresent:"10ml",atacado:57.6},
+      {name:"Finaplix 100",apresent:"10ml",atacado:64.8},
+      {name:"Masteron 100mg",apresent:"10ml",atacado:64.8},
+      {name:"Masteron 200mg",apresent:"10ml",atacado:84.6},
+      {name:"Ment 50 — Trestolone Acet.",apresent:"10ml",atacado:99.0},
+      {name:"Parabol 200",apresent:"10ml",atacado:77.4},
+      {name:"Parabolan 100",apresent:"10ml",atacado:66.6},
+      {name:"Primobolan 100mg",apresent:"10ml",atacado:99.0},
+      {name:"Somatropin 191 AA 15UI",apresent:"75UI",atacado:324.0},
+      {name:"Stano 50mg",apresent:"10 amp",atacado:39.6},
+      {name:"Sustanon — Testo Mix",apresent:"10ml",atacado:48.6},
+      {name:"Testopin 100",apresent:"10ml",atacado:36.0},
+      {name:"Winstrol 50",apresent:"amp",atacado:39.6}
+    ]
+  }
+};
+
+// ══════════════════════════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════════════════════════
+let currentUser = null;
+let failedAttempts = parseInt(sessionStorage.getItem('pp_fails')||'0');
+const MAX_ATTEMPTS = 5;
+const LOCK_MINUTES = 15;
+
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin(){
+  // Check lockout
+  const lockUntil = parseInt(sessionStorage.getItem('pp_lock')||'0');
+  if(Date.now() < lockUntil){
+    const mins = Math.ceil((lockUntil - Date.now())/60000);
+    showErr(`Bloqueado por ${mins} min. Tente novamente mais tarde.`);
+    return;
+  }
+
+  const user = document.getElementById('login-user').value.trim().toLowerCase();
+  const pwd = document.getElementById('login-pwd').value;
+  if(!user || !pwd){ showErr('Preencha login e senha'); return; }
+
+  const hash = await sha256(`${user}:${pwd}`);
+
+  if(CLIENTS[hash]){
+    // SUCCESS
+    sessionStorage.removeItem('pp_fails');
+    sessionStorage.removeItem('pp_lock');
+    sessionStorage.setItem('pp_session', JSON.stringify({hash, ts: Date.now()}));
+    currentUser = CLIENTS[hash];
+    showMain();
+  } else {
+    // FAIL
+    failedAttempts++;
+    sessionStorage.setItem('pp_fails', failedAttempts);
+    if(failedAttempts >= MAX_ATTEMPTS){
+      const lockUntil = Date.now() + LOCK_MINUTES * 60 * 1000;
+      sessionStorage.setItem('pp_lock', lockUntil);
+      showErr(`Muitas tentativas. Bloqueado por ${LOCK_MINUTES} minutos.`);
+    } else {
+      const left = MAX_ATTEMPTS - failedAttempts;
+      showErr(`Login ou senha incorretos. ${left} tentativa(s) restante(s).`);
+    }
+    document.getElementById('login-pwd').value = '';
+    document.getElementById('login-pwd').focus();
+  }
+}
+
+function showErr(msg){
+  const el = document.getElementById('login-err');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function doLogout(){
+  sessionStorage.removeItem('pp_session');
+  currentUser = null;
+  document.getElementById('main-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pwd').value = '';
+  document.getElementById('login-err').style.display = 'none';
+}
+
+function checkSession(){
+  try{
+    const s = JSON.parse(sessionStorage.getItem('pp_session')||'null');
+    if(s && s.hash && CLIENTS[s.hash] && (Date.now()-s.ts) < 8*60*60*1000){
+      currentUser = CLIENTS[s.hash];
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+
+// ══════════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════════
+let activeBrand = 'all';
+let cart = [];
+
+function showMain(){
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-screen').style.display = 'block';
+  document.getElementById('nav-greeting').textContent = `Olá, ${currentUser.name}`;
+  
+  const total = Object.values(PRODUCTS).reduce((a,b)=>a+b.produtos.length,0);
+  document.getElementById('page-sub').textContent = `${total} produtos disponíveis · Preços exclusivos atacado`;
+  
+  buildBrandPills();
+  renderProducts();
+}
+
+function buildBrandPills(){
+  const cont = document.getElementById('brand-pills');
+  let html = `<button class="pill all active" onclick="setBrand('all',this)">Todas</button>`;
+  for(const [key, brand] of Object.entries(PRODUCTS)){
+    html += `<button class="pill" onclick="setBrand('${key}',this)" style="--ac:${brand.color}">${brand.label}</button>`;
+  }
+  cont.innerHTML = html;
+}
+
+function setBrand(key, el){
+  activeBrand = key;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  filterAll();
+}
+
+function filterAll(){
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  let anyVisible = false;
+  
+  document.querySelectorAll('.brand-section').forEach(sec=>{
+    const slug = sec.dataset.brand;
+    const brandMatch = activeBrand === 'all' || activeBrand === slug;
+    if(!brandMatch){ sec.style.display='none'; return; }
+    
+    let secVisible = false;
+    sec.querySelectorAll('tr.prod-row').forEach(row=>{
+      const name = row.dataset.name.toLowerCase();
+      const show = !q || name.includes(q);
+      row.classList.toggle('hidden', !show);
+      if(show) secVisible = true;
+    });
+    sec.style.display = secVisible ? '' : 'none';
+    if(secVisible) anyVisible = true;
+  });
+  
+  document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
+}
+
+function brl(usd, brand_key){
+  if(brand_key === 'tirzepatidas'){
+    return TIRZ_BRL_FIXO.toFixed(0);
+  }
+  return (usd * USD_BRL).toFixed(2).replace('.',',');
+}
+
+function fmt(n){ return n.toFixed(2).replace('.',','); }
+
+function renderProducts(){
+  const cont = document.getElementById('products-container');
+  let html = '';
+  
+  for(const [key, brand] of Object.entries(PRODUCTS)){
+    const isTirz = key === 'tirzepatidas';
+    html += `<div class="brand-section" data-brand="${key}">`;
+    
+    if(isTirz){
+      html += `<div class="tirz-note">💊 Tirzepatidas · Valor em BRL fixo: R$ ${TIRZ_BRL_FIXO} por unidade (independente do câmbio)</div>`;
+    }
+    
+    html += `<div class="brand-header">
+      <div class="brand-dot" style="background:${brand.color}"></div>
+      <div class="brand-name">${brand.label}</div>
+      <div class="brand-count" style="margin-left:12px;">${brand.produtos.length} produtos</div>
+    </div>
+    <table class="prod-table">
+      <thead><tr>
+        <th>Produto</th>
+        <th>Apresentação</th>
+        <th style="text-align:right;">Atacado USD</th>
+        <th style="text-align:right;">≈ BRL</th>
+        <th></th>
+      </tr></thead>
+      <tbody>`;
+    
+    brand.produtos.forEach((p,i)=>{
+      const brlVal = isTirz ? TIRZ_BRL_FIXO.toFixed(0) : fmt(p.atacado * USD_BRL);
+      html += `<tr class="prod-row" data-name="${p.name.toLowerCase()}">
+        <td class="td-name">${p.name}</td>
+        <td class="td-apresent">${p.apresent||'—'}</td>
+        <td class="td-price">
+          <div class="price-usd">$${fmt(p.atacado)}</div>
+        </td>
+        <td class="td-price">
+          <div class="price-usd" style="color:${brand.color};">R$${brlVal}</div>
+        </td>
+        <td class="td-wa">
+          <button class="wa-btn" onclick="addToCart('${key}',${i})">+ Pedido</button>
+        </td>
+      </tr>`;
+    });
+    
+    html += `</tbody></table></div>`;
+  }
+  
+  cont.innerHTML = html;
+}
+
+// ══════════════════════════════════════════════════════════════
+// CART
+// ══════════════════════════════════════════════════════════════
+function addToCart(brandKey, idx){
+  const brand = PRODUCTS[brandKey];
+  const p = brand.produtos[idx];
+  const isTirz = brandKey === 'tirzepatidas';
+  
+  const existing = cart.find(c=>c.brandKey===brandKey && c.idx===idx);
+  if(existing){
+    existing.qty++;
+  } else {
+    cart.push({ brandKey, idx, name: p.name, brand: brand.label, priceUSD: p.atacado, isTirz, qty: 1 });
+  }
+  renderCart();
+  showToast(`${p.name} adicionado`);
+}
+
+function removeFromCart(i){
+  cart.splice(i,1);
+  renderCart();
+}
+
+function changeQty(i, delta){
+  cart[i].qty = Math.max(1, cart[i].qty + delta);
+  renderCart();
+}
+
+function toggleCart(){
+  document.getElementById('cart-sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('open');
+}
+
+function renderCart(){
+  const count = cart.reduce((a,c)=>a+c.qty,0);
+  const countEl = document.getElementById('cart-count');
+  countEl.textContent = count;
+  countEl.style.display = count > 0 ? 'flex' : 'none';
+  
+  if(cart.length === 0){
+    document.getElementById('cart-items').innerHTML = '<div class="cart-empty">Carrinho vazio</div>';
+    document.getElementById('cart-total-usd').textContent = '$0,00';
+    document.getElementById('cart-total-brl').textContent = '≈ R$ 0,00';
+    return;
+  }
+  
+  let totalUSD = 0;
+  let totalBRL = 0;
+  let html = '';
+  
+  cart.forEach((item, i) => {
+    const lineUSD = item.priceUSD * item.qty;
+    const lineBRL = item.isTirz ? TIRZ_BRL_FIXO * item.qty : lineUSD * USD_BRL;
+    totalUSD += lineUSD;
+    totalBRL += lineBRL;
+    html += `<div class="cart-item">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-brand">${item.brand}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+        <div>
+          <div class="cart-item-price">$${fmt(lineUSD)}</div>
+          <div class="cart-item-brl">≈ R$${item.isTirz ? (TIRZ_BRL_FIXO*item.qty).toFixed(0) : fmt(lineBRL)}</div>
+        </div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+          <span class="qty-val">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+          <button class="remove-btn" onclick="removeFromCart(${i})">🗑</button>
+        </div>
+      </div>
+    </div>`;
+  });
+  
+  document.getElementById('cart-items').innerHTML = html;
+  document.getElementById('cart-total-usd').textContent = `$${fmt(totalUSD)}`;
+  document.getElementById('cart-total-brl').textContent = `≈ R$ ${fmt(totalBRL)}`;
+}
+
+function sendWhatsApp(){
+  if(cart.length === 0){ showToast('Carrinho vazio'); return; }
+  
+  let msg = `*PEDIDO ATACADO — POWER PY*\n`;
+  msg += `Cliente: ${currentUser.name}\n`;
+  msg += `Câmbio: $1 = R$${USD_BRL.toFixed(2)}\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+  
+  let totalUSD = 0, totalBRL = 0;
+  cart.forEach(item=>{
+    const lineUSD = item.priceUSD * item.qty;
+    const lineBRL = item.isTirz ? TIRZ_BRL_FIXO * item.qty : lineUSD * USD_BRL;
+    totalUSD += lineUSD;
+    totalBRL += lineBRL;
+    const brlStr = item.isTirz ? `R$${(TIRZ_BRL_FIXO*item.qty).toFixed(0)}` : `R$${fmt(lineBRL)}`;
+    msg += `• ${item.name} (${item.brand})\n  ${item.qty}x $${fmt(item.priceUSD)} = $${fmt(lineUSD)} / ${brlStr}\n`;
+  });
+  
+  msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `*TOTAL: $${fmt(totalUSD)} / R$${fmt(totalBRL)}*\n`;
+  
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
+  
+  // Log lead to server
+  fetch('/api/lead', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      tipo: 'pedido_atacado',
+      nome: currentUser.name,
+      produto: cart.map(c=>`${c.name} x${c.qty}`).join(', '),
+      mensagem: `ATACADO · Total: $${fmt(totalUSD)} / R$${fmt(totalBRL)}`
+    })
+  }).catch(()=>{});
+}
+
+// ══════════════════════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════════════════════
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// ── INIT ──
+if(checkSession()){
+  showMain();
+} else {
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+// Enter key on login
+document.getElementById('login-user').addEventListener('keydown', e=>{
+  if(e.key==='Enter') document.getElementById('login-pwd').focus();
+});
+</script>
+</body>
+</html>
