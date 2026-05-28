@@ -510,6 +510,92 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // ── POST /api/admin/stock ─────────────────────────────────────────────────
+  if (pathname === '/api/admin/stock' && req.method === 'POST') {
+    if (rateLimit(ip, 10)) { res.writeHead(429); res.end(JSON.stringify({error:'rate limit'})); return; }
+    const secret = req.headers['x-admin-secret'];
+    if (!secret || !safeCompare(secret, ADMIN_SECRET)) {
+      res.writeHead(401); res.end(JSON.stringify({error:'unauthorized'})); return;
+    }
+    readBody(req, (err, body) => {
+      if (err) { res.writeHead(400); res.end(JSON.stringify({error:'bad json'})); return; }
+      const stock = body.stock;
+      if (!stock || typeof stock !== 'object') {
+        res.writeHead(400); res.end(JSON.stringify({error:'invalid stock'})); return;
+      }
+      // Persist stock to GitHub
+      const fileContent = JSON.stringify(stock, null, 2);
+      const encoded = Buffer.from(fileContent).toString('base64');
+      githubRequest('GET', `/repos/${GH_REPO}/contents/stock.json?ref=${GH_BRANCH}`, null, (err, data) => {
+        const sha = (!err && data && data.sha) ? data.sha : undefined;
+        const payload = { message: 'update stock via admin panel', content: encoded, branch: GH_BRANCH };
+        if (sha) payload.sha = sha;
+        githubRequest('PUT', `/repos/${GH_REPO}/contents/stock.json`, payload, (err2, data2, status2) => {
+          if (err2 || status2 > 201) {
+            res.writeHead(500); res.end(JSON.stringify({error:'gh error'})); return;
+          }
+          res.writeHead(200, {'Content-Type':'application/json'});
+          res.end(JSON.stringify({ok:true}));
+        });
+      });
+    });
+    return;
+  }
+
+  // ── GET /api/admin/stock ──────────────────────────────────────────────────
+  if (pathname === '/api/admin/stock' && req.method === 'GET') {
+    const secret = req.headers['x-admin-secret'];
+    if (!secret || !safeCompare(secret, ADMIN_SECRET)) {
+      res.writeHead(401); res.end(JSON.stringify({error:'unauthorized'})); return;
+    }
+    githubRequest('GET', `/repos/${GH_REPO}/contents/stock.json?ref=${GH_BRANCH}`, null, (err, data) => {
+      if (err || !data || !data.content) {
+        res.writeHead(200, {'Content-Type':'application/json'});
+        res.end(JSON.stringify({}));
+        return;
+      }
+      const content = Buffer.from(data.content.replace(/\n/g,''), 'base64').toString('utf8');
+      res.writeHead(200, {'Content-Type':'application/json'});
+      res.end(content);
+    });
+    return;
+  }
+
+  // ── POST /api/admin/image ─────────────────────────────────────────────────
+  if (pathname === '/api/admin/image' && req.method === 'POST') {
+    if (rateLimit(ip, 5)) { res.writeHead(429); res.end(JSON.stringify({error:'rate limit'})); return; }
+    const secret = req.headers['x-admin-secret'];
+    if (!secret || !safeCompare(secret, ADMIN_SECRET)) {
+      res.writeHead(401); res.end(JSON.stringify({error:'unauthorized'})); return;
+    }
+    readBody(req, (err, body) => {
+      if (err) { res.writeHead(400); res.end(JSON.stringify({error:'bad json'})); return; }
+      const { brand, idx, imageData, filename } = body;
+      if (!brand || idx === undefined || !imageData) {
+        res.writeHead(400); res.end(JSON.stringify({error:'missing fields'})); return;
+      }
+      // Save image to GitHub in /images/ folder
+      const ext = (filename || 'image.jpg').split('.').pop().toLowerCase();
+      const imgFilename = `${brand}_${idx}.${ext}`;
+      const encoded = imageData.includes(',') ? imageData.split(',')[1] : imageData;
+      githubRequest('GET', `/repos/${GH_REPO}/contents/images/${imgFilename}?ref=${GH_BRANCH}`, null, (err, data) => {
+        const sha = (!err && data && data.sha) ? data.sha : undefined;
+        const payload = { message: `upload image: ${imgFilename}`, content: encoded, branch: GH_BRANCH };
+        if (sha) payload.sha = sha;
+        githubRequest('PUT', `/repos/${GH_REPO}/contents/images/${imgFilename}`, payload, (err2, data2, status2) => {
+          if (err2 || status2 > 201) {
+            res.writeHead(500); res.end(JSON.stringify({error:'gh error saving image'})); return;
+          }
+          const imageUrl = `https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/images/${imgFilename}`;
+          res.writeHead(200, {'Content-Type':'application/json'});
+          res.end(JSON.stringify({ok:true, url: imageUrl}));
+        });
+      });
+    });
+    return;
+  }
+
+
   // ── Static files ──────────────────────────────────────────────────────────
   serveStatic(req, res);
 });
