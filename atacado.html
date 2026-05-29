@@ -305,7 +305,14 @@ const CLIENTS = {
   // hash de SHA-256("ezequiel:power2026")
   'c8114ab1db38183305a364ac2100ff265dde9b0ef59b1c77c98381f90651de05': {
     name: 'Ezequiel',
-    greeting: 'Ezequiel'
+    greeting: 'Ezequiel',
+    brands: null // null = vê todas as marcas
+  },
+  // hash de SHA-256("maycon:power2026")
+  '30d91d2fa632ae073c071f8b3224017229e9c88e54f461e482988d112fe17ab1': {
+    name: 'Maycon',
+    greeting: 'Maycon',
+    brands: ['tirzepatidas_maycon'] // só vê produtos específicos
   }
 };
 
@@ -330,6 +337,16 @@ const PRODUCTS = {
       {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
       {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
       {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810}
+    ]
+  },
+  // Tabela exclusiva do Maycon
+  "tirzepatidas_maycon": {
+    label: "Pep Gen Labs — Tirzepatidas",
+    color: "#14b8a6",
+    brl_fixo: null, // preço em BRL fixo por produto
+    produtos: [
+      {name:"Lipoless MD",apresent:"MD",atacado:0,brl_fixo:850},
+      {name:"Lipoless 4 vial",apresent:"4 vial",atacado:0,brl_fixo:870}
     ]
   },
   "cooper": {
@@ -701,10 +718,9 @@ function filterAll(){
   document.getElementById('no-results').style.display = anyVisible ? 'none' : 'block';
 }
 
-function brl(usd, brand_key){
-  if(brand_key === 'tirzepatidas'){
-    return TIRZ_BRL_FIXO.toFixed(0);
-  }
+function brl(usd, brand_key, prod_brl_fixo){
+  if(prod_brl_fixo) return prod_brl_fixo.toFixed(0);
+  if(brand_key === 'tirzepatidas') return TIRZ_BRL_FIXO.toFixed(0);
   return (usd * USD_BRL).toFixed(2).replace('.',',');
 }
 
@@ -714,7 +730,14 @@ function renderProducts(){
   const cont = document.getElementById('products-container');
   let html = '';
   
+  // Filter brands based on user permissions
+  const allowedBrands = currentUser && currentUser.brands ? currentUser.brands : null;
+  
   for(const [key, brand] of Object.entries(PRODUCTS)){
+    // Skip if user has brand restriction and this brand is not in their list
+    if(allowedBrands && !allowedBrands.includes(key)) continue;
+    // Skip tirzepatidas_maycon for users without restriction (Ezequiel sees standard tirzepatidas)
+    if(key === 'tirzepatidas_maycon' && !allowedBrands) continue;
     const isTirz = key === 'tirzepatidas';
     html += `<div class="brand-section" data-brand="${key}">`;
     
@@ -738,7 +761,7 @@ function renderProducts(){
       <tbody>`;
     
     brand.produtos.forEach((p,i)=>{
-      const brlVal = isTirz ? TIRZ_BRL_FIXO.toFixed(0) : fmt(p.atacado * USD_BRL);
+      const brlVal = p.brl_fixo ? p.brl_fixo.toFixed(0) : (isTirz ? TIRZ_BRL_FIXO.toFixed(0) : fmt(p.atacado * USD_BRL));
       html += `<tr class="prod-row" data-name="${p.name.toLowerCase()}">
         <td class="td-name">${p.name}</td>
         <td class="td-apresent">${p.apresent||'—'}</td>
@@ -772,7 +795,7 @@ function addToCart(brandKey, idx){
   if(existing){
     existing.qty++;
   } else {
-    cart.push({ brandKey, idx, name: p.name, brand: brand.label, priceUSD: p.atacado, isTirz, qty: 1 });
+    cart.push({ brandKey, idx, name: p.name, brand: brand.label, priceUSD: p.atacado, isTirz, brl_fixo: p.brl_fixo||null, qty: 1 });
   }
   renderCart();
   showToast(`${p.name} adicionado`);
@@ -910,7 +933,7 @@ async function getMpPk(){
 }
 
 function calcTotalBRL(){
-  return cart.reduce((s,c)=>s+(c.isTirz?TIRZ_BRL_FIXO*c.qty:c.priceUSD*c.qty*USD_BRL),0);
+  return cart.reduce((s,c)=>s+(c.brl_fixo?c.brl_fixo*c.qty:(c.isTirz?TIRZ_BRL_FIXO*c.qty:c.priceUSD*c.qty*USD_BRL)),0);
 }
 function cartDesc(){ return cart.map(c=>`${c.name} x${c.qty}`).join(', ').slice(0,200); }
 function fmtBRL(n){ return n.toFixed(2).replace('.',','); }
