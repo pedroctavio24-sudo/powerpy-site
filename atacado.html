@@ -312,7 +312,8 @@ const CLIENTS = {
   '30d91d2fa632ae073c071f8b3224017229e9c88e54f461e482988d112fe17ab1': {
     name: 'Maycon',
     greeting: 'Maycon',
-    brands: ['tirzepatidas_maycon'] // só vê produtos específicos
+    brands: null, // vê todas as marcas
+    tirz_custom: true // preços customizados nas tirzepatidas
   }
 };
 
@@ -339,14 +340,19 @@ const PRODUCTS = {
       {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810}
     ]
   },
-  // Tabela exclusiva do Maycon
+  // Tabela do Maycon — igual ao padrão mas com Lipoless com preços customizados
   "tirzepatidas_maycon": {
     label: "Pep Gen Labs — Tirzepatidas",
     color: "#14b8a6",
-    brl_fixo: null, // preço em BRL fixo por produto
+    brl_fixo: null,
     produtos: [
-      {name:"Lipoless MD",apresent:"MD",atacado:0,brl_fixo:850},
-      {name:"Lipoless 4 vial",apresent:"4 vial",atacado:0,brl_fixo:870}
+      {name:"Lipoless MD 15mg",apresent:"MD",atacado:0,brl_fixo:850},
+      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:0,brl_fixo:870},
+      {name:"TG 15mg (IF)",apresent:"IF",atacado:180},
+      {name:"Tirzec 15mg",apresent:"",atacado:190},
+      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
+      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
+      {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810}
     ]
   },
   "cooper": {
@@ -732,12 +738,15 @@ function renderProducts(){
   
   // Filter brands based on user permissions
   const allowedBrands = currentUser && currentUser.brands ? currentUser.brands : null;
+  const hasTirzCustom = currentUser && currentUser.tirz_custom;
   
   for(const [key, brand] of Object.entries(PRODUCTS)){
-    // Skip if user has brand restriction and this brand is not in their list
+    // Skip if user has brand restriction
     if(allowedBrands && !allowedBrands.includes(key)) continue;
-    // Skip tirzepatidas_maycon for users without restriction (Ezequiel sees standard tirzepatidas)
-    if(key === 'tirzepatidas_maycon' && !allowedBrands) continue;
+    // For Maycon: skip standard tirzepatidas, show custom one
+    if(key === 'tirzepatidas' && hasTirzCustom) continue;
+    // For Ezequiel/others: skip Maycon's custom tirzepatidas
+    if(key === 'tirzepatidas_maycon' && !hasTirzCustom) continue;
     const isTirz = key === 'tirzepatidas';
     html += `<div class="brand-section" data-brand="${key}">`;
     
