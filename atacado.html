@@ -312,7 +312,8 @@ const CLIENTS = {
   '30d91d2fa632ae073c071f8b3224017229e9c88e54f461e482988d112fe17ab1': {
     name: 'Maycon',
     greeting: 'Maycon',
-    brands: null, tirz_custom: true
+    brands: null, // vê todas as marcas
+    tirz_custom: true // usa tirzepatidas_maycon no lugar de tirzepatidas
   }
 };
 
@@ -332,20 +333,6 @@ const PRODUCTS = {
     produtos: [
       {name:"Lipoless MD 15mg",apresent:"MD",atacado:185},
       {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185},
-      {name:"TG 15mg (IF)",apresent:"IF",atacado:180},
-      {name:"Tirzec 15mg",apresent:"",atacado:190},
-      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
-      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
-      {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810}
-    ]
-  },
-  "tirzepatidas_maycon": {
-    label: "Pep Gen Labs — Tirzepatidas",
-    color: "#14b8a6",
-    brl_fixo: null,
-    produtos: [
-      {name:"Lipoless MD 15mg",apresent:"MD",atacado:0,brl_fixo:850},
-      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:0,brl_fixo:870},
       {name:"TG 15mg (IF)",apresent:"IF",atacado:180},
       {name:"Tirzec 15mg",apresent:"",atacado:190},
       {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
@@ -746,8 +733,8 @@ function renderProducts(){
   
   // Filter brands based on user permissions
   const allowedBrands = currentUser && currentUser.brands ? currentUser.brands : null;
-  const hasTirzCustom = currentUser && currentUser.tirz_custom;
   
+  const hasTirzCustom = !!(currentUser && currentUser.tirz_custom);
   for(const [key, brand] of Object.entries(PRODUCTS)){
     if(allowedBrands && !allowedBrands.includes(key)) continue;
     if(key === 'tirzepatidas' && hasTirzCustom) continue;
