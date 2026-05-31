@@ -215,7 +215,7 @@ body{padding-bottom:0;}
     <div class="nav-logo">POWER<span>PY</span></div>
     <div class="nav-user">
       <span class="nav-greeting" id="nav-greeting"></span>
-      <a href="catalogo.html" class="nav-logout" style="text-decoration:none;">← Catálogo</a>
+      <a href="catalogo.html" target="_top" class="nav-logout" style="text-decoration:none;">← Catálogo</a>
       <button class="nav-logout" onclick="doLogout()">Sair</button>
     </div>
   </nav>
@@ -645,7 +645,11 @@ function showErr(msg){
 function doLogout(){
   sessionStorage.removeItem('pp_session');
   currentUser = null;
-  window.location.href = 'catalogo.html';
+  document.getElementById('main-screen').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pwd').value = '';
+  document.getElementById('login-err').style.display = 'none';
 }
 
 function checkSession(){
