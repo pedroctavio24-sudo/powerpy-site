@@ -8830,6 +8830,11 @@ async function adminSave() {
 }
 
 function refreshBrandPage(slug) {
+  // tirzepatidas and peptideos use static HTML cards — skip rebuilding
+  if (slug === 'tirzepatidas' || slug === 'peptideos') {
+    if (USD_BRL) updateAllBRL();
+    return;
+  }
   const grid = document.getElementById('grid-' + slug);
   if (!grid) return;
   const meta = BRAND_META[slug];
