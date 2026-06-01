@@ -531,20 +531,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     return 'catalogo.html';
   }
 
-  window.openCatalog = function() {
-    var overlay = document.getElementById('catalogOverlay');
-    var frame = document.getElementById('catalogFrame');
-    overlay.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    if (!frame.src || frame.src === 'about:blank' || frame.src === '') {
-      frame.src = getUrl();
-    }
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        overlay.style.opacity = '1';
-      });
-    });
-  };
+  window.openCatalog = function() { window.location.href = 'catalogo.html'; };
 
   window.closeCatalog = function() {
     var overlay = document.getElementById('catalogOverlay');
