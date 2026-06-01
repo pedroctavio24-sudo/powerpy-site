@@ -357,7 +357,9 @@ const PRODUCTS = {
     produtos: [
       {name:"Lipoless MD",apresent:"MD",atacado:0,brl_fixo:850},
       {name:"Lipoless 4 vial",apresent:"4 vial",atacado:0,brl_fixo:870}
-    ]  "tirzepatidas_albuquerque": {
+    ]
+  },
+  "tirzepatidas_albuquerque": {
     label: "Pep Gen Labs — Tirzepatidas",
     color: "#14b8a6",
     brl_fixo: null,
@@ -756,12 +758,13 @@ function renderProducts(){
   // Filter brands based on user permissions
   const allowedBrands = currentUser && currentUser.brands ? currentUser.brands : null;
   
-  const hasTirzCustom = !!(currentUser && currentUser.tirz_custom);
+  const tirzCustom = currentUser ? currentUser.tirz_custom : false;
   for(const [key, brand] of Object.entries(PRODUCTS)){
     if(allowedBrands && !allowedBrands.includes(key)) continue;
-    if(key === 'tirzepatidas' && hasTirzCustom) continue;
-    if(key === 'tirzepatidas_maycon' && !hasTirzCustom) continue;
-    const isTirz = key === 'tirzepatidas';
+    if(key === 'tirzepatidas' && tirzCustom) continue;
+    if(key === 'tirzepatidas_maycon' && tirzCustom !== true) continue;
+    if(key === 'tirzepatidas_albuquerque' && tirzCustom !== 'albuquerque') continue;
+    const isTirz = (key === 'tirzepatidas' || key === 'tirzepatidas_maycon' || key === 'tirzepatidas_albuquerque');
     html += `<div class="brand-section" data-brand="${key}">`;
     
     if(isTirz){
