@@ -754,7 +754,6 @@ function filterAll(){
 
 function brl(usd, brand_key, prod_brl_fixo){
   if(prod_brl_fixo) return prod_brl_fixo.toFixed(0);
-  if(brand_key === 'tirzepatidas') return TIRZ_BRL_FIXO.toFixed(0);
   return (usd * USD_BRL).toFixed(2).replace('.',',');
 }
 
@@ -884,7 +883,7 @@ function renderCart(){
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
         <div>
           <div class="cart-item-price">$${fmt(lineUSD)}</div>
-          <div class="cart-item-brl">≈ R$${item.isTirz ? (TIRZ_BRL_FIXO*item.qty).toFixed(0) : fmt(lineBRL)}</div>
+          <div class="cart-item-brl">≈ R$${item.brl_fixo ? (item.brl_fixo*item.qty).toFixed(0) : fmt(lineBRL)}</div>
         </div>
         <div class="cart-qty">
           <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
