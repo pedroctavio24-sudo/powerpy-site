@@ -338,38 +338,18 @@ const PRODUCTS = {
       {name:"Tirzec 15mg",apresent:"",atacado:190},
       {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
       {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
-      {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810}
+      {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810},
+      {name:"Retatrutide M Synedica 40mg",apresent:"40mg",atacado:0,brl_fixo:1300,varejo_brl:1800}
     ]
   },
   // Tabela exclusiva do Maycon
   "tirzepatidas_maycon": {
     label: "Pep Gen Labs — Tirzepatidas",
     color: "#14b8a6",
-    brl_fixo: null,
+    brl_fixo: null, // preço em BRL fixo por produto
     produtos: [
-      {name:"Lipoless MD 15mg",apresent:"MD",atacado:0,brl_fixo:850},
-      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:0,brl_fixo:870},
-      {name:"TG 15mg (IF)",apresent:"IF",atacado:190},
-      {name:"Tirzec 15mg",apresent:"",atacado:190},
-      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
-      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
-      {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810},
-      {name:"Retatrutide M Synedica 40mg",apresent:"40mg",atacado:0,brl_fixo:1200,varejo_brl:1800}
-    ]
-  },
-  "tirzepatidas_albuquerque": {
-    label: "Pep Gen Labs — Tirzepatidas",
-    color: "#14b8a6",
-    brl_fixo: null,
-    produtos: [
-      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185},
-      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185},
-      {name:"TG 15mg (IF)",apresent:"IF",atacado:190},
-      {name:"Tirzec 15mg",apresent:"",atacado:190},
-      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
-      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
-      {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810},
-      {name:"Retatrutide M Synedica 40mg",apresent:"40mg",atacado:0,brl_fixo:1200,varejo_brl:1800}
+      {name:"Lipoless MD",apresent:"MD",atacado:0,brl_fixo:850},
+      {name:"Lipoless 4 vial",apresent:"4 vial",atacado:0,brl_fixo:870}
     ]
   },
   "cooper": {
@@ -756,13 +736,11 @@ function renderProducts(){
   // Filter brands based on user permissions
   const allowedBrands = currentUser && currentUser.brands ? currentUser.brands : null;
   
-  const tirzCustom = currentUser ? currentUser.tirz_custom : false;
+  const hasTirzCustom = !!(currentUser && currentUser.tirz_custom);
   for(const [key, brand] of Object.entries(PRODUCTS)){
     if(allowedBrands && !allowedBrands.includes(key)) continue;
-    // Show correct tirzepatidas version per user
-    if(key === 'tirzepatidas' && tirzCustom) continue;
-    if(key === 'tirzepatidas_maycon' && tirzCustom !== true) continue;
-    if(key === 'tirzepatidas_albuquerque' && tirzCustom !== 'albuquerque') continue;
+    if(key === 'tirzepatidas' && hasTirzCustom) continue;
+    if(key === 'tirzepatidas_maycon' && !hasTirzCustom) continue;
     const isTirz = key === 'tirzepatidas';
     html += `<div class="brand-section" data-brand="${key}">`;
     
@@ -787,7 +765,6 @@ function renderProducts(){
     
     brand.produtos.forEach((p,i)=>{
       const brlVal = p.brl_fixo ? p.brl_fixo.toFixed(0) : (isTirz ? TIRZ_BRL_FIXO.toFixed(0) : fmt(p.atacado * USD_BRL));
-      const varejoVal = p.varejo_brl ? `<span style="font-size:11px;color:rgba(255,255,255,0.3);text-decoration:line-through;display:block;">Varejo: R$${p.varejo_brl}</span>` : '';
       html += `<tr class="prod-row" data-name="${p.name.toLowerCase()}">
         <td class="td-name">${p.name}</td>
         <td class="td-apresent">${p.apresent||'—'}</td>
@@ -796,7 +773,6 @@ function renderProducts(){
         </td>
         <td class="td-price">
           <div class="price-usd" style="color:${brand.color};">R$${brlVal}</div>
-          ${varejoVal}
         </td>
         <td class="td-wa">
           <button class="wa-btn" onclick="addToCart('${key}',${i})">+ Pedido</button>
