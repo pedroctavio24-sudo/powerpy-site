@@ -8868,22 +8868,24 @@ function buildProductCard(p, slug, meta) {
 
 // ──── INIT ────
 window.addEventListener('load', async () => {
-  // Try to load products from server (overrides localStorage if server has newer data)
+  // Try to load products from server - MERGE with local, don't overwrite
   try {
     const resp = await fetch('/api/products');
     if (resp.ok) {
       const serverProducts = await resp.json();
       if (serverProducts && typeof serverProducts === 'object' && !serverProducts.error) {
-        PRODUCTS = serverProducts;
-        // Update localStorage cache too
+        // Merge: server data updates existing brands but keeps local-only brands
+        Object.keys(serverProducts).forEach(slug => {
+          PRODUCTS[slug] = serverProducts[slug];
+        });
         localStorage.setItem('pp_products', JSON.stringify(PRODUCTS));
-        // Re-render all product grids
-        Object.keys(BRAND_META).forEach(slug => refreshBrandPage(slug));
       }
     }
   } catch(e) {
-    // No server products — use compiled fallback (already loaded)
+    // No server — use compiled fallback
   }
+  // Re-render all grids from BRAND_META (includes peptideos)
+  Object.keys(BRAND_META).forEach(slug => refreshBrandPage(slug));
   fetchDolar();
   renderCart();
 });
