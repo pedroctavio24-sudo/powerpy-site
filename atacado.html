@@ -799,7 +799,7 @@ function renderProducts(){
       // Check for client-specific price overrides
       const overrideKey = key + '::' + p.name;
       const overrideBRL = currentUser && currentUser.price_overrides && currentUser.price_overrides[overrideKey];
-      const brlVal = overrideBRL ? overrideBRL.toFixed(0) : (p.brl_fixo ? p.brl_fixo.toFixed(0) : (isTirz ? TIRZ_BRL_FIXO.toFixed(0) : fmt(p.atacado * USD_BRL)));
+      const brlVal = overrideBRL ? overrideBRL.toFixed(0) : (p.brl_fixo ? p.brl_fixo.toFixed(0) : fmt(p.atacado * USD_BRL));
       html += `<tr class="prod-row" data-name="${p.name.toLowerCase()}">
         <td class="td-name">${p.name}</td>
         <td class="td-apresent">${p.apresent||'—'}</td>
@@ -873,7 +873,7 @@ function renderCart(){
   
   cart.forEach((item, i) => {
     const lineUSD = item.priceUSD * item.qty;
-    const lineBRL = item.isTirz ? TIRZ_BRL_FIXO * item.qty : lineUSD * USD_BRL;
+    const lineBRL = item.brl_fixo ? item.brl_fixo * item.qty : lineUSD * USD_BRL;
     totalUSD += lineUSD;
     totalBRL += lineBRL;
     html += `<div class="cart-item">
@@ -912,10 +912,10 @@ function sendWhatsApp(){
   let totalUSD = 0, totalBRL = 0;
   cart.forEach(item=>{
     const lineUSD = item.priceUSD * item.qty;
-    const lineBRL = item.isTirz ? TIRZ_BRL_FIXO * item.qty : lineUSD * USD_BRL;
+    const lineBRL = item.brl_fixo ? item.brl_fixo * item.qty : lineUSD * USD_BRL;
     totalUSD += lineUSD;
     totalBRL += lineBRL;
-    const brlStr = item.isTirz ? `R$${(TIRZ_BRL_FIXO*item.qty).toFixed(0)}` : `R$${fmt(lineBRL)}`;
+    const brlStr = item.brl_fixo ? `R$${(item.brl_fixo*item.qty).toFixed(0)}` : `R$${fmt(lineBRL)}`;
     msg += `• ${item.name} (${item.brand})\n  ${item.qty}x $${fmt(item.priceUSD)} = $${fmt(lineUSD)} / ${brlStr}\n`;
   });
   
@@ -971,7 +971,7 @@ async function getMpPk(){
 }
 
 function calcTotalBRL(){
-  return cart.reduce((s,c)=>s+(c.brl_fixo?c.brl_fixo*c.qty:(c.isTirz?TIRZ_BRL_FIXO*c.qty:c.priceUSD*c.qty*USD_BRL)),0);
+  return cart.reduce((s,c)=>s+(c.brl_fixo?c.brl_fixo*c.qty:c.priceUSD*c.qty*USD_BRL),0);
 }
 function cartDesc(){ return cart.map(c=>`${c.name} x${c.qty}`).join(', ').slice(0,200); }
 function fmtBRL(n){ return n.toFixed(2).replace('.',','); }
