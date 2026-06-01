@@ -8,5 +8,6 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "_deploy": "force_3a10edb"
 }
