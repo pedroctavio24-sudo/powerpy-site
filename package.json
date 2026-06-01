@@ -9,5 +9,6 @@
   "engines": {
     "node": ">=18"
   },
-  "_deploy": "force_3a10edb"
+  "_deploy": "force_3a10edb",
+  "_build": "20260601235013"
 }
