@@ -7566,23 +7566,20 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <button onclick="closePrices()" class="pp-back">← Voltar</button>
     <div class="pp-brand-name" style="--bc:#14b8a6">Pep Gen Labs — Peptídeos <span>16 produtos</span></div>
     <div class="pp-dolar-tag" id="dolar-tag-peptideos">
-      <span class="dolar-icon">$</span>
-      <span class="dolar-val">—</span>
+      <span class="dolar-icon">$</span><span class="dolar-val">—</span>
       <span class="dolar-label">USD/BRL hoje</span>
     </div>
     <div class="pp-search-wrap">
       <input type="text" placeholder="🔍 Buscar produto..." oninput="filterCards(this,'peptideos')" class="pp-search">
     </div>
-    <button class="pp-cart-mini-btn" onclick="toggleCart()">
-      🛒 <span class="cart-count-badge" id="cart-count">0</span>
-    </button>
+    <button class="pp-cart-mini-btn" onclick="toggleCart()">🛒 <span class="cart-count-badge" id="cart-count">0</span></button>
   </div>
   <div class="pp-grid" id="grid-peptideos">
-<div class="pc" data-slug="peptideos" data-pid="peptideos__tirce_60mg" data-name="TIRCE 60MG" data-apresent="60mg" data-atacado="105" data-varejo="189.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tirce_60mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__tirce_60mg" data-name="TIRCE 60MG" data-apresent="60mg" data-atacado="105" data-varejo="189" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tirce_60mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tirce_60mg.png" alt="TIRCE 60MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">T6</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">TIR</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7595,27 +7592,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">60mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="189.0">$189.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="189">$189.00</span>
+        <span class="pc-val-brl" data-usd="189">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="105">$105.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="105">$105.00</span>
+          <span class="pc-atac-brl" data-usd="105">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__klow_80mg" data-name="KLOW 80MG" data-apresent="80mg" data-atacado="115" data-varejo="207.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/klow_80mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__klow_80mg" data-name="KLOW 80MG" data-apresent="80mg" data-atacado="115" data-varejo="207" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/klow_80mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/klow_80mg.png" alt="KLOW 80MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">K8</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">KLO</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7628,27 +7625,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">80mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="207.0">$207.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="207">$207.00</span>
+        <span class="pc-val-brl" data-usd="207">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="115">$115.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="115">$115.00</span>
+          <span class="pc-atac-brl" data-usd="115">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__glow_70mg" data-name="GLOW 70MG" data-apresent="70mg" data-atacado="110" data-varejo="198.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/glow_70mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__glow_70mg" data-name="GLOW 70MG" data-apresent="70mg" data-atacado="110" data-varejo="198" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/glow_70mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/glow_70mg.png" alt="GLOW 70MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">G7</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">GLO</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7661,27 +7658,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">70mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="198.0">$198.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="198">$198.00</span>
+        <span class="pc-val-brl" data-usd="198">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="110">$110.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="110">$110.00</span>
+          <span class="pc-atac-brl" data-usd="110">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__semax_5mg" data-name="SEMAX 5MG" data-apresent="5mg" data-atacado="80" data-varejo="144.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/semax_5mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__semax_5mg" data-name="SEMAX 5MG" data-apresent="5mg" data-atacado="80" data-varejo="144" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/semax_5mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/semax_5mg.png" alt="SEMAX 5MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">S5</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">SEM</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7694,27 +7691,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">5mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="144.0">$144.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="144">$144.00</span>
+        <span class="pc-val-brl" data-usd="144">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="80">$80.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="80">$80.00</span>
+          <span class="pc-atac-brl" data-usd="80">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__selank_5mg" data-name="SELANK 5MG" data-apresent="5mg" data-atacado="80" data-varejo="144.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/selank_5mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__selank_5mg" data-name="SELANK 5MG" data-apresent="5mg" data-atacado="80" data-varejo="144" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/selank_5mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/selank_5mg.png" alt="SELANK 5MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">S5</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">SEL</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7727,27 +7724,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">5mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="144.0">$144.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="144">$144.00</span>
+        <span class="pc-val-brl" data-usd="144">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="80">$80.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="80">$80.00</span>
+          <span class="pc-atac-brl" data-usd="80">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__melanotan_10mg" data-name="MELANOTAN 10MG" data-apresent="10mg" data-atacado="80" data-varejo="144.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/melanotan_10mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__melanotan_10mg" data-name="MELANOTAN 10MG" data-apresent="10mg" data-atacado="80" data-varejo="144" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/melanotan_10mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/melanotan_10mg.png" alt="MELANOTAN 10MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">M1</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">MEL</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7760,27 +7757,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">10mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="144.0">$144.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="144">$144.00</span>
+        <span class="pc-val-brl" data-usd="144">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="80">$80.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="80">$80.00</span>
+          <span class="pc-atac-brl" data-usd="80">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__ghk_cu_100mg" data-name="GHK-CU 100MG" data-apresent="100mg" data-atacado="105" data-varejo="189.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/ghk_cu_100mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__ghk_cu_100mg" data-name="GHK-CU 100MG" data-apresent="100mg" data-atacado="105" data-varejo="189" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/ghk_cu_100mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/ghk_cu_100mg.png" alt="GHK-CU 100MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">G1</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">GHK</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7793,27 +7790,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">100mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="189.0">$189.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="189">$189.00</span>
+        <span class="pc-val-brl" data-usd="189">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="105">$105.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="105">$105.00</span>
+          <span class="pc-atac-brl" data-usd="105">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__nadplus_500mg" data-name="NAD+ 500MG" data-apresent="500mg" data-atacado="115" data-varejo="207.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/nad_plus_500mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__nadplus_500mg" data-name="NAD+ 500MG" data-apresent="500mg" data-atacado="115" data-varejo="207" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/nad_plus_500mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/nad_plus_500mg.png" alt="NAD+ 500MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">N5</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">NAD</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7826,27 +7823,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">500mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="207.0">$207.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="207">$207.00</span>
+        <span class="pc-val-brl" data-usd="207">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="115">$115.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="115">$115.00</span>
+          <span class="pc-atac-brl" data-usd="115">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__cjc_5mg_c__dac" data-name="CJC 5MG c/ DAC" data-apresent="5mg" data-atacado="85" data-varejo="153.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/cjc_5mg_c_dac.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__cjc_5mg_c__dac" data-name="CJC 5MG c/ DAC" data-apresent="5mg" data-atacado="85" data-varejo="153" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/cjc_5mg_c_dac.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/cjc_5mg_c_dac.png" alt="CJC 5MG c/ DAC" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">C5C</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">CJC</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7859,27 +7856,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">5mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="153.0">$153.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="153">$153.00</span>
+        <span class="pc-val-brl" data-usd="153">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="85">$85.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="85">$85.00</span>
+          <span class="pc-atac-brl" data-usd="85">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__ipamorelin_5mg" data-name="IPAMORELIN 5MG" data-apresent="5mg" data-atacado="80" data-varejo="144.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/ipamorelin_5mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__ipamorelin_5mg" data-name="IPAMORELIN 5MG" data-apresent="5mg" data-atacado="80" data-varejo="144" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/ipamorelin_5mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/ipamorelin_5mg.png" alt="IPAMORELIN 5MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">I5</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">IPA</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7892,27 +7889,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">5mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="144.0">$144.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="144">$144.00</span>
+        <span class="pc-val-brl" data-usd="144">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="80">$80.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="80">$80.00</span>
+          <span class="pc-atac-brl" data-usd="80">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__sermorelin_10mg" data-name="SERMORELIN 10MG" data-apresent="10mg" data-atacado="105" data-varejo="189.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/sermorelin_10mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__sermorelin_10mg" data-name="SERMORELIN 10MG" data-apresent="10mg" data-atacado="105" data-varejo="189" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/sermorelin_10mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/sermorelin_10mg.png" alt="SERMORELIN 10MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">S1</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">SER</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7925,27 +7922,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">10mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="189.0">$189.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="189">$189.00</span>
+        <span class="pc-val-brl" data-usd="189">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="105">$105.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="105">$105.00</span>
+          <span class="pc-atac-brl" data-usd="105">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__tesamorelin_5mg" data-name="TESAMORELIN 5MG" data-apresent="5mg" data-atacado="90" data-varejo="162.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tesamorelin_5mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__tesamorelin_5mg" data-name="TESAMORELIN 5MG" data-apresent="5mg" data-atacado="90" data-varejo="162" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tesamorelin_5mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tesamorelin_5mg.png" alt="TESAMORELIN 5MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">T5</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">TES</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7958,27 +7955,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">5mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="162.0">$162.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="162">$162.00</span>
+        <span class="pc-val-brl" data-usd="162">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="90">$90.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="90">$90.00</span>
+          <span class="pc-atac-brl" data-usd="90">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__tesamorelin_20mg" data-name="TESAMORELIN 20MG" data-apresent="20mg" data-atacado="165" data-varejo="297.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tesamorelin_20mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__tesamorelin_20mg" data-name="TESAMORELIN 20MG" data-apresent="20mg" data-atacado="165" data-varejo="297" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tesamorelin_20mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tesamorelin_20mg.png" alt="TESAMORELIN 20MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">T2</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">TES</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -7991,27 +7988,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">20mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="297.0">$297.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="297">$297.00</span>
+        <span class="pc-val-brl" data-usd="297">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="165">$165.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="165">$165.00</span>
+          <span class="pc-atac-brl" data-usd="165">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__kpv_10mg" data-name="KPV 10MG" data-apresent="10mg" data-atacado="80" data-varejo="144.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/kpv_10mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__kpv_10mg" data-name="KPV 10MG" data-apresent="10mg" data-atacado="80" data-varejo="144" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/kpv_10mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/kpv_10mg.png" alt="KPV 10MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">K1</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">KPV</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8024,27 +8021,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">10mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="144.0">$144.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="144">$144.00</span>
+        <span class="pc-val-brl" data-usd="144">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="80">$80.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="80">$80.00</span>
+          <span class="pc-atac-brl" data-usd="80">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__bpc_157_5mg" data-name="BPC-157 5MG" data-apresent="5mg" data-atacado="75" data-varejo="135.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/bpc_157_5mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__bpc_157_5mg" data-name="BPC-157 5MG" data-apresent="5mg" data-atacado="75" data-varejo="135" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/bpc_157_5mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/bpc_157_5mg.png" alt="BPC-157 5MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">B5</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">BPC</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8057,27 +8054,27 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">5mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="135.0">$135.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="135">$135.00</span>
+        <span class="pc-val-brl" data-usd="135">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="75">$75.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="75">$75.00</span>
+          <span class="pc-atac-brl" data-usd="75">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="peptideos" data-pid="peptideos__tb_500_5mg" data-name="TB-500 5MG" data-apresent="5mg" data-atacado="90" data-varejo="162.0" data-brand="Pep Gen Labs — Peptídeos" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tb_500_5mg.png" data-confirm="false">
+<div class="pc" data-slug="peptideos" data-pid="peptideos__tb_500_5mg" data-name="TB-500 5MG" data-apresent="5mg" data-atacado="90" data-varejo="162" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tb_500_5mg.png" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/peptideos/tb_500_5mg.png" alt="TB-500 5MG" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">T5</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">TB-</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8090,20 +8087,20 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-apresent">5mg</div>
     <div class="pc-prices">
       <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="162.0">$162.00</span>
-        <span class="pc-val-brl pc-varejo-brl">—</span>
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="162">$162.00</span>
+        <span class="pc-val-brl" data-usd="162">R$ —</span>
       </div>
-      <div class="pc-atacado pc-atacado-locked">
-        <span class="pc-label-a">Atacado</span>
-        <span class="pc-atac-usd" data-usd="90">$90.00</span>
-        <span class="pc-atac-brl">—</span>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="90">$90.00</span>
+          <span class="pc-atac-brl" data-usd="90">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
   </div>
@@ -8111,26 +8108,22 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
 <div id="prices-tirzepatidas" class="prices-page" style="display:none;">
   <div class="pp-topbar">
     <button onclick="closePrices()" class="pp-back">← Voltar</button>
-    <div class="pp-brand-name" style="--bc:#14b8a6">Tirzepatidas / Retatrutide <span>7 produtos</span></div>
+    <div class="pp-brand-name" style="--bc:#14b8a6">Tirzepatidas / Retatrutide <span>8 produtos</span></div>
     <div class="pp-dolar-tag" id="dolar-tag-tirzepatidas">
-      <span class="dolar-icon">$</span>
-      <span class="dolar-val">—</span>
+      <span class="dolar-icon">$</span><span class="dolar-val">—</span>
       <span class="dolar-label">USD/BRL hoje</span>
     </div>
     <div class="pp-search-wrap">
       <input type="text" placeholder="🔍 Buscar produto..." oninput="filterCards(this,'tirzepatidas')" class="pp-search">
     </div>
-    <button class="pp-cart-mini-btn" onclick="toggleCart()">
-      🛒 <span class="cart-count-badge" id="cart-count">0</span>
-    </button>
+    <button class="pp-cart-mini-btn" onclick="toggleCart()">🛒 <span class="cart-count-badge" id="cart-count">0</span></button>
   </div>
-  
   <div class="pp-grid" id="grid-tirzepatidas">
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoless_md_15mg" data-name="Lipoless MD 15mg" data-apresent="MD" data-atacado="185" data-varejo="245" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/lipoless-md-15.jpg" data-confirm="false">
+<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoless_md_15mg" data-name="Lipoless MD 15mg" data-apresent="MD" data-atacado="185" data-varejo="245" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="img/tirzepatidas/lipoless-md-15.jpg" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="img/tirzepatidas/lipoless-md-15.jpg" alt="Lipoless MD 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" >
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">LM1</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">LIP</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8156,16 +8149,14 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoless_15mg_4_ampolas" data-name="Lipoless 15mg 4 ampolas" data-apresent="x4 ampolas" data-atacado="185" data-varejo="245" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/lipoless-4amp-15.jpg" data-confirm="false">
+<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoless_15mg_4_ampolas" data-name="Lipoless 15mg 4 ampolas" data-apresent="x4 ampolas" data-atacado="185" data-varejo="245" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="img/tirzepatidas/lipoless-4amp.jpg" data-confirm="false">
   <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/lipoless-4amp-15.jpg" alt="Lipoless 15mg 4 ampolas" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" >
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">L14</span>
+    <img class="pc-img" src="img/tirzepatidas/lipoless-4amp.jpg" alt="Lipoless 15mg 4 ampolas" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">LIP</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8174,7 +8165,7 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     </div>
   </div>
   <div class="pc-info">
-    <div class="pc-name" title="Lipoless 15mg 4 ampolas">Lipoless 15mg 4 ampolas</div>
+    <div class="pc-name" title="Lipoless 15mg 4 ampolas">Lipoless 15mg 4 ampola…</div>
     <div class="pc-apresent">x4 ampolas</div>
     <div class="pc-prices">
       <div class="pc-varejo">
@@ -8191,16 +8182,14 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__tg_15mg_if" data-name="TG 15mg (IF)" data-apresent="IF" data-atacado="180" data-varejo="240" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/tg-15.jpg" data-confirm="false">
+<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__tg_15mg_if" data-name="TG 15mg (IF)" data-apresent="IF" data-atacado="180" data-varejo="240" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="img/tirzepatidas/tg-15.jpg" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="img/tirzepatidas/tg-15.jpg" alt="TG 15mg (IF)" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" >
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">T1(</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">TG </span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8226,16 +8215,14 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__tirzec_15mg" data-name="Tirzec 15mg" data-apresent="" data-atacado="190" data-varejo="250" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/tirzec-15.jpg" data-confirm="false">
+<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__tirzec_15mg" data-name="Tirzec 15mg" data-apresent="" data-atacado="190" data-varejo="250" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="img/tirzepatidas/tirzec-15.jpg" data-confirm="false">
   <div class="pc-img-wrap">
     <img class="pc-img" src="img/tirzepatidas/tirzec-15.jpg" alt="Tirzec 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" >
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">T15</span>
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">TIR</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8245,6 +8232,7 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
   </div>
   <div class="pc-info">
     <div class="pc-name" title="Tirzec 15mg">Tirzec 15mg</div>
+    <div class="pc-apresent"></div>
     <div class="pc-prices">
       <div class="pc-varejo">
         <span class="pc-label">Varejo</span>
@@ -8260,16 +8248,14 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoland_md_15mg" data-name="Lipoland MD 15mg" data-apresent="MD" data-atacado="210" data-varejo="260" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/lipoland-md-15.jpg" data-confirm="false">
+<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoland_md_15mg" data-name="Lipoland MD 15mg" data-apresent="MD" data-atacado="210" data-varejo="270" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="img/tirzepatidas/lipoland-md.jpg" data-confirm="false">
   <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/lipoland-md-15.jpg" alt="Lipoland MD 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" >
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">LM1</span>
+    <img class="pc-img" src="img/tirzepatidas/lipoland-md.jpg" alt="Lipoland MD 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">LIP</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8283,8 +8269,8 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     <div class="pc-prices">
       <div class="pc-varejo">
         <span class="pc-label">Varejo</span>
-        <span class="pc-val-usd" data-usd="260">$260.00</span>
-        <span class="pc-val-brl" data-usd="260">R$ —</span>
+        <span class="pc-val-usd" data-usd="270">$270.00</span>
+        <span class="pc-val-brl" data-usd="270">R$ —</span>
       </div>
       <div class="pc-atacado-wrap">
         <div class="pc-atacado pc-atacado-locked">
@@ -8295,16 +8281,14 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoland_15mg_4_ampolas" data-name="Lipoland 15mg 4 ampolas" data-apresent="x4 ampolas" data-atacado="210" data-varejo="260" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/lipoland-4amp-15.jpg" data-confirm="false">
+<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoland_15mg_4_ampolas" data-name="Lipoland 15mg 4 ampolas" data-apresent="x4 ampolas" data-atacado="210" data-varejo="270" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="img/tirzepatidas/lipoland-4amp.jpg" data-confirm="false">
   <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/lipoland-4amp-15.jpg" alt="Lipoland 15mg 4 ampolas" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" >
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">L14</span>
+    <img class="pc-img" src="img/tirzepatidas/lipoland-4amp.jpg" alt="Lipoland 15mg 4 ampolas" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">LIP</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8313,13 +8297,13 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     </div>
   </div>
   <div class="pc-info">
-    <div class="pc-name" title="Lipoland 15mg 4 ampolas">Lipoland 15mg 4 ampolas</div>
+    <div class="pc-name" title="Lipoland 15mg 4 ampolas">Lipoland 15mg 4 ampola…</div>
     <div class="pc-apresent">x4 ampolas</div>
     <div class="pc-prices">
       <div class="pc-varejo">
         <span class="pc-label">Varejo</span>
-        <span class="pc-val-usd" data-usd="260">$260.00</span>
-        <span class="pc-val-brl" data-usd="260">R$ —</span>
+        <span class="pc-val-usd" data-usd="270">$270.00</span>
+        <span class="pc-val-brl" data-usd="270">R$ —</span>
       </div>
       <div class="pc-atacado-wrap">
         <div class="pc-atacado pc-atacado-locked">
@@ -8330,16 +8314,14 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__mounjaro_original_15mg" data-name="Mounjaro Original 15mg" data-apresent="ORIGINAL — USD" data-atacado="810" data-varejo="1081" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/mounjaro-15.jpg" data-confirm="false">
+<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__mounjaro_original_15mg" data-name="Mounjaro Original 15mg" data-apresent="ORIGINAL" data-atacado="810" data-varejo="1050" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="img/tirzepatidas/mounjaro.jpg" data-confirm="false">
   <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/mounjaro-15.jpg" alt="Mounjaro Original 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" >
-      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">MO1</span>
+    <img class="pc-img" src="img/tirzepatidas/mounjaro.jpg" alt="Mounjaro Original 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
+    <div class="pc-placeholder" style="display:none;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">MOU</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -8349,12 +8331,12 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
   </div>
   <div class="pc-info">
     <div class="pc-name" title="Mounjaro Original 15mg">Mounjaro Original 15mg</div>
-    <div class="pc-apresent">ORIGINAL — USD</div>
+    <div class="pc-apresent">ORIGINAL</div>
     <div class="pc-prices">
       <div class="pc-varejo">
         <span class="pc-label">Varejo</span>
-        <span class="pc-val-usd" data-usd="1081">$1081.00</span>
-        <span class="pc-val-brl" data-usd="1081">R$ —</span>
+        <span class="pc-val-usd" data-usd="1050">$1050.00</span>
+        <span class="pc-val-brl" data-usd="1050">R$ —</span>
       </div>
       <div class="pc-atacado-wrap">
         <div class="pc-atacado pc-atacado-locked">
@@ -8365,14 +8347,45 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
-      + Carrinho
-    </button>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
   </div>
 </div>
+<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__retatrutide_m_synedica_40mg" data-name="Retatrutide M Synedica 40mg" data-apresent="40mg" data-atacado="0" data-varejo="340" data-brand="Pep Gen Labs" data-color="#14b8a6" data-img="" data-confirm="false">
+  <div class="pc-img-wrap">
+    <img class="pc-img" src="" alt="Retatrutide M Synedica 40mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
+    <div class="pc-placeholder" style="display:flex;">
+      <span style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#14b8a6;letter-spacing:2px;">RET</span>
+    </div>
+    <div class="pc-qty-overlay">
+      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
+      <span class="pc-qty-val">1</span>
+      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
+    </div>
+  </div>
+  <div class="pc-info">
+    <div class="pc-name" title="Retatrutide M Synedica 40mg">Retatrutide M Synedica…</div>
+    <div class="pc-apresent">40mg</div>
+    <div class="pc-prices">
+      <div class="pc-varejo">
+        <span class="pc-label">Varejo</span>
+        <span class="pc-val-usd" data-usd="340">$340.00</span>
+        <span class="pc-val-brl" data-usd="340">R$ —</span>
+      </div>
+      <div class="pc-atacado-wrap">
+        <div class="pc-atacado pc-atacado-locked">
+          <span class="pc-label">Atacado <em>min 5</em></span>
+          <span class="pc-atac-usd" data-usd="0">$0.00</span>
+          <span class="pc-atac-brl" data-usd="0">R$ —</span>
+          <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
+        </div>
+      </div>
+    </div>
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
+  </div>
 </div>
+  </div>
 </div>
-</div>
+
 
 
 <script>
