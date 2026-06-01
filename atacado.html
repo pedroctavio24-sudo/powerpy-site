@@ -337,14 +337,14 @@ const PRODUCTS = {
   "tirzepatidas": {
     label: "Pep Gen Labs — Tirzepatidas",
     color: "#14b8a6",
-    brl_fixo: TIRZ_BRL_FIXO,
+    brl_fixo: null,
     produtos: [
-      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185},
-      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185},
-      {name:"TG 15mg (IF)",apresent:"IF",atacado:180},
-      {name:"Tirzec 15mg",apresent:"",atacado:190},
-      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
-      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
+      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185,brl_fixo:740},
+      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185,brl_fixo:750},
+      {name:"TG 15mg (IF)",apresent:"IF",atacado:190,brl_fixo:800},
+      {name:"Tirzec 15mg",apresent:"",atacado:190,brl_fixo:750},
+      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210,brl_fixo:800},
+      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210,brl_fixo:800},
       {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810},
       {name:"Retatrutide M Synedica 40mg",apresent:"40mg",atacado:0,brl_fixo:1300,varejo_brl:1800}
     ]
@@ -353,10 +353,16 @@ const PRODUCTS = {
   "tirzepatidas_maycon": {
     label: "Pep Gen Labs — Tirzepatidas",
     color: "#14b8a6",
-    brl_fixo: null, // preço em BRL fixo por produto
+    brl_fixo: null,
     produtos: [
-      {name:"Lipoless MD",apresent:"MD",atacado:0,brl_fixo:850},
-      {name:"Lipoless 4 vial",apresent:"4 vial",atacado:0,brl_fixo:870}
+      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185,brl_fixo:850},
+      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185,brl_fixo:870},
+      {name:"TG 15mg (IF)",apresent:"IF",atacado:190,brl_fixo:800},
+      {name:"Tirzec 15mg",apresent:"",atacado:190,brl_fixo:750},
+      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210,brl_fixo:800},
+      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210,brl_fixo:800},
+      {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810},
+      {name:"Retatrutide M Synedica 40mg",apresent:"40mg",atacado:0,brl_fixo:1200,varejo_brl:1800}
     ]
   },
   "tirzepatidas_albuquerque": {
@@ -364,12 +370,12 @@ const PRODUCTS = {
     color: "#14b8a6",
     brl_fixo: null,
     produtos: [
-      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185},
-      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185},
-      {name:"TG 15mg (IF)",apresent:"IF",atacado:190},
-      {name:"Tirzec 15mg",apresent:"",atacado:190},
-      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210},
-      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210},
+      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185,brl_fixo:740},
+      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185,brl_fixo:750},
+      {name:"TG 15mg (IF)",apresent:"IF",atacado:190,brl_fixo:800},
+      {name:"Tirzec 15mg",apresent:"",atacado:190,brl_fixo:750},
+      {name:"Lipoland MD 15mg",apresent:"MD",atacado:210,brl_fixo:800},
+      {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210,brl_fixo:800},
       {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810},
       {name:"Retatrutide M Synedica 40mg",apresent:"40mg",atacado:0,brl_fixo:1200,varejo_brl:1800}
     ]
