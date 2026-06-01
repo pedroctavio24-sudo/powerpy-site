@@ -7929,10 +7929,13 @@ function pcQty(btn, delta) {
 // ──── OPEN/CLOSE PRICES ────
 function openPrices(slug) {
   const overlay = document.getElementById('pricesOverlay');
+  if (!overlay) return;
   document.querySelectorAll('.prices-page').forEach(p => p.style.display='none');
   const page = document.getElementById('prices-' + slug);
   if (page) {
     page.style.display = 'block';
+    overlay.style.display = 'flex';
+    overlay.style.flexDirection = 'column';
     overlay.classList.add('active');
     overlay.scrollTop = 0;
     // iOS Safari: position fixed + overflow hidden no body trava scroll do overlay
