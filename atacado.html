@@ -745,8 +745,12 @@ function showMain(){
 
 function buildBrandPills(){
   const cont = document.getElementById('brand-pills');
+  const tirzCustom = currentUser ? currentUser.tirz_custom : false;
   let html = `<button class="pill all active" onclick="setBrand('all',this)">Todas</button>`;
   for(const [key, brand] of Object.entries(PRODUCTS)){
+    if(key === 'tirzepatidas' && tirzCustom) continue;
+    if(key === 'tirzepatidas_maycon' && tirzCustom !== true) continue;
+    if(key === 'tirzepatidas_albuquerque' && tirzCustom !== 'albuquerque') continue;
     html += `<button class="pill" onclick="setBrand('${key}',this)" style="--ac:${brand.color}">${brand.label}</button>`;
   }
   cont.innerHTML = html;
