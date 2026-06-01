@@ -666,9 +666,8 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
       <span class="pep-pill">Emagrecimento</span>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-    <button class="btn-primary" onclick="openPrices('peptideos')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;">💊 Ver Peptídeos →</button>
-    <button class="btn-primary" onclick="openPrices('peptideos')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;margin-bottom:12px;">💊 Ver Peptídeos</button>
-    <button class="btn-primary" onclick="openPrices('tirzepatidas')" style="font-size:13px;padding:14px 40px;letter-spacing:2px;cursor:pointer;opacity:0.8;">🔬 Ver Tirzepatidas / Retatrutide →</button>
+    <button class="btn-primary" onclick="openPrices('peptideos')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;">💊 Ver Peptídeos</button>
+    <button class="btn-primary" onclick="openPrices('tirzepatidas')" style="font-size:13px;padding:14px 40px;letter-spacing:2px;cursor:pointer;opacity:0.8;">🔬 Ver Tirzepatidas / Retatrutide</button>
   </div>
   </div>
   <div class="brand-line"></div>
@@ -8293,6 +8292,7 @@ async function adminSave() {
 }
 
 function refreshBrandPage(slug) {
+  if (slug === 'tirzepatidas' || slug === 'peptideos') { if (USD_BRL) updateAllBRL(); return; }
   const grid = document.getElementById('grid-' + slug);
   if (!grid) return;
   const meta = BRAND_META[slug];
