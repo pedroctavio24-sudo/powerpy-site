@@ -321,7 +321,10 @@ const CLIENTS = {
     name: 'Albuquerque',
     greeting: 'Albuquerque',
     brands: null,
-    tirz_custom: 'albuquerque'
+    tirz_custom: 'albuquerque',
+    price_overrides: {
+      'lander_gold::Drostanolona Masteron Prop 100mg': 200
+    }
   }
 };
 
@@ -339,10 +342,10 @@ const PRODUCTS = {
     color: "#14b8a6",
     brl_fixo: null,
     produtos: [
-      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185,brl_fixo:740},
-      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185,brl_fixo:750},
-      {name:"TG 15mg (IF)",apresent:"IF",atacado:190,brl_fixo:800},
-      {name:"Tirzec 15mg",apresent:"",atacado:190,brl_fixo:750},
+      {name:"Lipoless MD 15mg",apresent:"MD",atacado:185,brl_fixo:850},
+      {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185,brl_fixo:870},
+      {name:"TG 15mg (IF)",apresent:"IF",atacado:190,brl_fixo:900},
+      {name:"Tirzec 15mg",apresent:"",atacado:190,brl_fixo:800},
       {name:"Lipoland MD 15mg",apresent:"MD",atacado:210,brl_fixo:800},
       {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210,brl_fixo:800},
       {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810},
@@ -357,12 +360,12 @@ const PRODUCTS = {
     produtos: [
       {name:"Lipoless MD 15mg",apresent:"MD",atacado:185,brl_fixo:850},
       {name:"Lipoless 15mg 4 ampolas",apresent:"x4 ampolas",atacado:185,brl_fixo:870},
-      {name:"TG 15mg (IF)",apresent:"IF",atacado:190,brl_fixo:800},
-      {name:"Tirzec 15mg",apresent:"",atacado:190,brl_fixo:750},
+      {name:"TG 15mg (IF)",apresent:"IF",atacado:190,brl_fixo:900},
+      {name:"Tirzec 15mg",apresent:"",atacado:190,brl_fixo:800},
       {name:"Lipoland MD 15mg",apresent:"MD",atacado:210,brl_fixo:800},
       {name:"Lipoland 15mg 4 ampolas",apresent:"x4 ampolas",atacado:210,brl_fixo:800},
       {name:"Mounjaro Original 15mg",apresent:"ORIGINAL",atacado:810},
-      {name:"Retatrutide M Synedica 40mg",apresent:"40mg",atacado:0,brl_fixo:1200,varejo_brl:1800}
+      {name:"Retatrutide M Synedica 40mg",apresent:"40mg",atacado:0,brl_fixo:1300,varejo_brl:1800}
     ]
   },
   "tirzepatidas_albuquerque": {
@@ -793,7 +796,10 @@ function renderProducts(){
       <tbody>`;
     
     brand.produtos.forEach((p,i)=>{
-      const brlVal = p.brl_fixo ? p.brl_fixo.toFixed(0) : (isTirz ? TIRZ_BRL_FIXO.toFixed(0) : fmt(p.atacado * USD_BRL));
+      // Check for client-specific price overrides
+      const overrideKey = key + '::' + p.name;
+      const overrideBRL = currentUser && currentUser.price_overrides && currentUser.price_overrides[overrideKey];
+      const brlVal = overrideBRL ? overrideBRL.toFixed(0) : (p.brl_fixo ? p.brl_fixo.toFixed(0) : (isTirz ? TIRZ_BRL_FIXO.toFixed(0) : fmt(p.atacado * USD_BRL)));
       html += `<tr class="prod-row" data-name="${p.name.toLowerCase()}">
         <td class="td-name">${p.name}</td>
         <td class="td-apresent">${p.apresent||'—'}</td>
