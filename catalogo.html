@@ -8263,6 +8263,7 @@ async function adminSave() {
 }
 
 function refreshBrandPage(slug) {
+  if (slug === 'tirzepatidas') { if (USD_BRL) updateAllBRL(); return; }
   const grid = document.getElementById('grid-' + slug);
   if (!grid) return;
   const meta = BRAND_META[slug];
@@ -8326,7 +8327,6 @@ window.addEventListener('load', async () => {
     if (resp.ok) {
       const serverProducts = await resp.json();
       if (serverProducts && typeof serverProducts === 'object' && !serverProducts.error) {
-        // Only update brands that are NOT static (peptideos and tirzepatidas are static HTML)
         PRODUCTS = serverProducts;
         localStorage.setItem('pp_products', JSON.stringify(PRODUCTS));
         Object.keys(BRAND_META).forEach(slug => refreshBrandPage(slug));
