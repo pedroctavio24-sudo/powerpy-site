@@ -8060,6 +8060,8 @@ function openPrices(slug) {
     // Show dolar ticker in overlay
     const ticker = document.getElementById('dolar-ticker');
     if (ticker) ticker.style.display = 'flex';
+    // Update BRL values after overlay is visible
+    setTimeout(() => updateAllBRL(), 100);
   }
 }
 function closePrices() {
