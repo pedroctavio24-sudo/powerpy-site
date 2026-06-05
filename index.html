@@ -533,6 +533,25 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
   window.openCatalog = function() { window.location.href = 'catalogo.html'; };
 
+  window.openCatalogSection = function(slug) {
+    var overlay = document.getElementById('catalogOverlay');
+    var frame = document.getElementById('catalogFrame');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    var targetUrl = 'catalogo.html?section=' + slug;
+    frame.src = targetUrl;
+    frame.onload = function() {
+      try {
+        frame.contentWindow.openPrices(slug);
+      } catch(e) {}
+    };
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        overlay.style.opacity = '1';
+      });
+    });
+  };
+
   window.closeCatalog = function() {
     var overlay = document.getElementById('catalogOverlay');
     overlay.style.opacity = '0';

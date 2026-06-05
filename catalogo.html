@@ -8645,6 +8645,27 @@ async function submitCardPayment() {
 }
 
 // Card payment endpoint
+
+// Auto-open section from URL param ?section=slug
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var section = params.get('section');
+  if (section) {
+    // Wait for DOM to be ready then open the section
+    function tryOpen() {
+      if (typeof openPrices === 'function' && document.getElementById('prices-' + section)) {
+        openPrices(section);
+      } else {
+        setTimeout(tryOpen, 100);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryOpen);
+    } else {
+      tryOpen();
+    }
+  }
+})();
 </script>
 
 </body>
