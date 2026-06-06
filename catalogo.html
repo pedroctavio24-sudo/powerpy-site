@@ -152,7 +152,7 @@ section{scroll-snap-align:start;min-height:100vh;position:relative;display:flex;
 
 /* ── PEPTIDES SPECIAL ── */
 .pep-section{background:#04060f;}
-.pep-content{position:relative;z-index:2;width:100%;max-width:1200px;padding:0 80px;text-align:center;}
+.pep-content{position:relative;z-index:2;width:100%;max-width:1200px;padding:0 80px;text-align:center;pointer-events:all;}
 .pep-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);padding:8px 24px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:#60a5fa;text-transform:uppercase;margin-bottom:40px;}
 .pep-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,11vw,150px);line-height:.88;color:#fff;margin-bottom:8px;}
 .pep-title em{display:block;font-style:normal;background:linear-gradient(135deg,#3b82f6,#93c5fd,#dbeafe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -161,9 +161,9 @@ section{scroll-snap-align:start;min-height:100vh;position:relative;display:flex;
 .pep-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:56px;}
 .pep-pill{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#93c5fd;border:1px solid rgba(59,130,246,0.3);padding:10px 20px;text-transform:uppercase;background:rgba(59,130,246,0.06);transition:all .2s;}
 .pep-pill:hover{background:rgba(59,130,246,0.15);border-color:#3b82f6;color:#fff;}
-.pep-bg-glow{position:absolute;width:900px;height:900px;background:radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
-.pep-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
-.pep-ring{position:absolute;border-radius:50%;border:1px solid rgba(59,130,246,0.08);top:50%;left:50%;transform:translate(-50%,-50%);}
+.pep-bg-glow{position:absolute;width:900px;height:900px;background:radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;pointer-events:none;}
+.pep-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;pointer-events:none;}
+.pep-ring{position:absolute;border-radius:50%;border:1px solid rgba(59,130,246,0.08);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
 
 /* ── MARQUEE ── */
 .marquee-wrap{position:fixed;bottom:0;left:0;right:0;z-index:500;border-top:1px solid rgba(59,130,246,0.1);background:rgba(4,6,15,0.8);backdrop-filter:blur(12px);padding:12px 0;overflow:hidden;}
@@ -633,13 +633,13 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
 
 <!-- ══ PEPTÍDEOS — PEP GEN LABS ══ -->
 <section class="pep-section" id="peptideos">
-  <div class="pep-bg-glow" style="pointer-events:none;"></div>
+  <div class="pep-bg-glow" style="pointer-events:none!important;" style="pointer-events:none;"></div>
   <!-- Rings decorativos -->
-  <div class="pep-rings" style="pointer-events:none;">
-    <div class="pep-ring" style="width:900px;height:900px;"></div>
-    <div class="pep-ring" style="width:660px;height:660px;"></div>
-    <div class="pep-ring" style="width:460px;height:460px;"></div>
-    <div class="pep-ring" style="width:280px;height:280px;"></div>
+  <div class="pep-rings" style="pointer-events:none!important;" style="pointer-events:none;">
+    <div class="pep-ring" style="pointer-events:none!important;" style="width:900px;height:900px;"></div>
+    <div class="pep-ring" style="pointer-events:none!important;" style="width:660px;height:660px;"></div>
+    <div class="pep-ring" style="pointer-events:none!important;" style="width:460px;height:460px;"></div>
+    <div class="pep-ring" style="pointer-events:none!important;" style="width:280px;height:280px;"></div>
   </div>
   <div class="pep-content reveal" style="position:relative;z-index:10;">
     <div class="pep-badge">
