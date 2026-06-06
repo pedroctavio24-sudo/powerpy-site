@@ -8083,7 +8083,9 @@ function openPrices(slug) {
   }
 }
 function closePrices() {
-  document.getElementById('pricesOverlay').classList.remove('active');
+  const overlay = document.getElementById('pricesOverlay');
+  overlay.classList.remove('active');
+  overlay.style.display = 'none';
   // Restaura scroll position
   var scrollY = parseInt(document.body.dataset.scrollY || '0');
   document.body.style.position = '';
