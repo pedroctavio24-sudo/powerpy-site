@@ -665,7 +665,10 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
       <span class="pep-pill">Ampola</span>
       <span class="pep-pill">Emagrecimento</span>
     </div>
-    <button class="btn-primary" onclick="openPrices('tirzepatidas')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;">Ver Tirzepatidas / Retatrutide →</button>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:9999;">
+    <button class="btn-primary" onclick="openPrices('peptideos')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;">💊 Ver Peptídeos</button>
+    <button class="btn-primary" onclick="openPrices('tirzepatidas')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;opacity:0.85;">🔬 Ver Tirzepatidas / Retatrutide</button>
+  </div>
   </div>
   <div class="brand-line"></div>
 </section>
@@ -7989,7 +7992,7 @@ const ADMIN_PASS = null;
 
 // Load from localStorage or fallback to compiled data
 // Clear stale cache
-const PP_VERSION = 'v5_tirz_rebuild';
+const PP_VERSION = 'v6_pepbtn';
 if (localStorage.getItem('pp_version') !== PP_VERSION) {
   localStorage.removeItem('pp_products');
   localStorage.setItem('pp_version', PP_VERSION);
