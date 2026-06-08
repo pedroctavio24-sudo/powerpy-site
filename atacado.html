@@ -387,7 +387,8 @@ const CLIENTS = {
     greeting: 'Danielle',
     brands: null,
     tirz_custom: true,
-    pep_custom: 'danielle'
+    pep_custom: 'danielle',
+    varejo_only: true
   }
 };
 
@@ -924,12 +925,15 @@ function renderProducts(){
       // Check for client-specific price overrides
       const overrideKey = key + '::' + p.name;
       const overrideBRL = currentUser && currentUser.price_overrides && currentUser.price_overrides[overrideKey];
-      const brlVal = overrideBRL ? overrideBRL.toFixed(0) : (p.brl_fixo ? p.brl_fixo.toFixed(0) : fmt(p.atacado * USD_BRL));
+      const isVarejoOnly = !!(currentUser && currentUser.varejo_only);
+      const brlValBase = overrideBRL ? overrideBRL.toFixed(0) : (p.brl_fixo ? p.brl_fixo.toFixed(0) : fmt(p.atacado * USD_BRL));
+      const brlVal = isVarejoOnly ? fmt(p.varejo * USD_BRL) : brlValBase;
+      const displayUSD = isVarejoOnly ? p.varejo : p.atacado;
       html += `<tr class="prod-row" data-name="${p.name.toLowerCase()}">
         <td class="td-name">${p.name}</td>
         <td class="td-apresent">${p.apresent||'—'}</td>
         <td class="td-price">
-          <div class="price-usd">$${fmt(p.atacado)}</div>
+          <div class="price-usd">$${fmt(displayUSD)}</div>
         </td>
         <td class="td-price">
           <div class="price-usd" style="color:${brand.color};">R$${brlVal}</div>
