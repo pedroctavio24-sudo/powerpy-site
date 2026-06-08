@@ -159,6 +159,13 @@ body{padding-bottom:0;}
 .cart-divider{text-align:center;font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:3px;text-transform:uppercase;margin:4px 0;}
 .checkout-modal{position:fixed;inset:0;z-index:2000;background:rgba(4,6,15,0.96);display:none;align-items:center;justify-content:center;padding:20px;}
 .checkout-modal.open{display:flex;}
+.etiqueta-section{background:#0d1117;border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:20px;margin:16px 0;}
+.etiqueta-section h3{color:#60a5fa;font-family:"Bebas Neue",sans-serif;letter-spacing:3px;font-size:16px;margin-bottom:16px;}
+.etiqueta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.etiqueta-grid .full{grid-column:1/-1;}
+.etiqueta-label{display:block;color:#9ca3af;font-size:11px;letter-spacing:1px;margin-bottom:4px;}
+.etiqueta-input{width:100%;background:#0a0c13;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:10px 12px;border-radius:4px;font-size:13px;font-family:"DM Sans",sans-serif;}
+.etiqueta-input:focus{outline:none;border-color:#3b82f6;}
 .checkout-box{background:#0d1117;border:1px solid rgba(59,130,246,0.2);width:100%;max-width:460px;max-height:90vh;overflow-y:auto;}
 .co-header{padding:20px 24px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#0d1117;z-index:1;}
 .co-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#fff;}
@@ -273,6 +280,39 @@ body{padding-bottom:0;}
     <div class="cart-pay-btns">
       <button class="cart-pix-btn" onclick="openCheckout('pix')">💠 PAGAR COM PIX</button>
       <button class="cart-card-btn" onclick="openCheckout('card')">💳 PAGAR COM CARTÃO</button>
+    </div>
+    <div class="etiqueta-section">
+      <h3>📦 DADOS PARA ENVIO</h3>
+      <div class="etiqueta-grid">
+        <div class="full">
+          <label class="etiqueta-label">NOME DO DESTINATÁRIO</label>
+          <input class="etiqueta-input" id="et-nome" placeholder="Nome completo" type="text">
+        </div>
+        <div class="full">
+          <label class="etiqueta-label">CPF / CNPJ</label>
+          <input class="etiqueta-input" id="et-cpf" placeholder="000.000.000-00" type="text">
+        </div>
+        <div>
+          <label class="etiqueta-label">CEP</label>
+          <input class="etiqueta-input" id="et-cep" placeholder="00000-000" type="text">
+        </div>
+        <div>
+          <label class="etiqueta-label">NÚMERO</label>
+          <input class="etiqueta-input" id="et-numero" placeholder="Nº" type="text">
+        </div>
+        <div class="full">
+          <label class="etiqueta-label">LOGRADOURO / ENDEREÇO</label>
+          <input class="etiqueta-input" id="et-logradouro" placeholder="Rua, Av..." type="text">
+        </div>
+        <div>
+          <label class="etiqueta-label">BAIRRO / DISTRITO</label>
+          <input class="etiqueta-input" id="et-bairro" placeholder="Bairro" type="text">
+        </div>
+        <div>
+          <label class="etiqueta-label">COMPLEMENTO</label>
+          <input class="etiqueta-input" id="et-complemento" placeholder="Apto, Bloco..." type="text">
+        </div>
+      </div>
     </div>
     <div class="cart-divider">— ou —</div>
     <button class="cart-wa-btn" onclick="sendWhatsApp()">
@@ -962,6 +1002,25 @@ function sendWhatsApp(){
   msg += `━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `*TOTAL: $${fmt(totalUSD)} / R$${fmt(totalBRL)}*\n`;
   
+  // Add etiqueta data to message
+  const etNome = document.getElementById('et-nome')?.value;
+  const etCpf = document.getElementById('et-cpf')?.value;
+  const etCep = document.getElementById('et-cep')?.value;
+  const etLogradouro = document.getElementById('et-logradouro')?.value;
+  const etNumero = document.getElementById('et-numero')?.value;
+  const etBairro = document.getElementById('et-bairro')?.value;
+  const etComplemento = document.getElementById('et-complemento')?.value;
+  
+  if(etNome || etCep) {
+    msg += `\n*📦 DADOS PARA ENVIO*\n`;
+    if(etNome) msg += `Destinatário: ${etNome}\n`;
+    if(etCpf) msg += `CPF/CNPJ: ${etCpf}\n`;
+    if(etCep) msg += `CEP: ${etCep}\n`;
+    if(etLogradouro) msg += `Endereço: ${etLogradouro}, ${etNumero}\n`;
+    if(etBairro) msg += `Bairro: ${etBairro}\n`;
+    if(etComplemento) msg += `Complemento: ${etComplemento}\n`;
+  }
+  
   window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
   
   // Log lead to server
@@ -972,7 +1031,8 @@ function sendWhatsApp(){
       tipo: 'pedido_atacado',
       nome: currentUser.name,
       produto: cart.map(c=>`${c.name} x${c.qty}`).join(', '),
-      mensagem: `ATACADO · Total: $${fmt(totalUSD)} / R$${fmt(totalBRL)}`
+      mensagem: `ATACADO · Total: $${fmt(totalUSD)} / R$${fmt(totalBRL)}`,
+      etiqueta: {nome:etNome,cpf:etCpf,cep:etCep,logradouro:etLogradouro,numero:etNumero,bairro:etBairro,complemento:etComplemento}
     })
   }).catch(()=>{});
 }
