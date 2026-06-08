@@ -926,9 +926,10 @@ function renderProducts(){
       const overrideKey = key + '::' + p.name;
       const overrideBRL = currentUser && currentUser.price_overrides && currentUser.price_overrides[overrideKey];
       const isVarejoOnly = !!(currentUser && currentUser.varejo_only);
+      const varejoUSD = p.varejo || (p.atacado * 1.28);
       const brlValBase = overrideBRL ? overrideBRL.toFixed(0) : (p.brl_fixo ? p.brl_fixo.toFixed(0) : fmt(p.atacado * USD_BRL));
-      const brlVal = (isVarejoOnly && p.varejo) ? fmt(p.varejo * USD_BRL) : brlValBase;
-      const displayUSD = (isVarejoOnly && p.varejo) ? p.varejo : p.atacado;
+      const brlVal = isVarejoOnly ? fmt(varejoUSD * USD_BRL) : brlValBase;
+      const displayUSD = isVarejoOnly ? varejoUSD : p.atacado;
       html += `<tr class="prod-row" data-name="${p.name.toLowerCase()}">
         <td class="td-name">${p.name}</td>
         <td class="td-apresent">${p.apresent||'—'}</td>
