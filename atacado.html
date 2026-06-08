@@ -380,6 +380,14 @@ const CLIENTS = {
     greeting: 'Mafra',
     brands: null,
     tirz_custom: true
+  },
+  // hash de SHA-256("danielle:power2026")
+  '97eabe5af3b3dc7513f0647c8e2dc687744d6bc479c69c9b56aaf305f1d989af': {
+    name: 'Danielle',
+    greeting: 'Danielle',
+    brands: null,
+    tirz_custom: true,
+    pep_custom: 'danielle'
   }
 };
 
@@ -413,6 +421,30 @@ const PRODUCTS = {
       {name:"KPV 10MG",apresent:"10mg",atacado:80,varejo:144.0},
       {name:"BPC-157 5MG",apresent:"5mg",atacado:75,varejo:135.0},
       {name:"TB-500 5MG",apresent:"5mg",atacado:90,varejo:162.0}
+    ]
+  },
+  "peptideos_danielle": {
+    label: "Pep Gen Labs — Peptídeos",
+    color: "#14b8a6",
+    brl_fixo: null,
+    produtos: [
+      {name:"SEMAX 5MG",apresent:"",atacado:104,brl_fixo:550},
+      {name:"SERMORELIN 10MG",apresent:"",atacado:140,brl_fixo:730},
+      {name:"KLOW 80MG",apresent:"",atacado:150,brl_fixo:800},
+      {name:"TESAMORELIN 20MG",apresent:"",atacado:215,brl_fixo:1140},
+      {name:"TIRCE 60MG",apresent:"",atacado:140,brl_fixo:730},
+      {name:"MELANOTAN 10MG",apresent:"",atacado:104,brl_fixo:550},
+      {name:"CJC 5MG c/ DAC",apresent:"",atacado:110,brl_fixo:590},
+      {name:"KPV 10MG",apresent:"",atacado:104,brl_fixo:550},
+      {name:"SELANK 5MG",apresent:"",atacado:104,brl_fixo:550},
+      {name:"TESAMORELIN 5MG",apresent:"",atacado:120,brl_fixo:620},
+      {name:"NAD+ 500MG",apresent:"",atacado:150,brl_fixo:800},
+      {name:"IPAMORELIN 5MG",apresent:"",atacado:104,brl_fixo:550},
+      {name:"GHK-CU 100MG",apresent:"",atacado:140,brl_fixo:730},
+      {name:"TB-500 5MG",apresent:"",atacado:120,brl_fixo:620},
+      {name:"GLOW 70MG",apresent:"",atacado:145,brl_fixo:760},
+      {name:"BPC-157 5MG",apresent:"",atacado:100,brl_fixo:520},
+      {name:"Retatrutide ZPHC 60mg",apresent:"60mg",atacado:0,brl_fixo:1900}
     ]
   },
   "tirzepatidas": {
@@ -799,6 +831,9 @@ function buildBrandPills(){
     if(key === 'tirzepatidas' && tirzCustom) continue;
     if(key === 'tirzepatidas_maycon' && tirzCustom !== true) continue;
     if(key === 'tirzepatidas_albuquerque' && tirzCustom !== 'albuquerque') continue;
+    const pepCustom = currentUser ? currentUser.pep_custom : false;
+    if(key === 'peptideos' && pepCustom) continue;
+    if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
     html += `<button class="pill" onclick="setBrand('${key}',this)" style="--ac:${brand.color}">${brand.label}</button>`;
   }
   cont.innerHTML = html;
@@ -854,6 +889,9 @@ function renderProducts(){
     if(key === 'tirzepatidas' && tirzCustom) continue;
     if(key === 'tirzepatidas_maycon' && tirzCustom !== true) continue;
     if(key === 'tirzepatidas_albuquerque' && tirzCustom !== 'albuquerque') continue;
+    const pepCustom = currentUser ? currentUser.pep_custom : false;
+    if(key === 'peptideos' && pepCustom) continue;
+    if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
     const isTirz = (key === 'tirzepatidas' || key === 'tirzepatidas_maycon' || key === 'tirzepatidas_albuquerque');
     html += `<div class="brand-section" data-brand="${key}">`;
     
