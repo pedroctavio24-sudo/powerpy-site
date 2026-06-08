@@ -6,7 +6,7 @@
       "atacado": 0,
       "varejo": 715.09,
       "confirm": false,
-      "img": ""
+      "img": "https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/tirzepatidas_0.png"
     },
     {
       "name": "Lipoless MD 15mg",
@@ -60,7 +60,7 @@
       "name": "Mounjaro Original 15mg",
       "apresent": "ORIGINAL",
       "atacado": 810,
-      "varejo": 810.0,
+      "varejo": 810,
       "confirm": false,
       "img": "img/tirzepatidas/mounjaro-15.jpg"
     },
@@ -109,7 +109,7 @@
     {
       "name": "Cypobolic — Testo Cipionato 250mg",
       "apresent": "10 amp",
-      "atacado": 54.0,
+      "atacado": 54,
       "varejo": 72.9,
       "confirm": false,
       "img": "img/cooper/cypobolic.jpg"
@@ -117,7 +117,7 @@
     {
       "name": "Decabolic — Nandrolona Decanoato 250mg",
       "apresent": "10 amp",
-      "atacado": 63.0,
+      "atacado": 63,
       "varejo": 85.05,
       "confirm": false,
       "img": "img/cooper/decabolic.jpg"
@@ -125,7 +125,7 @@
     {
       "name": "Enanbolic — Testo Enantato 250mg",
       "apresent": "10 amp",
-      "atacado": 54.0,
+      "atacado": 54,
       "varejo": 72.9,
       "confirm": false,
       "img": "img/cooper/enanbolic.jpg"
@@ -133,7 +133,7 @@
     {
       "name": "Masterbolic — Masteron Prop 100mg",
       "apresent": "10 amp",
-      "atacado": 81.0,
+      "atacado": 81,
       "varejo": 109.35,
       "confirm": false,
       "img": "img/cooper/masterbolic.jpg"
@@ -141,7 +141,7 @@
     {
       "name": "Nanbolic-PH — Nandrolona Fenilpropionato 100mg",
       "apresent": "10 amp",
-      "atacado": 63.0,
+      "atacado": 63,
       "varejo": 85.05,
       "confirm": false,
       "img": "img/cooper/nanbolic-ph.jpg"
@@ -157,7 +157,7 @@
     {
       "name": "Oxybolic — Hemogenin 50mg",
       "apresent": "50 comp",
-      "atacado": 54.0,
+      "atacado": 54,
       "varejo": 72.9,
       "confirm": false,
       "img": "img/cooper/oxybolic.jpg"
@@ -165,23 +165,23 @@
     {
       "name": "Primo Comp — Primobolan Metenolona",
       "apresent": "50 comp",
-      "atacado": 109.0,
-      "varejo": 127.0,
+      "atacado": 109,
+      "varejo": 127,
       "confirm": false,
       "img": "img/cooper/primo-comp.jpg"
     },
     {
       "name": "Primobolic — Primobolan Enantato 100mg",
       "apresent": "10 amp",
-      "atacado": 189.0,
-      "varejo": 229.0,
+      "atacado": 189,
+      "varejo": 229,
       "confirm": false,
       "img": "img/cooper/primobolic.jpg"
     },
     {
       "name": "Probolic — Testo Propionato 100mg",
       "apresent": "10 amp",
-      "atacado": 54.0,
+      "atacado": 54,
       "varejo": 72.9,
       "confirm": false,
       "img": "img/cooper/probolic.jpg"
@@ -189,7 +189,7 @@
     {
       "name": "Provibolic — Proviron 25mg",
       "apresent": "50 comp",
-      "atacado": 54.0,
+      "atacado": 54,
       "varejo": 72.9,
       "confirm": false,
       "img": "img/cooper/provibolic.jpg"
@@ -223,15 +223,15 @@
     {
       "name": "Dro P 100 — Masteron",
       "apresent": "10ml",
-      "atacado": 89.0,
-      "varejo": 129.0,
+      "atacado": 89,
+      "varejo": 129,
       "confirm": false,
       "img": "img/pharmacom/dro-p-100.jpg"
     },
     {
       "name": "Nan D 300 — Nandro Deca",
       "apresent": "10ml",
-      "atacado": 63.0,
+      "atacado": 63,
       "varejo": 85.05,
       "confirm": false,
       "img": "img/pharmacom/nan-d-300.jpg"
@@ -239,15 +239,15 @@
     {
       "name": "Nan Ph 100mg — Nandrolona Fenil",
       "apresent": "10ml",
-      "atacado": 58.0,
-      "varejo": 79.0,
+      "atacado": 58,
+      "varejo": 79,
       "confirm": false,
       "img": "img/pharmacom/nan-ph-100.jpg"
     },
     {
       "name": "Oxandrolonos 10mg",
       "apresent": "100 comp",
-      "atacado": 81.0,
+      "atacado": 81,
       "varejo": 109.35,
       "confirm": false,
       "img": "img/pharmacom/oxandrolonos-10.jpg"
@@ -255,8 +255,8 @@
     {
       "name": "Pharmatropin",
       "apresent": "100 UI",
-      "atacado": 360.0,
-      "varejo": 486.0,
+      "atacado": 360,
+      "varejo": 486,
       "confirm": false,
       "img": "img/pharmacom/pharmatropin-100.jpg"
     },
@@ -279,7 +279,7 @@
     {
       "name": "Sust 300mg — Durateston",
       "apresent": "10ml",
-      "atacado": 63.0,
+      "atacado": 63,
       "varejo": 85.05,
       "confirm": false,
       "img": "img/pharmacom/sust-300.jpg"
@@ -287,7 +287,7 @@
     {
       "name": "Test C 250",
       "apresent": "10ml",
-      "atacado": 63.0,
+      "atacado": 63,
       "varejo": 85.05,
       "confirm": false,
       "img": "img/pharmacom/test-c-250.jpg"
@@ -303,7 +303,7 @@
     {
       "name": "Tren A 100",
       "apresent": "10 amp",
-      "atacado": 63.0,
+      "atacado": 63,
       "varejo": 85.05,
       "confirm": false,
       "img": "img/pharmacom/tren-a-100.jpg"
@@ -353,7 +353,7 @@
     {
       "name": "Primobolan 25mg",
       "apresent": "50 comp",
-      "atacado": 54.0,
+      "atacado": 54,
       "varejo": 72.9,
       "confirm": false,
       "img": "img/king/primobolan-25.jpg"
@@ -361,15 +361,15 @@
     {
       "name": "Sustan — Durateston",
       "apresent": "10ml",
-      "atacado": 33.0,
-      "varejo": 44.0,
+      "atacado": 33,
+      "varejo": 44,
       "confirm": false,
       "img": "img/king/sustan-200.jpg"
     },
     {
       "name": "Testoviron — Testo Enantato",
       "apresent": "10ml",
-      "atacado": 30.0,
+      "atacado": 30,
       "varejo": 41.9,
       "confirm": false,
       "img": "img/king/testoviron-250.jpg"
@@ -378,7 +378,7 @@
       "name": "Testex — Cipionato de Testo",
       "apresent": "10ml",
       "atacado": 31.9,
-      "varejo": 39.0,
+      "varejo": 39,
       "confirm": false,
       "img": "img/king/textex-250.jpg"
     }
@@ -395,7 +395,7 @@
     {
       "name": "Clembuterol 0,04mg",
       "apresent": "50 comp",
-      "atacado": 18.0,
+      "atacado": 18,
       "varejo": 24.3,
       "confirm": false,
       "img": "img/landerlangold/clembuterol_clorhidrato_50cmp40mcg.jpg"
@@ -419,16 +419,16 @@
     {
       "name": "Durateston Plus Gold 250mg",
       "apresent": "10ml",
-      "atacado": 32.0,
-      "varejo": 41.0,
+      "atacado": 32,
+      "varejo": 41,
       "confirm": false,
       "img": "img/landerlangold/durateston_plus_250mg10ml.jpg"
     },
     {
       "name": "HCG Gonadotropin 5000 UI",
       "apresent": "",
-      "atacado": 58.0,
-      "varejo": 71.0,
+      "atacado": 58,
+      "varejo": 71,
       "confirm": false,
       "img": "img/landerlangold/gonadotropina_corionica_humana_hcg_1_vial_x_5000ui.jpg"
     },
@@ -443,7 +443,7 @@
     {
       "name": "Primobolan — Metenolona Enantato 100mg",
       "apresent": "10ml",
-      "atacado": 69.0,
+      "atacado": 69,
       "varejo": 85.05,
       "confirm": false,
       "img": "img/landerlangold/testenat_10ml_250mg10ml.jpg"
@@ -451,23 +451,23 @@
     {
       "name": "Sales de Trembolona Tritrembo 200mg",
       "apresent": "10ml",
-      "atacado": 51.0,
-      "varejo": 69.0,
+      "atacado": 51,
+      "varejo": 69,
       "confirm": false,
       "img": "img/landerlangold/sales_de_trembolona_tritrembo_200mg10ml.jpg"
     },
     {
       "name": "Testenat — Enantato de Testosterona 250mg",
       "apresent": "10ml",
-      "atacado": 32.0,
-      "varejo": 41.0,
+      "atacado": 32,
+      "varejo": 41,
       "confirm": false,
       "img": "img/landerlangold/testenat_10ml_250mg10ml.jpg"
     },
     {
       "name": "Testo Propionato",
       "apresent": "10ml",
-      "atacado": 27.0,
+      "atacado": 27,
       "varejo": 36.45,
       "confirm": false,
       "img": "img/landerlangold/testosterona_propionato_100mg10ml.jpg"
@@ -475,23 +475,23 @@
     {
       "name": "Testoland Depot Gold",
       "apresent": "10ml",
-      "atacado": 29.0,
-      "varejo": 39.0,
+      "atacado": 29,
+      "varejo": 39,
       "confirm": false,
       "img": "img/landerlangold/testoland_depot_100mg10ml.jpg"
     },
     {
       "name": "Trembolona Acetato 100mg",
       "apresent": "10ml",
-      "atacado": 40.0,
-      "varejo": 54.0,
+      "atacado": 40,
+      "varejo": 54,
       "confirm": false,
       "img": "img/landerlangold/trembolona_acetato_100mg10ml.jpg"
     },
     {
       "name": "Trembolona Enantato",
       "apresent": "10ml",
-      "atacado": 36.0,
+      "atacado": 36,
       "varejo": 48.3,
       "confirm": false,
       "img": "img/landerlangold/trembolona_enantato_200mg10ml.jpg"
@@ -499,8 +499,8 @@
     {
       "name": "Trembolona Hexa 100mg",
       "apresent": "10ml",
-      "atacado": 37.0,
-      "varejo": 49.0,
+      "atacado": 37,
+      "varejo": 49,
       "confirm": false,
       "img": "img/landerlangold/sales_de_trembolona_tritrembo_200mg10ml.jpg"
     }
@@ -525,7 +525,7 @@
     {
       "name": "Metandrostenolona 10mg",
       "apresent": "100 comp",
-      "atacado": 18.0,
+      "atacado": 18,
       "varejo": 24.3,
       "confirm": false,
       "img": "img/landerlan/metandrostenolona.png"
@@ -533,7 +533,7 @@
     {
       "name": "Oxandrolona 5mg",
       "apresent": "100 comp",
-      "atacado": 45.0,
+      "atacado": 45,
       "varejo": 60.75,
       "confirm": false,
       "img": "img/landerlan/oxandroland.png"
@@ -541,7 +541,7 @@
     {
       "name": "Oxitoland 50mg",
       "apresent": "20 comp",
-      "atacado": 18.0,
+      "atacado": 18,
       "varejo": 24.3,
       "confirm": false,
       "img": "img/landerlan/oxitoland.png"
@@ -549,7 +549,7 @@
     {
       "name": "Stanozoland 10mg",
       "apresent": "100 comp",
-      "atacado": 18.0,
+      "atacado": 18,
       "varejo": 24.3,
       "confirm": false,
       "img": "img/landerlan/stanozoland-comp.png"
@@ -632,7 +632,7 @@
       "name": "HP HCG 5000UI",
       "apresent": "",
       "atacado": 52.5,
-      "varejo": 69.0,
+      "varejo": 69,
       "confirm": false,
       "img": "img/zphc/hcg-5000.jpg"
     },
@@ -648,7 +648,7 @@
       "name": "Mesterolone Proviron",
       "apresent": "100 comp",
       "atacado": 87.5,
-      "varejo": 115.0,
+      "varejo": 115,
       "confirm": false,
       "img": "img/zphc/proviron-100.jpg"
     },
@@ -663,7 +663,7 @@
     {
       "name": "Methenolone E Primo 100mg",
       "apresent": "10ml",
-      "atacado": 153.0,
+      "atacado": 153,
       "varejo": 195.5,
       "confirm": false,
       "img": "img/zphc/primo-100.jpg"
@@ -688,7 +688,7 @@
       "name": "Nandrolone Phenylpropionate NPP 100mg",
       "apresent": "10ml",
       "atacado": 54.5,
-      "varejo": 69.0,
+      "varejo": 69,
       "confirm": false,
       "img": "img/zphc/npp-100.jpg"
     },
@@ -711,7 +711,7 @@
     {
       "name": "Stanozolol 10mg",
       "apresent": "100 comp",
-      "atacado": 27.0,
+      "atacado": 27,
       "varejo": 34.5,
       "confirm": false,
       "img": "img/zphc/stanozolol-100.jpg"
@@ -807,16 +807,16 @@
     {
       "name": "Zptrop 90 GH 90UI",
       "apresent": "",
-      "atacado": 216.0,
-      "varejo": 276.0,
+      "atacado": 216,
+      "varejo": 276,
       "confirm": false,
       "img": "img/zphc/zptrop-90.jpg"
     },
     {
       "name": "Zptropin 16 GH 16UI",
       "apresent": "",
-      "atacado": 72.0,
-      "varejo": 92.0,
+      "atacado": 72,
+      "varejo": 92,
       "confirm": false,
       "img": "img/zphc/zptropin-16.jpg"
     }
@@ -825,7 +825,7 @@
     {
       "name": "Acetato Trembolona 100mg",
       "apresent": "10ml",
-      "atacado": 27.0,
+      "atacado": 27,
       "varejo": 36.45,
       "confirm": false,
       "img": "img/bratva/acetato-trembolona.jpg"
@@ -850,7 +850,7 @@
       "name": "Cipionato Testo 200mg",
       "apresent": "10ml",
       "atacado": 23.4,
-      "varejo": 30.0,
+      "varejo": 30,
       "confirm": false,
       "img": "img/bratva/cipionato-200.jpg"
     },
@@ -921,8 +921,8 @@
     {
       "name": "Oxandrolona 10mg",
       "apresent": "50 caps",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/bratva/oxandrolona-10.jpg"
     },
@@ -945,7 +945,7 @@
     {
       "name": "Proviron (Mesterolona) 25mg",
       "apresent": "25 caps",
-      "atacado": 27.0,
+      "atacado": 27,
       "varejo": 34.5,
       "confirm": false,
       "img": "img/bratva/proviron-25.jpg"
@@ -979,16 +979,16 @@
     {
       "name": "Anadrol 25mg",
       "apresent": "50 comp",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/anadrol.png"
     },
     {
       "name": "Anavar 10mg",
       "apresent": "50 comp",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/anavar-10.png"
     },
@@ -1011,48 +1011,48 @@
     {
       "name": "Aromasin 1mg",
       "apresent": "30 comp",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/aromasin.png"
     },
     {
       "name": "Boldebol 200mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/boldebol.png"
     },
     {
       "name": "Cut Stack 100mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/cut-stack.png"
     },
     {
       "name": "D-Bol 50mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/d-bol.png"
     },
     {
       "name": "Decadurabolin 300mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/decadurabolin.png"
     },
     {
       "name": "Dianabol 10mg",
       "apresent": "",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/dianabol.png"
     },
@@ -1067,7 +1067,7 @@
     {
       "name": "GH 50UI",
       "apresent": "5 amp",
-      "atacado": 207.0,
+      "atacado": 207,
       "varejo": 264.5,
       "confirm": false,
       "img": "img/muscle/primobolan.png"
@@ -1075,8 +1075,8 @@
     {
       "name": "Halotestin 10mg",
       "apresent": "30 tabs",
-      "atacado": 54.0,
-      "varejo": 69.0,
+      "atacado": 54,
+      "varejo": 69,
       "confirm": false,
       "img": "img/muscle/halotestin.png"
     },
@@ -1091,7 +1091,7 @@
     {
       "name": "IGF-1 100mcg",
       "apresent": "5 amp + diluente",
-      "atacado": 189.0,
+      "atacado": 189,
       "varejo": 241.5,
       "confirm": false,
       "img": "img/muscle/primobolan.png"
@@ -1099,31 +1099,31 @@
     {
       "name": "Masteron 100mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/masteron.png"
     },
     {
       "name": "Parabolan 100mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/parabolan-la.png"
     },
     {
       "name": "Parabolan LA — Trembo Enantato",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/parabolan-la.png"
     },
     {
       "name": "Parabolin Blend 200mg",
       "apresent": "10ml",
-      "atacado": 45.0,
+      "atacado": 45,
       "varejo": 57.5,
       "confirm": false,
       "img": "img/muscle/parabolan-la.png"
@@ -1131,31 +1131,31 @@
     {
       "name": "Primobolan 100mg",
       "apresent": "10ml",
-      "atacado": 54.0,
-      "varejo": 70.0,
+      "atacado": 54,
+      "varejo": 70,
       "confirm": false,
       "img": "img/muscle/primobolan.png"
     },
     {
       "name": "Proviron",
       "apresent": "50 comp",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/proviron.png"
     },
     {
       "name": "Sibutramina 15mg",
       "apresent": "30 tabs",
-      "atacado": 18.0,
-      "varejo": 23.0,
+      "atacado": 18,
+      "varejo": 23,
       "confirm": false,
       "img": "img/muscle/sibutramina.png"
     },
     {
       "name": "Somatropin XT 10UI",
       "apresent": "",
-      "atacado": 45.0,
+      "atacado": 45,
       "varejo": 57.5,
       "confirm": false,
       "img": "img/muscle/testoviron-250.png"
@@ -1187,32 +1187,32 @@
     {
       "name": "Sustan XT 250mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/sustan-xt.png"
     },
     {
       "name": "T3 Cytomel 100mcg",
       "apresent": "50 comp",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/t3-cytomel.png"
     },
     {
       "name": "Testex 250mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/testex-250.png"
     },
     {
       "name": "Testoviron 100",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/testoviron-100.png"
     },
@@ -1227,24 +1227,24 @@
     {
       "name": "Testoviron 250",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/testoviron-250.png"
     },
     {
       "name": "Turinabol 10mg",
       "apresent": "60 comp",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/turinabol.png"
     },
     {
       "name": "Winstrol 100 — 100mg",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/muscle/stanozolol-oil.png"
     }
@@ -1253,7 +1253,7 @@
     {
       "name": "Anavar 5mg",
       "apresent": "100 comp",
-      "atacado": 45.0,
+      "atacado": 45,
       "varejo": 57.5,
       "confirm": false,
       "img": "img/spectrum/anavar-5.jpg"
@@ -1261,8 +1261,8 @@
     {
       "name": "Deca 250mg",
       "apresent": "10 amp",
-      "atacado": 54.0,
-      "varejo": 69.0,
+      "atacado": 54,
+      "varejo": 69,
       "confirm": false,
       "img": "img/spectrum/deca-250.jpg"
     },
@@ -1301,7 +1301,7 @@
     {
       "name": "Masteron Depot 200mg",
       "apresent": "10 amp",
-      "atacado": 81.0,
+      "atacado": 81,
       "varejo": 103.5,
       "confirm": false,
       "img": "img/spectrum/masteron-depot-200.jpg"
@@ -1309,8 +1309,8 @@
     {
       "name": "Primobolan Depot 100mg",
       "apresent": "",
-      "atacado": 90.0,
-      "varejo": 115.0,
+      "atacado": 90,
+      "varejo": 115,
       "confirm": false,
       "img": "img/spectrum/primobolan-depot-100.jpg"
     },
@@ -1325,7 +1325,7 @@
     {
       "name": "Spectros GH 140UI",
       "apresent": "",
-      "atacado": 405.0,
+      "atacado": 405,
       "varejo": 517.5,
       "confirm": false,
       "img": "img/spectrum/spectros-140.jpg"
@@ -1333,39 +1333,39 @@
     {
       "name": "Stromba Stanozolol 10mg",
       "apresent": "",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/spectrum/stromba-10.jpg"
     },
     {
       "name": "Test Propionato 100mg",
       "apresent": "1ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/spectrum/test-prop-100.jpg"
     },
     {
       "name": "Testen 300mg",
       "apresent": "10ml",
-      "atacado": 54.0,
-      "varejo": 69.0,
+      "atacado": 54,
+      "varejo": 69,
       "confirm": false,
       "img": "img/spectrum/testen-300.jpg"
     },
     {
       "name": "Testo Mix 250mg",
       "apresent": "10ml",
-      "atacado": 54.0,
-      "varejo": 69.0,
+      "atacado": 54,
+      "varejo": 69,
       "confirm": false,
       "img": "img/spectrum/testo-mix-250.jpg"
     },
     {
       "name": "Testoc 200mg",
       "apresent": "10ml",
-      "atacado": 45.0,
+      "atacado": 45,
       "varejo": 57.5,
       "confirm": false,
       "img": "img/spectrum/testoc-200.jpg"
@@ -1399,7 +1399,7 @@
     {
       "name": "Anavar (Oxa)",
       "apresent": "10ml",
-      "atacado": 45.0,
+      "atacado": 45,
       "varejo": 57.5,
       "confirm": false,
       "img": "img/canada/anavar-10ml.jpg"
@@ -1439,7 +1439,7 @@
     {
       "name": "Durabolin 100",
       "apresent": "10ml",
-      "atacado": 45.0,
+      "atacado": 45,
       "varejo": 57.5,
       "confirm": false,
       "img": "img/canada/durabolin-100.jpg"
@@ -1479,7 +1479,7 @@
     {
       "name": "Ment 50 — Trestolone Acet.",
       "apresent": "10ml",
-      "atacado": 99.0,
+      "atacado": 99,
       "varejo": 126.65,
       "confirm": false,
       "img": "img/canada/ment-50.jpg"
@@ -1503,7 +1503,7 @@
     {
       "name": "Primobolan 100mg",
       "apresent": "10ml",
-      "atacado": 99.0,
+      "atacado": 99,
       "varejo": 126.5,
       "confirm": false,
       "img": "img/canada/primobolan-100.jpg"
@@ -1511,8 +1511,8 @@
     {
       "name": "Somatropin 191 AA 15UI",
       "apresent": "75UI",
-      "atacado": 324.0,
-      "varejo": 414.0,
+      "atacado": 324,
+      "varejo": 414,
       "confirm": false,
       "img": "img/canada/somatropin-75.jpg"
     },
@@ -1535,8 +1535,8 @@
     {
       "name": "Testopin 100",
       "apresent": "10ml",
-      "atacado": 36.0,
-      "varejo": 46.0,
+      "atacado": 36,
+      "varejo": 46,
       "confirm": false,
       "img": "img/canada/testopin-100.jpg"
     },
@@ -1554,7 +1554,7 @@
       "name": "TIRCE 60MG",
       "apresent": "60mg",
       "atacado": 105,
-      "varejo": 189.0,
+      "varejo": 189,
       "confirm": false,
       "img": ""
     },
@@ -1562,7 +1562,7 @@
       "name": "KLOW 80MG",
       "apresent": "80mg",
       "atacado": 115,
-      "varejo": 207.0,
+      "varejo": 207,
       "confirm": false,
       "img": ""
     },
@@ -1570,7 +1570,7 @@
       "name": "GLOW 70MG",
       "apresent": "70mg",
       "atacado": 110,
-      "varejo": 198.0,
+      "varejo": 198,
       "confirm": false,
       "img": ""
     },
@@ -1578,7 +1578,7 @@
       "name": "SEMAX 5MG",
       "apresent": "5mg",
       "atacado": 80,
-      "varejo": 144.0,
+      "varejo": 144,
       "confirm": false,
       "img": ""
     },
@@ -1586,7 +1586,7 @@
       "name": "SELANK 5MG",
       "apresent": "5mg",
       "atacado": 80,
-      "varejo": 144.0,
+      "varejo": 144,
       "confirm": false,
       "img": ""
     },
@@ -1594,7 +1594,7 @@
       "name": "MELANOTAN 10MG",
       "apresent": "10mg",
       "atacado": 80,
-      "varejo": 144.0,
+      "varejo": 144,
       "confirm": false,
       "img": ""
     },
@@ -1602,7 +1602,7 @@
       "name": "GHK-CU 100MG",
       "apresent": "100mg",
       "atacado": 105,
-      "varejo": 189.0,
+      "varejo": 189,
       "confirm": false,
       "img": ""
     },
@@ -1610,7 +1610,7 @@
       "name": "NAD+ 500MG",
       "apresent": "500mg",
       "atacado": 115,
-      "varejo": 207.0,
+      "varejo": 207,
       "confirm": false,
       "img": ""
     },
@@ -1618,7 +1618,7 @@
       "name": "CJC 5MG c/ DAC",
       "apresent": "5mg",
       "atacado": 85,
-      "varejo": 153.0,
+      "varejo": 153,
       "confirm": false,
       "img": ""
     },
@@ -1626,7 +1626,7 @@
       "name": "IPAMORELIN 5MG",
       "apresent": "5mg",
       "atacado": 80,
-      "varejo": 144.0,
+      "varejo": 144,
       "confirm": false,
       "img": ""
     },
@@ -1634,7 +1634,7 @@
       "name": "SERMORELIN 10MG",
       "apresent": "10mg",
       "atacado": 105,
-      "varejo": 189.0,
+      "varejo": 189,
       "confirm": false,
       "img": ""
     },
@@ -1642,7 +1642,7 @@
       "name": "TESAMORELIN 5MG",
       "apresent": "5mg",
       "atacado": 90,
-      "varejo": 162.0,
+      "varejo": 162,
       "confirm": false,
       "img": ""
     },
@@ -1650,7 +1650,7 @@
       "name": "TESAMORELIN 20MG",
       "apresent": "20mg",
       "atacado": 165,
-      "varejo": 297.0,
+      "varejo": 297,
       "confirm": false,
       "img": ""
     },
@@ -1658,7 +1658,7 @@
       "name": "KPV 10MG",
       "apresent": "10mg",
       "atacado": 80,
-      "varejo": 144.0,
+      "varejo": 144,
       "confirm": false,
       "img": ""
     },
@@ -1666,7 +1666,7 @@
       "name": "BPC-157 5MG",
       "apresent": "5mg",
       "atacado": 75,
-      "varejo": 135.0,
+      "varejo": 135,
       "confirm": false,
       "img": ""
     },
@@ -1674,7 +1674,7 @@
       "name": "TB-500 5MG",
       "apresent": "5mg",
       "atacado": 90,
-      "varejo": 162.0,
+      "varejo": 162,
       "confirm": false,
       "img": ""
     }
