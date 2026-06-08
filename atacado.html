@@ -447,6 +447,12 @@ const PRODUCTS = {
       {name:"Retatrutide ZPHC 60mg",apresent:"60mg",atacado:0,brl_fixo:1900}
     ]
   },
+  "peptideos_danielle": {
+    label: "Pep Gen Labs — Peptídeos",
+    color: "#14b8a6",
+    brl_fixo: null,
+    produtos: [{"name": "SEMAX 5MG", "apresent": "", "atacado": 104, "brl_fixo": 550, "varejo_brl": 550}, {"name": "SERMORELIN 10MG", "apresent": "", "atacado": 140, "brl_fixo": 730, "varejo_brl": 730}, {"name": "KLOW 80MG", "apresent": "", "atacado": 150, "brl_fixo": 800, "varejo_brl": 800}, {"name": "TESAMORELIN 20MG", "apresent": "", "atacado": 215, "brl_fixo": 1140, "varejo_brl": 1140}, {"name": "TIRCE 60MG", "apresent": "", "atacado": 140, "brl_fixo": 730, "varejo_brl": 730}, {"name": "MELANOTAN 10MG", "apresent": "", "atacado": 104, "brl_fixo": 550, "varejo_brl": 550}, {"name": "CJC 5MG c/ DAC", "apresent": "", "atacado": 110, "brl_fixo": 590, "varejo_brl": 590}, {"name": "KPV 10MG", "apresent": "", "atacado": 104, "brl_fixo": 550, "varejo_brl": 550}, {"name": "SELANK 5MG", "apresent": "", "atacado": 104, "brl_fixo": 550, "varejo_brl": 550}, {"name": "TESAMORELIN 5MG", "apresent": "", "atacado": 120, "brl_fixo": 620, "varejo_brl": 620}, {"name": "NAD+ 500MG", "apresent": "", "atacado": 150, "brl_fixo": 800, "varejo_brl": 800}, {"name": "IPAMORELIN 5MG", "apresent": "", "atacado": 104, "brl_fixo": 550, "varejo_brl": 550}, {"name": "GHK-CU 100MG", "apresent": "", "atacado": 140, "brl_fixo": 730, "varejo_brl": 730}, {"name": "TB-500 5MG", "apresent": "", "atacado": 120, "brl_fixo": 620, "varejo_brl": 620}, {"name": "GLOW 70MG", "apresent": "", "atacado": 145, "brl_fixo": 760, "varejo_brl": 760}, {"name": "BPC-157 5MG", "apresent": "", "atacado": 100, "brl_fixo": 520, "varejo_brl": 520}, {"name": "Retatrutide", "apresent": "", "atacado": 0, "brl_fixo": 1900, "varejo_brl": 1900}]
+  },
   "tirzepatidas": {
     label: "Pep Gen Labs — Tirzepatidas",
     color: "#14b8a6",
@@ -834,6 +840,9 @@ function buildBrandPills(){
     const pepCustom = currentUser ? currentUser.pep_custom : false;
     if(key === 'peptideos' && pepCustom) continue;
     if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
+    const pepCustom = currentUser ? currentUser.pep_custom : false;
+    if(key === 'peptideos' && pepCustom) continue;
+    if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
     html += `<button class="pill" onclick="setBrand('${key}',this)" style="--ac:${brand.color}">${brand.label}</button>`;
   }
   cont.innerHTML = html;
@@ -889,6 +898,9 @@ function renderProducts(){
     if(key === 'tirzepatidas' && tirzCustom) continue;
     if(key === 'tirzepatidas_maycon' && tirzCustom !== true) continue;
     if(key === 'tirzepatidas_albuquerque' && tirzCustom !== 'albuquerque') continue;
+    const pepCustom = currentUser ? currentUser.pep_custom : false;
+    if(key === 'peptideos' && pepCustom) continue;
+    if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
     const pepCustom = currentUser ? currentUser.pep_custom : false;
     if(key === 'peptideos' && pepCustom) continue;
     if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
