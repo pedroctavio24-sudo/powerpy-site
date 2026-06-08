@@ -840,9 +840,6 @@ function buildBrandPills(){
     const pepCustom = currentUser ? currentUser.pep_custom : false;
     if(key === 'peptideos' && pepCustom) continue;
     if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
-    const pepCustom = currentUser ? currentUser.pep_custom : false;
-    if(key === 'peptideos' && pepCustom) continue;
-    if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
     html += `<button class="pill" onclick="setBrand('${key}',this)" style="--ac:${brand.color}">${brand.label}</button>`;
   }
   cont.innerHTML = html;
@@ -898,9 +895,6 @@ function renderProducts(){
     if(key === 'tirzepatidas' && tirzCustom) continue;
     if(key === 'tirzepatidas_maycon' && tirzCustom !== true) continue;
     if(key === 'tirzepatidas_albuquerque' && tirzCustom !== 'albuquerque') continue;
-    const pepCustom = currentUser ? currentUser.pep_custom : false;
-    if(key === 'peptideos' && pepCustom) continue;
-    if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
     const pepCustom = currentUser ? currentUser.pep_custom : false;
     if(key === 'peptideos' && pepCustom) continue;
     if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
