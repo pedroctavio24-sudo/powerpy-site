@@ -925,7 +925,8 @@ function renderProducts(){
       // Check for client-specific price overrides
       const overrideKey = key + '::' + p.name;
       const overrideBRL = currentUser && currentUser.price_overrides && currentUser.price_overrides[overrideKey];
-      const isVarejoOnly = !!(currentUser && currentUser.varejo_only);
+      const isHormone = !key.includes('tirzepatidas') && !key.includes('peptideos');
+      const isVarejoOnly = !!(currentUser && currentUser.varejo_only && isHormone);
       const varejoUSD = p.varejo || (p.atacado * 1.28);
       const brlValBase = overrideBRL ? overrideBRL.toFixed(0) : (p.brl_fixo ? p.brl_fixo.toFixed(0) : fmt(p.atacado * USD_BRL));
       const brlVal = isVarejoOnly ? fmt(varejoUSD * USD_BRL) : brlValBase;
