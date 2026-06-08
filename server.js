@@ -171,7 +171,7 @@ function mpRequest(method, endpoint, body, cb) {
 
 function readBody(req, cb) {
   let body = '';
-  req.on('data', c => { body += c; if (body.length > 50_000) req.destroy(); }); // max 50kb
+  req.on('data', c => { body += c; if (body.length > 5_000_000) req.destroy(); }); // max 5mb
   req.on('end', () => { try { cb(null, JSON.parse(body)); } catch(e) { cb(e); } });
 }
 
