@@ -560,7 +560,7 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
       <span class="pep-pill">Ampola</span>
       <span class="pep-pill">Emagrecimento</span>
     </div>
-    <button class="btn-primary" onclick="(function(){var o=document.getElementById('pricesOverlay');var p=document.getElementById('prices-peptideos');console.log('overlay:',o,'page:',p,'cards:',p?p.querySelectorAll('.pc').length:0);if(!o||!p){alert('Erro: overlay='+!!o+' page='+!!p);return;}document.querySelectorAll('.prices-page').forEach(function(x){x.style.display='none';});p.style.display='block';o.style.display='flex';o.style.flexDirection='column';o.classList.add('active');o.scrollTop=0;setTimeout(function(){var cards=p.querySelectorAll('.pc');console.log('cards found:',cards.length);},200);})()" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;display:block;margin-bottom:12px;">💊 Ver Peptídeos</button>
+    <button class="btn-primary" onclick="openPrices('peptideos')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;display:block;margin-bottom:12px;">💊 Ver Peptídeos</button>
     <button class="btn-primary" onclick="openPrices('tirzepatidas')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;">🔬 Ver Tirzepatidas / Retatrutide</button>
   </div>
   <div class="brand-line"></div>
