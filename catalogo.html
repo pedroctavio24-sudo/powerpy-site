@@ -6601,7 +6601,7 @@ async function adminSave() {
 }
 
 function refreshBrandPage(slug) {
-  if (slug === 'tirzepatidas' || slug === 'peptideos') { if (USD_BRL) updateAllBRL(); return; }
+  if (slug === 'tirzepatidas' || slug === 'peptideos' || slug === 'retatrutide') { if (USD_BRL) updateAllBRL(); return; }
   const grid = document.getElementById('grid-' + slug);
   if (!grid) return;
   const meta = BRAND_META[slug];
