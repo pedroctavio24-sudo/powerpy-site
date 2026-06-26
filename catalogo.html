@@ -561,7 +561,10 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
       <span class="pep-pill">Emagrecimento</span>
     </div>
     <button class="btn-primary" onclick="openPrices('peptideos')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;display:block;margin-bottom:12px;">💊 Ver Peptídeos</button>
-    <button class="btn-primary" onclick="openPrices('tirzepatidas')" style="font-size:14px;padding:18px 56px;letter-spacing:3px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;">🔬 Ver Tirzepatidas / Retatrutide</button>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="openPrices('tirzepatidas')" style="font-size:13px;padding:16px 40px;letter-spacing:2px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;background:linear-gradient(135deg,#14b8a6,#0d9488);">🔬 Tirzepatidas</button>
+      <button class="btn-primary" onclick="openPrices('retatrutide')" style="font-size:13px;padding:16px 40px;letter-spacing:2px;cursor:pointer;position:relative;z-index:9999;pointer-events:all;background:linear-gradient(135deg,#f59e0b,#d97706);">⚗️ Retatrutide</button>
+    </div>
   </div>
   <div class="brand-line"></div>
 </section>
@@ -5745,7 +5748,7 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
 <div id="prices-tirzepatidas" class="prices-page" style="display:none;">
   <div class="pp-topbar">
     <button onclick="closePrices()" class="pp-back">← Voltar</button>
-    <div class="pp-brand-name" style="--bc:#14b8a6">Tirzepatidas / Retatrutide <span>11 produtos</span></div>
+    <div class="pp-brand-name" style="--bc:#14b8a6">Tirzepatidas <span>8 produtos</span></div>
     <div class="pp-dolar-tag" id="dolar-tag-tirzepatidas">
       <span class="dolar-icon">$</span>
       <span class="dolar-val">—</span>
@@ -6029,10 +6032,24 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
     </button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__retatrutide_m_synedica_40mg" data-name="Retatrutide M Synedica 40mg" data-apresent="40mg" data-atacado="0" data-varejo="283.02" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="" data-confirm="false">
+  </div>
+</div>
+</div>
+
+<div id="prices-retatrutide" class="prices-page" style="display:none;">
+  <div class="pp-topbar">
+    <button class="pp-back" onclick="closePrices()">← Voltar</button>
+    <div class="pp-brand-name" style="--bc:#f59e0b">Retatrutide <span>3 produtos</span></div>
+    <div class="pp-currency-toggle">
+      <button class="pp-cur-btn active" data-cur="usd" onclick="setCurrency('usd',this)">USD</button>
+      <button class="pp-cur-btn" data-cur="brl" onclick="setCurrency('brl',this)">BRL</button>
+    </div>
+  </div>
+  <div class="pp-grid" id="grid-retatrutide">
+<div class="pc" data-slug="retatrutide" data-pid="retatrutide__retatrutide_m_synedica_40mg" data-name="Retatrutide M Synedica 40mg" data-apresent="40mg" data-atacado="0" data-varejo="283.02" data-brand="Retatrutide" data-color="#f59e0b" data-img="" data-confirm="false">
   <div class="pc-img-wrap">
     <div class="pc-placeholder" style="display:flex;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:24px;color:#14b8a6;letter-spacing:2px;">RMS</span>
+      <span style="font-family:Bebas Neue,sans-serif;font-size:24px;color:#f59e0b;letter-spacing:2px;">RMS</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -6047,26 +6064,26 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
       <div class="pc-varejo">
         <span class="pc-label-v">Varejo</span>
         <span class="pc-val-usd" data-usd="283.02">$283.02</span>
-        <span class="pc-val-brl" data-usd="283.02">R$ 1.500,00</span>
+        <span class="pc-val-brl" data-usd="283.02">R$ 1.500,00</span>
       </div>
       <div class="pc-atacado-wrap">
         <div class="pc-atacado pc-atacado-locked">
           <span class="pc-label-a">Atacado <em>min 5</em></span>
           <span class="pc-atac-usd" data-usd="0">$0.00</span>
-          <span class="pc-atac-brl" data-usd="0">R$ 0,00</span>
+          <span class="pc-atac-brl" data-usd="0">R$ 0,00</span>
           <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#f59e0b">
       + Carrinho
     </button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__retatrutide_zphc_60mg" data-name="Retatrutide ZPHC 60mg" data-apresent="60mg" data-atacado="0" data-varejo="471.7" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="" data-confirm="false">
+<div class="pc" data-slug="retatrutide" data-pid="retatrutide__retatrutide_zphc_60mg" data-name="Retatrutide ZPHC 60mg" data-apresent="60mg" data-atacado="0" data-varejo="471.7" data-brand="Retatrutide" data-color="#f59e0b" data-img="" data-confirm="false">
   <div class="pc-img-wrap">
     <div class="pc-placeholder" style="display:flex;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:24px;color:#14b8a6;letter-spacing:2px;">RZ6</span>
+      <span style="font-family:Bebas Neue,sans-serif;font-size:24px;color:#f59e0b;letter-spacing:2px;">RZ6</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -6081,26 +6098,26 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
       <div class="pc-varejo">
         <span class="pc-label-v">Varejo</span>
         <span class="pc-val-usd" data-usd="471.7">$471.70</span>
-        <span class="pc-val-brl" data-usd="471.7">R$ 2.500,00</span>
+        <span class="pc-val-brl" data-usd="471.7">R$ 2.500,00</span>
       </div>
       <div class="pc-atacado-wrap">
         <div class="pc-atacado pc-atacado-locked">
           <span class="pc-label-a">Atacado <em>min 5</em></span>
           <span class="pc-atac-usd" data-usd="0">$0.00</span>
-          <span class="pc-atac-brl" data-usd="0">R$ 0,00</span>
+          <span class="pc-atac-brl" data-usd="0">R$ 0,00</span>
           <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#f59e0b">
       + Carrinho
     </button>
   </div>
 </div>
-<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__retatrutide_zphc_120mg" data-name="Retatrutide ZPHC 120mg" data-apresent="120mg" data-atacado="0" data-varejo="647.17" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="" data-confirm="false">
+<div class="pc" data-slug="retatrutide" data-pid="retatrutide__retatrutide_zphc_120mg" data-name="Retatrutide ZPHC 120mg" data-apresent="120mg" data-atacado="0" data-varejo="647.17" data-brand="Retatrutide" data-color="#f59e0b" data-img="" data-confirm="false">
   <div class="pc-img-wrap">
     <div class="pc-placeholder" style="display:flex;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:24px;color:#14b8a6;letter-spacing:2px;">RZ1</span>
+      <span style="font-family:Bebas Neue,sans-serif;font-size:24px;color:#f59e0b;letter-spacing:2px;">RZ1</span>
     </div>
     <div class="pc-qty-overlay">
       <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
@@ -6115,30 +6132,29 @@ footer{border-top:1px solid rgba(59,130,246,0.1);padding:60px 80px 80px;backgrou
       <div class="pc-varejo">
         <span class="pc-label-v">Varejo</span>
         <span class="pc-val-usd" data-usd="647.17">$647.17</span>
-        <span class="pc-val-brl" data-usd="647.17">R$ 3.430,00</span>
+        <span class="pc-val-brl" data-usd="647.17">R$ 3.430,00</span>
       </div>
       <div class="pc-atacado-wrap">
         <div class="pc-atacado pc-atacado-locked">
           <span class="pc-label-a">Atacado <em>min 5</em></span>
           <span class="pc-atac-usd" data-usd="0">$0.00</span>
-          <span class="pc-atac-brl" data-usd="0">R$ 0,00</span>
+          <span class="pc-atac-brl" data-usd="0">R$ 0,00</span>
           <div class="pc-atac-blur">🔒 Selecione 5+ peças</div>
         </div>
       </div>
     </div>
-    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">
+    <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#f59e0b">
       + Carrinho
     </button>
   </div>
 </div>
   </div>
 </div>
-</div>
 
 
 <script>
 /* ══ PRODUCT DATA (admin-editable, localStorage-persisted) ══ */
-const BRAND_META = {"landerlan": {"name": "Landerlan", "color": "#3b82f6"}, "lander_gold": {"name": "Lander Gold", "color": "#f59e0b"}, "cooper": {"name": "Cooper Pharma", "color": "#10b981"}, "king": {"name": "King Pharma", "color": "#8b5cf6"}, "pharmacom": {"name": "", "color": "#ef4444"}, "zphc": {"name": "ZPHC", "color": "#06b6d4"}, "spectrum": {"name": "", "color": "#f97316"}, "canada": {"name": "", "color": "#22c55e"}, "muscle_pharma": {"name": "Muscle Pharma", "color": "#a855f7"}, "bratva_labs": {"name": "Bratva Labs", "color": "#ec4899"}, "peptideos": {"name": "Pep Gen Labs — Peptideos", "color": "#14b8a6"}, "tirzepatidas": {"name": "Tirzepatidas / Retatrutide", "color": "#14b8a6"}};
+const BRAND_META = {"landerlan": {"name": "Landerlan", "color": "#3b82f6"}, "lander_gold": {"name": "Lander Gold", "color": "#f59e0b"}, "cooper": {"name": "Cooper Pharma", "color": "#10b981"}, "king": {"name": "King Pharma", "color": "#8b5cf6"}, "pharmacom": {"name": "", "color": "#ef4444"}, "zphc": {"name": "ZPHC", "color": "#06b6d4"}, "spectrum": {"name": "", "color": "#f97316"}, "canada": {"name": "", "color": "#22c55e"}, "muscle_pharma": {"name": "Muscle Pharma", "color": "#a855f7"}, "bratva_labs": {"name": "Bratva Labs", "color": "#ec4899"}, "peptideos": {"name": "Pep Gen Labs — Peptideos", "color": "#14b8a6"}, "tirzepatidas": {"name": "Tirzepatidas", "color": "#14b8a6"}, "retatrutide": {"name": "Retatrutide", "color": "#f59e0b"}};
 const WA_NUM = '5561992011365';
 // Senha removida — acesso via painel-pp2126.html
 const ADMIN_PASS = null;
@@ -6976,244 +6992,4 @@ async function submitCardPayment() {
 </script>
 
 </body>
-</html<div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoless_md_15mg" data-name="Lipoless MD 15mg" data-apresent="MD" data-atacado="185" data-varejo="188.68" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/lipoless-md-15.jpg" data-confirm="false">
-  <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/lipoless-md-15.jpg" alt="Lipoless MD 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" style="display:none;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">LM1</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Lipoless MD 15mg" style="">Lipoless MD 15mg</div>
-    <div class="pc-apresent">MD</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="188.68">$188.68</span><span class="pc-val-brl" data-usd="188.68">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="185">$185.00</span><span class="pc-atac-brl" data-usd="185">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoless_15mg_4_ampolas" data-name="Lipoless 15mg 4 ampolas" data-apresent="x4 ampolas" data-atacado="185" data-varejo="188.68" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/lipoless-4amp-15.jpg" data-confirm="false">
-  <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/lipoless-4amp-15.jpg" alt="Lipoless 15mg 4 ampolas" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" style="display:none;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">L14</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Lipoless 15mg 4 ampolas" style="">Lipoless 15mg 4 ampola...</div>
-    <div class="pc-apresent">x4 ampolas</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="188.68">$188.68</span><span class="pc-val-brl" data-usd="188.68">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="185">$185.00</span><span class="pc-atac-brl" data-usd="185">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__tg_15mg__if_" data-name="TG 15mg (IF)" data-apresent="IF" data-atacado="180" data-varejo="207.55" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/tg-15.jpg" data-confirm="false">
-  <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/tg-15.jpg" alt="TG 15mg (IF)" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" style="display:none;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">T1(</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="TG 15mg (IF)" style="">TG 15mg (IF)</div>
-    <div class="pc-apresent">IF</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="207.55">$207.55</span><span class="pc-val-brl" data-usd="207.55">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="180">$180.00</span><span class="pc-atac-brl" data-usd="180">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__tirzec_15mg" data-name="Tirzec 15mg" data-apresent="" data-atacado="190" data-varejo="186.79" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/tirzec-15.jpg" data-confirm="false">
-  <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/tirzec-15.jpg" alt="Tirzec 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" style="display:none;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">T1</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Tirzec 15mg" style="">Tirzec 15mg</div>
-    <div class="pc-apresent"></div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="186.79">$186.79</span><span class="pc-val-brl" data-usd="186.79">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="190">$190.00</span><span class="pc-atac-brl" data-usd="190">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoland_md_15mg" data-name="Lipoland MD 15mg" data-apresent="MD" data-atacado="210" data-varejo="186.79" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/lipoland-md-15.jpg" data-confirm="false">
-  <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/lipoland-md-15.jpg" alt="Lipoland MD 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" style="display:none;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">LM1</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Lipoland MD 15mg" style="">Lipoland MD 15mg</div>
-    <div class="pc-apresent">MD</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="186.79">$186.79</span><span class="pc-val-brl" data-usd="186.79">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="210">$210.00</span><span class="pc-atac-brl" data-usd="210">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__lipoland_15mg_4_ampolas" data-name="Lipoland 15mg 4 ampolas" data-apresent="x4 ampolas" data-atacado="210" data-varejo="186.79" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/lipoland-4amp-15.jpg" data-confirm="false">
-  <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/lipoland-4amp-15.jpg" alt="Lipoland 15mg 4 ampolas" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" style="display:none;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">L14</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Lipoland 15mg 4 ampolas" style="">Lipoland 15mg 4 ampola...</div>
-    <div class="pc-apresent">x4 ampolas</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="186.79">$186.79</span><span class="pc-val-brl" data-usd="186.79">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="210">$210.00</span><span class="pc-atac-brl" data-usd="210">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__mounjaro_original_15mg" data-name="Mounjaro Original 15mg" data-apresent="ORIGINAL" data-atacado="810" data-varejo="1081" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="img/tirzepatidas/mounjaro-15.jpg" data-confirm="false">
-  <div class="pc-img-wrap">
-    <img class="pc-img" src="img/tirzepatidas/mounjaro-15.jpg" alt="Mounjaro Original 15mg" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy">
-    <div class="pc-placeholder" style="display:none;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">MO1</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Mounjaro Original 15mg" style="">Mounjaro Original 15mg</div>
-    <div class="pc-apresent">ORIGINAL</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="1081">$1081.00</span><span class="pc-val-brl" data-usd="1081">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="810">$810.00</span><span class="pc-atac-brl" data-usd="810">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__retatrutide_m_synedica_40mg" data-name="Retatrutide M Synedica 40mg" data-apresent="40mg" data-atacado="0" data-varejo="283.02" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="" data-confirm="false">
-  <div class="pc-img-wrap">
-    
-    <div class="pc-placeholder" style="display:flex;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">RMS</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Retatrutide M Synedica 40mg" style="">Retatrutide M Synedica...</div>
-    <div class="pc-apresent">40mg</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="283.02">$283.02</span><span class="pc-val-brl" data-usd="283.02">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="0">$0.00</span><span class="pc-atac-brl" data-usd="0">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__retatrutide_zphc_60mg" data-name="Retatrutide ZPHC 60mg" data-apresent="60mg" data-atacado="0" data-varejo="471.7" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="" data-confirm="false">
-  <div class="pc-img-wrap">
-    
-    <div class="pc-placeholder" style="display:flex;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">RZ6</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Retatrutide ZPHC 60mg" style="">Retatrutide ZPHC 60mg</div>
-    <div class="pc-apresent">60mg</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="471.7">$471.70</span><span class="pc-val-brl" data-usd="471.7">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="0">$0.00</span><span class="pc-atac-brl" data-usd="0">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div><div class="pc" data-slug="tirzepatidas" data-pid="tirzepatidas__retatrutide_zphc_120mg" data-name="Retatrutide ZPHC 120mg" data-apresent="120mg" data-atacado="0" data-varejo="647.17" data-brand="Tirzepatidas / Retatrutide" data-color="#14b8a6" data-img="" data-confirm="false">
-  <div class="pc-img-wrap">
-    
-    <div class="pc-placeholder" style="display:flex;">
-      <span style="font-family:Bebas Neue,sans-serif;font-size:26px;color:#14b8a6;letter-spacing:2px;">RZ1</span>
-    </div>
-    <div class="pc-qty-overlay">
-      <button class="pc-qty-btn" onclick="pcQty(this,-1)">−</button>
-      <span class="pc-qty-val">1</span>
-      <button class="pc-qty-btn" onclick="pcQty(this,1)">+</button>
-    </div>
-  </div>
-  <div class="pc-info">
-    <div class="pc-name" title="Retatrutide ZPHC 120mg" style="">Retatrutide ZPHC 120mg</div>
-    <div class="pc-apresent">120mg</div>
-    <div class="pc-prices">
-      <div class="pc-varejo">
-        <span class="pc-label-v">Varejo</span>
-        <span class="pc-val-usd" data-usd="647.17">$647.17</span><span class="pc-val-brl" data-usd="647.17">R$ —</span>
-      </div>
-      <div class="pc-atacado-wrap"><div class="pc-atacado pc-atacado-locked"><span class="pc-label-a">Atacado <em>min 5</em></span><span class="pc-atac-usd" data-usd="0">$0.00</span><span class="pc-atac-brl" data-usd="0">R$ —</span><div class="pc-atac-blur">🔒 Selecione 5+ peças</div></div></div>
-    </div>
-  </div>
-  <button class="pc-add-btn" onclick="addToCart(this)" style="--c:#14b8a6">+ Carrinho</button>
-</div>>
+</html>
