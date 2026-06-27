@@ -87,6 +87,110 @@
       "varejo": 647.17,
       "confirm": false,
       "img": "https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/tirzepatidas_10.jpg"
+    },
+    {
+      "name": "Retatrutide Synedica 40mg",
+      "apresent": "caneta",
+      "atacado": 0,
+      "varejo": 95.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide Thera 40mg",
+      "apresent": "caneta",
+      "atacado": 0,
+      "varejo": 95.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide iPeptides 120mg",
+      "apresent": "1 vial liofilizado",
+      "atacado": 0,
+      "varejo": 87.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide USA Peptides 40mg",
+      "apresent": "1 vial liofilizado",
+      "atacado": 0,
+      "varejo": 95.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide Oxygen 80mg",
+      "apresent": "1 vial diluído",
+      "atacado": 0,
+      "varejo": 98.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide Oxygen 40mg",
+      "apresent": "1 vial diluído",
+      "atacado": 0,
+      "varejo": 85.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide ZPHC 60mg Caneta",
+      "apresent": "caneta",
+      "atacado": 0,
+      "varejo": 210.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide ZPHC 60mg Viais",
+      "apresent": "5 viais 12mg liofilizados",
+      "atacado": 0,
+      "varejo": 265.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide Veltrane 90mg",
+      "apresent": "1 ampola diluída",
+      "atacado": 0,
+      "varejo": 95.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide Veltrane 120mg",
+      "apresent": "1 vial diluído",
+      "atacado": 0,
+      "varejo": 98.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide TNL 48mg Caneta",
+      "apresent": "caneta",
+      "atacado": 0,
+      "varejo": 90.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide TNL 48mg Viais",
+      "apresent": "4 viais 12mg diluídos",
+      "atacado": 0,
+      "varejo": 80.0,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Retatrutide Biogenesis 60mg",
+      "apresent": "1 vial diluído",
+      "atacado": 0,
+      "varejo": 70.0,
+      "confirm": false,
+      "img": ""
     }
   ],
   "cooper": [
