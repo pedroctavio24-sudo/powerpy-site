@@ -416,7 +416,7 @@ const CLIENTS = {
 };
 
 // Taxa do dólar fixa
-const USD_BRL = 5.30;
+const USD_BRL = 5.40;
 // Valor fixo BRL para Tirzepatidas (independente da taxa)
 const TIRZ_BRL_FIXO = 830;
 
@@ -957,9 +957,6 @@ function renderProducts(){
       html += `<tr class="prod-row" data-name="${p.name.toLowerCase()}">
         <td class="td-name">${p.name}</td>
         <td class="td-apresent">${p.apresent||'—'}</td>
-        <td class="td-price">
-          <div class="price-usd">$${fmt(displayUSD)}</div>
-        </td>
         <td class="td-price">
           <div class="price-usd" style="color:${brand.color};">R$${brlVal}</div>
         </td>
