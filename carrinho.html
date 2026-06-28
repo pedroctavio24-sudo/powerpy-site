@@ -71,7 +71,7 @@ nav{height:64px;display:flex;align-items:center;justify-content:space-between;pa
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="img/logo-powerpy.png" alt="Power PY"></a>
-  <a href="ofertas.html" class="nav-back">← Continuar comprando</a>
+  <a href="catalogo.html" class="nav-back">← Continuar comprando</a>
 </nav>
 
 <div class="steps">
@@ -107,7 +107,7 @@ nav{height:64px;display:flex;align-items:center;justify-content:space-between;pa
     <div class="sum-row" id="freeRow" style="display:none"><span class="sum-free">+ Brinde</span><span class="sum-free">GRÁTIS</span></div>
     <div class="sum-row total"><span>Total</span><span id="sumTotal">R$ 0,00</span></div>
     <button class="btn-checkout" id="btnCheckout" onclick="goCheckout()">FINALIZAR COMPRA</button>
-    <a href="ofertas.html" class="btn-continue">Continuar comprando</a>
+    <a href="catalogo.html" class="btn-continue">Continuar comprando</a>
     <div class="sum-note">Pix · Pagamento 100% seguro<br>Mercado Pago</div>
   </div>
 </div>
@@ -137,18 +137,51 @@ const PRODUCTS = {
   }
 };
 
+// ── FORMATO UNIFICADO ──
+// pp_cart é SEMPRE array de {pid, name, priceUSD, qty, img, brand, color, type, apresent}
+// Produtos de promoção (tirzepatida/synedica) são convertidos para este formato
+
+const PROMO_BRL_PRICE = { tirzepatida: 4190, synedica: 6300 }; // preço fixo BRL
+const PROMO_USD_EQUIV = { tirzepatida: 715.09, synedica: 1050 }; // equiv USD para formato unificado
+
 function getCart() {
   try { return JSON.parse(localStorage.getItem('pp_cart') || '[]'); } catch(e) { return []; }
 }
 function saveCart(cart) {
   localStorage.setItem('pp_cart', JSON.stringify(cart));
 }
+// Converte item legado {id, qty} para formato unificado
+function normalizeLegacyItem(item) {
+  if (item.pid) return item; // já no formato novo
+  const p = PRODUCTS[item.id];
+  if (!p) return null;
+  return {
+    pid: '__promo__' + item.id,
+    name: p.nome,
+    brand: p.tag,
+    apresent: p.desc,
+    priceUSD: PROMO_USD_EQUIV[item.id] || p.preco,
+    priceBRL: p.preco, // preço fixo BRL para promos
+    qty: item.qty || 1,
+    img: p.img,
+    type: 'varejo',
+    color: '#e53e3e',
+    brinde: p.brinde || null,
+    isPromo: true
+  };
+}
 function fmt(v) {
   return 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits:2});
 }
 
 function renderCart() {
-  const cart = getCart();
+  const rawCart = getCart();
+  // Normaliza todos os itens para formato unificado
+  const cart = rawCart.map(i => normalizeLegacyItem(i)).filter(Boolean);
+  // Salva normalizado para que catalogo.html leia corretamente
+  if (cart.length !== rawCart.length || cart.some((c,i) => !rawCart[i].pid)) {
+    saveCart(cart);
+  }
   const box = document.getElementById('cartBox');
 
   if (!cart.length) {
@@ -163,21 +196,22 @@ function renderCart() {
   let hasBrinde = false;
 
   cart.forEach(item => {
-    const p = PRODUCTS[item.id];
-    if (!p) return;
-    total += p.preco * item.qty;
-    if (p.brinde) hasBrinde = true;
+    // Usa priceBRL fixo para promos, senão converte USD
+    const usdRate = parseFloat(localStorage.getItem('pp_usd_brl') || '6');
+    const itemTotal = item.priceBRL ? item.priceBRL * item.qty : item.priceUSD * usdRate * item.qty;
+    total += itemTotal;
+    if (item.brinde) hasBrinde = true;
     html += `
       <div class="cart-item">
-        <div class="ci-img"><img src="${p.img}" alt="${p.nome}"></div>
+        <div class="ci-img"><img src="${item.img}" alt="${item.name}"></div>
         <div class="ci-info">
-          <div class="ci-tag">${p.tag}</div>
-          <div class="ci-name">${p.nome}</div>
-          <div class="ci-desc">${p.desc}</div>
-          ${p.brinde ? `<span class="ci-free">+ ${p.brinde}</span>` : ''}
+          <div class="ci-tag">${item.brand}</div>
+          <div class="ci-name">${item.name}</div>
+          <div class="ci-desc">${item.apresent || ''}</div>
+          ${item.brinde ? `<span class="ci-free">+ ${item.brinde}</span>` : ''}
         </div>
         <div>
-          <div class="ci-price">${fmt(p.preco)}</div>
+          <div class="ci-price">${fmt(itemTotal / item.qty)}</div>
           <div class="ci-qty">Qtd: ${item.qty}</div>
         </div>
       </div>`;
@@ -191,11 +225,19 @@ function renderCart() {
 }
 
 function goCheckout() {
-  const cart = getCart();
+  const rawCart = getCart();
+  const cart = rawCart.map(i => normalizeLegacyItem(i)).filter(Boolean);
   if (!cart.length) return;
-  // Save order context
-  const order = { cart, ts: Date.now() };
-  localStorage.setItem('pp_order', JSON.stringify(order));
+  saveCart(cart);
+  const usdRate = parseFloat(localStorage.getItem('pp_usd_brl') || '6');
+  const totalBRL = cart.reduce((a,i) => a + (i.priceBRL ? i.priceBRL * i.qty : i.priceUSD * usdRate * i.qty), 0);
+  const itensLabel = cart.map(i => `${i.qty}x ${i.name}`).join(' + ');
+  localStorage.setItem('pp_order', JSON.stringify({
+    produto: itensLabel,
+    preco: Math.round(totalBRL * 100) / 100,
+    etiqueta: null,
+    fonte: 'carrinho'
+  }));
   window.location.href = 'checkout.html';
 }
 
@@ -204,8 +246,10 @@ const params = new URLSearchParams(location.search);
 const pid = params.get('produto');
 if (pid && PRODUCTS[pid]) {
   let cart = getCart();
-  const exists = cart.find(c => c.id === pid);
-  if (!exists) cart.push({ id: pid, qty: 1 });
+  // Converte para formato unificado imediatamente
+  const norm = normalizeLegacyItem({ id: pid, qty: 1 });
+  const exists = cart.find(c => c.pid === '__promo__' + pid);
+  if (!exists && norm) cart.push(norm);
   saveCart(cart);
   // Clean URL
   history.replaceState({}, '', 'carrinho.html');

@@ -6686,7 +6686,14 @@ function filterCards(input, slug) {
 document.addEventListener('keydown', e => { if(e.key==='Escape') { closePrices(); closeAdmin(); } });
 
 // ──── CART ────
-let cart = [];
+// Carrega pp_cart do localStorage (formato unificado: {pid, name, priceUSD, qty, img, brand, color, type})
+function loadCart() {
+  try { return JSON.parse(localStorage.getItem('pp_cart') || '[]'); } catch(e) { return []; }
+}
+function persistCart() {
+  localStorage.setItem('pp_cart', JSON.stringify(cart));
+}
+let cart = loadCart();
 
 function addToCart(btn) {
   const card = btn.closest('.pc');
@@ -6709,6 +6716,7 @@ function addToCart(btn) {
       color: card.dataset.color
     });
   }
+  persistCart();
   renderCart();
   showCartFeedback(btn);
 }
@@ -6766,14 +6774,17 @@ function cartQty(idx, delta) {
     );
     cart[idx].type = 'varejo';
   }
+  persistCart();
   renderCart();
 }
 function cartRemove(idx) {
   cart.splice(idx, 1);
+  persistCart();
   renderCart();
 }
 function clearCart() {
   cart = [];
+  persistCart();
   renderCart();
 }
 function irParaCheckout() {
