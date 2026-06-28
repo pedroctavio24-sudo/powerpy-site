@@ -26,6 +26,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .s1-bg{position:absolute;inset:0;}
 .s1-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(229,62,62,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(229,62,62,0.06) 1px,transparent 1px);background-size:60px 60px;animation:gridShift 20s linear infinite;}
 @keyframes gridShift{from{transform:translateY(0);}to{transform:translateY(60px);}}
+@keyframes pulseOffer{0%,100%{box-shadow:0 0 24px rgba(229,62,62,0.35);}50%{box-shadow:0 0 48px rgba(229,62,62,0.7);}}
 .s1-glow1{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(229,62,62,0.15) 0%,transparent 70%);top:-100px;left:-100px;animation:glowMove1 8s ease-in-out infinite;}
 .s1-glow2{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(185,28,28,0.12) 0%,transparent 70%);bottom:-100px;right:-100px;animation:glowMove2 10s ease-in-out infinite;}
 @keyframes glowMove1{0%,100%{transform:translate(0,0);}50%{transform:translate(60px,40px);}}
@@ -406,6 +407,7 @@ footer{border-top:1px solid rgba(229,62,62,0.08);padding:80px 80px 48px;backgrou
 
     <div class="s1-cta">
       <a href="#" onclick="openCatalog();return false;" class="btn-brutal">VER CATÁLOGO COMPLETO</a>
+      <a href="ofertas.html" class="btn-brutal" style="background:transparent;border:2px solid #e53e3e;box-shadow:0 0 24px rgba(229,62,62,0.35);animation:pulseOffer 2s infinite;">🔥 VER OFERTAS</a>
       <a href="#sobre" class="btn-outline">Quem somos</a>
     </div>
   </div>
