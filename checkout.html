@@ -609,6 +609,7 @@ function startPixPoll() {
           document.getElementById('pixStatus').className = 'pix-status approved';
           document.getElementById('pixStatus').textContent = '✓ Pagamento confirmado! Redirecionando...';
           localStorage.setItem('pp_confirmed', JSON.stringify({id: pixPaymentId, ts: Date.now()}));
+          if (window.ppMarkPaid) window.ppMarkPaid();
           setTimeout(() => { window.location.href = 'confirmacao.html'; }, 2000);
         }
       })
@@ -674,6 +675,6 @@ if (savedDados.email) {
   document.getElementById('celular').value = savedDados.celular || '';
 }
 </script>
-
+<script src="cart-watchdog.js"></script>
 </body>
 </html>
