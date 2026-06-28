@@ -122,7 +122,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:5000;height:64px;display:flex;al
 .nav-link:hover{color:#fff;}
 
 /* ══ FOOTER ══ */
-footer{border-top:1px solid rgba(229,62,62,0.08);padding:48px 80px;background:#030508;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+footer{border-top:1px solid rgba(229,62,62,0.08);padding:80px 80px 48px;background:#030508;}
+.ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:56px;max-width:1300px;margin:0 auto 56px;}
+.ft-brand-col .ft-logo{margin-bottom:20px;}
+.ft-tagline{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.8;font-weight:300;max-width:340px;margin-bottom:24px;}
+.ft-contact{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.5);line-height:2.2;}
+.ft-contact a{color:#e53e3e;text-decoration:none;}
+.ft-contact a:hover{color:#fc8181;}
+.ft-links-col{display:block;}
+.ft-col-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:#e53e3e;text-transform:uppercase;margin-bottom:24px;display:block;}
+.ft-nav{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+.ft-nav a{font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;font-weight:300;}
+.ft-nav a:hover{color:#fff;}
+.ft-policy{max-width:1300px;margin:0 auto;padding-top:40px;border-top:1px solid rgba(229,62,62,0.08);}
+.ft-policy-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:12px;}
+.ft-policy-text{font-size:11px;color:rgba(255,255,255,0.28);line-height:1.9;font-weight:300;margin-bottom:20px;}
+.ft-legal{font-size:10px;color:rgba(255,255,255,0.22);line-height:1.9;font-weight:300;margin-bottom:28px;}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:28px;border-top:1px solid rgba(229,62,62,0.06);}
+.ft-OLD-HIDDEN{display:none;}
+.ft-hidden-orig{border-top:1px solid rgba(229,62,62,0.08);padding:48px 80px;background:#030508;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
 .ft-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:#fff;}
 .ft-logo span{color:#e53e3e;}
 .ft-copy{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.2);text-transform:uppercase;}
@@ -225,8 +243,10 @@ footer{border-top:1px solid rgba(229,62,62,0.08);padding:48px 80px;background:#0
   .counter-item:last-child{border-bottom:none;}
 
   /* Footer */
-  footer{padding:32px 24px;flex-direction:column;align-items:flex-start;gap:16px;}
-  .ft-links{gap:20px;flex-wrap:wrap;}
+  footer{padding:56px 24px 40px;}
+  .ft-top{grid-template-columns:1fr;gap:40px;margin-bottom:40px;}
+  .ft-tagline{max-width:100%;}
+  .ft-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
 
   /* WA float */
   .wa-float{bottom:56px;right:16px;}
@@ -560,13 +580,54 @@ footer{border-top:1px solid rgba(229,62,62,0.08);padding:48px 80px;background:#0
 
 <!-- FOOTER -->
 <footer>
-  <div class="ft-logo"><img src="img/logo-powerpy.png" alt="PowerPY" style="height:44px;width:auto;object-fit:contain;"></div>
-  <div class="ft-links">
-    <a href="#" onclick="openCatalog();return false;">Catálogo</a>
-    <a href="#sobre">Sobre</a>
-    <a href="https://wa.me/5561992011365">WhatsApp</a>
+  <div class="ft-top">
+    <div class="ft-brand-col">
+      <div class="ft-logo"><img src="img/logo-powerpy.png" alt="Power PY" style="height:44px;width:auto;object-fit:contain;"></div>
+      <p class="ft-tagline">Power PY — Suplementação de elite. Performance, qualidade e atendimento de outro nível.</p>
+      <div class="ft-contact">
+        E-mail: <a href="mailto:pypower43@gmail.com">pypower43@gmail.com</a><br>
+        Instagram: <a href="https://instagram.com/power_py_suple" target="_blank">@power_py_suple</a>
+      </div>
+    </div>
+
+    <div class="ft-links-col">
+      <div class="ft-col-title">Institucional</div>
+      <div class="ft-nav">
+        <a href="#sobre">Sobre Nós</a>
+        <a href="https://instagram.com/power_py_suple" target="_blank">Redes</a>
+        <a href="#" onclick="return false;">Seja Parceiro</a>
+        <a href="#" onclick="return false;">Influenciadores</a>
+        <a href="#" onclick="return false;">Eventos</a>
+      </div>
+    </div>
+
+    <div class="ft-links-col">
+      <div class="ft-col-title">Loja</div>
+      <div class="ft-nav">
+        <a href="#" onclick="openCatalog();return false;">Catálogo</a>
+        <a href="#" onclick="return false;">Ofertas</a>
+        <a href="#" onclick="return false;">Conteúdo técnico</a>
+        <a href="#" onclick="return false;">Calculadora</a>
+        <a href="#" onclick="return false;">Devolução e Reembolso</a>
+        <a href="#" onclick="return false;">Política de Privacidade</a>
+      </div>
+    </div>
   </div>
-  <div class="ft-copy">© 2026 Power PY · Todos os direitos reservados</div>
+
+  <div class="ft-policy">
+    <div class="ft-policy-title">Devolução e Reembolso</div>
+    <p class="ft-policy-text">Devolução em até 7 dias corridos para produto fechado, sem uso, com lacre intacto e embalagem original. Reembolso em até 7 dias úteis após aprovação e conferência.</p>
+
+    <p class="ft-legal">
+      Conteúdo educativo e informativo. Responsabilidade de uso do comprador. Proibida a venda a menores de 18 anos.<br><br>
+      <strong style="color:rgba(255,255,255,0.35);font-weight:400;">Aviso legal:</strong> Este site comercializa suplementos alimentares e itens de performance. Estes produtos não se destinam a diagnosticar, tratar, curar ou prevenir doenças e não substituem orientação médica ou nutricional. Resultados variam conforme dieta, rotina de treino e fatores individuais. Em caso de dúvida sobre uso, consulte um profissional habilitado. ANVISA RDC 243/2018 — comercialização sob legislação paraguaia.
+    </p>
+
+    <div class="ft-bottom">
+      <div class="ft-copy">© 2026 Power PY · Ciudad del Este, Paraguai · Entrega Brasil</div>
+      <div class="ft-copy">Suplementação de Elite</div>
+    </div>
+  </div>
 </footer>
 
 <script>
