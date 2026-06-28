@@ -6767,7 +6767,7 @@ function renderCart() {
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-brand" style="color:${item.color}">${item.brand} ${item.type==='atacado'?'· Atacado':''}</div>
         <div class="cart-item-price">
-          R$\u00a0${(item.priceBRL * item.qty).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+          R$\u00a0${((item.priceBRL || (item.priceUSD * USD_BRL) || 0) * item.qty).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
         </div>
         <div class="cart-item-qty">
           <button class="cart-qty-btn" onclick="cartQty(${idx},-1)">−</button>
