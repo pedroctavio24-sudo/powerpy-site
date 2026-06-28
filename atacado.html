@@ -10,8 +10,8 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#04060f;--surface:#0d1117;--border:rgba(59,130,246,0.12);
-  --accent:#3b82f6;--accent2:#60a5fa;--text:#fff;--muted:rgba(255,255,255,0.35);
+  --bg:#030508;--surface:#0d1117;--border:rgba(229,62,62,0.12);
+  --accent:#e53e3e;--accent2:#fc8181;--text:#fff;--muted:rgba(255,255,255,0.35);
   --green:#22c55e;--red:#ef4444;
 }
 html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;}
@@ -27,7 +27,7 @@ html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'D
 .login-input:focus{border-color:var(--accent);}
 .login-input::placeholder{color:rgba(255,255,255,0.2);}
 .login-btn{width:100%;background:var(--accent);border:none;color:#fff;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;cursor:pointer;transition:background .2s;margin-top:8px;}
-.login-btn:hover{background:#2563eb;}
+.login-btn:hover{background:#b91c1c;}
 .login-err{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:12px;display:none;}
 .login-attempts{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:16px;letter-spacing:1px;}
 
@@ -75,7 +75,7 @@ nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:cente
 .prod-table thead th{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:14px 16px;border-bottom:1px solid var(--border);text-align:left;}
 .prod-table thead th:last-child{text-align:right;}
 .prod-table tbody tr{border-bottom:1px solid rgba(255,255,255,0.03);transition:background .15s;}
-.prod-table tbody tr:hover{background:rgba(59,130,246,0.04);}
+.prod-table tbody tr:hover{background:rgba(229,62,62,0.04);}
 .prod-table tbody tr.hidden{display:none;}
 .td-name{padding:14px 16px;font-size:14px;color:rgba(255,255,255,0.85);}
 .td-apresent{padding:14px 16px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
@@ -95,8 +95,8 @@ nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:cente
 
 /* CART FAB */
 .cart-fab{position:fixed;bottom:80px;right:32px;z-index:500;}
-.cart-fab-btn{width:56px;height:56px;background:var(--accent);border:none;border-radius:50%;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(59,130,246,0.4);transition:all .2s;position:relative;}
-.cart-fab-btn:hover{transform:scale(1.08);background:#2563eb;}
+.cart-fab-btn{width:56px;height:56px;background:var(--accent);border:none;border-radius:50%;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(229,62,62,0.4);transition:all .2s;position:relative;}
+.cart-fab-btn:hover{transform:scale(1.08);background:#b91c1c;}
 .cart-count{position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;}
 
 /* CART SIDEBAR */
@@ -115,7 +115,7 @@ nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:cente
 .cart-item-brl{font-family:'Space Mono',monospace;font-size:9px;color:var(--green);letter-spacing:1px;}
 .cart-qty{display:flex;align-items:center;gap:8px;}
 .qty-btn{background:rgba(255,255,255,0.06);border:none;color:#fff;width:28px;height:28px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
-.qty-btn:hover{background:rgba(59,130,246,0.2);}
+.qty-btn:hover{background:rgba(229,62,62,0.2);}
 .qty-val{font-family:'Space Mono',monospace;font-size:12px;color:#fff;min-width:20px;text-align:center;}
 .remove-btn{background:none;border:none;color:rgba(255,255,255,0.2);cursor:pointer;font-size:14px;padding:4px;transition:color .2s;}
 .remove-btn:hover{color:var(--red);}
@@ -159,14 +159,14 @@ body{padding-bottom:0;}
 .cart-divider{text-align:center;font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:3px;text-transform:uppercase;margin:4px 0;}
 .checkout-modal{position:fixed;inset:0;z-index:2000;background:rgba(4,6,15,0.96);display:none;align-items:center;justify-content:center;padding:20px;}
 .checkout-modal.open{display:flex;}
-.etiqueta-section{background:#0d1117;border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:20px;margin:16px 0;}
-.etiqueta-section h3{color:#60a5fa;font-family:"Bebas Neue",sans-serif;letter-spacing:3px;font-size:16px;margin-bottom:16px;}
+.etiqueta-section{background:#0d1117;border:1px solid rgba(229,62,62,0.2);border-radius:8px;padding:20px;margin:16px 0;}
+.etiqueta-section h3{color:#fc8181;font-family:"Bebas Neue",sans-serif;letter-spacing:3px;font-size:16px;margin-bottom:16px;}
 .etiqueta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .etiqueta-grid .full{grid-column:1/-1;}
 .etiqueta-label{display:block;color:#9ca3af;font-size:11px;letter-spacing:1px;margin-bottom:4px;}
 .etiqueta-input{width:100%;background:#0a0c13;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:10px 12px;border-radius:4px;font-size:13px;font-family:"DM Sans",sans-serif;}
-.etiqueta-input:focus{outline:none;border-color:#3b82f6;}
-.checkout-box{background:#0d1117;border:1px solid rgba(59,130,246,0.2);width:100%;max-width:460px;max-height:90vh;overflow-y:auto;}
+.etiqueta-input:focus{outline:none;border-color:#e53e3e;}
+.checkout-box{background:#0d1117;border:1px solid rgba(229,62,62,0.2);width:100%;max-width:460px;max-height:90vh;overflow-y:auto;}
 .co-header{padding:20px 24px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#0d1117;z-index:1;}
 .co-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#fff;}
 .co-close{background:none;border:none;color:rgba(255,255,255,0.3);font-size:20px;cursor:pointer;}
@@ -175,11 +175,11 @@ body{padding-bottom:0;}
 .co-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;display:block;margin-bottom:6px;margin-top:14px;}
 .co-label:first-child{margin-top:0;}
 .co-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;padding:11px 14px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
-.co-input:focus{border-color:rgba(59,130,246,0.5);}
+.co-input:focus{border-color:rgba(229,62,62,0.5);}
 .co-input::placeholder{color:rgba(255,255,255,0.2);}
 .co-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .co-select{width:100%;background:#0d1117;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:11px 14px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;}
-.co-total-box{background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.15);padding:14px;margin-top:16px;}
+.co-total-box{background:rgba(229,62,62,0.07);border:1px solid rgba(229,62,62,0.15);padding:14px;margin-top:16px;}
 .co-total-lbl{font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
 .co-total-val{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;line-height:1;}
 .co-total-note{font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);margin-top:4px;}
@@ -600,7 +600,7 @@ const PRODUCTS = {
   },
   "landerlan": {
     label: "Landerlan Clássica",
-    color: "#3b82f6",
+    color: "#e53e3e",
     produtos: [
       {name:"Decaland",apresent:"5ml",atacado:15.3,varejo:20.66},
       {name:"Durateston 250mg",apresent:"1ml",atacado:5.4,varejo:7.29},

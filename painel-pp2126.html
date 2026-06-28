@@ -9,12 +9,12 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#04060f;
+  --bg:#030508;
   --surface:#0d1117;
   --surface2:#111827;
   --border:rgba(255,255,255,0.07);
-  --blue:#3b82f6;
-  --blue2:rgba(59,130,246,0.15);
+  --blue:#e53e3e;
+  --blue2:rgba(229,62,62,0.15);
   --green:#10b981;
   --red:#ef4444;
   --yellow:#f59e0b;
@@ -47,7 +47,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   outline:none;margin-bottom:16px;transition:border-color .2s;
   -webkit-text-security:disc;
 }
-.login-input:focus{border-color:rgba(59,130,246,0.5);}
+.login-input:focus{border-color:rgba(229,62,62,0.5);}
 .login-btn{
   width:100%;background:var(--blue);border:none;color:#fff;
   padding:14px;font-family:'DM Sans',sans-serif;font-size:13px;
@@ -137,7 +137,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .badge-green{background:rgba(16,185,129,0.15);color:var(--green);border:1px solid rgba(16,185,129,0.2);}
 .badge-red{background:rgba(239,68,68,0.12);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
 .badge-yellow{background:rgba(245,158,11,0.12);color:var(--yellow);border:1px solid rgba(245,158,11,0.2);}
-.badge-blue{background:var(--blue2);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
+.badge-blue{background:var(--blue2);color:var(--blue);border:1px solid rgba(229,62,62,0.2);}
 
 /* ── INPUTS ── */
 .form-row{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
@@ -148,7 +148,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   color:#fff;padding:10px 12px;font-family:'DM Sans',sans-serif;
   font-size:13px;outline:none;transition:border-color .2s;width:100%;
 }
-.form-input:focus{border-color:rgba(59,130,246,0.4);}
+.form-input:focus{border-color:rgba(229,62,62,0.4);}
 .form-select{
   background:var(--surface2);border:1px solid var(--border);
   color:#fff;padding:10px 12px;font-family:'DM Sans',sans-serif;
@@ -182,8 +182,8 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   background:rgba(255,255,255,0.03);border:1px solid var(--border);
   color:var(--muted);transition:all .2s;
 }
-.brand-tab:hover{border-color:rgba(59,130,246,0.3);color:#fff;}
-.brand-tab.active{background:var(--blue2);border-color:rgba(59,130,246,0.4);color:var(--blue);}
+.brand-tab:hover{border-color:rgba(229,62,62,0.3);color:#fff;}
+.brand-tab.active{background:var(--blue2);border-color:rgba(229,62,62,0.4);color:var(--blue);}
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
 .product-card{
   background:var(--surface);border:1px solid var(--border);
@@ -221,7 +221,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 
 /* ── ADD PRODUCT FORM ── */
 .add-section{
-  background:var(--surface);border:1px solid rgba(59,130,246,0.15);
+  background:var(--surface);border:1px solid rgba(229,62,62,0.15);
   padding:24px;margin-top:24px;
 }
 .add-title{
@@ -273,7 +273,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 #toast.show{transform:translateY(0);opacity:1;}
 #toast.error{background:var(--red);}
 #toast.warning{background:#f59e0b;}
-#toast.info{background:#3b82f6;}
+#toast.info{background:#e53e3e;}
 
 /* ── BRANDS MANAGER ── */
 .brand-manager-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
