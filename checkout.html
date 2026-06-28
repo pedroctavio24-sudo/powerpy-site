@@ -119,7 +119,7 @@ nav{height:64px;display:flex;align-items:center;justify-content:space-between;pa
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="img/logo-powerpy.png" alt="Power PY"></a>
-  <a href="carrinho.html" class="nav-back" id="navBack">← Carrinho</a>
+  <a href="carrinho.html" class="nav-back" id="navBack">← Continuar comprando</a>
 </nav>
 
 <div class="steps" id="stepsBar">
@@ -329,6 +329,26 @@ function getCart() { try { return JSON.parse(localStorage.getItem('pp_cart') || 
 function getOrder() { try { return JSON.parse(localStorage.getItem('pp_order') || '{}'); } catch(e) { return {}; } }
 function fmt(v) { return 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits:2}); }
 
+// Resolve um item do carrinho para {nome, preco, brinde, img} independente da origem
+function resolveItem(item) {
+  // Formato carrinho.html (promos hardcoded): {id, qty}
+  if (item.id && PRODUCTS[item.id]) {
+    const p = PRODUCTS[item.id];
+    return { nome: p.nome, preco: p.preco, brinde: p.brinde, img: p.img, qty: item.qty || 1 };
+  }
+  // Formato catalogo.html: {pid, name, priceUSD, qty, img, brand, ...}
+  if (item.pid || item.priceUSD !== undefined) {
+    const rate = parseFloat(localStorage.getItem('pp_usd_brl') || '6');
+    const preco = item.priceBRL || Math.round(item.priceUSD * rate * 100) / 100;
+    return { nome: item.name || item.nome || item.pid || 'Produto', preco, brinde: null, img: item.img || '', qty: item.qty || 1 };
+  }
+  return null;
+}
+
+function getCartResolved() {
+  return getCart().map(resolveItem).filter(Boolean);
+}
+
 // ── STEPS ─────────────────────────────────────────────────────────────────────
 let currentStep = 2; // 2=cadastro, 3=entrega, 4=pagamento
 function setStep(n) {
@@ -346,33 +366,36 @@ function setStep(n) {
   window.scrollTo(0,0);
 
   // Nav back text
-  const backs = {2:'← Carrinho', 3:'← Cadastro', 4:'← Entrega'};
+  const backs = {2:'← Continuar comprando', 3:'← Cadastro', 4:'← Entrega'};
   document.getElementById('navBack').textContent = backs[n];
 }
 document.getElementById('navBack').addEventListener('click', (e) => {
   e.preventDefault();
-  if (currentStep === 2) { window.location.href = 'carrinho.html'; }
-  else goBack(currentStep - 1);
+  if (currentStep === 2) {
+    // volta pro catálogo se veio de lá, senão pro carrinho
+    const order = getOrder();
+    window.location.href = (order.fonte === 'catalogo') ? 'catalogo.html' : 'carrinho.html';
+  } else goBack(currentStep - 1);
 });
 
 function goBack(n) { setStep(n); }
 
 // ── SIDEBAR ───────────────────────────────────────────────────────────────────
 function renderSidebar() {
-  const cart = getCart();
+  const items = getCartResolved();
   let html = ''; let total = 0;
-  cart.forEach(item => {
-    const p = PRODUCTS[item.id]; if (!p) return;
-    total += p.preco * item.qty;
+  items.forEach(p => {
+    total += p.preco * p.qty;
     html += `<div class="sum-item">
-      <div class="si-img"><img src="${p.img}" alt="${p.nome}"></div>
+      <div class="si-img">${p.img ? `<img src="${p.img}" alt="${p.nome}">` : `<div style="width:56px;height:56px;background:#0a0c13;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:14px;color:rgba(255,255,255,0.3);">${p.nome.slice(0,3)}</div>`}</div>
       <div class="si-info">
-        <div class="si-name">${p.nome}</div>
-        <div class="si-price">${fmt(p.preco)}</div>
+        <div class="si-name">${p.nome}${p.qty > 1 ? ` × ${p.qty}` : ''}</div>
+        <div class="si-price">${fmt(p.preco * p.qty)}</div>
         ${p.brinde ? `<div class="si-free">${p.brinde}</div>` : ''}
       </div>
     </div>`;
   });
+  if (!html) html = '<div style="color:rgba(255,255,255,0.3);font-family:Space Mono,monospace;font-size:11px;text-align:center;padding:16px;">Carrinho vazio</div>';
   document.getElementById('sideItems').innerHTML = html;
   document.getElementById('sideSub').textContent = fmt(total);
   document.getElementById('sideTotal').textContent = fmt(total);
@@ -506,15 +529,15 @@ function gerarPix() {
   document.getElementById('pixError').style.display = 'none';
 
   const cart = getCart();
+  const items = getCartResolved();
   const dados = JSON.parse(localStorage.getItem('pp_dados') || '{}');
   const endereco = JSON.parse(localStorage.getItem('pp_endereco') || '{}');
 
   let total = 0;
   let descParts = [];
-  cart.forEach(item => {
-    const p = PRODUCTS[item.id]; if (!p) return;
-    total += p.preco * item.qty;
-    descParts.push(p.nome + ' x' + item.qty);
+  items.forEach(p => {
+    total += p.preco * p.qty;
+    descParts.push(p.nome + (p.qty > 1 ? ' x' + p.qty : ''));
   });
 
   const payload = {
@@ -604,9 +627,10 @@ function copyPix() {
 
 // ── SAVE LEAD ─────────────────────────────────────────────────────────────────
 function saveLead(dados, endereco, cart, total, paymentId) {
-  const items = cart.map(c => {
-    const p = PRODUCTS[c.id]; return p ? p.nome + ' x' + c.qty : c.id;
-  }).join(', ');
+  const resolved = getCartResolved();
+  const items = resolved.length > 0
+    ? resolved.map(p => p.nome + (p.qty > 1 ? ' x' + p.qty : '')).join(', ')
+    : cart.map(c => { const p = PRODUCTS[c.id]; return p ? p.nome + ' x' + (c.qty||1) : (c.name || c.id || 'item'); }).join(', ');
 
   fetch('/api/lead', {
     method: 'POST',
@@ -635,7 +659,10 @@ function saveLead(dados, endereco, cart, total, paymentId) {
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 const cart = getCart();
-if (!cart.length) { window.location.href = 'carrinho.html'; }
+if (!cart.length) {
+  const _orderFonte = JSON.parse(localStorage.getItem('pp_order') || '{}').fonte;
+  window.location.href = _orderFonte === 'catalogo' ? 'catalogo.html' : 'carrinho.html';
+}
 
 // Prefill se já tiver dados salvos
 const savedDados = JSON.parse(localStorage.getItem('pp_dados') || '{}');

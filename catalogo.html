@@ -882,31 +882,13 @@ footer{border-top:1px solid rgba(229,62,62,0.1);padding:60px 80px 80px;backgroun
       <span style="font-family:Space Mono,monospace;font-size:11px;color:rgba(255,255,255,0.4);">TOTAL BRL</span>
       <span id="cart-total-brl" style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#10b981;">R$ 0,00</span>
     </div>
-    <!-- DADOS PARA ETIQUETA — OBRIGATÓRIO -->
-    <div id="etiqueta-form" style="margin-bottom:16px;padding:14px;background:rgba(229,62,62,0.07);border:1px solid rgba(229,62,62,0.2);">
-      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:#fc8181;margin-bottom:12px;display:flex;align-items:center;gap:6px;">
-        📦 DADOS PARA ETIQUETA <span style="color:#ef4444;font-size:11px;">*obrigatório</span>
-      </div>
-      <input id="etiq-destinatario" type="text" placeholder="Nome Destinatário *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
-      <input id="etiq-cpf-cnpj" type="text" placeholder="CPF ou CNPJ *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
-      <input id="etiq-cep" type="text" placeholder="CEP *" maxlength="9" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
-      <input id="etiq-endereco" type="text" placeholder="Endereço de Entrega *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
-      <input id="etiq-numero" type="text" placeholder="Número *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
-      <input id="etiq-complemento" type="text" placeholder="Complemento (ex: Apto 12)" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
-      <input id="etiq-bairro" type="text" placeholder="Bairro / Distrito *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:6px;box-sizing:border-box;">
-      <input id="etiq-logradouro" type="text" placeholder="Logradouro (ex: Rua, Av, Travessa) *" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:0;box-sizing:border-box;">
-      <div id="etiq-erro" style="color:#ef4444;font-family:'Space Mono',monospace;font-size:10px;margin-top:8px;display:none;">⚠ Preencha todos os campos obrigatórios (*) para continuar.</div>
-    </div>
-    <!-- Campo nome/tel (ainda usado internamente) -->
-    <input id="lead-nome" type="hidden">
-    <input id="lead-tel" type="hidden">
-    <button onclick="openMPCheckout()" style="width:100%;background:linear-gradient(135deg,#009ee3,#0073c1);color:#fff;border:none;padding:16px;font-family:DM Sans,sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;margin-bottom:10px;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-      💳 Pagar com Mercado Pago
+    <!-- Botões de ação -->
+    <button onclick="irParaCheckout()" style="width:100%;background:#e53e3e;color:#fff;border:none;padding:18px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;margin-bottom:10px;">
+      ⚡ FINALIZAR PEDIDO
     </button>
-    <button onclick="sendCartWA()" style="width:100%;background:#25d366;color:#fff;border:none;padding:16px;font-family:DM Sans,sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Enviar Pedido WhatsApp
+    <button onclick="sendCartWA()" style="width:100%;background:#25d366;color:#fff;border:none;padding:14px;font-family:DM Sans,sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enviar no WhatsApp
     </button>
     <button onclick="clearCart()" style="width:100%;background:none;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);padding:10px;font-family:DM Sans,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:all .2s;">
       Limpar Carrinho
@@ -6601,6 +6583,8 @@ async function fetchDolar() {
   // Usa cotação do painel admin (se definida) ou o valor fixo padrão
   const saved = parseFloat(localStorage.getItem('pp_usd_rate'));
   if (saved && !isNaN(saved)) USD_BRL = saved;
+  // Persiste para checkout.html ler
+  localStorage.setItem('pp_usd_brl', USD_BRL);
   // Aplica
   updateAllBRL();
   document.getElementById('ticker-val').textContent = 'R$ ' + USD_BRL.toFixed(2);
@@ -6792,6 +6776,21 @@ function clearCart() {
   cart = [];
   renderCart();
 }
+function irParaCheckout() {
+  if (cart.length === 0) { alert('Adicione produtos ao carrinho primeiro!'); return; }
+  // Salva carrinho no formato compatível com checkout.html
+  localStorage.setItem('pp_cart', JSON.stringify(cart));
+  // Salva pp_order no formato que checkout.html também lê (fallback)
+  const totalBRL = cart.reduce((a,i) => a + (i.priceUSD * (USD_BRL||1) * i.qty), 0);
+  const itensLabel = cart.map(i => `${i.qty}x ${i.name}`).join(' + ');
+  localStorage.setItem('pp_order', JSON.stringify({
+    produto: itensLabel,
+    preco: Math.round(totalBRL * 100) / 100,
+    etiqueta: null,
+    fonte: 'catalogo'
+  }));
+  window.location.href = 'checkout.html';
+}
 function updateCartTotals() {
   const totalUSD = cart.reduce((a,i) => a + i.priceUSD * i.qty, 0);
   const totalBRL = USD_BRL ? totalUSD * USD_BRL : 0;
@@ -6831,38 +6830,14 @@ function getEtiquetaDados() {
   };
 }
 function validarEtiqueta() {
-  const d = getEtiquetaDados();
-  const erroEl = document.getElementById('etiq-erro');
-  const obrigatorios = [d.destinatario, d.cpfCnpj, d.cep, d.endereco, d.numero, d.bairro, d.logradouro];
-  const ok = obrigatorios.every(v => v.length > 0);
-  if (erroEl) erroEl.style.display = ok ? 'none' : 'block';
-  if (!ok) {
-    // highlight campos vazios
-    const ids = ['etiq-destinatario','etiq-cpf-cnpj','etiq-cep','etiq-endereco','etiq-numero','etiq-bairro','etiq-logradouro'];
-    ids.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.style.borderColor = el.value.trim() ? 'rgba(255,255,255,0.12)' : '#ef4444';
-    });
-    document.getElementById('etiqueta-form')?.scrollIntoView({behavior:'smooth',block:'center'});
-  }
-  return ok;
+  // Formulário de etiqueta removido — validação sempre passa
+  return true;
 }
 function sendCartWA() {
   if (cart.length === 0) return;
-  if (!validarEtiqueta()) return;
-  const etiq = getEtiquetaDados();
   const rate = USD_BRL ? USD_BRL.toFixed(2) : '?';
   let msg = '*PEDIDO POWER PY*\n';
   msg += `Cotação: $1 = R$\u00a0${rate}\n`;
-  msg += '━━━━━━━━━━━━━━━━━━━━\n';
-  msg += '\n*📦 DADOS PARA ETIQUETA*\n';
-  msg += `Destinatário: ${etiq.destinatario}\n`;
-  msg += `CPF/CNPJ: ${etiq.cpfCnpj}\n`;
-  msg += `CEP: ${etiq.cep}\n`;
-  msg += `Logradouro: ${etiq.logradouro}\n`;
-  msg += `Endereço: ${etiq.endereco}, Nº ${etiq.numero}`;
-  if (etiq.complemento) msg += `, ${etiq.complemento}`;
-  msg += `\nBairro: ${etiq.bairro}\n`;
   msg += '━━━━━━━━━━━━━━━━━━━━\n';
   cart.forEach(item => {
     const unitBRL = USD_BRL ? (item.priceUSD * USD_BRL).toLocaleString('pt-BR', {minimumFractionDigits:2}) : '?';
