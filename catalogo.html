@@ -218,6 +218,7 @@ footer{border-top:1px solid rgba(229,62,62,0.1);padding:60px 80px 80px;backgroun
 .reveal-right.visible{opacity:1;transform:translateX(0);}
 .pc-val-usd, .pc-atac-usd { display: none !important; }
 #cart-total-usd { display: none !important; }
+.pp-dolar-tag, #dolar-ticker { display: none !important; }
 </style>
 </head>
 <body>
@@ -6660,7 +6661,7 @@ function openPrices(slug) {
     document.body.dataset.scrollY = scrollY;
     // Show dolar ticker in overlay
     const ticker = document.getElementById('dolar-ticker');
-    if (ticker) ticker.style.display = 'flex';
+    if (ticker) ticker.style.display = 'none';
     // Update BRL values after overlay is visible
     setTimeout(() => updateAllBRL(), 100);
   }
