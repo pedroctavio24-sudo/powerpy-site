@@ -1033,8 +1033,7 @@ function renderCart(){
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
         <div>
-          <div class="cart-item-price">$${fmt(lineUSD)}</div>
-          <div class="cart-item-brl">R$${item.brl_fixo ? (item.brl_fixo*item.qty).toFixed(0) : fmt(lineBRL)}</div>
+          <div class="cart-item-brl" style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;">R$${item.brl_fixo ? (item.brl_fixo*item.qty).toFixed(0) : fmt(lineBRL)}</div>
         </div>
         <div class="cart-qty">
           <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
