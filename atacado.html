@@ -325,7 +325,7 @@ body{padding-bottom:0;}
       <div>
         <div class="cart-total-label">Total</div>
         <div class="cart-total-usd" id="cart-total-usd">$0,00</div>
-        <div class="cart-total-brl" id="cart-total-brl">≈ R$ 0,00</div>
+        <div class="cart-total-brl" id="cart-total-brl">R$ 0,00</div>
       </div>
     </div>
     <button class="cart-wa-btn" onclick="sendWhatsApp()">
@@ -1034,7 +1034,7 @@ function renderCart(){
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
         <div>
           <div class="cart-item-price">$${fmt(lineUSD)}</div>
-          <div class="cart-item-brl">≈ R$${item.brl_fixo ? (item.brl_fixo*item.qty).toFixed(0) : fmt(lineBRL)}</div>
+          <div class="cart-item-brl">R$${item.brl_fixo ? (item.brl_fixo*item.qty).toFixed(0) : fmt(lineBRL)}</div>
         </div>
         <div class="cart-qty">
           <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
@@ -1048,7 +1048,7 @@ function renderCart(){
   
   document.getElementById('cart-items').innerHTML = html;
   document.getElementById('cart-total-usd').textContent = `$${fmt(totalUSD)}`;
-  document.getElementById('cart-total-brl').textContent = `≈ R$ ${fmt(totalBRL)}`;
+  document.getElementById('cart-total-brl').textContent = `R$ ${fmt(totalBRL)}`;
 }
 
 function sendWhatsApp(){
