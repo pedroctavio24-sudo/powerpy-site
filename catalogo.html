@@ -6702,7 +6702,21 @@ function addToCart(btn) {
   const card = btn.closest('.pc');
   const qty = parseInt(card.querySelector('.pc-qty-val')?.textContent || '1');
   const isAtacado = qty >= 5;
-  const priceUSD = isAtacado ? parseFloat(card.dataset.atacado) : parseFloat(card.dataset.varejo);
+  // Capture the FINAL price already displayed on the card (BRL fixed, no recalculation)
+  const priceEl = isAtacado ? card.querySelector('.pc-atac-brl') : card.querySelector('.pc-val-brl');
+  let priceBRL = 0;
+  if (priceEl) {
+    const txt = priceEl.textContent.replace('R$','').replace(/\s/g,'').replace(/\./g,'').replace(',','.');
+    priceBRL = parseFloat(txt) || 0;
+  }
+  // Fallback for kit/promo cards with fixed BRL price (no usd spans)
+  if (!priceBRL) {
+    const kitPriceEl = card.querySelector('.pc-prices span[style*="font-weight:800"]');
+    if (kitPriceEl) {
+      const txt = kitPriceEl.textContent.replace('R$','').replace(/\s/g,'').replace(/\./g,'').replace(',','.');
+      priceBRL = parseFloat(txt) || 0;
+    }
+  }
   const existing = cart.find(i => i.pid === card.dataset.pid && i.type === (isAtacado ? 'atacado' : 'varejo'));
   if (existing) {
     existing.qty += qty;
@@ -6712,7 +6726,7 @@ function addToCart(btn) {
       name: card.dataset.name,
       brand: card.dataset.brand,
       apresent: card.dataset.apresent,
-      priceUSD: priceUSD,
+      priceBRL: priceBRL,
       qty: qty,
       img: card.dataset.img || '',
       type: isAtacado ? 'atacado' : 'varejo',
