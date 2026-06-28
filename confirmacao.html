@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido Confirmado | Power PY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#030508;color:#fff;min-height:100vh;display:flex;flex-direction:column;}
+nav{height:64px;display:flex;align-items:center;justify-content:center;padding:0 32px;background:rgba(3,5,8,0.9);border-bottom:1px solid rgba(229,62,62,0.1);}
+.nav-logo img{height:32px;object-fit:contain;}
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 24px;}
+.box{max-width:520px;width:100%;text-align:center;}
+.check-circle{width:80px;height:80px;border-radius:50%;background:rgba(22,163,74,0.15);border:2px solid rgba(22,163,74,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;animation:popIn .5s ease;}
+@keyframes popIn{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
+.check-circle svg{width:36px;height:36px;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,7vw,64px);letter-spacing:2px;line-height:1;margin-bottom:12px;}
+h1 em{font-style:normal;color:#4ade80;}
+.sub{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:36px;}
+.order-id{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.25);text-transform:uppercase;margin-bottom:32px;}
+.info-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:22px;text-align:left;margin-bottom:28px;}
+.info-row{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:10px;}
+.info-row:last-child{margin-bottom:0;}
+.info-row strong{color:#fff;}
+.actions{display:flex;flex-direction:column;gap:12px;}
+.btn-home{background:#e53e3e;color:#fff;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;border-radius:8px;text-decoration:none;display:block;box-shadow:0 0 24px rgba(229,62,62,0.3);transition:all .2s;}
+.btn-home:hover{background:#c53030;}
+.btn-ig{display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);padding:14px;border-radius:8px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.btn-ig:hover{border-color:rgba(229,62,62,0.4);color:#fc8181;}
+footer{padding:28px;text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.2);text-transform:uppercase;border-top:1px solid rgba(255,255,255,0.04);}
+</style>
+</head>
+<body>
+
+<nav><a href="index.html"><img src="img/logo-powerpy.png" alt="Power PY" style="height:32px;object-fit:contain;"></a></nav>
+
+<div class="main">
+  <div class="box">
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <h1>PEDIDO<br><em>CONFIRMADO!</em></h1>
+    <p class="sub">Pagamento recebido com sucesso. Nossa equipe vai entrar em contato para confirmar os detalhes de entrega.</p>
+    <div class="order-id" id="orderId">Pedido #—</div>
+
+    <div class="info-box" id="infoBox"></div>
+
+    <div class="actions">
+      <a href="index.html" class="btn-home">VOLTAR AO INÍCIO</a>
+      <a href="https://instagram.com/power_py_suple" target="_blank" class="btn-ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        Seguir @power_py_suple
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Power PY · Ciudad del Este, Paraguai · Entrega Brasil</footer>
+
+<script>
+const conf = JSON.parse(localStorage.getItem('pp_confirmed') || '{}');
+const dados = JSON.parse(localStorage.getItem('pp_dados') || '{}');
+const cart = JSON.parse(localStorage.getItem('pp_cart') || '[]');
+
+const PRODUCTS = {
+  tirzepatida: { nome: 'Tirzepatida — Lipoland MD 15mg', preco: 4190 },
+  synedica: { nome: 'Reta da Synedica', preco: 1050 }
+};
+
+document.getElementById('orderId').textContent = conf.id ? 'Pedido #' + conf.id : 'Pedido confirmado';
+
+let total = 0;
+let itemsHtml = '';
+cart.forEach(c => {
+  const p = PRODUCTS[c.id]; if (!p) return;
+  total += p.preco * c.qty;
+  itemsHtml += `<div class="info-row"><span>${p.nome}</span><strong>R$ ${p.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}</strong></div>`;
+});
+
+document.getElementById('infoBox').innerHTML = `
+  ${itemsHtml}
+  ${dados.email ? `<div class="info-row"><span>E-mail</span><strong>${dados.email}</strong></div>` : ''}
+  <div class="info-row"><span>Método</span><strong>Pix</strong></div>
+  <div class="info-row" style="border-top:1px solid rgba(255,255,255,0.06);padding-top:10px;margin-top:4px;"><span>Total pago</span><strong style="color:#4ade80">R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits:2})}</strong></div>
+`;
+
+// Limpar carrinho após confirmação
+localStorage.removeItem('pp_cart');
+localStorage.removeItem('pp_order');
+localStorage.removeItem('pp_endereco');
+</script>
+</body>
+</html>

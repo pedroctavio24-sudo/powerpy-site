@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar Compra | Power PY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#030508;color:#fff;min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+::selection{background:#e53e3e;color:#fff;}
+
+nav{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(3,5,8,0.9);border-bottom:1px solid rgba(229,62,62,0.15);position:sticky;top:0;z-index:100;}
+.nav-logo img{height:32px;object-fit:contain;}
+.nav-back{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.5);text-transform:uppercase;}
+.nav-back:hover{color:#fff;}
+
+.steps{display:flex;justify-content:center;align-items:center;gap:0;padding:24px 32px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.step{display:flex;align-items:center;gap:10px;}
+.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;flex-shrink:0;}
+.step-num.active{background:#e53e3e;color:#fff;}
+.step-num.done{background:#16a34a;color:#fff;}
+.step-num.inactive{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);}
+.step-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;}
+.step-label.active{color:#fff;}
+.step-label.done{color:#4ade80;}
+.step-label.inactive{color:rgba(255,255,255,0.25);}
+.step-line{width:40px;height:1px;background:rgba(255,255,255,0.1);margin:0 8px;flex-shrink:0;}
+@media(max-width:500px){.step-label{display:none;}.step-line{width:16px;}}
+
+.layout{max-width:960px;margin:0 auto;padding:40px 24px 80px;display:grid;grid-template-columns:1fr 320px;gap:32px;}
+@media(max-width:800px){.layout{grid-template-columns:1fr;}}
+
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;}
+
+.form-box{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:28px;}
+.form-box h2{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;margin-bottom:24px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+.field{margin-bottom:18px;}
+.field label{display:block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;}
+.field input,.field select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:13px 16px;font-family:'Inter',sans-serif;font-size:14px;color:#fff;outline:none;transition:border-color .2s;}
+.field input:focus,.field select:focus{border-color:rgba(229,62,62,0.5);background:rgba(229,62,62,0.04);}
+.field input.err,.field select.err{border-color:#e53e3e;}
+.field .err-msg{font-size:11px;color:#fc8181;margin-top:5px;display:none;}
+.field input.err + .err-msg,.field select.err + .err-msg{display:block;}
+.field select option{background:#0d0d0d;}
+
+.check-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.check-row input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:1px;accent-color:#e53e3e;cursor:pointer;}
+.check-row label{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;cursor:pointer;}
+.check-row label a{color:#fc8181;}
+.check-row label span{color:rgba(255,255,255,0.75);}
+
+.btn-next{width:100%;background:#e53e3e;color:#fff;border:none;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;cursor:pointer;border-radius:8px;margin-top:8px;box-shadow:0 0 24px rgba(229,62,62,0.3);transition:all .2s;}
+.btn-next:hover{background:#c53030;box-shadow:0 0 40px rgba(229,62,62,0.5);}
+.btn-next:disabled{background:rgba(229,62,62,0.3);cursor:not-allowed;box-shadow:none;}
+.btn-back{background:transparent;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.5);padding:13px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:6px;width:100%;margin-top:10px;transition:all .2s;}
+.btn-back:hover{border-color:rgba(255,255,255,0.3);color:#fff;}
+
+/* CEP */
+.cep-row{display:flex;gap:10px;}
+.cep-row input{flex:1;}
+.btn-cep{background:rgba(229,62,62,0.12);border:1px solid rgba(229,62,62,0.3);color:#fc8181;padding:13px 18px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:6px;white-space:nowrap;transition:all .2s;}
+.btn-cep:hover{background:#e53e3e;color:#fff;}
+
+/* PIX */
+.pix-box{text-align:center;padding:32px 24px;}
+.pix-box h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;margin-bottom:8px;}
+.pix-box p{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:24px;}
+.pix-qr{width:200px;height:200px;margin:0 auto 20px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.pix-qr img{width:100%;height:100%;object-fit:contain;}
+.pix-key-wrap{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px;margin-bottom:16px;display:flex;gap:10px;align-items:center;}
+.pix-key{font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.7);word-break:break-all;flex:1;text-align:left;}
+.btn-copy{background:#e53e3e;color:#fff;border:none;padding:10px 18px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;border-radius:6px;white-space:nowrap;flex-shrink:0;}
+.pix-timer{font-family:'Space Mono',monospace;font-size:11px;color:#fc8181;letter-spacing:1px;margin-bottom:20px;}
+.pix-status{margin-top:16px;padding:12px;border-radius:8px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;}
+.pix-status.pending{background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.3);color:#fbbf24;}
+.pix-status.approved{background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.3);color:#4ade80;}
+
+/* SIDEBAR SUMMARY */
+.summary-box{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:24px;height:fit-content;position:sticky;top:90px;}
+.sum-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;margin-bottom:16px;}
+.sum-item{display:flex;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.sum-item:last-of-type{margin-bottom:0;}
+.si-img{width:48px;height:48px;border-radius:6px;background:#0a0303;overflow:hidden;flex-shrink:0;}
+.si-img img{width:100%;height:100%;object-fit:contain;padding:3px;}
+.si-info{flex:1;}
+.si-name{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;line-height:1.2;}
+.si-price{font-family:'Space Mono',monospace;font-size:11px;color:#e53e3e;margin-top:3px;}
+.si-free{font-size:10px;color:#4ade80;margin-top:2px;}
+.sum-divider{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:14px 0;}
+.sum-row{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:8px;}
+.sum-row.total{color:#fff;font-weight:600;font-size:15px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:4px;}
+.secure-badge{display:flex;align-items:center;gap:8px;margin-top:20px;padding:12px;background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.15);border-radius:8px;}
+.secure-badge svg{flex-shrink:0;width:18px;height:18px;}
+.secure-badge span{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.4);text-transform:uppercase;line-height:1.5;}
+
+/* SPINNER */
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,0.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* LOADING overlay */
+#loadingOverlay{position:fixed;inset:0;background:rgba(3,5,8,0.85);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;display:none;}
+#loadingOverlay .sp{width:48px;height:48px;border:3px solid rgba(229,62,62,0.2);border-top-color:#e53e3e;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px;}
+#loadingOverlay p{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(255,255,255,0.5);text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<div id="loadingOverlay">
+  <div class="sp"></div>
+  <p>Processando...</p>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="img/logo-powerpy.png" alt="Power PY"></a>
+  <a href="carrinho.html" class="nav-back" id="navBack">← Carrinho</a>
+</nav>
+
+<div class="steps" id="stepsBar">
+  <div class="step"><div class="step-num done" id="s1n">✓</div><div class="step-label done" id="s1l">Carrinho</div></div>
+  <div class="step-line"></div>
+  <div class="step"><div class="step-num active" id="s2n">2</div><div class="step-label active" id="s2l">Cadastro</div></div>
+  <div class="step-line"></div>
+  <div class="step"><div class="step-num inactive" id="s3n">3</div><div class="step-label inactive" id="s3l">Entrega</div></div>
+  <div class="step-line"></div>
+  <div class="step"><div class="step-num inactive" id="s4n">4</div><div class="step-label inactive" id="s4l">Pagamento</div></div>
+</div>
+
+<div class="layout">
+  <div>
+
+    <!-- ETAPA 2: CADASTRO -->
+    <div class="panel active" id="panelCadastro">
+      <div class="form-box">
+        <h2>SEUS DADOS</h2>
+        <div class="form-row">
+          <div class="field">
+            <label>Nome</label>
+            <input type="text" id="nome" placeholder="João" autocomplete="given-name">
+            <div class="err-msg">Campo obrigatório</div>
+          </div>
+          <div class="field">
+            <label>Sobrenome</label>
+            <input type="text" id="sobrenome" placeholder="Silva" autocomplete="family-name">
+            <div class="err-msg">Campo obrigatório</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" id="email" placeholder="joao@email.com" autocomplete="email">
+          <div class="err-msg">E-mail inválido</div>
+        </div>
+        <div class="field">
+          <label>Senha (mín. 6 caracteres)</label>
+          <input type="password" id="senha" placeholder="••••••••" autocomplete="new-password">
+          <div class="err-msg">Mínimo 6 caracteres</div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>CPF</label>
+            <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" autocomplete="off">
+            <div class="err-msg">CPF inválido</div>
+          </div>
+          <div class="field">
+            <label>Celular (com DDD)</label>
+            <input type="tel" id="celular" placeholder="(11) 99999-9999" maxlength="15" autocomplete="tel">
+            <div class="err-msg">Celular obrigatório</div>
+          </div>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="aceitaEmail" checked>
+          <label for="aceitaEmail"><span>Quero receber promoções e novidades</span> por e-mail e WhatsApp da Power PY.</label>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="aceitaPolitica">
+          <label for="aceitaPolitica">Li e concordo com a <a href="#" onclick="return false;">Política de Privacidade</a> e <a href="#" onclick="return false;">Termos de Uso</a> da Power PY. <span style="color:#e53e3e">*</span></label>
+        </div>
+        <div id="errPolitica" style="font-size:11px;color:#fc8181;margin-bottom:12px;display:none;">Você precisa aceitar a política para continuar.</div>
+        <button class="btn-next" onclick="goEntrega()">CONTINUAR PARA ENTREGA</button>
+      </div>
+    </div>
+
+    <!-- ETAPA 3: ENTREGA -->
+    <div class="panel" id="panelEntrega">
+      <div class="form-box">
+        <h2>ENDEREÇO DE ENTREGA</h2>
+        <div class="field">
+          <label>CEP</label>
+          <div class="cep-row">
+            <input type="text" id="cep" placeholder="00000-000" maxlength="9" autocomplete="postal-code">
+            <button class="btn-cep" onclick="buscaCep()">Buscar</button>
+          </div>
+          <div class="err-msg">CEP inválido</div>
+        </div>
+        <div class="form-row">
+          <div class="field" style="grid-column:1/-1;">
+            <label>Logradouro</label>
+            <input type="text" id="logradouro" placeholder="Rua, Av..." autocomplete="street-address">
+            <div class="err-msg">Campo obrigatório</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Número</label>
+            <input type="text" id="numero" placeholder="123" autocomplete="address-line2">
+            <div class="err-msg">Campo obrigatório</div>
+          </div>
+          <div class="field">
+            <label>Complemento</label>
+            <input type="text" id="complemento" placeholder="Apto 4, Bloco B (opcional)" autocomplete="address-line3">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Bairro</label>
+            <input type="text" id="bairro" placeholder="Centro" autocomplete="address-level3">
+            <div class="err-msg">Campo obrigatório</div>
+          </div>
+          <div class="field">
+            <label>Cidade</label>
+            <input type="text" id="cidade" placeholder="São Paulo" autocomplete="address-level2">
+            <div class="err-msg">Campo obrigatório</div>
+          </div>
+        </div>
+        <div class="field" style="max-width:200px;">
+          <label>Estado</label>
+          <select id="estado" autocomplete="address-level1">
+            <option value="">Selecione</option>
+            <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
+            <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+            <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
+            <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
+            <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
+            <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
+            <option>SE</option><option>SP</option><option>TO</option>
+          </select>
+          <div class="err-msg">Selecione o estado</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <button class="btn-next" onclick="goPagamento()" style="flex:1;">CONTINUAR PARA PAGAMENTO</button>
+        </div>
+        <button class="btn-back" onclick="goBack(2)">← Voltar ao cadastro</button>
+      </div>
+    </div>
+
+    <!-- ETAPA 4: PAGAMENTO PIX -->
+    <div class="panel" id="panelPagamento">
+      <div class="form-box">
+        <h2>PAGAMENTO VIA PIX</h2>
+
+        <div id="pixGerating" style="text-align:center;padding:40px 0;">
+          <div class="spinner"></div>
+          <span style="font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,0.4);">Gerando QR Code...</span>
+        </div>
+
+        <div id="pixReady" style="display:none;">
+          <div class="pix-box">
+            <h3>ESCANEIE O QR CODE</h3>
+            <p>Abra o app do seu banco, vá em Pix → Pagar com QR Code</p>
+            <div class="pix-qr" id="pixQrDiv">
+              <img id="pixQrImg" src="" alt="QR Code Pix">
+            </div>
+            <div class="pix-timer" id="pixTimer">⏱ Válido por <span id="pixTimerNum">30:00</span></div>
+            <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:12px;">Ou copie o código Pix copia e cola:</p>
+            <div class="pix-key-wrap">
+              <div class="pix-key" id="pixKey">Aguardando...</div>
+              <button class="btn-copy" onclick="copyPix()">COPIAR</button>
+            </div>
+            <div class="pix-status pending" id="pixStatus">⏳ Aguardando pagamento...</div>
+          </div>
+        </div>
+
+        <div id="pixError" style="display:none;text-align:center;padding:40px 0;">
+          <p style="color:#fc8181;font-family:'Space Mono',monospace;font-size:12px;margin-bottom:16px;">Erro ao gerar QR Code. Tente novamente.</p>
+          <button class="btn-next" onclick="goPagamento()" style="max-width:200px;margin:0 auto;">Tentar novamente</button>
+        </div>
+
+        <button class="btn-back" onclick="goBack(3)" style="margin-top:16px;">← Voltar à entrega</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="summary-box">
+    <div class="sum-title">SEU PEDIDO</div>
+    <div id="sideItems"></div>
+    <hr class="sum-divider">
+    <div class="sum-row"><span>Subtotal</span><span id="sideSub">—</span></div>
+    <div class="sum-row"><span>Frete</span><span style="color:#fc8181;">A calcular</span></div>
+    <div class="sum-row total"><span>Total</span><span id="sideTotal">—</span></div>
+    <div class="secure-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Pagamento 100% seguro via Mercado Pago</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PRODUCTS ──────────────────────────────────────────────────────────────────
+const PRODUCTS = {
+  tirzepatida: {
+    id: 'tirzepatida',
+    nome: 'Tirzepatida — Lipoland MD 15mg',
+    desc: 'Kit 5 ampolas 60mg',
+    tag: 'Emagrecimento · Peptídeo',
+    preco: 4190,
+    img: 'img/tirzepatidas/lipoland-md-promo.png',
+    brinde: '+ Vitamina C Lander (GRÁTIS)'
+  },
+  synedica: {
+    id: 'synedica',
+    nome: 'Reta da Synedica',
+    desc: 'Linha completa Synedica',
+    tag: 'Synedica · Premium',
+    preco: 1050,
+    img: 'img/retatrutide/synedica-40.jpg',
+    brinde: null
+  }
+};
+
+function getCart() { try { return JSON.parse(localStorage.getItem('pp_cart') || '[]'); } catch(e) { return []; } }
+function getOrder() { try { return JSON.parse(localStorage.getItem('pp_order') || '{}'); } catch(e) { return {}; } }
+function fmt(v) { return 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits:2}); }
+
+// ── STEPS ─────────────────────────────────────────────────────────────────────
+let currentStep = 2; // 2=cadastro, 3=entrega, 4=pagamento
+function setStep(n) {
+  currentStep = n;
+  [2,3,4].forEach(i => {
+    const num = document.getElementById('s'+i+'n');
+    const lbl = document.getElementById('s'+i+'l');
+    if (i < n) { num.className='step-num done'; num.textContent='✓'; lbl.className='step-label done'; }
+    else if (i === n) { num.className='step-num active'; num.textContent=i; lbl.className='step-label active'; }
+    else { num.className='step-num inactive'; num.textContent=i; lbl.className='step-label inactive'; }
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const panels = {2:'panelCadastro', 3:'panelEntrega', 4:'panelPagamento'};
+  document.getElementById(panels[n]).classList.add('active');
+  window.scrollTo(0,0);
+
+  // Nav back text
+  const backs = {2:'← Carrinho', 3:'← Cadastro', 4:'← Entrega'};
+  document.getElementById('navBack').textContent = backs[n];
+}
+document.getElementById('navBack').addEventListener('click', (e) => {
+  e.preventDefault();
+  if (currentStep === 2) { window.location.href = 'carrinho.html'; }
+  else goBack(currentStep - 1);
+});
+
+function goBack(n) { setStep(n); }
+
+// ── SIDEBAR ───────────────────────────────────────────────────────────────────
+function renderSidebar() {
+  const cart = getCart();
+  let html = ''; let total = 0;
+  cart.forEach(item => {
+    const p = PRODUCTS[item.id]; if (!p) return;
+    total += p.preco * item.qty;
+    html += `<div class="sum-item">
+      <div class="si-img"><img src="${p.img}" alt="${p.nome}"></div>
+      <div class="si-info">
+        <div class="si-name">${p.nome}</div>
+        <div class="si-price">${fmt(p.preco)}</div>
+        ${p.brinde ? `<div class="si-free">${p.brinde}</div>` : ''}
+      </div>
+    </div>`;
+  });
+  document.getElementById('sideItems').innerHTML = html;
+  document.getElementById('sideSub').textContent = fmt(total);
+  document.getElementById('sideTotal').textContent = fmt(total);
+}
+renderSidebar();
+
+// ── MASKS ─────────────────────────────────────────────────────────────────────
+document.getElementById('cpf').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g,'').slice(0,11);
+  if (v.length > 9) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6,9)+'-'+v.slice(9);
+  else if (v.length > 6) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6);
+  else if (v.length > 3) v = v.slice(0,3)+'.'+v.slice(3);
+  this.value = v;
+});
+document.getElementById('celular').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g,'').slice(0,11);
+  if (v.length > 10) v = '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);
+  else if (v.length > 6) v = '('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);
+  else if (v.length > 2) v = '('+v.slice(0,2)+') '+v.slice(2);
+  this.value = v;
+});
+document.getElementById('cep').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g,'').slice(0,8);
+  if (v.length > 5) v = v.slice(0,5)+'-'+v.slice(5);
+  this.value = v;
+});
+
+// ── VALIDATION HELPERS ────────────────────────────────────────────────────────
+function setErr(id, hasErr) {
+  const el = document.getElementById(id);
+  if (hasErr) el.classList.add('err'); else el.classList.remove('err');
+}
+function req(id) {
+  const v = document.getElementById(id).value.trim();
+  const ok = v.length > 0;
+  setErr(id, !ok); return ok;
+}
+function validEmail(id) {
+  const v = document.getElementById(id).value.trim();
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  setErr(id, !ok); return ok;
+}
+function validCpf(id) {
+  const v = document.getElementById(id).value.replace(/\D/g,'');
+  const ok = v.length === 11;
+  setErr(id, !ok); return ok;
+}
+function validCel(id) {
+  const v = document.getElementById(id).value.replace(/\D/g,'');
+  const ok = v.length >= 10;
+  setErr(id, !ok); return ok;
+}
+function validSenha(id) {
+  const v = document.getElementById(id).value;
+  const ok = v.length >= 6;
+  setErr(id, !ok); return ok;
+}
+
+// ── ETAPA 2 → 3 ──────────────────────────────────────────────────────────────
+function goEntrega() {
+  const ok = [req('nome'), req('sobrenome'), validEmail('email'), validSenha('senha'), validCpf('cpf'), validCel('celular')].every(Boolean);
+  const politica = document.getElementById('aceitaPolitica').checked;
+  document.getElementById('errPolitica').style.display = politica ? 'none' : 'block';
+  if (!ok || !politica) return;
+  // Save cadastro
+  const dados = {
+    nome: document.getElementById('nome').value.trim(),
+    sobrenome: document.getElementById('sobrenome').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    senha: document.getElementById('senha').value,
+    cpf: document.getElementById('cpf').value,
+    celular: document.getElementById('celular').value,
+    aceitaEmail: document.getElementById('aceitaEmail').checked,
+    aceitaPolitica: true
+  };
+  localStorage.setItem('pp_dados', JSON.stringify(dados));
+  setStep(3);
+}
+
+// ── CEP BUSCA ─────────────────────────────────────────────────────────────────
+function buscaCep() {
+  const cep = document.getElementById('cep').value.replace(/\D/g,'');
+  if (cep.length !== 8) { setErr('cep', true); return; }
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(r => r.json())
+    .then(d => {
+      if (d.erro) { setErr('cep', true); return; }
+      setErr('cep', false);
+      document.getElementById('logradouro').value = d.logradouro || '';
+      document.getElementById('bairro').value = d.bairro || '';
+      document.getElementById('cidade').value = d.localidade || '';
+      const sel = document.getElementById('estado');
+      for (let i=0; i<sel.options.length; i++) {
+        if (sel.options[i].value === d.uf) { sel.selectedIndex = i; break; }
+      }
+      document.getElementById('numero').focus();
+    })
+    .catch(() => setErr('cep', true));
+}
+document.getElementById('cep').addEventListener('keydown', e => { if (e.key==='Enter') buscaCep(); });
+
+// ── ETAPA 3 → 4 ──────────────────────────────────────────────────────────────
+function goPagamento() {
+  const ok = [req('logradouro'), req('numero'), req('bairro'), req('cidade')].every(Boolean);
+  const estado = document.getElementById('estado').value;
+  setErr('estado', !estado);
+  if (!ok || !estado) return;
+
+  const endereco = {
+    cep: document.getElementById('cep').value,
+    logradouro: document.getElementById('logradouro').value.trim(),
+    numero: document.getElementById('numero').value.trim(),
+    complemento: document.getElementById('complemento').value.trim(),
+    bairro: document.getElementById('bairro').value.trim(),
+    cidade: document.getElementById('cidade').value.trim(),
+    estado
+  };
+  localStorage.setItem('pp_endereco', JSON.stringify(endereco));
+  setStep(4);
+  gerarPix();
+}
+
+// ── PIX ───────────────────────────────────────────────────────────────────────
+let pixPaymentId = null;
+let pixTimerInterval = null;
+let pixPollInterval = null;
+
+function gerarPix() {
+  document.getElementById('pixGerating').style.display = 'block';
+  document.getElementById('pixReady').style.display = 'none';
+  document.getElementById('pixError').style.display = 'none';
+
+  const cart = getCart();
+  const dados = JSON.parse(localStorage.getItem('pp_dados') || '{}');
+  const endereco = JSON.parse(localStorage.getItem('pp_endereco') || '{}');
+
+  let total = 0;
+  let descParts = [];
+  cart.forEach(item => {
+    const p = PRODUCTS[item.id]; if (!p) return;
+    total += p.preco * item.qty;
+    descParts.push(p.nome + ' x' + item.qty);
+  });
+
+  const payload = {
+    amount: total,
+    description: descParts.join(', ').slice(0,256),
+    email: dados.email || 'cliente@powerpy.com',
+    nome: dados.nome || 'Cliente',
+    sobrenome: dados.sobrenome || 'PowerPY',
+    cpf: (dados.cpf || '').replace(/\D/g,'')
+  };
+
+  fetch('/api/mp/pix', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.error || !data.point_of_interaction) {
+      console.error(data);
+      showPixError(); return;
+    }
+    pixPaymentId = data.id;
+    const txInfo = data.point_of_interaction.transaction_data;
+    document.getElementById('pixQrImg').src = 'data:image/png;base64,' + txInfo.qr_code_base64;
+    document.getElementById('pixKey').textContent = txInfo.qr_code;
+
+    document.getElementById('pixGerating').style.display = 'none';
+    document.getElementById('pixReady').style.display = 'block';
+
+    startPixTimer(30 * 60);
+    startPixPoll();
+
+    // Save lead
+    saveLead(dados, endereco, cart, total, data.id);
+  })
+  .catch(e => { console.error(e); showPixError(); });
+}
+
+function showPixError() {
+  document.getElementById('pixGerating').style.display = 'none';
+  document.getElementById('pixReady').style.display = 'none';
+  document.getElementById('pixError').style.display = 'block';
+}
+
+function startPixTimer(seconds) {
+  clearInterval(pixTimerInterval);
+  let rem = seconds;
+  function tick() {
+    const m = Math.floor(rem/60);
+    const s = rem % 60;
+    document.getElementById('pixTimerNum').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    if (rem <= 0) { clearInterval(pixTimerInterval); document.getElementById('pixTimer').textContent = 'QR Code expirado. Gere um novo pedido.'; }
+    rem--;
+  }
+  tick(); pixTimerInterval = setInterval(tick, 1000);
+}
+
+function startPixPoll() {
+  clearInterval(pixPollInterval);
+  pixPollInterval = setInterval(() => {
+    if (!pixPaymentId) return;
+    fetch(`/api/mp/payment-status?id=${pixPaymentId}`)
+      .then(r => r.json())
+      .then(d => {
+        if (d.status === 'approved') {
+          clearInterval(pixPollInterval);
+          clearInterval(pixTimerInterval);
+          document.getElementById('pixStatus').className = 'pix-status approved';
+          document.getElementById('pixStatus').textContent = '✓ Pagamento confirmado! Redirecionando...';
+          localStorage.setItem('pp_confirmed', JSON.stringify({id: pixPaymentId, ts: Date.now()}));
+          setTimeout(() => { window.location.href = 'confirmacao.html'; }, 2000);
+        }
+      })
+      .catch(() => {});
+  }, 5000);
+}
+
+function copyPix() {
+  const key = document.getElementById('pixKey').textContent;
+  navigator.clipboard.writeText(key).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = 'COPIADO!';
+    setTimeout(() => btn.textContent = 'COPIAR', 2000);
+  });
+}
+
+// ── SAVE LEAD ─────────────────────────────────────────────────────────────────
+function saveLead(dados, endereco, cart, total, paymentId) {
+  const items = cart.map(c => {
+    const p = PRODUCTS[c.id]; return p ? p.nome + ' x' + c.qty : c.id;
+  }).join(', ');
+
+  fetch('/api/lead', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      nome: dados.nome + ' ' + dados.sobrenome,
+      email: dados.email,
+      telefone: dados.celular,
+      produto: items,
+      mensagem: `Total: R$ ${total} | Pix ID: ${paymentId} | CEP: ${endereco.cep} | ${endereco.cidade}/${endereco.estado}`,
+      tipo: 'pedido',
+      aceitaEmail: dados.aceitaEmail,
+      etiqueta: {
+        destinatario: dados.nome + ' ' + dados.sobrenome,
+        cpfCnpj: dados.cpf,
+        cep: endereco.cep,
+        logradouro: endereco.logradouro,
+        numero: endereco.numero,
+        complemento: endereco.complemento,
+        bairro: endereco.bairro,
+        endereco: endereco.logradouro + ', ' + endereco.numero + ' - ' + endereco.bairro + ', ' + endereco.cidade + '/' + endereco.estado
+      }
+    })
+  }).catch(() => {});
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+const cart = getCart();
+if (!cart.length) { window.location.href = 'carrinho.html'; }
+
+// Prefill se já tiver dados salvos
+const savedDados = JSON.parse(localStorage.getItem('pp_dados') || '{}');
+if (savedDados.email) {
+  document.getElementById('nome').value = savedDados.nome || '';
+  document.getElementById('sobrenome').value = savedDados.sobrenome || '';
+  document.getElementById('email').value = savedDados.email || '';
+  document.getElementById('cpf').value = savedDados.cpf || '';
+  document.getElementById('celular').value = savedDados.celular || '';
+}
+</script>
+
+</body>
+</html>

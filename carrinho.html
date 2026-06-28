@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrinho | Power PY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#030508;color:#fff;min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+::selection{background:#e53e3e;color:#fff;}
+
+/* NAV */
+nav{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(3,5,8,0.9);border-bottom:1px solid rgba(229,62,62,0.15);position:sticky;top:0;z-index:100;}
+.nav-logo img{height:32px;object-fit:contain;}
+.nav-back{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.5);text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+.nav-back:hover{color:#fff;}
+
+/* STEPS */
+.steps{display:flex;justify-content:center;align-items:center;gap:0;padding:24px 32px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.step{display:flex;align-items:center;gap:10px;}
+.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;flex-shrink:0;}
+.step-num.active{background:#e53e3e;color:#fff;}
+.step-num.done{background:#16a34a;color:#fff;}
+.step-num.inactive{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);}
+.step-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;}
+.step-label.active{color:#fff;}
+.step-label.inactive{color:rgba(255,255,255,0.25);}
+.step-line{width:40px;height:1px;background:rgba(255,255,255,0.1);margin:0 8px;flex-shrink:0;}
+@media(max-width:500px){.step-label{display:none;}.step-line{width:20px;}}
+
+/* LAYOUT */
+.layout{max-width:960px;margin:0 auto;padding:40px 24px 80px;display:grid;grid-template-columns:1fr 360px;gap:32px;}
+@media(max-width:800px){.layout{grid-template-columns:1fr;}}
+
+/* CART ITEMS */
+.cart-box{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;}
+.cart-header{padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.06);font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;}
+.cart-item{display:flex;gap:16px;padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.05);align-items:flex-start;}
+.cart-item:last-child{border-bottom:none;}
+.ci-img{width:72px;height:72px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#0a0303;}
+.ci-img img{width:100%;height:100%;object-fit:contain;padding:4px;}
+.ci-info{flex:1;}
+.ci-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:#fc8181;text-transform:uppercase;margin-bottom:4px;}
+.ci-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:4px;}
+.ci-desc{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5;}
+.ci-free{display:inline-block;margin-top:6px;background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.3);color:#4ade80;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 10px;border-radius:4px;text-transform:uppercase;}
+.ci-price{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#e53e3e;text-align:right;flex-shrink:0;}
+.ci-qty{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px;text-align:right;}
+
+.cart-empty{padding:60px 24px;text-align:center;}
+.cart-empty p{color:rgba(255,255,255,0.3);margin-bottom:20px;}
+.cart-empty a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;border:1px solid rgba(229,62,62,0.3);color:#fc8181;padding:12px 24px;border-radius:6px;text-transform:uppercase;}
+
+/* SIDEBAR */
+.summary-box{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:24px;height:fit-content;position:sticky;top:90px;}
+.sum-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin-bottom:20px;}
+.sum-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:14px;color:rgba(255,255,255,0.55);}
+.sum-row.total{color:#fff;font-weight:600;font-size:16px;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;margin-top:6px;}
+.sum-free{color:#4ade80;font-size:12px;}
+.btn-checkout{display:block;width:100%;background:#e53e3e;color:#fff;border:none;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;cursor:pointer;border-radius:8px;text-align:center;margin-top:20px;box-shadow:0 0 24px rgba(229,62,62,0.35);transition:all .2s;}
+.btn-checkout:hover{background:#c53030;box-shadow:0 0 40px rgba(229,62,62,0.5);}
+.sum-note{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.25);text-align:center;margin-top:14px;line-height:1.7;text-transform:uppercase;}
+.btn-continue{display:block;text-align:center;margin-top:12px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.4);text-transform:uppercase;}
+.btn-continue:hover{color:#fc8181;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="img/logo-powerpy.png" alt="Power PY"></a>
+  <a href="ofertas.html" class="nav-back">← Continuar comprando</a>
+</nav>
+
+<div class="steps">
+  <div class="step">
+    <div class="step-num active">1</div>
+    <div class="step-label active">Carrinho</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step">
+    <div class="step-num inactive">2</div>
+    <div class="step-label inactive">Cadastro</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step">
+    <div class="step-num inactive">3</div>
+    <div class="step-label inactive">Entrega</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step">
+    <div class="step-num inactive">4</div>
+    <div class="step-label inactive">Pagamento</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div>
+    <div class="cart-box" id="cartBox"></div>
+  </div>
+  <div class="summary-box">
+    <div class="sum-title">Resumo</div>
+    <div class="sum-row"><span>Subtotal</span><span id="sumSub">R$ 0,00</span></div>
+    <div class="sum-row"><span>Frete</span><span style="color:#fc8181">Calcular na entrega</span></div>
+    <div class="sum-row" id="freeRow" style="display:none"><span class="sum-free">+ Brinde</span><span class="sum-free">GRÁTIS</span></div>
+    <div class="sum-row total"><span>Total</span><span id="sumTotal">R$ 0,00</span></div>
+    <button class="btn-checkout" id="btnCheckout" onclick="goCheckout()">FINALIZAR COMPRA</button>
+    <a href="ofertas.html" class="btn-continue">Continuar comprando</a>
+    <div class="sum-note">Pix · Pagamento 100% seguro<br>Mercado Pago</div>
+  </div>
+</div>
+
+<script>
+// ── CART ENGINE ───────────────────────────────────────────────────────────────
+const PRODUCTS = {
+  tirzepatida: {
+    id: 'tirzepatida',
+    nome: 'Tirzepatida — Lipoland MD 15mg',
+    desc: 'Kit 5 ampolas 60mg · Produto lacrado e refrigerado',
+    tag: 'Emagrecimento · Peptídeo',
+    preco: 4190,
+    qty: 1,
+    img: 'img/tirzepatidas/lipoland-md-promo.png',
+    brinde: 'Vitamina C Lander (GRÁTIS)'
+  },
+  synedica: {
+    id: 'synedica',
+    nome: 'Reta da Synedica',
+    desc: 'Linha completa Synedica · Qualidade farmacêutica de elite',
+    tag: 'Synedica · Premium',
+    preco: 1050,
+    qty: 1,
+    img: 'img/retatrutide/synedica-40.jpg',
+    brinde: null
+  }
+};
+
+function getCart() {
+  try { return JSON.parse(localStorage.getItem('pp_cart') || '[]'); } catch(e) { return []; }
+}
+function saveCart(cart) {
+  localStorage.setItem('pp_cart', JSON.stringify(cart));
+}
+function fmt(v) {
+  return 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits:2});
+}
+
+function renderCart() {
+  const cart = getCart();
+  const box = document.getElementById('cartBox');
+
+  if (!cart.length) {
+    box.innerHTML = `<div class="cart-header">MEU CARRINHO</div><div class="cart-empty"><p>Carrinho vazio.</p><a href="ofertas.html">Ver promoções</a></div>`;
+    document.getElementById('btnCheckout').disabled = true;
+    document.getElementById('btnCheckout').style.opacity = '0.4';
+    return;
+  }
+
+  let html = '<div class="cart-header">MEU CARRINHO</div>';
+  let total = 0;
+  let hasBrinde = false;
+
+  cart.forEach(item => {
+    const p = PRODUCTS[item.id];
+    if (!p) return;
+    total += p.preco * item.qty;
+    if (p.brinde) hasBrinde = true;
+    html += `
+      <div class="cart-item">
+        <div class="ci-img"><img src="${p.img}" alt="${p.nome}"></div>
+        <div class="ci-info">
+          <div class="ci-tag">${p.tag}</div>
+          <div class="ci-name">${p.nome}</div>
+          <div class="ci-desc">${p.desc}</div>
+          ${p.brinde ? `<span class="ci-free">+ ${p.brinde}</span>` : ''}
+        </div>
+        <div>
+          <div class="ci-price">${fmt(p.preco)}</div>
+          <div class="ci-qty">Qtd: ${item.qty}</div>
+        </div>
+      </div>`;
+  });
+
+  box.innerHTML = html;
+
+  document.getElementById('sumSub').textContent = fmt(total);
+  document.getElementById('sumTotal').textContent = fmt(total);
+  document.getElementById('freeRow').style.display = hasBrinde ? 'flex' : 'none';
+}
+
+function goCheckout() {
+  const cart = getCart();
+  if (!cart.length) return;
+  // Save order context
+  const order = { cart, ts: Date.now() };
+  localStorage.setItem('pp_order', JSON.stringify(order));
+  window.location.href = 'checkout.html';
+}
+
+// If arriving with ?produto=tirzepatida or ?produto=synedica, add to cart
+const params = new URLSearchParams(location.search);
+const pid = params.get('produto');
+if (pid && PRODUCTS[pid]) {
+  let cart = getCart();
+  const exists = cart.find(c => c.id === pid);
+  if (!exists) cart.push({ id: pid, qty: 1 });
+  saveCart(cart);
+  // Clean URL
+  history.replaceState({}, '', 'carrinho.html');
+}
+
+renderCart();
+</script>
+</body>
+</html>

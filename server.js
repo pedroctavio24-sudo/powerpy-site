@@ -363,6 +363,19 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // ── GET /api/mp/payment-status ───────────────────────────────────────────
+  if (pathname === '/api/mp/payment-status' && req.method === 'GET') {
+    if (rateLimit(ip, 60)) { res.writeHead(429); res.end(JSON.stringify({error:'rate limit'})); return; }
+    const payId = String(parsedUrl.query.id || '').replace(/\D/g,'').slice(0,20);
+    if (!payId) { res.writeHead(400); res.end(JSON.stringify({error:'missing id'})); return; }
+    mpRequest('GET', `/v1/payments/${payId}`, null, (err, data, status) => {
+      if (err) { res.writeHead(500); res.end(JSON.stringify({error:'mp error'})); return; }
+      res.writeHead(status, {'Content-Type':'application/json'});
+      res.end(JSON.stringify({ status: data.status, id: data.id }));
+    });
+    return;
+  }
+
   // ── GET /api/mp/pubkey ────────────────────────────────────────────────────
   if (pathname === '/api/mp/pubkey' && req.method === 'GET') {
     if (rateLimit(ip, 30)) { res.writeHead(429); res.end(JSON.stringify({error:'rate limit'})); return; }

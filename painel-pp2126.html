@@ -390,8 +390,14 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="lead-filters">
         <input class="search-input" id="lead-search" placeholder="Buscar nome, telefone..." oninput="renderLeads()">
+        <select class="form-select" id="lead-tipo-filter" onchange="renderLeads()" style="flex:0;min-width:120px;">
+          <option value="">Todos os tipos</option>
+          <option value="pedido">Pedidos</option>
+          <option value="lead">Leads</option>
+          <option value="contato">Contato</option>
+        </select>
         <select class="form-select" id="lead-status-filter" onchange="renderLeads()" style="flex:0;min-width:140px;">
-          <option value="">Todos</option>
+          <option value="">Todos status</option>
           <option value="novo">Novo</option>
           <option value="contato">Em contato</option>
           <option value="fechado">Fechado</option>
@@ -843,26 +849,48 @@ function renderLeads(){
   const leads = getLeads();
   const q = (document.getElementById('lead-search')?.value||'').toLowerCase();
   const sf = document.getElementById('lead-status-filter')?.value||'';
+  const tf = document.getElementById('lead-tipo-filter')?.value||'';
   let filtered = leads.filter(l=>{
-    const match = !q || (l.nome||'').toLowerCase().includes(q)||(l.tel||'').includes(q)||(l.msg||'').toLowerCase().includes(q);
+    const searchFields = [(l.nome||''),(l.tel||''),(l.telefone||''),(l.email||''),(l.msg||''),(l.mensagem||''),(l.produto||'')].join(' ').toLowerCase();
+    const match = !q || searchFields.includes(q);
     const statusOk = !sf || l.status===sf;
-    return match && statusOk;
+    // tipo: server leads usam l.tipo, local usam default 'lead'
+    const tipoOk = !tf || (l.tipo||'lead')===tf;
+    return match && statusOk && tipoOk;
   });
   const tbody = document.getElementById('leads-tbody');
   const empty = document.getElementById('leads-empty');
   if(!filtered.length){tbody.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
-  tbody.innerHTML = filtered.map((l,i)=>{
+  tbody.innerHTML = filtered.map((l)=>{
     const realIdx = leads.indexOf(l);
+    // Support both local (l.tel/l.msg/l.date) and server format (l.telefone/l.mensagem/l.ts)
+    const nome = l.nome || '—';
+    const telefone = l.telefone || l.tel || '';
+    const email = l.email || '';
+    const produto = l.produto || '';
+    const msg = l.mensagem || l.msg || '';
+    const date = l.ts ? fmtDate(new Date(l.ts).getTime()) : fmtDate(l.date);
+    const tipo = l.tipo || 'lead';
+    const aceitaEmail = l.aceitaEmail;
+    const tipoBadge = tipo==='pedido'
+      ? `<span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#4ade80;padding:2px 8px;border-radius:4px;font-size:9px;letter-spacing:1px;">PEDIDO</span>`
+      : tipo==='contato'
+      ? `<span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#60a5fa;padding:2px 8px;border-radius:4px;font-size:9px;">CONTATO</span>`
+      : `<span style="background:rgba(229,62,62,0.1);border:1px solid rgba(229,62,62,0.2);color:#fc8181;padding:2px 8px;border-radius:4px;font-size:9px;">LEAD</span>`;
+    const emailBadge = aceitaEmail===true ? `<span title="Aceita emails/WhatsApp" style="color:#4ade80;font-size:11px;">✉✓</span>` : '';
+    const telLink = telefone ? `<a href="https://wa.me/55${telefone.replace(/\D/g,'')}" target="_blank" style="color:var(--blue);text-decoration:none;">📱 ${telefone}</a>` : '—';
+    const infoExtra = [email, produto].filter(Boolean).join(' · ');
     return `<tr>
       <td style="color:var(--muted);font-size:11px;">#${realIdx+1}</td>
-      <td><strong>${l.nome||'—'}</strong></td>
-      <td>${l.tel?`<a href="https://wa.me/${l.tel}" target="_blank" style="color:var(--blue);text-decoration:none;">📱 ${l.tel}</a>`:'—'}</td>
-      <td class="lead-msg" title="${(l.msg||'').replace(/"/g,"'")}">${l.msg||'—'}</td>
-      <td style="font-size:11px;color:var(--muted);">${fmtDate(l.date)}</td>
+      <td><strong>${nome}</strong>${emailBadge ? ' '+emailBadge : ''}<br><span style="font-size:11px;color:var(--muted);">${email}</span></td>
+      <td>${telLink}</td>
+      <td class="lead-msg" title="${msg.replace(/"/g,"'")}"><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">${produto||''}</div>${msg.slice(0,80)+(msg.length>80?'…':'')}</td>
+      <td>${tipoBadge}</td>
+      <td style="font-size:11px;color:var(--muted);">${date}</td>
       <td>
         <select class="lead-status-sel" onchange="updateLeadStatus(${realIdx},this.value)">
-          <option value="novo" ${l.status==='novo'?'selected':''}>Novo</option>
+          <option value="novo" ${(l.status||'novo')==='novo'?'selected':''}>Novo</option>
           <option value="contato" ${l.status==='contato'?'selected':''}>Em contato</option>
           <option value="fechado" ${l.status==='fechado'?'selected':''}>Fechado</option>
           <option value="perdido" ${l.status==='perdido'?'selected':''}>Perdido</option>
