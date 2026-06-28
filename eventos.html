@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eventos | Power PY</title>
+<meta name="description" content="Eventos, feiras, encontros e ações Power PY. Acompanhe onde a Power PY vai estar e participe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#030508;color:#fff;overflow-x:hidden;}
+a{color:inherit;}
+::selection{background:#e53e3e;color:#fff;}
+nav{position:fixed;top:0;left:0;right:0;z-index:5000;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(3,5,8,0.7);backdrop-filter:blur(24px);border-bottom:1px solid rgba(229,62,62,0.1);}
+.nav-logo img{height:36px;width:auto;object-fit:contain;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-pill{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.5px;color:#fff;text-decoration:none;text-transform:uppercase;background:rgba(229,62,62,0.12);border:1px solid rgba(229,62,62,0.3);padding:9px 16px;border-radius:4px;transition:all .2s;white-space:nowrap;}
+.nav-pill:hover{background:#e53e3e;border-color:#e53e3e;box-shadow:0 0 18px rgba(229,62,62,0.4);}
+.nav-pill-home{background:transparent;border-color:rgba(255,255,255,0.15);}
+.btn-brutal{background:#e53e3e;color:#fff;border:none;padding:9px 22px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 0 24px rgba(229,62,62,0.4);transition:transform .2s,box-shadow .2s;border-radius:3px;}
+.btn-brutal:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(229,62,62,0.6);}
+@media(max-width:900px){.nav-menu-desktop{display:none;}nav{padding:0 20px;}}
+.hero{padding:150px 32px 70px;text-align:center;position:relative;overflow:hidden;}
+.hero-glow{position:absolute;width:800px;height:600px;background:radial-gradient(circle,rgba(229,62,62,0.13) 0%,transparent 70%);top:0;left:50%;transform:translateX(-50%);pointer-events:none;}
+.hero-badge{position:relative;display:inline-flex;align-items:center;gap:10px;background:rgba(229,62,62,0.1);border:1px solid rgba(229,62,62,0.3);padding:8px 22px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;color:#fc8181;text-transform:uppercase;margin-bottom:28px;border-radius:40px;}
+.hero-badge::before{content:'';width:7px;height:7px;background:#e53e3e;border-radius:50%;box-shadow:0 0 10px #e53e3e;}
+.hero h1{position:relative;font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,120px);line-height:.9;letter-spacing:-2px;margin-bottom:20px;}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#e53e3e,#fc8181);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{position:relative;font-size:clamp(15px,2vw,19px);color:rgba(255,255,255,0.5);max-width:620px;margin:0 auto;line-height:1.7;font-weight:300;}
+.wrap{max-width:1000px;margin:0 auto;padding:40px 48px 100px;}
+/* TIMELINE */
+.ev{display:flex;gap:28px;padding:32px 0;border-bottom:1px solid rgba(229,62,62,0.1);align-items:flex-start;}
+.ev-date{flex-shrink:0;width:120px;text-align:center;border:1px solid rgba(229,62,62,0.2);border-radius:10px;padding:18px 12px;background:rgba(229,62,62,0.04);}
+.ev-date .d{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:.9;color:#e53e3e;}
+.ev-date .m{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-top:4px;}
+.ev-body{flex:1;}
+.ev-status{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:4px;margin-bottom:12px;}
+.ev-status.soon{background:rgba(229,62,62,0.15);color:#fc8181;border:1px solid rgba(229,62,62,0.3);}
+.ev-status.tba{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);}
+.ev-body h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;margin-bottom:8px;}
+.ev-body .loc{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:#fc8181;margin-bottom:14px;}
+.ev-body p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.8;font-weight:300;max-width:560px;}
+@media(max-width:640px){.ev{flex-direction:column;gap:16px;}.ev-date{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;}.ev-date .d{font-size:32px;}}
+/* CTA */
+.cta-box{text-align:center;border:1px solid rgba(229,62,62,0.15);background:linear-gradient(135deg,rgba(229,62,62,0.06),transparent);border-radius:12px;padding:64px 40px;margin-top:60px;}
+.cta-box h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);line-height:1;margin-bottom:16px;}
+.cta-box p{color:rgba(255,255,255,0.5);font-size:16px;margin-bottom:32px;font-weight:300;}
+.btn-big{background:#e53e3e;color:#fff;padding:18px 48px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;text-decoration:none;border-radius:4px;box-shadow:0 0 40px rgba(229,62,62,0.4);transition:transform .2s,box-shadow .2s;display:inline-block;}
+.btn-big:hover{transform:scale(1.04);box-shadow:0 0 60px rgba(229,62,62,0.6);}
+footer{border-top:1px solid rgba(229,62,62,0.08);padding:48px;background:#030508;text-align:center;}
+.ft-copy{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.25);text-transform:uppercase;line-height:1.8;}
+.ft-copy a{color:#e53e3e;text-decoration:none;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="img/logo-powerpy.png" alt="Power PY"></a>
+  <div class="nav-right nav-menu-desktop">
+    <a href="index.html" class="nav-pill nav-pill-home">← Início</a>
+    <a href="ofertas.html" class="nav-pill">Ofertas</a>
+    <a href="https://instagram.com/power_py_suple" target="_blank" class="btn-brutal">Seguir no Insta</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">📅 Agenda Power PY</div>
+  <h1>NOSSOS <em>EVENTOS</em></h1>
+  <p>Feiras, encontros, ações e collabs. Veja onde a Power PY vai estar e fique por dentro.</p>
+</section>
+
+<div class="wrap">
+  <div class="ev">
+    <div class="ev-date"><div class="d">EM<br>BREVE</div></div>
+    <div class="ev-body">
+      <span class="ev-status soon">Confirmando data</span>
+      <h3>Encontro Power PY — Comunidade</h3>
+      <div class="loc">📍 Ciudad del Este, Paraguai</div>
+      <p>Primeiro encontro presencial com parceiros, clientes e atletas da comunidade Power PY. Networking, novidades de produtos e condições exclusivas pra quem participar. Vagas limitadas.</p>
+    </div>
+  </div>
+
+  <div class="ev">
+    <div class="ev-date"><div class="d">2026</div><div class="m">2º Sem</div></div>
+    <div class="ev-body">
+      <span class="ev-status tba">A definir</span>
+      <h3>Presença em Feiras Fitness</h3>
+      <div class="loc">📍 Brasil — múltiplas cidades</div>
+      <p>A Power PY vai marcar presença nas principais feiras e expos de suplementação e fitness do Brasil. Acompanhe nossas redes pra saber em qual cidade a gente vai estar.</p>
+    </div>
+  </div>
+
+  <div class="ev">
+    <div class="ev-date"><div class="d">LIVE</div><div class="m">Mensal</div></div>
+    <div class="ev-body">
+      <span class="ev-status soon">Recorrente</span>
+      <h3>Lives de Protocolo & Performance</h3>
+      <div class="loc">📍 Instagram @power_py_suple</div>
+      <p>Toda semana lives com dicas de protocolo, uso correto de produtos e tira-dúvidas ao vivo com a equipe. Ativa as notificações pra não perder.</p>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h2>QUER SER AVISADO?</h2>
+    <p>Segue a gente no Instagram pra receber a data de cada evento em primeira mão.</p>
+    <a href="https://instagram.com/power_py_suple" target="_blank" class="btn-big">Seguir @power_py_suple</a>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-copy">
+    © 2026 Power PY · Ciudad del Este, Paraguai · Entrega Brasil<br>
+    <a href="mailto:pypower43@gmail.com">pypower43@gmail.com</a> · <a href="https://instagram.com/power_py_suple" target="_blank">@power_py_suple</a>
+  </div>
+</footer>
+
+</body>
+</html>

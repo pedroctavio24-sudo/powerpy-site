@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seja Parceiro — Programa de Distribuidores | Power PY</title>
+<meta name="description" content="Vire parceiro Power PY: preço de atacado, margem 30 a 50% maior, prioridade de estoque, suporte técnico e material de divulgação. Para lojas, academias, clínicas e personal trainers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#030508;color:#fff;overflow-x:hidden;}
+a{color:inherit;}
+::selection{background:#e53e3e;color:#fff;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:5000;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(3,5,8,0.7);backdrop-filter:blur(24px);border-bottom:1px solid rgba(229,62,62,0.1);}
+.nav-logo img{height:36px;width:auto;object-fit:contain;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-pill{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.5px;color:#fff;text-decoration:none;text-transform:uppercase;background:rgba(229,62,62,0.12);border:1px solid rgba(229,62,62,0.3);padding:9px 16px;border-radius:4px;transition:all .2s;white-space:nowrap;}
+.nav-pill:hover{background:#e53e3e;border-color:#e53e3e;box-shadow:0 0 18px rgba(229,62,62,0.4);}
+.nav-pill-home{background:transparent;border-color:rgba(255,255,255,0.15);}
+.btn-brutal{position:relative;background:#e53e3e;color:#fff;border:none;padding:9px 22px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 0 24px rgba(229,62,62,0.4);transition:transform .2s,box-shadow .2s;border-radius:3px;}
+.btn-brutal:hover{transform:scale(1.05);box-shadow:0 0 40px rgba(229,62,62,0.6);}
+@media(max-width:900px){.nav-menu-desktop{display:none;}nav{padding:0 20px;}}
+
+/* HERO */
+.hero{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 32px 80px;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(229,62,62,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(229,62,62,0.05) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 70% 70% at 50% 40%,black 20%,transparent 100%);}
+.hero-glow{position:absolute;width:800px;height:800px;background:radial-gradient(circle,rgba(229,62,62,0.13) 0%,transparent 70%);top:30%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.hero-badge{position:relative;display:inline-flex;align-items:center;gap:10px;background:rgba(229,62,62,0.1);border:1px solid rgba(229,62,62,0.3);padding:8px 22px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;color:#fc8181;text-transform:uppercase;margin-bottom:36px;border-radius:40px;}
+.hero-badge::before{content:'';width:7px;height:7px;background:#e53e3e;border-radius:50%;box-shadow:0 0 10px #e53e3e;}
+.hero h1{position:relative;font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,128px);line-height:.9;letter-spacing:-2px;margin-bottom:28px;}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#e53e3e,#fc8181);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{position:relative;font-size:clamp(16px,2vw,21px);color:rgba(255,255,255,0.5);max-width:680px;line-height:1.8;font-weight:300;margin-bottom:44px;}
+.hero-cta{position:relative;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.btn-big{background:#e53e3e;color:#fff;padding:20px 56px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;text-decoration:none;border-radius:4px;box-shadow:0 0 40px rgba(229,62,62,0.4);transition:transform .2s,box-shadow .2s;}
+.btn-big:hover{transform:scale(1.04);box-shadow:0 0 60px rgba(229,62,62,0.6);}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.75);padding:20px 48px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);border-radius:4px;transition:all .3s;}
+.btn-ghost:hover{border-color:#e53e3e;color:#fff;}
+
+/* SECTIONS */
+section.blk{padding:100px 48px;max-width:1200px;margin:0 auto;}
+.sec-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:5px;color:#e53e3e;text-transform:uppercase;margin-bottom:20px;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,80px);line-height:.95;margin-bottom:56px;}
+.sec-title em{font-style:normal;color:#e53e3e;}
+
+/* GRID CARDS */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid rgba(229,62,62,0.1);}
+@media(max-width:860px){.grid3{grid-template-columns:1fr;}}
+.gcard{padding:44px 36px;background:rgba(255,255,255,0.01);transition:background .3s;position:relative;}
+.gcard:hover{background:rgba(229,62,62,0.04);}
+.gcard-ico{font-size:30px;margin-bottom:20px;}
+.gcard h3{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;margin-bottom:14px;color:#fff;}
+.gcard p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.8;font-weight:300;}
+
+/* BENEFITS list */
+.blist{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;}
+@media(max-width:760px){.blist{grid-template-columns:1fr;}}
+.bitem{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid rgba(229,62,62,0.08);}
+.bitem-mark{color:#e53e3e;font-size:20px;flex-shrink:0;line-height:1.4;}
+.bitem-txt strong{display:block;color:#fff;font-size:16px;font-weight:500;margin-bottom:4px;}
+.bitem-txt span{color:rgba(255,255,255,0.45);font-size:13px;font-weight:300;line-height:1.6;}
+
+/* CRITERIA */
+.crit-box{border:1px solid rgba(229,62,62,0.15);background:linear-gradient(135deg,rgba(229,62,62,0.05),transparent);padding:48px;border-radius:8px;}
+.crit-row{display:flex;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.crit-row:last-child{border-bottom:none;}
+.crit-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:rgba(229,62,62,0.4);min-width:48px;}
+.crit-txt{font-size:15px;color:rgba(255,255,255,0.6);font-weight:300;}
+.crit-txt b{color:#fff;font-weight:500;}
+
+/* CTA banner */
+.cta-banner{text-align:center;padding:120px 32px;position:relative;overflow:hidden;}
+.cta-banner h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,96px);line-height:.95;margin-bottom:24px;}
+.cta-banner p{color:rgba(255,255,255,0.5);font-size:18px;margin-bottom:40px;font-weight:300;}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(229,62,62,0.08);padding:48px;background:#030508;text-align:center;}
+.ft-copy{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.25);text-transform:uppercase;line-height:1.8;}
+.ft-copy a{color:#e53e3e;text-decoration:none;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="img/logo-powerpy.png" alt="Power PY"></a>
+  <div class="nav-right nav-menu-desktop">
+    <a href="index.html" class="nav-pill nav-pill-home">← Início</a>
+    <a href="influenciadores.html" class="nav-pill">Influenciadores</a>
+    <a href="#candidatar" class="btn-brutal">Quero ser parceiro</a>
+  </div>
+  <a href="#candidatar" class="btn-brutal" style="display:none;" id="navMob">Parceiro</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge">💎 Programa de Distribuidores</div>
+  <h1>VIRE UM <em>PARCEIRO</em><br>POWER PY</h1>
+  <p>Loja física, academia, clínica, e-commerce ou comunidade ativa? Você pode operar com <strong style="color:#fff;">preço de atacado</strong>, prioridade de estoque e suporte direto da nossa equipe.</p>
+  <div class="hero-cta">
+    <a href="#candidatar" class="btn-big">Quero me candidatar</a>
+    <a href="#beneficios" class="btn-ghost">Ver benefícios</a>
+  </div>
+</section>
+
+<!-- QUEM PODE -->
+<section class="blk">
+  <div class="sec-label">Perfil ideal</div>
+  <h2 class="sec-title">QUEM PODE SER <em>PARCEIRO</em></h2>
+  <div class="grid3">
+    <div class="gcard"><div class="gcard-ico">🏪</div><h3>Lojas Físicas</h3><p>Lojas de suplementação e nutrição esportiva que querem ampliar a linha com produtos de performance.</p></div>
+    <div class="gcard"><div class="gcard-ico">🏋️</div><h3>Academias & Boxes</h3><p>Academias, estúdios e boxes de CrossFit com fluxo constante de atletas e praticantes.</p></div>
+    <div class="gcard"><div class="gcard-ico">🩺</div><h3>Clínicas & Consultórios</h3><p>Clínicas, consultórios e profissionais de saúde com público fiel e recorrente.</p></div>
+    <div class="gcard"><div class="gcard-ico">💻</div><h3>E-commerces</h3><p>Lojas online e marketplaces que buscam um fornecedor confiável com margem competitiva.</p></div>
+    <div class="gcard"><div class="gcard-ico">🎯</div><h3>Personal Trainers</h3><p>Personais com cartela de alunos ativos prontos pra indicar e revender produtos de qualidade.</p></div>
+    <div class="gcard"><div class="gcard-ico">💬</div><h3>Comunidades Ativas</h3><p>Grupos de WhatsApp, comunidades e criadores com público engajado em performance.</p></div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="blk" id="beneficios">
+  <div class="sec-label">Vantagens</div>
+  <h2 class="sec-title">O QUE VOCÊ <em>GANHA</em></h2>
+  <div class="blist">
+    <div class="bitem"><span class="bitem-mark">✦</span><div class="bitem-txt"><strong>Preço de atacado</strong><span>Margem de 30% a 50% maior que o varejo. Compra barato, vende com lucro real.</span></div></div>
+    <div class="bitem"><span class="bitem-mark">✦</span><div class="bitem-txt"><strong>Lista de preço dedicada</strong><span>Tabela exclusiva de parceiro com seu link próprio de pedidos.</span></div></div>
+    <div class="bitem"><span class="bitem-mark">✦</span><div class="bitem-txt"><strong>Prioridade de estoque</strong><span>Acesso antecipado a reposições e novos lançamentos antes do varejo.</span></div></div>
+    <div class="bitem"><span class="bitem-mark">✦</span><div class="bitem-txt"><strong>Suporte técnico direto</strong><span>Nossa equipe orienta você e seus clientes sobre uso e protocolos.</span></div></div>
+    <div class="bitem"><span class="bitem-mark">✦</span><div class="bitem-txt"><strong>Material de divulgação</strong><span>Artes, fichas técnicas e conteúdo pronto pra postar e vender.</span></div></div>
+    <div class="bitem"><span class="bitem-mark">✦</span><div class="bitem-txt"><strong>Treinamento sob demanda</strong><span>Capacitação sobre os produtos para você vender com autoridade.</span></div></div>
+  </div>
+</section>
+
+<!-- CRITERIOS -->
+<section class="blk">
+  <div class="sec-label">Requisitos</div>
+  <h2 class="sec-title">CRITÉRIOS DE <em>APROVAÇÃO</em></h2>
+  <div class="crit-box">
+    <div class="crit-row"><span class="crit-num">01</span><div class="crit-txt">Pedido inicial mínimo de <b>USD 500</b>.</div></div>
+    <div class="crit-row"><span class="crit-num">02</span><div class="crit-txt">Pagamento à vista — <b>Pix, USDT ou cartão</b>.</div></div>
+    <div class="crit-row"><span class="crit-num">03</span><div class="crit-txt">Aprovação de perfil em <b>até 24 horas</b>.</div></div>
+    <div class="crit-row"><span class="crit-num">04</span><div class="crit-txt">Renovação periódica de pedido pra <b>manter o status ativo</b>.</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" id="candidatar">
+  <div class="hero-glow"></div>
+  <h2 style="position:relative;">PRONTO PRA<br><span style="color:#e53e3e;">FATURAR COM A POWER PY?</span></h2>
+  <p style="position:relative;">Manda mensagem pra gente. Aprovação de perfil em até 24h.</p>
+  <a href="https://instagram.com/power_py_suple" target="_blank" class="btn-big" style="position:relative;">Candidatar agora</a>
+</section>
+
+<footer>
+  <div class="ft-copy">
+    © 2026 Power PY · Ciudad del Este, Paraguai · Entrega Brasil<br>
+    <a href="mailto:pypower43@gmail.com">pypower43@gmail.com</a> · <a href="https://instagram.com/power_py_suple" target="_blank">@power_py_suple</a>
+  </div>
+</footer>
+
+</body>
+</html>
