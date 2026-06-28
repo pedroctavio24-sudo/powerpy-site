@@ -273,8 +273,8 @@ body{padding-bottom:0;}
     <div class="cart-total-row">
       <div>
         <div class="cart-total-label">Total do Pedido</div>
-        <div class="cart-total-usd" id="cart-total-usd">$0,00</div>
-        <div class="cart-total-brl" id="cart-total-brl">≈ R$ 0,00</div>
+        <div class="cart-total-usd" id="cart-total-usd" style="display:none;">$0,00</div>
+        <div class="cart-total-brl" id="cart-total-brl" style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;line-height:1;">R$ 0,00</div>
       </div>
     </div>
     <div class="etiqueta-section">
@@ -1013,7 +1013,7 @@ function renderCart(){
   if(cart.length === 0){
     document.getElementById('cart-items').innerHTML = '<div class="cart-empty">Carrinho vazio</div>';
     document.getElementById('cart-total-usd').textContent = '$0,00';
-    document.getElementById('cart-total-brl').textContent = '≈ R$ 0,00';
+    document.getElementById('cart-total-brl').textContent = 'R$ 0,00';
     return;
   }
   
