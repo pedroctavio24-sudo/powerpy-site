@@ -6819,9 +6819,8 @@ function irParaCheckout() {
   window.location.href = 'checkout.html';
 }
 function updateCartTotals() {
-  const totalUSD = cart.reduce((a,i) => a + i.priceUSD * i.qty, 0);
-  const totalBRL = USD_BRL ? totalUSD * USD_BRL : 0;
-  document.getElementById('cart-total-usd').textContent = '$' + totalUSD.toFixed(2);
+  // Use fixed priceBRL when available (no conversion), fallback to priceUSD*rate for legacy items
+  const totalBRL = cart.reduce((a,i) => a + ((i.priceBRL != null ? i.priceBRL : (i.priceUSD * USD_BRL)) * i.qty), 0);
   document.getElementById('cart-total-brl').textContent = 'R$\u00a0' + totalBRL.toLocaleString('pt-BR', {minimumFractionDigits:2,maximumFractionDigits:2});
 }
 
