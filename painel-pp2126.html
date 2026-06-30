@@ -304,6 +304,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   .stats-grid{grid-template-columns:repeat(2,1fr);}
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -335,6 +336,9 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </a>
       <a class="nav-item" onclick="navTo('pedidos')" href="#">
         <span class="nav-icon">📦</span> Pedidos
+      </a>
+      <a class="nav-item" onclick="navTo('notas')" href="#">
+        <span class="nav-icon">🧾</span> Notas
       </a>
       <div class="sidebar-section">Catálogo</div>
       <a class="nav-item" onclick="navTo('produtos')" href="#">
@@ -770,6 +774,7 @@ function navTo(page){
   if(page==='dashboard')renderDashboard();
   if(page==='leads')renderLeads();
   if(page==='pedidos')renderPedidos();
+  if(page==='notas')renderNotas();
   if(page==='produtos')renderProductsPage();
   if(page==='marcas')renderBrands();
   if(page==='config')loadConfig();
