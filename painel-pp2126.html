@@ -1162,7 +1162,7 @@ function addNotaItem(){
   const qty = Math.max(1, parseInt(document.getElementById('nota-add-qty').value)||1);
   const products = getProducts();
   const p = (products[brand]||[])[idx];
-  if(!p){showToast('Selecione um produto','error');return;}
+  if(!p){toast('Selecione um produto','error');return;}
   const meta = getBrandMeta();
   notaItens.push({
     brand: brand,
@@ -1248,7 +1248,7 @@ function fmtBRL(v){
 }
 
 function gerarNotaPDF(){
-  if(!notaItens.length){showToast('Adicione ao menos um produto','error');return;}
+  if(!notaItens.length){toast('Adicione ao menos um produto','error');return;}
   const cliente = document.getElementById('nota-cliente').value || 'Cliente não informado';
   const tipo = document.getElementById('nota-tipo').value;
   const tipoLabel = tipo === 'revendedor' ? 'REVENDEDOR' : 'VAREJO';
@@ -1428,7 +1428,7 @@ function gerarNotaPDF(){
   doc.text('powerpy-site-production.up.railway.app', W/2, H-6, {align:'center'});
 
   doc.save('Nota_'+cliente.replace(/[^a-zA-Z0-9]/g,'_')+'.pdf');
-  showToast('Nota gerada com sucesso!','success');
+  toast('Nota gerada com sucesso!','success');
 }
 
 function updatePedidoStatus(idx,val){
