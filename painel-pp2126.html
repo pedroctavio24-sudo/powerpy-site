@@ -540,6 +540,36 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <button class="btn btn-ghost" onclick="limparNota()">Limpar</button>
         </div>
       </div>
+
+      <!-- HISTÓRICO DE NOTAS -->
+      <div class="add-section" style="margin-top:32px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div class="add-title" style="margin-bottom:0;">Histórico de Notas</div>
+          <select class="form-select" id="nota-mes-filtro" style="width:180px;" onchange="renderHistoricoNotas()">
+            <option value="">Todos os meses</option>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px;">
+          <div><div class="stat-label">Notas salvas</div><div class="stat-val" id="hist-count" style="font-size:22px;">0</div></div>
+          <div><div class="stat-label">Custo Total</div><div class="stat-val" id="hist-custo" style="font-size:22px;">R$ 0</div></div>
+          <div><div class="stat-label">Valor Final</div><div class="stat-val blue" id="hist-final" style="font-size:22px;">R$ 0</div></div>
+          <div><div class="stat-label">Lucro Total</div><div class="stat-val green" id="hist-lucro" style="font-size:22px;">R$ 0</div></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Data</th><th>Cliente</th><th>Tipo</th><th>Itens</th>
+              <th style="text-align:right;">Custo</th>
+              <th style="text-align:right;">Frete</th>
+              <th style="text-align:right;">Valor Final</th>
+              <th style="text-align:right;">Lucro</th>
+              <th></th>
+            </tr></thead>
+            <tbody id="nota-historico-tbody"></tbody>
+          </table>
+        </div>
+        <div id="nota-historico-empty" style="padding:32px;text-align:center;color:var(--muted);">Nenhuma nota salva ainda.</div>
+      </div>
     </div>
 
     <!-- PRODUTOS -->
