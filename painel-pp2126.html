@@ -1272,10 +1272,131 @@ function limparNota(){
 function renderNotas(){
   fillNotaBrandSelect();
   renderNotaItens();
+  renderHistoricoNotas();
 }
 
 function fmtBRL(v){
   return 'R$ ' + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+// ── NOTAS HISTORICO ──
+function getNotasHistorico(){
+  try{ return JSON.parse(localStorage.getItem('pp_notas_historico'))||[]; }
+  catch{ return []; }
+}
+function saveNotasHistorico(list){
+  localStorage.setItem('pp_notas_historico', JSON.stringify(list));
+}
+
+function salvarNota(){
+  if(!notaItens.length){ toast('Adicione ao menos um produto','error'); return; }
+  const cliente = document.getElementById('nota-cliente').value || 'Cliente não informado';
+  const tipo = document.getElementById('nota-tipo').value;
+  const frete = parseFloat(document.getElementById('nota-frete').value)||0;
+  const totalCusto = notaItens.reduce((a,it)=>a+(it.custoUnit||0)*it.qty,0);
+  const totalFinal = notaItens.reduce((a,it)=>a+(it.valorFinalUnit||0)*it.qty,0);
+  const lucro = totalFinal - totalCusto - frete;
+  const nota = {
+    id: Date.now(),
+    data: new Date().toISOString(),
+    cliente,
+    tipo,
+    frete,
+    totalCusto,
+    totalFinal,
+    lucro,
+    itens: notaItens.map(it=>({...it}))
+  };
+  const list = getNotasHistorico();
+  list.unshift(nota);
+  saveNotasHistorico(list);
+  toast('Nota salva com sucesso!');
+  renderHistoricoNotas();
+  if(confirm('Nota salva! Deseja limpar o formulário para uma nova nota?')) limparNota();
+}
+
+function deletarNota(id){
+  if(!confirm('Remover esta nota do histórico?')) return;
+  const list = getNotasHistorico().filter(n=>n.id!==id);
+  saveNotasHistorico(list);
+  renderHistoricoNotas();
+  toast('Nota removida','warning');
+}
+
+function renderHistoricoNotas(){
+  const all = getNotasHistorico();
+  const filtro = document.getElementById('nota-mes-filtro')?.value||'';
+
+  // Populate month filter
+  const mesSel = document.getElementById('nota-mes-filtro');
+  const meses = [...new Set(all.map(n=>n.data.substring(0,7)))].sort().reverse();
+  const curFiltro = mesSel.value;
+  mesSel.innerHTML = '<option value="">Todos os meses</option>' +
+    meses.map(m=>{
+      const [y,mo] = m.split('-');
+      const label = new Date(y,parseInt(mo)-1).toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+      return `<option value="${m}" ${curFiltro===m?'selected':''}>${label}</option>`;
+    }).join('');
+
+  const filtered = filtro ? all.filter(n=>n.data.startsWith(filtro)) : all;
+
+  const totCusto = filtered.reduce((a,n)=>a+n.totalCusto,0);
+  const totFinal = filtered.reduce((a,n)=>a+n.totalFinal,0);
+  const totLucro = filtered.reduce((a,n)=>a+n.lucro,0);
+
+  document.getElementById('hist-count').textContent = filtered.length;
+  document.getElementById('hist-custo').textContent = 'R$ ' + totCusto.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById('hist-final').textContent = 'R$ ' + totFinal.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const lucroEl = document.getElementById('hist-lucro');
+  lucroEl.textContent = 'R$ ' + totLucro.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  lucroEl.className = 'stat-val ' + (totLucro>=0?'green':'red');
+
+  const tbody = document.getElementById('nota-historico-tbody');
+  const empty = document.getElementById('nota-historico-empty');
+  if(!filtered.length){ tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+
+  tbody.innerHTML = filtered.map(n=>{
+    const d = new Date(n.data).toLocaleDateString('pt-BR');
+    const tipoLabel = n.tipo==='revendedor' ? '<span class="badge badge-yellow">REVEND.</span>' : '<span class="badge badge-green">VAREJO</span>';
+    const itensStr = n.itens.map(it=>`${it.name} x${it.qty}`).join(', ');
+    const itensShort = itensStr.length>40 ? itensStr.substring(0,40)+'...' : itensStr;
+    const lucroColor = n.lucro>=0 ? 'var(--green)' : 'var(--red)';
+    return `<tr>
+      <td style="white-space:nowrap;">${d}</td>
+      <td style="font-weight:600;">${n.cliente}</td>
+      <td>${tipoLabel}</td>
+      <td style="font-size:11px;color:var(--muted);" title="${itensStr}">${itensShort}</td>
+      <td style="text-align:right;">${fmtBRL(n.totalCusto)}</td>
+      <td style="text-align:right;">${fmtBRL(n.frete)}</td>
+      <td style="text-align:right;font-weight:700;">${fmtBRL(n.totalFinal)}</td>
+      <td style="text-align:right;font-weight:700;color:${lucroColor};">${fmtBRL(n.lucro)}</td>
+      <td>
+        <button class="btn btn-ghost btn-sm" onclick="gerarNotaPDFById(${n.id})">PDF</button>
+        <button class="btn btn-red btn-icon btn-sm" onclick="deletarNota(${n.id})">✕</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function gerarNotaPDFById(id){
+  const nota = getNotasHistorico().find(n=>n.id===id);
+  if(!nota){ toast('Nota não encontrada','error'); return; }
+  // Temporarily load nota into editor and generate PDF
+  const prevItens = [...notaItens];
+  const prevCliente = document.getElementById('nota-cliente').value;
+  const prevTipo = document.getElementById('nota-tipo').value;
+  const prevFrete = document.getElementById('nota-frete').value;
+  notaItens = nota.itens.map(it=>({...it}));
+  document.getElementById('nota-cliente').value = nota.cliente;
+  document.getElementById('nota-tipo').value = nota.tipo;
+  document.getElementById('nota-frete').value = nota.frete;
+  gerarNotaPDF();
+  // Restore
+  notaItens = prevItens;
+  document.getElementById('nota-cliente').value = prevCliente;
+  document.getElementById('nota-tipo').value = prevTipo;
+  document.getElementById('nota-frete').value = prevFrete;
 }
 
 function gerarNotaPDF(){
