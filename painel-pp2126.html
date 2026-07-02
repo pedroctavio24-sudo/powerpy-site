@@ -1379,6 +1379,25 @@ function renderHistoricoNotas(){
   }).join('');
 }
 
+function editarNota(id){
+  const nota = getNotasHistorico().find(n=>n.id===id);
+  if(!nota){ toast('Nota não encontrada','error'); return; }
+  // Load nota into form
+  notaItens = nota.itens.map(it=>({...it}));
+  document.getElementById('nota-cliente').value = nota.cliente;
+  document.getElementById('nota-tipo').value = nota.tipo;
+  document.getElementById('nota-frete').value = nota.frete;
+  // Remove from history so when saved it replaces itself
+  const list = getNotasHistorico().filter(n=>n.id!==id);
+  saveNotasHistorico(list);
+  renderNotaItens();
+  renderHistoricoNotas();
+  // Scroll to top of notas page
+  document.getElementById('page-notas').scrollTop = 0;
+  window.scrollTo(0,0);
+  toast('Nota carregada para edição — adicione produtos e salve novamente');
+}
+
 function gerarNotaPDFById(id){
   const nota = getNotasHistorico().find(n=>n.id===id);
   if(!nota){ toast('Nota não encontrada','error'); return; }
