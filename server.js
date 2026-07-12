@@ -24,6 +24,7 @@ const ADMIN_SECRET = process.env.ADMIN_SECRET || 'pp2126';
 // Allowed origins (CORS)
 const ALLOWED_ORIGINS = [
   'https://powerpy-site-production.up.railway.app',
+  'https://powersuplepy.netlify.app',
   'http://localhost:8899',
   'http://localhost:3000'
 ];
