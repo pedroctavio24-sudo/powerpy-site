@@ -6898,7 +6898,7 @@ function sendCartWA() {
     localStorage.setItem('pp_pedidos',JSON.stringify(pedidos));
     // enviar lead ao servidor (centralizado)
     try {
-      fetch('/api/lead', {
+      fetch('https://powerpy-site-production.up.railway.app/api/lead', {
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify({
@@ -7007,7 +7007,7 @@ async function adminSave() {
   if (btn) btn.textContent = '⏳ Salvando...';
 
   try {
-    const resp = await fetch('/api/admin/save', {
+    const resp = await fetch('https://powerpy-site-production.up.railway.app/api/admin/save', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ secret: 'pp2126', products: PRODUCTS })
@@ -7087,7 +7087,7 @@ function buildProductCard(p, slug, meta) {
 window.addEventListener('load', async () => {
   // Try to load products from server — MERGE only, never overwrite peptideos/tirzepatidas
   try {
-    const resp = await fetch('/api/products');
+    const resp = await fetch('https://powerpy-site-production.up.railway.app/api/products');
     if (resp.ok) {
       const serverProducts = await resp.json();
       if (serverProducts && typeof serverProducts === 'object' && !serverProducts.error) {
@@ -7250,7 +7250,7 @@ async function gerarPix() {
   const desc = cartItems.map(i => `${i.qty}x ${i.name}`).join(', ').substring(0, 200) || 'Pedido PowerPy';
 
   try {
-    const res = await fetch('/api/mp/pix', {
+    const res = await fetch('https://powerpy-site-production.up.railway.app/api/mp/pix', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -7292,7 +7292,7 @@ function copyPix() {
 
 async function initCardForm() {
   try {
-    const pk = await fetch('/api/mp/pubkey').then(r=>r.json());
+    const pk = await fetch('https://powerpy-site-production.up.railway.app/api/mp/pubkey').then(r=>r.json());
     mpInstance = new MercadoPago(pk.public_key, { locale: 'pt-BR' });
     mpCardForm = true; // marca como iniciado
 
@@ -7382,7 +7382,7 @@ async function submitCardPayment() {
     const paymentMethodId = methods.results && methods.results.length > 0 ? methods.results[0].id : 'visa';
 
     const total = getCartTotalBRL();
-    const res = await fetch('/api/mp/payment', {
+    const res = await fetch('https://powerpy-site-production.up.railway.app/api/mp/payment', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
