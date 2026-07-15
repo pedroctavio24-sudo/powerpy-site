@@ -1119,7 +1119,7 @@ function sendWhatsApp(){
   window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
   
   // Log lead to server
-  fetch('https://powerpy-site-production.up.railway.app/api/lead', {
+  fetch('/.netlify/functions/api/lead', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({
@@ -1161,7 +1161,7 @@ let _mpPk = null;
 
 async function getMpPk(){
   if(_mpPk) return _mpPk;
-  try{ const r=await fetch('https://powerpy-site-production.up.railway.app/api/mp/pubkey'); if(r.ok){const d=await r.json();_mpPk=d.public_key;} }catch(e){}
+  try{ const r=await fetch('/.netlify/functions/api/mp/pubkey'); if(r.ok){const d=await r.json();_mpPk=d.public_key;} }catch(e){}
   return _mpPk;
 }
 
@@ -1253,7 +1253,7 @@ async function submitPix(){
   coLoad(true);
   const totalBRL=calcTotalBRL();
   try{
-    const r=await fetch('https://powerpy-site-production.up.railway.app/api/mp/pix',{method:'POST',headers:{'Content-Type':'application/json'},
+    const r=await fetch('/.netlify/functions/api/mp/pix',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({amount:totalBRL,description:cartDesc(),nome,sobrenome:sobre,cpf,email})});
     const d=await r.json();
     if(!r.ok||d.error){ coErr(d.error||d.message||'Erro ao gerar PIX'); coLoad(false); return; }
@@ -1302,7 +1302,7 @@ async function submitCard(){
     const pmId=pmRes.results[0]?.id||'visa';
     // Send to server — MP will apply buyer interest automatically
     // based on your MP account config (Parcelado Comprador)
-    const r=await fetch('https://powerpy-site-production.up.railway.app/api/mp/payment',{method:'POST',headers:{'Content-Type':'application/json'},
+    const r=await fetch('/.netlify/functions/api/mp/payment',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         token:tok.id,payment_method_id:pmId,installments:parc,
         transaction_amount:totalBRL,description:cartDesc(),
@@ -1338,7 +1338,7 @@ async function loadMpSdk(){
 }
 
 function logLead(tipo,totalBRL,id){
-  fetch('https://powerpy-site-production.up.railway.app/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+  fetch('/.netlify/functions/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({tipo:'pagamento_atacado',nome:currentUser.name,
       produto:cartDesc(),mensagem:`${tipo} · R$ ${fmtBRL(totalBRL)} · ID: ${id}`})}).catch(()=>{});
 }
