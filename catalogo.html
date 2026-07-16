@@ -7085,17 +7085,15 @@ function buildProductCard(p, slug, meta) {
 
 // ──── INIT ────
 window.addEventListener('load', async () => {
-  // Try to load products from server — MERGE only, never overwrite peptideos/tirzepatidas
+  // Load products from server — sincroniza TODAS as marcas, incluindo peptideos e tirzepatidas
+  // (antes essas 2 eram ignoradas de propósito, o que fazia edições no painel nunca aparecerem no site)
   try {
     const resp = await fetch('/.netlify/functions/api/products');
     if (resp.ok) {
       const serverProducts = await resp.json();
       if (serverProducts && typeof serverProducts === 'object' && !serverProducts.error) {
-        // Only update brands that are NOT static (peptideos and tirzepatidas are static HTML)
         Object.keys(serverProducts).forEach(slug => {
-          if (slug !== 'peptideos' && slug !== 'tirzepatidas') {
-            PRODUCTS[slug] = serverProducts[slug];
-          }
+          PRODUCTS[slug] = serverProducts[slug];
         });
         localStorage.setItem('pp_products', JSON.stringify(PRODUCTS));
         Object.keys(BRAND_META).forEach(slug => refreshBrandPage(slug));
