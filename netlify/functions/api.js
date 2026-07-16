@@ -274,6 +274,14 @@ exports.handler = async (event, context) => {
       return ok(res.data, res.status);
     }
 
+    // GET /mp/payment-status
+    if (path === '/mp/payment-status' && method === 'GET') {
+      const payId = String((event.queryStringParameters && event.queryStringParameters.id) || '').replace(/\D/g, '').slice(0, 20);
+      if (!payId) return err('missing id', 400);
+      const res = await mpRequest('GET', `/v1/payments/${payId}`);
+      return ok({ status: res.data.status, id: res.data.id }, res.status);
+    }
+
     return err('not found', 404);
 
   } catch(e) {
