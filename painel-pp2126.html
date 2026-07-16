@@ -818,10 +818,7 @@ const BRAND_META_DEFAULT = {
   lander_gold:  {name:'LANDER GOLD',sub:'Linha Premium'},
   cooper:       {name:'COOPER PHARMA',sub:'Importado'},
   king:         {name:'KING PHARMA',sub:'Linha Completa'},
-  pharmacom:    {name:'PHARMACOM',sub:'Alta Performance'},
   zphc:         {name:'ZPHC',sub:'Laboratorio Russo'},
-  spectrum:     {name:'SPECTRUM PHARMA',sub:'Importado'},
-  canada:       {name:'CANADA PEPTIDES',sub:'Peptídeos Premium'},
   muscle_pharma:{name:'MUSCLE PHARMA',sub:'Linha Profissional'},
   bratva_labs:  {name:'BRATVA LABS',sub:'Importado'},
   tirzepatidas: {name:'TIRZEPATIDAS / RETATRUTIDE',sub:'Emagrecimento GLP-1'},
@@ -2028,9 +2025,10 @@ async function syncFromServer(){
   } catch(e) {
     console.warn('[PowerPY] Sync failed:', e.message);
   }
-  // Re-render after sync — precisa ser renderProductsPage (não só renderProducts)
-  // pra reconstruir as abas de marca com a lista completa vinda do servidor
+  // Re-render after sync — atualiza abas de produtos E cards de marcas,
+  // pra nenhuma tela ficar presa em dado antigo independente de onde o usuário está
   if(typeof renderProductsPage === 'function') renderProductsPage();
+  if(typeof renderBrands === 'function') renderBrands();
   if(typeof renderLeads === 'function') renderLeads();
   updateDashboard();
 }
