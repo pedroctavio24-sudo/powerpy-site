@@ -1,3 +1,4 @@
+// force-redeploy: 20260716214629
 const https = require('https');
 const crypto = require('crypto');
 
