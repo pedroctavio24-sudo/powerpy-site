@@ -1,5 +1,25 @@
 [
   {
+    "id": 1784322733873,
+    "ts": "2026-07-17T21:12:13.874Z",
+    "nome": "pedro octavio",
+    "email": "pypower43@gmail.com",
+    "telefone": "(61) 99201-1365",
+    "produto": "Reta da Synedica, CXI Enantato de Testosterona, Mesterolona 25mg, Metandrostenolona (Diana) 10mg, Enanbolic — Testo Enantato 250mg, Nanbolic-PH — Nandrolona Fenilpropionato 100mg, Oxanbolic — Oxandrol",
+    "mensagem": "Total: R$ 2698.13 | Pix ID: 169310820350 | CEP: 55900-000 | Goiana/PE",
+    "tipo": "pedido",
+    "etiqueta": {
+      "destinatario": "pedro octavio",
+      "cpfCnpj": "076.144.531-58",
+      "cep": "55900-000",
+      "logradouro": "rua nova numero 7",
+      "numero": "7",
+      "complemento": "",
+      "bairro": "goiana",
+      "endereco": "rua nova numero 7, 7 - goiana, Goiana/PE"
+    }
+  },
+  {
     "id": 1780935725316,
     "ts": "2026-06-08T16:22:05.316Z",
     "ip": "189.6.14.237",
