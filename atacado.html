@@ -877,6 +877,7 @@ function showMain(){
 function buildBrandPills(){
   const cont = document.getElementById('brand-pills');
   const tirzCustom = currentUser ? currentUser.tirz_custom : false;
+  const pepCustom = currentUser ? currentUser.pep_custom : false;
   let html = `<button class="pill all active" onclick="setBrand('all',this)">Todas</button>`;
   for(const [key, brand] of Object.entries(PRODUCTS)){
     if(key === 'tirzepatidas' && tirzCustom) continue;
@@ -884,7 +885,6 @@ function buildBrandPills(){
     if(key === 'tirzepatidas_albuquerque' && tirzCustom !== 'albuquerque') continue;
     if(key === 'tirzepatidas_bruna' && tirzCustom !== 'bruna') continue;
     if(key === 'peptideos_bruna' && pepCustom !== 'bruna') continue;
-    const pepCustom = currentUser ? currentUser.pep_custom : false;
     if(key === 'peptideos' && pepCustom) continue;
     if(key === 'tirzepatidas' && tirzCustom === 'bruna') continue;
     if(key === 'peptideos_danielle' && pepCustom !== 'danielle') continue;
