@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora | Power PY</title>
+<meta name="description" content="Calculadora Power PY: reconstituição de peptídeos (UI na seringa) e cálculo de ampolas por ciclo. Ferramenta educativa.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;--fg:#fff;--muted:rgba(255,255,255,0.55);--red:#e53e3e;
+  --line:rgba(255,255,255,0.08);--card:rgba(255,255,255,0.02);
+  --amber:#f59e0b;--teal:#14b8a6;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;-webkit-font-smoothing:antialiased;}
+body{min-height:100vh;line-height:1.55;}
+
+.top{border-bottom:1px solid var(--line);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10;}
+.top a.brand{color:var(--fg);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;}
+.top a.back{color:var(--muted);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;border:1px solid var(--line);border-radius:4px;transition:.2s;}
+.top a.back:hover{color:var(--red);border-color:var(--red);}
+
+.wrap{max-width:1000px;margin:0 auto;padding:48px 24px 96px;}
+.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;font-weight:700;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,56px);letter-spacing:4px;line-height:1;margin-bottom:14px;}
+.intro{color:rgba(255,255,255,0.72);font-size:14px;max-width:640px;margin-bottom:32px;}
+
+/* Warning */
+.warning{background:linear-gradient(90deg,rgba(229,62,62,0.10),rgba(229,62,62,0.02));border:1px solid rgba(229,62,62,0.28);border-left:3px solid var(--red);padding:16px 20px;margin-bottom:32px;border-radius:4px;font-size:12.5px;color:rgba(255,255,255,0.85);}
+.warning strong{color:var(--red);}
+
+/* Tabs */
+.tabs{display:flex;gap:8px;margin-bottom:24px;border-bottom:1px solid var(--line);padding-bottom:0;}
+.tab{background:transparent;color:var(--muted);border:none;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:14px 20px;cursor:pointer;transition:.2s;position:relative;border-radius:0;font-weight:700;}
+.tab:hover{color:var(--fg);}
+.tab.active{color:var(--fg);}
+.tab.active::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--red);}
+
+.panel{display:none;animation:fadeIn .25s ease;}
+.panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+/* Cards */
+.section-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:24px 26px;margin-bottom:20px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.section-title .ico{color:var(--red);font-size:14px;}
+
+/* Form grid */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;}
+@media (max-width:640px){.grid{grid-template-columns:1fr;}}
+.field label{display:block;color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:700;}
+.field .hint{color:var(--muted);font-size:10px;margin-top:4px;letter-spacing:0.5px;font-style:italic;}
+.input, select{
+  width:100%;background:rgba(0,0,0,0.5);color:var(--fg);border:1px solid var(--line);border-radius:4px;
+  padding:12px 14px;font-family:'Space Mono',monospace;font-size:14px;transition:.15s;
+  -webkit-appearance:none;-moz-appearance:none;appearance:none;
+}
+select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23e53e3e' d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+.input:focus,select:focus{outline:none;border-color:var(--red);background:rgba(229,62,62,0.05);}
+.dose-combo{display:grid;grid-template-columns:1fr 90px;gap:10px;}
+
+/* Results */
+.results{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media (max-width:640px){.results{grid-template-columns:1fr;}}
+.result-card{background:rgba(0,0,0,0.35);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:4px;padding:18px 20px;}
+.result-card .rlabel{color:var(--muted);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px;font-weight:700;}
+.result-card .rlabel .dot{color:var(--red);}
+.result-card .rvalue{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;line-height:1.1;margin-bottom:4px;}
+.result-card .rsub{color:var(--muted);font-size:11px;letter-spacing:1px;}
+.result-card.warn{border-left-color:var(--amber);}
+.result-card.warn .rlabel .dot{color:var(--amber);}
+
+/* Syringe visualization */
+.syringe-wrap{background:rgba(0,0,0,0.35);border:1px solid var(--line);border-radius:4px;padding:24px 20px;margin-top:20px;}
+.syringe-title{color:var(--muted);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;font-weight:700;}
+.syringe{position:relative;height:56px;margin:0 20px;}
+.barrel{position:absolute;left:0;right:40px;top:14px;height:28px;background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:2px 4px 4px 2px;overflow:hidden;}
+.fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,rgba(229,62,62,0.7),rgba(229,62,62,0.35));border-right:2px solid var(--red);transition:.35s ease;}
+.needle{position:absolute;right:0;top:24px;width:40px;height:8px;background:linear-gradient(90deg,#888,#ddd);border-radius:2px 8px 8px 2px;}
+.plunger{position:absolute;left:-12px;top:8px;width:14px;height:40px;background:linear-gradient(90deg,#666,#aaa);border-radius:2px 6px 6px 2px;}
+.ticks{position:absolute;left:0;right:40px;top:44px;height:14px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;}
+.tick{width:1px;height:10px;background:var(--muted);}
+.tick.big{height:14px;background:rgba(255,255,255,0.5);}
+.scale{position:absolute;left:0;right:40px;top:58px;height:14px;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);pointer-events:none;padding:0 2px;}
+
+/* Info footer */
+.footnote{color:var(--muted);font-size:11.5px;line-height:1.5;margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);}
+.footnote strong{color:rgba(255,255,255,0.85);}
+
+.foot{border-top:1px solid var(--line);padding:32px 24px;text-align:center;color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;}
+.foot a{color:var(--muted);text-decoration:none;margin:0 8px;}
+.foot a:hover{color:var(--red);}
+
+@media (max-width:640px){
+  .wrap{padding:32px 16px 72px;}
+  .section-card{padding:20px 18px;}
+  .tab{padding:12px 14px;font-size:11.5px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a href="/" class="brand">POWER PY</a>
+  <a href="/" class="back">← Voltar ao site</a>
+</div>
+
+<div class="wrap">
+  <div class="eyebrow">Ferramenta</div>
+  <h1>Calculadora</h1>
+  <p class="intro">Duas ferramentas: reconstituição de peptídeos (quantas UI puxar na seringa de insulina) e planejamento de ciclo (quantas ampolas você vai precisar).</p>
+
+  <div class="warning">
+    <strong>⚠ Uso educativo.</strong> Esta calculadora só faz a matemática — não substitui orientação médica, prescrição ou acompanhamento profissional. Confirme sempre com quem entende antes de qualquer aplicação.
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-tab="pep" role="tab">Peptídeos</button>
+    <button class="tab" data-tab="ciclo" role="tab">Ciclo · Ampolas</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PEPTIDEOS
+       ═══════════════════════════════════════════════════════ -->
+  <div class="panel active" id="pan-pep">
+    <div class="section-card">
+      <div class="section-title"><span class="ico">▲</span> Dados de Entrada</div>
+      <div class="grid">
+        <div class="field">
+          <label for="pep-mg">Dose total do Peptídeo (mg)</label>
+          <input type="number" id="pep-mg" class="input" value="5" min="0.01" step="0.01">
+          <div class="hint">Quantidade que veio no frasco (ex: 5, 10, 60)</div>
+        </div>
+        <div class="field">
+          <label for="pep-ml">Total de Água Bacteriostática (ml)</label>
+          <input type="number" id="pep-ml" class="input" value="2" min="0.1" step="0.1">
+          <div class="hint">Quanto de água você vai injetar no frasco</div>
+        </div>
+        <div class="field">
+          <label for="pep-dose">Dose Desejada por Aplicação</label>
+          <div class="dose-combo">
+            <input type="number" id="pep-dose" class="input" value="250" min="1" step="1">
+            <select id="pep-unit">
+              <option value="mcg" selected>mcg</option>
+              <option value="mg">mg</option>
+            </select>
+          </div>
+          <div class="hint">Quanto de peptídeo por aplicação</div>
+        </div>
+        <div class="field">
+          <label for="pep-syr">Tamanho da Seringa</label>
+          <select id="pep-syr" class="input">
+            <option value="100" selected>100 UI (1.0 mL)</option>
+            <option value="50">50 UI (0.5 mL)</option>
+            <option value="30">30 UI (0.3 mL)</option>
+          </select>
+          <div class="hint">Seringa de insulina</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title"><span class="ico">◎</span> Resultados</div>
+      <div class="results">
+        <div class="result-card">
+          <div class="rlabel"><span class="dot">◆</span> Concentração</div>
+          <div class="rvalue" id="pep-r-conc">2.50 mg/mL</div>
+          <div class="rsub" id="pep-r-conc-sub">2500 mcg/mL</div>
+        </div>
+        <div class="result-card">
+          <div class="rlabel"><span class="dot">◆</span> Volume por Dose</div>
+          <div class="rvalue" id="pep-r-vol">0.100 mL</div>
+          <div class="rsub" id="pep-r-vol-sub">Para 250 mcg</div>
+        </div>
+        <div class="result-card" id="pep-card-ui">
+          <div class="rlabel"><span class="dot">◆</span> Unidades na Seringa</div>
+          <div class="rvalue" id="pep-r-ui">10.0 UI</div>
+          <div class="rsub" id="pep-r-ui-sub">Marcar na seringa de 100 UI</div>
+        </div>
+        <div class="result-card">
+          <div class="rlabel"><span class="dot">◆</span> Doses por Frasco</div>
+          <div class="rvalue" id="pep-r-doses">20 doses</div>
+          <div class="rsub" id="pep-r-doses-sub">Aplicações de 250 mcg</div>
+        </div>
+      </div>
+
+      <div class="syringe-wrap">
+        <div class="syringe-title">▷ Visualização da Seringa</div>
+        <div class="syringe">
+          <div class="plunger"></div>
+          <div class="barrel"><div class="fill" id="pep-fill" style="width:10%"></div></div>
+          <div class="needle"></div>
+          <div class="ticks" id="pep-ticks"></div>
+          <div class="scale" id="pep-scale"></div>
+        </div>
+      </div>
+
+      <div class="footnote">
+        <strong>Como ler:</strong> a marca vermelha mostra onde parar o êmbolo da seringa. As "UI" aqui são as unidades marcadas no corpo da seringa de insulina — não confundir com unidades internacionais de medicamento. Use sempre água bacteriostática, nunca água comum.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CICLO · AMPOLAS
+       ═══════════════════════════════════════════════════════ -->
+  <div class="panel" id="pan-ciclo">
+    <div class="section-card">
+      <div class="section-title"><span class="ico">▲</span> Dados de Entrada</div>
+      <div class="grid">
+        <div class="field">
+          <label for="c-conc">Concentração do Composto (mg/ml)</label>
+          <input type="number" id="c-conc" class="input" value="250" min="1" step="1">
+          <div class="hint">Ex: Testo Enantato 250mg/ml → digite 250</div>
+        </div>
+        <div class="field">
+          <label for="c-vol">Volume da Ampola/Frasco (ml)</label>
+          <input type="number" id="c-vol" class="input" value="10" min="0.1" step="0.1">
+          <div class="hint">Ampola 1ml, frasco 10ml, etc.</div>
+        </div>
+        <div class="field">
+          <label for="c-dose">Dose Semanal Desejada (mg)</label>
+          <input type="number" id="c-dose" class="input" value="500" min="1" step="1">
+          <div class="hint">Total do composto por semana</div>
+        </div>
+        <div class="field">
+          <label for="c-weeks">Duração do Ciclo (semanas)</label>
+          <input type="number" id="c-weeks" class="input" value="10" min="1" max="52" step="1">
+          <div class="hint">Quantas semanas de uso</div>
+        </div>
+        <div class="field">
+          <label for="c-freq">Aplicações por Semana</label>
+          <select id="c-freq" class="input">
+            <option value="1">1× por semana</option>
+            <option value="2" selected>2× por semana</option>
+            <option value="3">3× por semana (dia sim, dia não)</option>
+            <option value="7">Diário (EOD é 3×; ED é 7×)</option>
+          </select>
+          <div class="hint">Divisão da dose semanal</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title"><span class="ico">◎</span> Resultados</div>
+      <div class="results">
+        <div class="result-card">
+          <div class="rlabel"><span class="dot">◆</span> Por Aplicação</div>
+          <div class="rvalue" id="c-r-app">1.00 mL</div>
+          <div class="rsub" id="c-r-app-sub">250 mg por aplicação</div>
+        </div>
+        <div class="result-card">
+          <div class="rlabel"><span class="dot">◆</span> Por Semana</div>
+          <div class="rvalue" id="c-r-sem">2.00 mL</div>
+          <div class="rsub" id="c-r-sem-sub">500 mg / semana</div>
+        </div>
+        <div class="result-card">
+          <div class="rlabel"><span class="dot">◆</span> Total do Ciclo</div>
+          <div class="rvalue" id="c-r-tot">20.00 mL</div>
+          <div class="rsub" id="c-r-tot-sub">5000 mg em 10 semanas</div>
+        </div>
+        <div class="result-card warn">
+          <div class="rlabel"><span class="dot">◆</span> Ampolas/Frascos</div>
+          <div class="rvalue" id="c-r-amp">2 frascos</div>
+          <div class="rsub" id="c-r-amp-sub">de 10 mL cada</div>
+        </div>
+      </div>
+      <div class="footnote">
+        <strong>Como funciona:</strong> a calculadora divide a dose semanal pelo número de aplicações, converte pra ml usando a concentração e projeta o total do ciclo. O número de ampolas é arredondado pra cima — comprar exato pode deixar você na mão se sobrar dose numa semana.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot">
+  © 2026 Power PY · Ciudad del Este, Paraguai
+  &nbsp;·&nbsp;
+  <a href="/">Início</a> &nbsp;·&nbsp;
+  <a href="/conteudo-tecnico.html">Conteúdo técnico</a> &nbsp;·&nbsp;
+  <a href="/devolucao.html">Devolução</a> &nbsp;·&nbsp;
+  <a href="/privacidade.html">Privacidade</a>
+</div>
+
+<script>
+// ── Tab switching ─────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('pan-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ── Helpers ───────────────────────────────────────────────────
+function fmt(n, d) { return n.toFixed(d).replace('.', ','); }
+function fmtDec(n, d) { return n.toFixed(d); } // for mL, UI (dot format like Shandong)
+
+// ── PEPTIDEOS ─────────────────────────────────────────────────
+function calcPep() {
+  const mg = parseFloat(document.getElementById('pep-mg').value) || 0;
+  const ml = parseFloat(document.getElementById('pep-ml').value) || 0;
+  const doseInput = parseFloat(document.getElementById('pep-dose').value) || 0;
+  const unit = document.getElementById('pep-unit').value;
+  const syrUI = parseInt(document.getElementById('pep-syr').value);
+
+  if (mg <= 0 || ml <= 0 || doseInput <= 0) return;
+
+  // Convert desired dose to mg
+  const doseMg = (unit === 'mcg') ? doseInput / 1000 : doseInput;
+  const doseMcg = doseMg * 1000;
+
+  // Concentration
+  const concMgMl = mg / ml;
+  const concMcgMl = concMgMl * 1000;
+
+  // Volume per dose (mL)
+  const volMl = doseMg / concMgMl;
+
+  // UI: syringe 100 UI = 1 mL, so UI = mL * 100
+  const uiVal = volMl * 100;
+
+  // Doses per vial
+  const totalDoses = Math.floor(mg / doseMg);
+
+  // Update result cards
+  document.getElementById('pep-r-conc').textContent = fmtDec(concMgMl, 2) + ' mg/mL';
+  document.getElementById('pep-r-conc-sub').textContent = '(' + Math.round(concMcgMl) + ' mcg/mL)';
+  document.getElementById('pep-r-vol').textContent = fmtDec(volMl, 3) + ' mL';
+  document.getElementById('pep-r-vol-sub').textContent = 'Para ' + (unit === 'mcg' ? Math.round(doseMcg) + ' mcg' : fmtDec(doseMg, 2) + ' mg');
+  document.getElementById('pep-r-ui').textContent = fmtDec(uiVal, 1) + ' UI';
+  document.getElementById('pep-r-ui-sub').textContent = 'Marcar na seringa de ' + syrUI + ' UI';
+  document.getElementById('pep-r-doses').textContent = totalDoses + ' dose' + (totalDoses !== 1 ? 's' : '');
+  document.getElementById('pep-r-doses-sub').textContent = 'Aplicações de ' + (unit === 'mcg' ? Math.round(doseMcg) + ' mcg' : fmtDec(doseMg, 2) + ' mg');
+
+  // Warning if dose exceeds syringe capacity
+  const card = document.getElementById('pep-card-ui');
+  if (uiVal > syrUI) {
+    card.classList.add('warn');
+    document.getElementById('pep-r-ui-sub').textContent = '⚠ Excede capacidade de ' + syrUI + ' UI';
+  } else {
+    card.classList.remove('warn');
+  }
+
+  // Syringe visualization
+  const pct = Math.min(100, (uiVal / syrUI) * 100);
+  document.getElementById('pep-fill').style.width = pct + '%';
+  buildScale(syrUI);
+}
+
+function buildScale(maxUI) {
+  const ticks = document.getElementById('pep-ticks');
+  const scale = document.getElementById('pep-scale');
+  ticks.innerHTML = '';
+  scale.innerHTML = '';
+  const steps = 10;
+  for (let i = 0; i <= steps; i++) {
+    const t = document.createElement('div');
+    t.className = 'tick' + (i % 2 === 0 ? ' big' : '');
+    ticks.appendChild(t);
+    if (i % 2 === 0) {
+      const s = document.createElement('div');
+      s.textContent = Math.round((maxUI / steps) * i);
+      s.style.width = '20px';
+      s.style.textAlign = 'center';
+      s.style.marginLeft = i === 0 ? '-8px' : (i === steps ? '8px' : '0');
+      scale.appendChild(s);
+    } else {
+      const s = document.createElement('div');
+      scale.appendChild(s);
+    }
+  }
+}
+
+['pep-mg','pep-ml','pep-dose','pep-unit','pep-syr'].forEach(id => {
+  document.getElementById(id).addEventListener('input', calcPep);
+  document.getElementById(id).addEventListener('change', calcPep);
+});
+
+// ── CICLO ─────────────────────────────────────────────────────
+function calcCiclo() {
+  const conc = parseFloat(document.getElementById('c-conc').value) || 0;
+  const vol = parseFloat(document.getElementById('c-vol').value) || 0;
+  const doseSem = parseFloat(document.getElementById('c-dose').value) || 0;
+  const weeks = parseInt(document.getElementById('c-weeks').value) || 0;
+  const freq = parseInt(document.getElementById('c-freq').value) || 1;
+
+  if (conc <= 0 || vol <= 0 || doseSem <= 0 || weeks <= 0) return;
+
+  const doseApp = doseSem / freq;         // mg por aplicação
+  const mlApp = doseApp / conc;           // ml por aplicação
+  const mlSem = mlApp * freq;             // ml por semana
+  const mlTot = mlSem * weeks;            // ml total do ciclo
+  const mgTot = doseSem * weeks;          // mg total do ciclo
+  const ampolas = Math.ceil(mlTot / vol); // frascos/ampolas (arred pra cima)
+
+  document.getElementById('c-r-app').textContent = fmtDec(mlApp, 2) + ' mL';
+  document.getElementById('c-r-app-sub').textContent = fmtDec(doseApp, 1) + ' mg por aplicação';
+  document.getElementById('c-r-sem').textContent = fmtDec(mlSem, 2) + ' mL';
+  document.getElementById('c-r-sem-sub').textContent = doseSem + ' mg / semana';
+  document.getElementById('c-r-tot').textContent = fmtDec(mlTot, 2) + ' mL';
+  document.getElementById('c-r-tot-sub').textContent = mgTot + ' mg em ' + weeks + ' semana' + (weeks !== 1 ? 's' : '');
+  const unidade = (vol <= 2) ? 'ampola' : 'frasco';
+  document.getElementById('c-r-amp').textContent = ampolas + ' ' + unidade + (ampolas !== 1 ? 's' : '');
+  document.getElementById('c-r-amp-sub').textContent = 'de ' + fmtDec(vol, 1) + ' mL cada';
+}
+
+['c-conc','c-vol','c-dose','c-weeks','c-freq'].forEach(id => {
+  document.getElementById(id).addEventListener('input', calcCiclo);
+  document.getElementById(id).addEventListener('change', calcCiclo);
+});
+
+// Initial calc
+calcPep();
+calcCiclo();
+</script>
+
+</body>
+</html>
