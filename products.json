@@ -70,7 +70,7 @@
       "name": "Retatrutide M Synedica 40mg",
       "apresent": "40mg",
       "atacado": 0,
-      "varejo": 283.02,
+      "varejo": 1500,
       "confirm": false,
       "img": "https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/tirzepatidas_8.webp"
     },
@@ -78,7 +78,7 @@
       "name": "Retatrutide ZPHC 60mg",
       "apresent": "60mg",
       "atacado": 0,
-      "varejo": 471.7,
+      "varejo": 2600,
       "confirm": false,
       "img": "https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/tirzepatidas_9.png"
     },
@@ -86,7 +86,7 @@
       "name": "Retatrutide ZPHC 120mg",
       "apresent": "120mg",
       "atacado": 0,
-      "varejo": 647.17,
+      "varejo": 3400,
       "confirm": false,
       "img": "https://raw.githubusercontent.com/pedroctavio24-sudo/powerpy-site/main/images/tirzepatidas_10.jpg"
     },
@@ -94,7 +94,7 @@
       "name": "Retatrutide Synedica 40mg",
       "apresent": "caneta",
       "atacado": 0,
-      "varejo": 95.0,
+      "varejo": 1500,
       "confirm": false,
       "img": "img/retatrutide/synedica-40.jpg"
     },
@@ -102,7 +102,7 @@
       "name": "Retatrutide Thera 40mg",
       "apresent": "caneta",
       "atacado": 0,
-      "varejo": 95.0,
+      "varejo": 1500,
       "confirm": false,
       "img": "img/retatrutide/thera-40.jpg"
     },
@@ -110,7 +110,7 @@
       "name": "Retatrutide iPeptides 120mg",
       "apresent": "1 vial liofilizado",
       "atacado": 0,
-      "varejo": 87.0,
+      "varejo": 1400,
       "confirm": false,
       "img": "img/retatrutide/ipeptides-120.jpeg"
     },
@@ -118,7 +118,7 @@
       "name": "Retatrutide USA Peptides 40mg",
       "apresent": "1 vial liofilizado",
       "atacado": 0,
-      "varejo": 95.0,
+      "varejo": 1400,
       "confirm": false,
       "img": "img/retatrutide/usa-peptides-40.jpeg"
     },
@@ -126,7 +126,7 @@
       "name": "Retatrutide Oxygen 80mg",
       "apresent": "1 vial diluído",
       "atacado": 0,
-      "varejo": 98.0,
+      "varejo": 1600,
       "confirm": false,
       "img": "img/retatrutide/oxygen-80.png"
     },
@@ -134,7 +134,7 @@
       "name": "Retatrutide Oxygen 40mg",
       "apresent": "1 vial diluído",
       "atacado": 0,
-      "varejo": 85.0,
+      "varejo": 1400,
       "confirm": false,
       "img": "img/retatrutide/oxygen-40.png"
     },
@@ -142,7 +142,7 @@
       "name": "Retatrutide ZPHC 60mg Caneta",
       "apresent": "caneta",
       "atacado": 0,
-      "varejo": 210.0,
+      "varejo": 2600,
       "confirm": false,
       "img": "img/retatrutide/zphc-60-caneta.jpg"
     },
@@ -150,7 +150,7 @@
       "name": "Retatrutide ZPHC 60mg Viais",
       "apresent": "5 viais 12mg liofilizados",
       "atacado": 0,
-      "varejo": 265.0,
+      "varejo": 2400,
       "confirm": false,
       "img": "img/retatrutide/zphc-60-viais.png"
     },
@@ -158,7 +158,7 @@
       "name": "Retatrutide Veltrane 90mg",
       "apresent": "1 ampola diluída",
       "atacado": 0,
-      "varejo": 95.0,
+      "varejo": 1200,
       "confirm": false,
       "img": "img/retatrutide/veltrane-90.jpeg"
     },
@@ -166,7 +166,7 @@
       "name": "Retatrutide Veltrane 120mg",
       "apresent": "1 vial diluído",
       "atacado": 0,
-      "varejo": 98.0,
+      "varejo": 1400,
       "confirm": false,
       "img": "img/retatrutide/veltrane-120.png"
     },
@@ -174,7 +174,7 @@
       "name": "Retatrutide TNL 48mg Caneta",
       "apresent": "caneta",
       "atacado": 0,
-      "varejo": 90.0,
+      "varejo": 1400,
       "confirm": false,
       "img": "img/retatrutide/tnl-48-caneta.webp"
     },
@@ -182,7 +182,7 @@
       "name": "Retatrutide TNL 48mg Viais",
       "apresent": "4 viais 12mg diluídos",
       "atacado": 0,
-      "varejo": 80.0,
+      "varejo": 1500,
       "confirm": false,
       "img": "img/retatrutide/tnl-48-viais.png"
     },
@@ -190,7 +190,7 @@
       "name": "Retatrutide Biogenesis 60mg",
       "apresent": "1 vial diluído",
       "atacado": 0,
-      "varejo": 70.0,
+      "varejo": 1100,
       "confirm": false,
       "img": "img/retatrutide/biogenesis-60.png"
     },
@@ -198,7 +198,7 @@
       "name": "Retatrutide ZPHC 120mg 5 Ampolas",
       "apresent": "5 ampolas com 24mg cada",
       "atacado": 0,
-      "varejo": 300.0,
+      "varejo": 3400,
       "confirm": false,
       "img": "img/retatrutide/zphc-60-viais.png"
     },
@@ -206,7 +206,7 @@
       "name": "Retatrutide ZPHC 120mg 2 Viais",
       "apresent": "2 viais de 60mg diluídos",
       "atacado": 0,
-      "varejo": 290.0,
+      "varejo": 3200,
       "confirm": false,
       "img": "img/retatrutide/zphc-120-viais.png"
     }
