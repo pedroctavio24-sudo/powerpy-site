@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade | Power PY</title>
+<meta name="description" content="Política de Privacidade da Power PY — como coletamos, usamos e protegemos seus dados pessoais. Conformidade LGPD (Brasil) e LDPP (Paraguai).">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;
+  --fg:#fff;
+  --muted:rgba(255,255,255,0.55);
+  --red:#e53e3e;
+  --line:rgba(255,255,255,0.08);
+  --card:rgba(255,255,255,0.02);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;-webkit-font-smoothing:antialiased;}
+body{min-height:100vh;line-height:1.65;}
+
+/* Top bar */
+.top{
+  border-bottom:1px solid var(--line);
+  padding:18px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.top a.brand{
+  color:var(--fg);
+  text-decoration:none;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;
+  letter-spacing:3px;
+}
+.top a.back{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:8px 14px;
+  border:1px solid var(--line);
+  border-radius:4px;
+  transition:.2s;
+}
+.top a.back:hover{color:var(--red);border-color:var(--red);}
+
+/* Content */
+.wrap{max-width:820px;margin:0 auto;padding:64px 24px 96px;}
+.eyebrow{
+  color:var(--red);
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  font-weight:700;
+}
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(38px,6vw,64px);
+  letter-spacing:4px;
+  line-height:1;
+  margin-bottom:22px;
+}
+.meta{
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:1px;
+  margin-bottom:48px;
+  padding-bottom:32px;
+  border-bottom:1px solid var(--line);
+}
+.meta strong{color:var(--fg);}
+
+h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;
+  letter-spacing:3px;
+  margin-top:48px;
+  margin-bottom:16px;
+  color:var(--fg);
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+}
+h2 .num{
+  color:var(--red);
+  font-family:'Space Mono',monospace;
+  font-size:14px;
+  letter-spacing:2px;
+}
+h3{
+  font-size:14px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-top:24px;
+  margin-bottom:10px;
+  font-weight:700;
+}
+p{
+  color:rgba(255,255,255,0.82);
+  font-size:14px;
+  margin-bottom:14px;
+}
+ul{
+  list-style:none;
+  margin-bottom:14px;
+}
+ul li{
+  color:rgba(255,255,255,0.82);
+  font-size:14px;
+  padding-left:22px;
+  position:relative;
+  margin-bottom:8px;
+}
+ul li::before{
+  content:'→';
+  color:var(--red);
+  position:absolute;
+  left:0;
+  font-weight:700;
+}
+strong{color:var(--fg);}
+a{color:var(--red);text-decoration:none;border-bottom:1px solid transparent;transition:.15s;}
+a:hover{border-bottom-color:var(--red);}
+
+.callout{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-left:3px solid var(--red);
+  padding:20px 22px;
+  margin:24px 0;
+  border-radius:4px;
+}
+.callout p:last-child{margin-bottom:0;}
+.callout .label{
+  color:var(--red);
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.contact-box{
+  background:var(--card);
+  border:1px solid var(--line);
+  padding:24px;
+  border-radius:4px;
+  margin-top:16px;
+}
+.contact-box p{margin-bottom:8px;}
+.contact-box p:last-child{margin-bottom:0;}
+
+/* Footer */
+.foot{
+  border-top:1px solid var(--line);
+  padding:32px 24px;
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.foot a{color:var(--muted);border-bottom:none;margin:0 8px;}
+.foot a:hover{color:var(--red);}
+
+@media (max-width:640px){
+  .wrap{padding:40px 20px 72px;}
+  h2{font-size:20px;}
+  .top{padding:14px 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a href="/" class="brand">POWER PY</a>
+  <a href="/" class="back">← Voltar ao site</a>
+</div>
+
+<div class="wrap">
+  <div class="eyebrow">Documento Legal</div>
+  <h1>Política de Privacidade</h1>
+  <div class="meta">
+    <strong>Última atualização:</strong> 17 de julho de 2026 &nbsp;·&nbsp;
+    <strong>Aplicável a:</strong> Brasil (LGPD) e Paraguai (LDPP)
+  </div>
+
+  <p>A <strong>Power PY</strong> ("nós", "nosso") é uma distribuidora de suplementos e produtos farmacêuticos sediada em <strong>Ciudad del Este, Paraguai</strong>, com atendimento e entrega para clientes no Brasil. Esta Política de Privacidade explica de forma clara <strong>quais dados coletamos, para que usamos e quais são os seus direitos</strong> quando você navega em nosso site, faz um pedido, se cadastra como cliente atacado ou entra em contato conosco.</p>
+
+  <div class="callout">
+    <div class="label">Resumo em uma frase</div>
+    <p>Coletamos o mínimo de informação necessária pra atender seu pedido e nos comunicar com você — nunca vendemos seus dados a terceiros e você pode pedir a exclusão a qualquer momento pelo e-mail <a href="mailto:pypower43@gmail.com">pypower43@gmail.com</a>.</p>
+  </div>
+
+  <h2><span class="num">01</span> Quem é o responsável pelos seus dados</h2>
+  <p>A Power PY é a <strong>controladora</strong> dos dados pessoais coletados através deste site, sob o regime da:</p>
+  <ul>
+    <li><strong>Brasil:</strong> Lei nº 13.709/2018 — Lei Geral de Proteção de Dados (LGPD)</li>
+    <li><strong>Paraguai:</strong> Ley Nº 6534/2020 — Ley de Protección de Datos Personales (LDPP)</li>
+  </ul>
+  <p>Para qualquer solicitação relacionada a esta política, use o canal indicado ao final deste documento.</p>
+
+  <h2><span class="num">02</span> Quais dados coletamos</h2>
+
+  <h3>Dados fornecidos por você</h3>
+  <ul>
+    <li><strong>Cadastro e contato:</strong> nome, WhatsApp, e-mail</li>
+    <li><strong>Endereço de entrega:</strong> CEP, rua, número, complemento, cidade, estado</li>
+    <li><strong>Pedidos:</strong> produtos escolhidos, quantidade, forma de pagamento</li>
+    <li><strong>Pagamento via Pix:</strong> processado por parceiro autorizado (Mercado Pago), que recebe apenas o valor e o identificador do pagamento — não temos acesso ao número da sua chave Pix ou dados bancários</li>
+    <li><strong>Área do cliente atacado:</strong> nome de usuário e senha (armazenada de forma criptografada, com algoritmo SHA-256)</li>
+  </ul>
+
+  <h3>Dados coletados automaticamente</h3>
+  <ul>
+    <li>Endereço IP e informações técnicas do navegador (para segurança e prevenção de fraudes)</li>
+    <li>Registro básico de páginas visitadas (para melhorar a experiência)</li>
+    <li>Dados de sessão armazenados localmente no seu dispositivo (carrinho de compras, preferências)</li>
+  </ul>
+
+  <p><strong>Não coletamos</strong> dados sensíveis como saúde, biometria, orientação sexual ou dados de menores de idade. Nossos produtos são vendidos exclusivamente para maiores de 18 anos.</p>
+
+  <h2><span class="num">03</span> Para que usamos seus dados</h2>
+  <ul>
+    <li><strong>Processar e entregar seu pedido:</strong> comunicar com você, emitir nota, calcular frete e garantir a entrega</li>
+    <li><strong>Atendimento:</strong> responder dúvidas via WhatsApp, e-mail ou Instagram</li>
+    <li><strong>Autenticar clientes atacado:</strong> permitir acesso à área com preços personalizados</li>
+    <li><strong>Prevenir fraudes:</strong> proteger a operação contra pedidos indevidos e ataques</li>
+    <li><strong>Cumprir obrigações legais:</strong> guardar registros conforme exigido pela legislação fiscal e sanitária dos dois países</li>
+  </ul>
+
+  <div class="callout">
+    <div class="label">O que não fazemos</div>
+    <p>Não usamos seus dados para publicidade dirigida por terceiros, não vendemos sua lista de contato, não compartilhamos com corretoras de dados e não fazemos perfilamento comportamental para venda.</p>
+  </div>
+
+  <h2><span class="num">04</span> Com quem compartilhamos</h2>
+  <p>Compartilhamos dados <strong>apenas com quem é essencial pro pedido acontecer</strong>:</p>
+  <ul>
+    <li><strong>Mercado Pago</strong> — processamento de pagamento Pix</li>
+    <li><strong>Transportadoras e Correios</strong> — apenas nome, endereço e telefone, para a entrega</li>
+    <li><strong>Provedores de infraestrutura</strong> (hospedagem Netlify, banco de dados) — sob contrato de confidencialidade</li>
+    <li><strong>Autoridades competentes</strong> — apenas mediante ordem judicial ou requisição legal formal</li>
+  </ul>
+  <p>Nenhum desses parceiros recebe mais dados do que o estritamente necessário para executar sua função.</p>
+
+  <h2><span class="num">05</span> Por quanto tempo guardamos</h2>
+  <ul>
+    <li><strong>Dados de pedidos:</strong> pelo prazo exigido pela legislação fiscal (5 anos, contados do encerramento do exercício)</li>
+    <li><strong>Cadastro de cliente:</strong> enquanto sua conta estiver ativa; após 24 meses sem atividade, os dados são anonimizados ou apagados</li>
+    <li><strong>Comunicações via WhatsApp/e-mail:</strong> pelo tempo necessário pra concluir o atendimento e por prazo prudencial adicional</li>
+    <li><strong>Registros técnicos (logs):</strong> até 6 meses, para fins de segurança</li>
+  </ul>
+
+  <h2><span class="num">06</span> Seus direitos</h2>
+  <p>Você tem direito de, a qualquer momento e gratuitamente, exercer os seguintes direitos sobre seus dados:</p>
+  <ul>
+    <li><strong>Confirmação e acesso:</strong> saber se tratamos seus dados e obter uma cópia deles</li>
+    <li><strong>Correção:</strong> pedir que corrijamos dados incompletos ou desatualizados</li>
+    <li><strong>Anonimização, bloqueio ou eliminação:</strong> pedir que apaguemos dados desnecessários ou tratados em desconformidade</li>
+    <li><strong>Portabilidade:</strong> receber seus dados em formato estruturado</li>
+    <li><strong>Revogação do consentimento:</strong> retirar autorização que você havia dado</li>
+    <li><strong>Oposição:</strong> se opor a tratamentos feitos com base em outra hipótese legal</li>
+    <li><strong>Reclamação:</strong> apresentar reclamação à autoridade competente (ANPD no Brasil, MITIC no Paraguai)</li>
+  </ul>
+  <p>Para exercer qualquer desses direitos, é só nos enviar um e-mail para <a href="mailto:pypower43@gmail.com">pypower43@gmail.com</a> com a solicitação. Vamos responder em até 15 dias.</p>
+
+  <h2><span class="num">07</span> Cookies e armazenamento local</h2>
+  <p>Nosso site usa <strong>armazenamento local</strong> (localStorage) do seu navegador para funcionalidades essenciais — como manter seu carrinho de compras entre páginas e lembrar suas preferências. Não usamos cookies de rastreamento publicitário nem de terceiros. Você pode limpar esse armazenamento a qualquer momento nas configurações do seu navegador.</p>
+
+  <h2><span class="num">08</span> Segurança da informação</h2>
+  <p>Aplicamos medidas técnicas e organizacionais para proteger seus dados:</p>
+  <ul>
+    <li>Conexão criptografada (HTTPS) em todas as páginas</li>
+    <li>Senhas armazenadas com criptografia SHA-256 (não guardamos senhas em texto puro)</li>
+    <li>Rate limiting e proteção contra tentativas repetidas de login</li>
+    <li>Acesso administrativo restrito por chaves e tokens rotacionáveis</li>
+    <li>Backup regular e monitoramento de logs</li>
+  </ul>
+  <p>Ainda assim, nenhum sistema é 100% imune a incidentes. Se ocorrer qualquer violação relevante que afete seus dados, iremos comunicá-lo(a) e às autoridades competentes conforme exige a lei.</p>
+
+  <h2><span class="num">09</span> Transferência internacional</h2>
+  <p>Como a Power PY opera do Paraguai atendendo clientes no Brasil, seus dados podem ser tratados nos dois países. Ambas as jurisdições possuem legislação equivalente de proteção de dados. Nossos provedores de hospedagem podem armazenar dados em servidores fora desses países, sempre sob cláusulas contratuais que garantem o mesmo nível de proteção.</p>
+
+  <h2><span class="num">10</span> Menores de idade</h2>
+  <p>Este site e nossos produtos <strong>não são destinados a menores de 18 anos</strong>. Não coletamos conscientemente dados de crianças ou adolescentes. Caso tomemos conhecimento de que um menor forneceu dados, iremos apagá-los imediatamente. Se você é responsável legal e identificou que um menor sob seus cuidados nos enviou dados, entre em contato para que possamos removê-los.</p>
+
+  <h2><span class="num">11</span> Alterações desta política</h2>
+  <p>Podemos atualizar esta política periodicamente para refletir mudanças em nossas práticas ou na legislação. Sempre que houver alteração relevante, atualizaremos a data no topo do documento e, quando cabível, avisaremos você pelos canais habituais. Recomendamos revisar esta página de tempos em tempos.</p>
+
+  <h2><span class="num">12</span> Contato</h2>
+  <p>Se você tem dúvidas, quer exercer seus direitos ou precisa relatar algum incidente, fale conosco:</p>
+  <div class="contact-box">
+    <p><strong>Power PY — Suplementação de Elite</strong></p>
+    <p>E-mail: <a href="mailto:pypower43@gmail.com">pypower43@gmail.com</a></p>
+    <p>Instagram: <a href="https://www.instagram.com/powerpy_suple/" target="_blank">@powerpy_suple</a></p>
+    <p>Endereço: Ciudad del Este, Paraguai</p>
+    <p>Entrega: Brasil</p>
+  </div>
+</div>
+
+<div class="foot">
+  © 2026 Power PY · Ciudad del Este, Paraguai · Suplementação de Elite
+  &nbsp;·&nbsp;
+  <a href="/">Início</a>
+</div>
+
+</body>
+</html>
