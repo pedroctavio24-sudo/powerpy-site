@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conteúdo Técnico | Power PY</title>
+<meta name="description" content="Informações técnicas sobre categorias de produtos Power PY. Conteúdo educativo — não substitui orientação médica ou farmacêutica.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;--fg:#fff;--muted:rgba(255,255,255,0.55);--red:#e53e3e;
+  --line:rgba(255,255,255,0.08);--card:rgba(255,255,255,0.02);
+  --amber:#f59e0b;--teal:#14b8a6;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--fg);font-family:'Space Mono',monospace;-webkit-font-smoothing:antialiased;}
+body{min-height:100vh;line-height:1.65;}
+.top{border-bottom:1px solid var(--line);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10;}
+.top a.brand{color:var(--fg);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;}
+.top a.back{color:var(--muted);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;border:1px solid var(--line);border-radius:4px;transition:.2s;}
+.top a.back:hover{color:var(--red);border-color:var(--red);}
+.wrap{max-width:900px;margin:0 auto;padding:64px 24px 96px;}
+.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;font-weight:700;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,64px);letter-spacing:4px;line-height:1;margin-bottom:22px;}
+.intro{color:rgba(255,255,255,0.82);font-size:15px;margin-bottom:20px;max-width:720px;}
+.meta{color:var(--muted);font-size:12px;letter-spacing:1px;margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid var(--line);}
+
+/* Big warning */
+.warning{
+  background:linear-gradient(90deg,rgba(229,62,62,0.12),rgba(229,62,62,0.03));
+  border:1px solid rgba(229,62,62,0.35);
+  border-left:4px solid var(--red);
+  padding:24px 26px;
+  margin:0 0 48px;
+  border-radius:4px;
+}
+.warning-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--red);margin-bottom:12px;}
+.warning p{color:rgba(255,255,255,0.9);font-size:14px;margin-bottom:8px;}
+.warning p:last-child{margin-bottom:0;}
+
+h2{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;margin-top:56px;margin-bottom:20px;color:var(--fg);display:flex;align-items:baseline;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line);}
+h2 .num{color:var(--red);font-family:'Space Mono',monospace;font-size:14px;letter-spacing:2px;}
+
+.category{
+  background:var(--card);
+  border:1px solid var(--line);
+  padding:22px 24px;
+  margin-bottom:16px;
+  border-radius:4px;
+  border-left:3px solid var(--red);
+}
+.category h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:19px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+  color:var(--fg);
+}
+.category p{color:rgba(255,255,255,0.78);font-size:13.5px;margin-bottom:10px;}
+.category p:last-child{margin-bottom:0;}
+.category .tag{
+  display:inline-block;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding:3px 8px;
+  border:1px solid var(--line);
+  border-radius:3px;
+  margin-right:6px;
+  margin-bottom:8px;
+}
+
+h3.sec{font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-top:32px;margin-bottom:12px;font-weight:700;}
+p{color:rgba(255,255,255,0.82);font-size:14px;margin-bottom:14px;}
+ul{list-style:none;margin-bottom:14px;}
+ul li{color:rgba(255,255,255,0.82);font-size:14px;padding-left:22px;position:relative;margin-bottom:8px;}
+ul li::before{content:'→';color:var(--red);position:absolute;left:0;font-weight:700;}
+strong{color:var(--fg);}
+a{color:var(--red);text-decoration:none;border-bottom:1px solid transparent;transition:.15s;}
+a:hover{border-bottom-color:var(--red);}
+
+.tip-box{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-left:3px solid var(--amber);
+  padding:18px 20px;
+  margin:20px 0;
+  border-radius:4px;
+}
+.tip-box .label{color:var(--amber);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+
+.contact-box{background:var(--card);border:1px solid var(--line);padding:24px;border-radius:4px;margin-top:16px;}
+.contact-box p{margin-bottom:8px;}
+.contact-box p:last-child{margin-bottom:0;}
+
+.foot{border-top:1px solid var(--line);padding:32px 24px;text-align:center;color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;}
+.foot a{color:var(--muted);border-bottom:none;margin:0 8px;}
+.foot a:hover{color:var(--red);}
+@media (max-width:640px){.wrap{padding:40px 20px 72px;}h2{font-size:22px;}.top{padding:14px 18px;}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a href="/" class="brand">POWER PY</a>
+  <a href="/" class="back">← Voltar ao site</a>
+</div>
+
+<div class="wrap">
+  <div class="eyebrow">Central de Informação</div>
+  <h1>Conteúdo Técnico</h1>
+  <p class="intro">Informações gerais sobre as categorias de produtos que trabalhamos, para você conhecer o que está comprando e usar com responsabilidade.</p>
+  <div class="meta"><strong>Atualizado em:</strong> 17 de julho de 2026 · <strong>Público:</strong> maiores de 18 anos</div>
+
+  <div class="warning">
+    <div class="warning-title">⚠ Aviso Importante</div>
+    <p><strong>Este conteúdo é meramente educativo e informativo.</strong> A Power PY comercializa suplementos e produtos farmacêuticos sob legislação paraguaia. As informações desta página não constituem receita, prescrição, indicação médica ou farmacêutica.</p>
+    <p>Antes de iniciar o uso de qualquer produto, <strong>consulte um profissional de saúde habilitado</strong> — médico, endocrinologista ou farmacêutico. Resultados variam conforme dieta, rotina de treino, biotipo e fatores individuais. Uso indevido pode causar efeitos colaterais graves.</p>
+    <p><strong>Produtos vendidos exclusivamente para maiores de 18 anos.</strong></p>
+  </div>
+
+  <h2><span class="num">01</span> Categorias de Produto</h2>
+
+  <div class="category">
+    <h3>Peptídeos</h3>
+    <span class="tag">Pep Gen Labs</span>
+    <p>Sequências curtas de aminoácidos que atuam como sinalizadores no organismo. Cada peptídeo tem função específica — recuperação tecidual (BPC-157, TB-500), liberação de hormônio de crescimento (Sermorelin, Ipamorelin, CJC-1295), pigmentação (Melanotan), função cognitiva (Semax, Selank), entre outros.</p>
+    <p>Costumam vir em frasco liofilizado (pó) e precisam de reconstituição com água bacteriostática antes do uso. Armazenamento adequado (refrigeração após diluição) é essencial pra manter a estabilidade.</p>
+  </div>
+
+  <div class="category">
+    <h3>Tirzepatidas</h3>
+    <span class="tag">GLP-1</span> <span class="tag">Emagrecimento</span>
+    <p>Análogos do GLP-1 e do GIP (Tirzepatida) usados no manejo de peso corporal e controle glicêmico. Atuam simulando hormônios naturais que sinalizam saciedade ao cérebro e regulam a resposta à glicose.</p>
+    <p>Trabalhamos com apresentações em ampola, caneta pré-dosada e frasco multidose (MD) de laboratórios como Lipoless, Lipoland, Tirzec, TG e Mounjaro Original.</p>
+  </div>
+
+  <div class="category">
+    <h3>Retatrutide</h3>
+    <span class="tag">GLP-1/GIP/GCG</span> <span class="tag">Novo</span>
+    <p>Análogo triplo agonista (GLP-1, GIP e glucagon) em estudo avançado para obesidade. Apresentações variadas em vials liofilizados e canetas, dosagens de 40mg a 120mg, com laboratórios como Synedica, Thera, ZPHC, Veltrane, iPeptides, Oxygen, TNL e Biogenesis.</p>
+  </div>
+
+  <div class="category">
+    <h3>Anabolizantes / Hormônios</h3>
+    <span class="tag">Cooper</span> <span class="tag">King</span> <span class="tag">Landerlan</span> <span class="tag">ZPHC</span> <span class="tag">Bratva</span> <span class="tag">Muscle Pharma</span>
+    <p>Trabalhamos com laboratórios reconhecidos internacionalmente. Cada um tem linha própria de compostos — testosterona (propionato, enantato, cipionato, undecilato), nandrolona, boldenona, trembolona, estanozolol, oxandrolona, mesterolona, primobolan, hemogenin, entre outros.</p>
+    <p>Diferentes ésteres têm meia-vidas diferentes, o que afeta frequência de aplicação e curva de liberação. Compostos orais e injetáveis também exigem cuidados distintos.</p>
+  </div>
+
+  <div class="category">
+    <h3>Suporte de Ciclo</h3>
+    <span class="tag">Antiestrogênicos</span> <span class="tag">TPC</span>
+    <p>Produtos usados como suporte durante e após ciclos — inibidores de aromatase (Anastrozol), SERMs (Tamoxifeno, Clomifeno), Proviron/Mesterolona, HCG, e complementos como T3 e Clenbuterol. O uso adequado desses compostos é o que separa um ciclo bem conduzido de um problema hormonal futuro.</p>
+  </div>
+
+  <h2><span class="num">02</span> Recomendações Gerais</h2>
+
+  <h3 class="sec">Antes de iniciar</h3>
+  <ul>
+    <li>Faça <strong>exames de sangue basais</strong> — hemograma, perfil lipídico, função hepática, função renal, hormônios (testosterona, estradiol, prolactina), PSA. Sem exame, você está no escuro.</li>
+    <li>Consulte um <strong>profissional de saúde</strong> que entenda de hormônios — evita surpresa desagradável no meio do caminho.</li>
+    <li>Tenha uma <strong>rotina consistente de treino e dieta</strong>. Produto não faz milagre sem base sólida.</li>
+    <li>Confirme que não há <strong>contraindicações</strong> pra você — histórico familiar cardiovascular, doença hepática, câncer hormônio-dependente etc.</li>
+  </ul>
+
+  <h3 class="sec">Durante o uso</h3>
+  <ul>
+    <li>Respeite <strong>dosagem e frequência</strong>. Mais não é melhor — é apenas mais efeito colateral.</li>
+    <li>Repita <strong>exames de meio de ciclo</strong> se o protocolo passar de 6-8 semanas.</li>
+    <li>Fique atento a sinais como aumento de pressão, retenção excessiva, alteração de humor, libido caída — são recados do corpo, não frescura.</li>
+    <li>Mantenha <strong>hidratação, sono e dieta</strong> em ordem. Fígado e rins agradecem.</li>
+  </ul>
+
+  <h3 class="sec">Após o ciclo (TPC)</h3>
+  <ul>
+    <li>Toda supressão exógena de hormônio precisa de <strong>terapia pós-ciclo bem estruturada</strong> pra restaurar o eixo hormonal natural.</li>
+    <li>O que você usa e por quanto tempo depende do composto, da dose e da duração — não existe TPC "padrão".</li>
+    <li>Refazer os exames <strong>4-6 semanas após o fim da TPC</strong> pra confirmar que o eixo voltou ao basal.</li>
+  </ul>
+
+  <h2><span class="num">03</span> Armazenamento e Manuseio</h2>
+  <ul>
+    <li><strong>Produtos injetáveis:</strong> guardar em local fresco, protegido de luz. Não congelar frascos oleosos.</li>
+    <li><strong>Peptídeos e Tirzepatidas liofilizados:</strong> podem ficar em temperatura ambiente antes da reconstituição. Após diluir, sob refrigeração (2-8°C).</li>
+    <li><strong>Comprimidos e cápsulas orais:</strong> ao abrigo da luz e umidade, em temperatura ambiente.</li>
+    <li><strong>Higiene na aplicação:</strong> agulha nova a cada aplicação, assepsia local com álcool, rotação de locais de aplicação.</li>
+    <li>Confira sempre o <strong>lacre e a data de validade</strong> antes de usar. Suspeita de adulteração ou vazamento: não use, fale conosco.</li>
+  </ul>
+
+  <h2><span class="num">04</span> Sinais de Alerta</h2>
+  <p>Procure atendimento médico imediato se durante o uso aparecer:</p>
+  <ul>
+    <li>Dor torácica, falta de ar ou palpitação intensa</li>
+    <li>Pressão arterial fora do padrão habitual</li>
+    <li>Dor abdominal forte, urina escura ou olhos amarelados (sinais hepáticos)</li>
+    <li>Inchaço súbito, especialmente em pernas ou face</li>
+    <li>Alteração significativa de humor, ansiedade severa ou pensamentos ruins</li>
+    <li>Qualquer reação alérgica no local de aplicação (vermelhidão intensa, calor, pus)</li>
+  </ul>
+
+  <h2><span class="num">05</span> Aspectos Legais</h2>
+  <p>A Power PY comercializa produtos <strong>sob legislação paraguaia (ANVISA RDC 243/2018 mencionada apenas para referência a padrões brasileiros)</strong>. Cabe ao consumidor conhecer a legislação do seu país sobre importação, posse e uso desses produtos.</p>
+  <p>Nossa venda é feita para maiores de 18 anos, para uso próprio, sob responsabilidade do comprador. Não somos consultório, não emitimos receita, não prescrevemos.</p>
+
+  <h2><span class="num">06</span> Fale Conosco</h2>
+  <p>Tem dúvida sobre um produto específico, apresentação ou como armazenar corretamente? A gente responde:</p>
+  <div class="contact-box">
+    <p><strong>Power PY — Atendimento</strong></p>
+    <p>WhatsApp: <a href="https://wa.me/5561992011365" target="_blank">+55 61 9 9201-1365</a></p>
+    <p>E-mail: <a href="mailto:pypower43@gmail.com">pypower43@gmail.com</a></p>
+    <p>Instagram: <a href="https://www.instagram.com/powerpy_suple/" target="_blank">@powerpy_suple</a></p>
+    <p>Respondemos em minutos, seg a sáb.</p>
+  </div>
+
+  <div class="tip-box">
+    <div class="label">Lembrete</div>
+    <p style="margin:0;">Nossa equipe pode orientar sobre o produto — apresentação, laboratório, armazenamento e uso geral. Para <strong>prescrição, dosagem individualizada e acompanhamento clínico</strong>, procure sempre um profissional de saúde habilitado. É a sua saúde, ela merece esse cuidado.</p>
+  </div>
+</div>
+
+<div class="foot">
+  © 2026 Power PY · Ciudad del Este, Paraguai · Suplementação de Elite
+  &nbsp;·&nbsp;
+  <a href="/">Início</a> &nbsp;·&nbsp;
+  <a href="/privacidade.html">Política de Privacidade</a> &nbsp;·&nbsp;
+  <a href="/devolucao.html">Devolução e Reembolso</a>
+</div>
+
+</body>
+</html>
