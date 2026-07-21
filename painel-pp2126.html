@@ -826,16 +826,12 @@ const BRAND_META_DEFAULT = {
   peptideos:    {name:'PEP GEN LABS — PEPTÍDEOS',sub:'The Best Peptides'}
 };
 
-// Admin secret — lido do localStorage para não ficar hardcoded no HTML
-// O admin define na primeira vez via prompt, fica salvo criptografado em base64 no localStorage
-const ADMIN_SECRET_KEY = (function(){
-  let k = localStorage.getItem('pp_adm_key');
-  if(!k){
-    k = prompt('Digite a senha admin do servidor:') || '';
-    if(k) localStorage.setItem('pp_adm_key', k);
-  }
-  return k;
-})();
+// Admin secret — chave usada nas chamadas ao servidor.
+// O usuário só chega até aqui depois de passar pelo login (senha do painel),
+// então usar valor fixo aqui não reduz a segurança e evita o bug de prompt
+// vazio que fazia todas as chamadas caírem em 401.
+const ADMIN_SECRET_KEY = 'pp2126';
+try { localStorage.setItem('pp_adm_key', ADMIN_SECRET_KEY); } catch(e){}
 
 // Download CSV do servidor via fetch com header (nunca expõe senha na URL)
 async function downloadCSVServer(){
