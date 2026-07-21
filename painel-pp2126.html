@@ -1755,7 +1755,7 @@ function removeImg(brand, idx){
   toast('Foto removida');
 }
 
-function saveProduct(brand, idx){
+async function saveProduct(brand, idx){
   const products = getProducts();
   const stock = getStock();
   const at = parseFloat(document.getElementById(`at-${brand}-${idx}`).value)||0;
@@ -1771,7 +1771,28 @@ function saveProduct(brand, idx){
   else stock[key] = parseInt(stVal)||0;
   saveStock(stock);
   renderProducts();
-  toast('Produto salvo!');
+  // Push to server (mesma logica do saveAllProducts, senao o valor volta apos recarregar)
+  try {
+    const [rp, rs] = await Promise.all([
+      fetch('/.netlify/functions/api/admin/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': ADMIN_SECRET_KEY },
+        body: JSON.stringify({ products })
+      }),
+      fetch('/.netlify/functions/api/admin/stock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': ADMIN_SECRET_KEY },
+        body: JSON.stringify({ stock })
+      })
+    ]);
+    const dp = await rp.json().catch(()=>({}));
+    const ds = await rs.json().catch(()=>({}));
+    if (!rp.ok || dp.error) { toast('Erro ao salvar produto no servidor: ' + (dp.error || rp.status), 'error'); return; }
+    if (!rs.ok || ds.error) { toast('Produto salvo, mas estoque falhou: ' + (ds.error || rs.status), 'error'); return; }
+    toast('Produto salvo!');
+  } catch(e){
+    toast('Produto salvo local, mas erro de conexao ao enviar ao servidor', 'error');
+  }
 }
 
 async function saveAllProducts(){
