@@ -417,190 +417,248 @@
   ],
   "lander_gold": [
     {
-      "name": "Boldenona 250mg",
-      "apresent": "10ml",
-      "atacado": 32.4,
-      "varejo": 43.74,
+      "name": "Nandrolona Fenil 100mg",
+      "apresent": "10 ml",
+      "atacado": 24.08,
+      "varejo": 30.1,
       "confirm": false,
-      "img": "img/landerlangold/durateston_plus_250mg10ml.jpg"
-    },
-    {
-      "name": "Clembuterol 0,04mg",
-      "apresent": "50 comp",
-      "atacado": 18,
-      "varejo": 24.3,
-      "confirm": false,
-      "img": "img/landerlangold/clembuterol_clorhidrato_50cmp40mcg.jpg"
-    },
-    {
-      "name": "Decaland Plus 250mg",
-      "apresent": "10ml",
-      "atacado": 31.9,
-      "varejo": 39.9,
-      "confirm": false,
-      "img": "img/landerlangold/decaland_depot_10ml_200mg10ml.jpg"
-    },
-    {
-      "name": "Drostanolona Masteron Prop 100mg",
-      "apresent": "10ml",
-      "atacado": 32.4,
-      "varejo": 43.74,
-      "confirm": false,
-      "img": "img/landerlangold/drostanolona_propionato_masteron_100mg10ml.jpg"
-    },
-    {
-      "name": "Durateston Plus Gold 250mg",
-      "apresent": "10ml",
-      "atacado": 32,
-      "varejo": 41,
-      "confirm": false,
-      "img": "img/landerlangold/durateston_plus_250mg10ml.jpg"
-    },
-    {
-      "name": "HCG Gonadotropin 5000 UI",
-      "apresent": "",
-      "atacado": 58,
-      "varejo": 71,
-      "confirm": false,
-      "img": "img/landerlangold/gonadotropina_corionica_humana_hcg_1_vial_x_5000ui.jpg"
-    },
-    {
-      "name": "NPP — Nandrolona Fenilpropionato",
-      "apresent": "10ml",
-      "atacado": 30.6,
-      "varejo": 41.31,
-      "confirm": false,
-      "img": "img/landerlangold/nandrolona_fenilpropionato_npp_100mg10ml.jpg"
-    },
-    {
-      "name": "Primobolan — Metenolona Enantato 100mg",
-      "apresent": "10ml",
-      "atacado": 69,
-      "varejo": 85.05,
-      "confirm": false,
-      "img": "img/landerlangold/testenat_10ml_250mg10ml.jpg"
+      "img": ""
     },
     {
       "name": "Sales de Trembolona Tritrembo 200mg",
-      "apresent": "10ml",
-      "atacado": 51,
-      "varejo": 69,
+      "apresent": "10 ml",
+      "atacado": 41.91,
+      "varejo": 52.39,
       "confirm": false,
-      "img": "img/landerlangold/sales_de_trembolona_tritrembo_200mg10ml.jpg"
+      "img": ""
     },
     {
-      "name": "Testenat — Enantato de Testosterona 250mg",
-      "apresent": "10ml",
-      "atacado": 32,
-      "varejo": 41,
+      "name": "Trembolona Enantato 100mg",
+      "apresent": "10 ml",
+      "atacado": 26.75,
+      "varejo": 33.44,
       "confirm": false,
-      "img": "img/landerlangold/testenat_10ml_250mg10ml.jpg"
+      "img": ""
     },
     {
-      "name": "Testo Propionato",
-      "apresent": "10ml",
-      "atacado": 27,
-      "varejo": 36.45,
+      "name": "Trembolona Hexa 50mg",
+      "apresent": "10 ml",
+      "atacado": 31.21,
+      "varejo": 39.01,
       "confirm": false,
-      "img": "img/landerlangold/testosterona_propionato_100mg10ml.jpg"
-    },
-    {
-      "name": "Testoland Depot Gold",
-      "apresent": "10ml",
-      "atacado": 29,
-      "varejo": 39,
-      "confirm": false,
-      "img": "img/landerlangold/testoland_depot_100mg10ml.jpg"
+      "img": ""
     },
     {
       "name": "Trembolona Acetato 100mg",
-      "apresent": "10ml",
-      "atacado": 40,
-      "varejo": 54,
+      "apresent": "10 ml",
+      "atacado": 27.64,
+      "varejo": 34.55,
       "confirm": false,
-      "img": "img/landerlangold/trembolona_acetato_100mg10ml.jpg"
+      "img": ""
     },
     {
-      "name": "Trembolona Enantato",
-      "apresent": "10ml",
-      "atacado": 36,
-      "varejo": 48.3,
+      "name": "Drostanolona 100mg",
+      "apresent": "10 ml",
+      "atacado": 0,
+      "varejo": 0,
       "confirm": false,
-      "img": "img/landerlangold/trembolona_enantato_200mg10ml.jpg"
+      "img": ""
     },
     {
-      "name": "Trembolona Hexa 100mg",
-      "apresent": "10ml",
-      "atacado": 37,
-      "varejo": 49,
+      "name": "Duratestoland Plus 250mg",
+      "apresent": "10 ml",
+      "atacado": 25.86,
+      "varejo": 32.33,
       "confirm": false,
-      "img": "img/landerlangold/sales_de_trembolona_tritrembo_200mg10ml.jpg"
+      "img": ""
+    },
+    {
+      "name": "Testenat Depot 250mg",
+      "apresent": "10 ml",
+      "atacado": 22.29,
+      "varejo": 27.86,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Decaland Depot 200mg",
+      "apresent": "10 ml",
+      "atacado": 24.08,
+      "varejo": 30.1,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Propionato Testosterona 100mg",
+      "apresent": "10 ml",
+      "atacado": 18.73,
+      "varejo": 23.41,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Testoland Depot 200mg",
+      "apresent": "10 ml",
+      "atacado": 16.05,
+      "varejo": 20.06,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Boldenona 250mg",
+      "apresent": "10 ml",
+      "atacado": 24.08,
+      "varejo": 30.1,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "HCG",
+      "apresent": "—",
+      "atacado": 29.43,
+      "varejo": 36.79,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Landertropin",
+      "apresent": "100 UI",
+      "atacado": 344.18,
+      "varejo": 430.23,
+      "confirm": false,
+      "img": ""
+    }
+  ],
+  "primo": [
+    {
+      "name": "Metenolona Acetato Primo 25mg",
+      "apresent": "30 comp",
+      "atacado": 52.61,
+      "varejo": 65.76,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Metenolona E. 100mg Primo Iny.",
+      "apresent": "1 amp 10 ml",
+      "atacado": 0,
+      "varejo": 0,
+      "confirm": false,
+      "img": ""
     }
   ],
   "landerlan": [
     {
-      "name": "Decaland",
-      "apresent": "5ml",
-      "atacado": 15.3,
-      "varejo": 20.66,
+      "name": "Stanozoland Depot Iny. 15 ml",
+      "apresent": "15 ml",
+      "atacado": 12.13,
+      "varejo": 15.16,
       "confirm": false,
-      "img": "img/landerlan/decaland.png"
+      "img": ""
     },
     {
-      "name": "Durateston 250mg",
-      "apresent": "1ml",
-      "atacado": 5.4,
-      "varejo": 7.29,
+      "name": "Stanozoland Depot Iny. 30 ml",
+      "apresent": "30 ml",
+      "atacado": 21.4,
+      "varejo": 26.75,
       "confirm": false,
-      "img": "img/landerlan/durateston.jpg"
+      "img": ""
     },
     {
-      "name": "Metandrostenolona 10mg",
+      "name": "Stanozoland Depot 100 comp",
       "apresent": "100 comp",
-      "atacado": 18,
-      "varejo": 24.3,
+      "atacado": 11.59,
+      "varejo": 14.49,
       "confirm": false,
-      "img": "img/landerlan/metandrostenolona.png"
+      "img": ""
     },
     {
-      "name": "Oxandrolona 5mg",
-      "apresent": "100 comp",
-      "atacado": 45,
-      "varejo": 60.75,
+      "name": "Testoland Depot 200mg Iny. 3 amp",
+      "apresent": "3 amp bandeja",
+      "atacado": 10.7,
+      "varejo": 13.38,
       "confirm": false,
-      "img": "img/landerlan/oxandroland.png"
+      "img": ""
     },
     {
       "name": "Oxitoland 50mg",
       "apresent": "20 comp",
-      "atacado": 18,
-      "varejo": 24.3,
+      "atacado": 12.49,
+      "varejo": 15.61,
       "confirm": false,
-      "img": "img/landerlan/oxitoland.png"
+      "img": ""
     },
     {
-      "name": "Stanozoland 10mg",
+      "name": "Testenat Depot 250mg",
+      "apresent": "4 ml",
+      "atacado": 11.59,
+      "varejo": 14.49,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Decaland Depot 200mg",
+      "apresent": "5 ml",
+      "atacado": 13.37,
+      "varejo": 16.71,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Duratestoland",
+      "apresent": "1 ml bandeja",
+      "atacado": 5.89,
+      "varejo": 7.36,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Metandrostenolona 10mg",
       "apresent": "100 comp",
-      "atacado": 18,
-      "varejo": 24.3,
+      "atacado": 11.59,
+      "varejo": 14.49,
       "confirm": false,
-      "img": "img/landerlan/stanozoland-comp.png"
+      "img": ""
     },
     {
-      "name": "Testenat Depot",
-      "apresent": "4ml",
-      "atacado": 15.3,
-      "varejo": 20.66,
+      "name": "Oxandroland 5mg",
+      "apresent": "100 comp",
+      "atacado": 34.78,
+      "varejo": 43.48,
       "confirm": false,
-      "img": "img/landerlan/testenat.png"
+      "img": ""
     },
     {
-      "name": "Testoland Depot 200mg",
-      "apresent": "3 amp x 2ml",
-      "atacado": 13.5,
-      "varejo": 18.23,
+      "name": "Oxandroland 10mg",
+      "apresent": "50 comp",
+      "atacado": 34.78,
+      "varejo": 43.48,
       "confirm": false,
-      "img": "img/landerlan/testoland.png"
+      "img": ""
+    },
+    {
+      "name": "Androlic",
+      "apresent": "comprimidos",
+      "atacado": 16.94,
+      "varejo": 21.18,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Clenbuterol 0,04mg",
+      "apresent": "50 comp",
+      "atacado": 13.37,
+      "varejo": 16.71,
+      "confirm": false,
+      "img": ""
+    },
+    {
+      "name": "Drostenolona 10mg",
+      "apresent": "50 comp",
+      "atacado": 0,
+      "varejo": 0,
+      "confirm": false,
+      "img": ""
     }
   ],
   "zphc": [
