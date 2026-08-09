@@ -129,7 +129,7 @@ nav{height:64px;display:flex;align-items:center;justify-content:space-between;pa
   <div class="step-line"></div>
   <div class="step"><div class="step-num inactive" id="s3n">3</div><div class="step-label inactive" id="s3l">Entrega</div></div>
   <div class="step-line"></div>
-  <div class="step"><div class="step-num inactive" id="s4n">4</div><div class="step-label inactive" id="s4l">Pagamento</div></div>
+  <div class="step"><div class="step-num inactive" id="s4n">4</div><div class="step-label inactive" id="s4l">Finalizar</div></div>
 </div>
 
 <div class="layout">
@@ -243,42 +243,28 @@ nav{height:64px;display:flex;align-items:center;justify-content:space-between;pa
           <div class="err-msg">Selecione o estado</div>
         </div>
         <div style="display:flex;gap:10px;margin-top:8px;">
-          <button class="btn-next" onclick="goPagamento()" style="flex:1;">CONTINUAR PARA PAGAMENTO</button>
+          <button class="btn-next" onclick="goPagamento()" style="flex:1;">REVISAR E FINALIZAR</button>
         </div>
         <button class="btn-back" onclick="goBack(2)">← Voltar ao cadastro</button>
       </div>
     </div>
 
-    <!-- ETAPA 4: PAGAMENTO PIX -->
+    <!-- ETAPA 4: FINALIZAR NO WHATSAPP -->
     <div class="panel" id="panelPagamento">
       <div class="form-box">
-        <h2>PAGAMENTO VIA PIX</h2>
+        <h2>FINALIZAR PEDIDO</h2>
 
-        <div id="pixGerating" style="text-align:center;padding:40px 0;">
-          <div class="spinner"></div>
-          <span style="font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,0.4);">Gerando QR Code...</span>
-        </div>
-
-        <div id="pixReady" style="display:none;">
-          <div class="pix-box">
-            <h3>ESCANEIE O QR CODE</h3>
-            <p>Abra o app do seu banco, vá em Pix → Pagar com QR Code</p>
-            <div class="pix-qr" id="pixQrDiv">
-              <img id="pixQrImg" src="" alt="QR Code Pix">
-            </div>
-            <div class="pix-timer" id="pixTimer">⏱ Válido por <span id="pixTimerNum">30:00</span></div>
-            <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:12px;">Ou copie o código Pix copia e cola:</p>
-            <div class="pix-key-wrap">
-              <div class="pix-key" id="pixKey">Aguardando...</div>
-              <button class="btn-copy" onclick="copyPix()">COPIAR</button>
-            </div>
-            <div class="pix-status pending" id="pixStatus">⏳ Aguardando pagamento...</div>
+        <div class="pix-box" style="padding:16px 8px 8px;">
+          <div style="width:80px;height:80px;margin:0 auto 20px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" width="44" height="44" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </div>
-        </div>
-
-        <div id="pixError" style="display:none;text-align:center;padding:40px 0;">
-          <p style="color:#fc8181;font-family:'Space Mono',monospace;font-size:12px;margin-bottom:16px;">Erro ao gerar QR Code. Tente novamente.</p>
-          <button class="btn-next" onclick="goPagamento()" style="max-width:200px;margin:0 auto;">Tentar novamente</button>
+          <h3 style="color:#fff;">TUDO PRONTO!</h3>
+          <p style="max-width:400px;margin:0 auto 24px;">Confirme o pedido pelo WhatsApp e nossa equipe fecha o pagamento e envio com você em poucos minutos.</p>
+          <div id="waResumo" style="background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.25);border-radius:10px;padding:14px 16px;margin:0 auto 20px;max-width:420px;text-align:left;font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.7);line-height:1.9;">carregando resumo...</div>
+          <button onclick="finalizarWhats()" class="btn-next" style="background:#25D366;box-shadow:0 0 24px rgba(37,211,102,0.4);max-width:340px;margin:0 auto;">
+            📱 FINALIZAR NO WHATSAPP
+          </button>
+          <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-top:14px;">Atendimento em até 15 min · Seg a Sáb 9h-20h</p>
         </div>
 
         <button class="btn-back" onclick="goBack(3)" style="margin-top:16px;">← Voltar à entrega</button>
@@ -297,7 +283,7 @@ nav{height:64px;display:flex;align-items:center;justify-content:space-between;pa
     <div class="sum-row total"><span>Total</span><span id="sideTotal">—</span></div>
     <div class="secure-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <span>Pagamento 100% seguro via Mercado Pago</span>
+      <span>Atendimento direto no WhatsApp</span>
     </div>
   </div>
 </div>
@@ -515,7 +501,58 @@ function goPagamento() {
   };
   localStorage.setItem('pp_endereco', JSON.stringify(endereco));
   setStep(4);
-  gerarPix();
+  renderWaResumo();
+}
+
+// ── WHATSAPP FINALIZAR ────────────────────────────────────────────────────────
+const WA_NUMERO = '5561992011365';
+
+function renderWaResumo() {
+  try {
+    const dados = JSON.parse(localStorage.getItem('pp_dados') || '{}');
+    const endereco = JSON.parse(localStorage.getItem('pp_endereco') || '{}');
+    const items = getCartResolved();
+    let total = 0;
+    items.forEach(p => total += p.preco * p.qty);
+    let html = '';
+    html += '<b style="color:#4ade80;">👤 ' + (dados.nome||'') + ' ' + (dados.sobrenome||'') + '</b><br>';
+    html += '📍 ' + (endereco.logradouro||'') + ', ' + (endereco.numero||'') + ' — ' + (endereco.cidade||'') + '/' + (endereco.estado||'') + '<br>';
+    html += '<br><b style="color:#fc8181;">🛒 Pedido:</b><br>';
+    items.forEach(p => {
+      html += '• ' + p.nome + (p.qty>1 ? ' × '+p.qty : '') + ' — ' + fmt(p.preco * p.qty) + '<br>';
+    });
+    html += '<br><b style="color:#fff;">💰 Total: ' + fmt(total) + '</b>';
+    document.getElementById('waResumo').innerHTML = html;
+  } catch(e){ console.error(e); }
+}
+
+function finalizarWhats() {
+  const dados = JSON.parse(localStorage.getItem('pp_dados') || '{}');
+  const endereco = JSON.parse(localStorage.getItem('pp_endereco') || '{}');
+  const items = getCartResolved();
+  let total = 0;
+  items.forEach(p => total += p.preco * p.qty);
+
+  let msg = '🛒 *NOVO PEDIDO — Power PY*\n\n';
+  msg += '*Cliente:*\n';
+  msg += 'Nome: ' + (dados.nome||'') + ' ' + (dados.sobrenome||'') + '\n';
+  msg += 'CPF: ' + (dados.cpf||'') + '\n';
+  msg += 'Telefone: ' + (dados.celular||'') + '\n';
+  msg += 'Email: ' + (dados.email||'') + '\n\n';
+  msg += '*Endereço de entrega:*\n';
+  msg += (endereco.logradouro||'') + ', ' + (endereco.numero||'');
+  if (endereco.complemento) msg += ' — ' + endereco.complemento;
+  msg += '\n' + (endereco.bairro||'') + ' — ' + (endereco.cidade||'') + '/' + (endereco.estado||'') + '\n';
+  msg += 'CEP: ' + (endereco.cep||'') + '\n\n';
+  msg += '*Produtos:*\n';
+  items.forEach(p => {
+    msg += '• ' + p.nome + (p.qty>1 ? ' × '+p.qty : '') + ' — ' + fmt(p.preco * p.qty) + '\n';
+  });
+  msg += '\n*Total: ' + fmt(total) + '*\n\n';
+  msg += 'Gostaria de fechar o pedido, por favor.';
+
+  const url = 'https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
 }
 
 // ── PIX ───────────────────────────────────────────────────────────────────────
