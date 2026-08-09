@@ -87,6 +87,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:5000;height:64px;display:flex;al
 footer{border-top:1px solid rgba(229,62,62,0.08);padding:40px;background:#030508;text-align:center;}
 .ft-copy{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.25);text-transform:uppercase;line-height:1.8;}
 .ft-copy a{color:#e53e3e;text-decoration:none;}
+
+.pcard-was{font-size:14px;color:rgba(255,255,255,0.4);text-decoration:line-through;text-decoration-color:rgba(229,62,62,0.6);}
 </style>
 </head>
 <body>
@@ -136,6 +138,25 @@ footer{border-top:1px solid rgba(229,62,62,0.08);padding:40px;background:#030508
     <p>Preços especiais por tempo limitado. Acabou, acabou.</p>
   </div>
   <div class="pgrid">
+
+    <!-- TG 12,5 INDUFAR (novo) -->
+    <div class="pcard">
+      <div class="pcard-img">
+        <span class="pcard-tag off">NOVIDADE</span>
+        <img src="img/promo/tg-125-promo.png" alt="TG 12,5 · Tirzepatida Indufar 12,5mg 4 ampolas">
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Tirzepatida · Indufar CISA</div>
+        <div class="pcard-name">TG 12,5</div>
+        <div class="pcard-desc">Tirzepatida 12,5mg/0,5mL · Caixa com 4 frascos-ampola · Indufar CISA (Paraguai). Produto farmacêutico lacrado.</div>
+        <div class="pcard-price">
+          <span class="pcard-was">R$ 820</span>
+          <span class="pcard-now"><small>R$</small> 680</span>
+        </div>
+        <a href="carrinho.html?produto=tg125" class="pcard-btn">Garantir oferta</a>
+      </div>
+    </div>
+
 
     <!-- TIRZEDRAL 15 (nova) -->
     <div class="pcard">
@@ -210,7 +231,7 @@ footer{border-top:1px solid rgba(229,62,62,0.08);padding:40px;background:#030508
 
 <script>
 // Deadline: 08/07/2026 00:00:00 (Paraguai = UTC-4)
-var deadline = new Date('2026-07-26T00:00:00-04:00').getTime();
+var deadline = new Date('2030-12-31T00:00:00-04:00').getTime();
 
 function updateCountdown(){
   var now = Date.now();
